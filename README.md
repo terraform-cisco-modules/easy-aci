@@ -4,6 +4,14 @@
 
 # Easy ACI - Comprehensive example for ACI & NDO
 
+### YAML Schema for auto-completion, Help, and Error Validation:
+
+If you would like to utilize Autocompletion, Help Context, and Error Validation, `(HIGHLY RECOMMENDED)`, make sure the files all utilize the `.eza.yaml` file extension.
+
+The Schema for these YAML Files have been registered with [*SchemaStore*](https://github.com/SchemaStore/schemastore/blob/master/src/api/json/catalog.json) via utilizing this `.eza.yaml` file extension.
+
+## Use Cases
+
 There are two examples in this Repository.  The first example is shown in the primary folders:
 
 * `access-policies/`
@@ -14,9 +22,11 @@ There are two examples in this Repository.  The first example is shown in the pr
 * `tenants/`
 * `virtual-networking/`
 
-This is to show an example of how the module can be used with a single ACI Fabric.
+### IMPORTANT NOTE
 
-The more complex example is shown in the `./RICH/` Folder Structure.  This is what is being used for our lab in Richfield Ohio.  In these examples there are four sub-folders.
+Notice the `eza.yaml` extension on the files.  This is how the  `data.utils_yaml_merge.model` is configured to recognize the files that should be imported with the module.
+
+The more complex example is shown in the `./RICH/` Folder Structure.  This is what is being used for our lab in Richfield, Ohio.  In these examples there are four sub-folders.
 
 * `RICH/Asgard` - The First ACI Fabric
 * `RICH/Wakanda` - The Second ACI Fabric
@@ -42,38 +52,17 @@ Additionally because the `./RICH/Odin/` Nexus Dashboard Fabric Only supports pus
 
 #### Note 2: The reason for the seperation of `built_in_tenants` vs `tenants` is to make sure objects are always created in common/mgmt first.  So they can be consumed by user tenants or Admin/Fabric etc (management EPGs for example).  If nothing is being configured in common/mgmt/infra the `built_in_tenant` is not necessary.
 
-## YAML Schema Notes for Autocompletion, Help, and Error Validation:
-
-If you would like to enable Autocompletion, Help Context, and Error Validation, (`HIGHLY RECOMMENDED`) perform the following configuration in Visual Studio Code.
-
-### Install the YAML extension by Red Hat
-`Extensions`: Search for YAML and Select the 'YAML Language Support by Red Hat'
-
-### Add the YAML Schema's below to the Visual Studio Code Settings
-
-`Settings` » `Settings`: Search for `YAML:Schemas`.
-
-Click: `Edit in settings.json`
-
-Configure the following in `yaml.schemas`
-```bash
-"https://raw.githubusercontent.com/terraform-cisco-modules/easy-aci-complete/main/yaml_schemas/easy_aci.json": [
-    "easy-aci-complete/*/*.yaml",
-    "easy-aci-complete/*/*/*/*.yaml"
-]
-```
-
 ## Environment Variables
 
 ### Terraform Cloud/Enterprise - Workspace Variables
 
 #### At a Minimum for APIC
 
-- Add variable `apic_password` with the value of [your-apic-password] and sensitive set to true
+- Add variable `apic_password` with the value of `<your-apic-password>` and sensitive set to true
 
 #### At a Minimum for NDO
 
-- Add variable `ndo_password` with the value of [your-ndo-password] and sensitive set to true
+- Add variable `ndo_password` with the value of `<your-ndo-password>` and sensitive set to true
 
 #### Add Other Variables as discussed below based on use cases
 
@@ -519,29 +508,17 @@ export vrf_snmp_community_5='<vrf_snmp_community_5>'
 
 If you want to see documentation on Variables for Submodules use the links below:
 
-### [access-policies](https://github.com/terraform-cisco-modules/terraform-aci-access)
-
-### [admin](https://github.com/terraform-cisco-modules/terraform-aci-admin)
-
-### [fabric-policies](https://github.com/terraform-cisco-modules/terraform-aci-fabric)
-
-### [switch](https://github.com/terraform-cisco-modules/terraform-aci-switch)
-
-### [system-settings](https://github.com/terraform-cisco-modules/terraform-aci-system-settings)
-
-### [tenants](https://github.com/terraform-cisco-modules/terraform-aci-tenants)
-
 ## Terraform Registry
 
-### [access-policies](https://registry.terraform.io/modules/terraform-cisco-modules/access/aci/latest)
+### [*access-policies*](https://registry.terraform.io/modules/terraform-cisco-modules/access/aci/latest)
 
-### [admin](https://registry.terraform.io/modules/terraform-cisco-modules/admin/aci/latest)
+### [*admin*](https://registry.terraform.io/modules/terraform-cisco-modules/admin/aci/latest)
 
-### [fabric-policies](https://registry.terraform.io/modules/terraform-cisco-modules/fabric/aci/latest)
+### [*fabric-policies*](https://registry.terraform.io/modules/terraform-cisco-modules/fabric/aci/latest)
 
-### [switch](https://registry.terraform.io/modules/terraform-cisco-modules/switch/aci/latest)
+### [*switch*](https://registry.terraform.io/modules/terraform-cisco-modules/switch/aci/latest)
 
-### [system-settings](https://registry.terraform.io/modules/terraform-cisco-modules/system-settings/aci/latest)
+### [*system-settings*](https://registry.terraform.io/modules/terraform-cisco-modules/system-settings/aci/latest)
 
-### [tenants](https://registry.terraform.io/modules/terraform-cisco-modules/tenants/aci/latest)
+### [*tenants*](https://registry.terraform.io/modules/terraform-cisco-modules/tenants/aci/latest)
 <!-- END_TF_DOCS -->
