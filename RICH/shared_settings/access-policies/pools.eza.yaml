@@ -1,0 +1,15 @@
+---
+#===================================
+#   Access -> Pools - Variables
+#===================================
+access:
+  pools:
+    vlan:
+    - allocation_mode: dynamic
+      description: Access VLAN Pool
+      encap_blocks:
+      - allocation_mode: static
+        vlan_range: 4-299
+      - allocation_mode: inherit
+        vlan_range: 1000-1199
+      name: all-vlans

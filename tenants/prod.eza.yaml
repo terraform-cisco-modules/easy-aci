@@ -1,0 +1,42 @@
+---
+tenants:
+  - name: prod
+    apics_inband_mgmt_addresses:
+      ipv4_address: "198.18.1.10/24"
+      ipv4_gateway: "198.18.1.1"
+      management_epg: default
+      node_id: 1
+      pod_id: 1
+    application_profiles:
+      - name: nets
+        description: "Default Network Centric Application Profile"
+        application_epgs:
+          - name: 10.92.103.0
+            bridge_domain: 10.92.103.0
+            vlans: [103]
+            template: preferred_group
+    networking:
+      bridge_domains:
+        - application_epg:
+            application_profile: nets
+            template: preferred_group
+            vlans: [101]
+          name: 10.92.101.0
+          subnets:
+            - gateway_ip: 10.92.101.1/24
+              template: advertise_external
+          template: prod_optimize
+        - application_epg:
+            application_profile: nets
+            template: preferred_group
+            vlans: [102]
+          name: 10.92.102.0
+          subnets:
+            - gateway_ip: 10.92.102.1/24
+              template: advertise_external
+          template: prod_optimize
+        - name: 10.92.103.0
+          subnets:
+            - gateway_ip: 10.92.103.1/24
+              template: advertise_external
+          template: prod_optimize

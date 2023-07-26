@@ -1,0 +1,12 @@
+mv common.yaml common.eza.yaml
+mv dmz.yaml dmz.eza.yaml
+mv mgmt.yaml mgmt.eza.yaml
+mv prod.yaml prod.eza.yaml
+mv templates.yaml templates.eza.yaml
+
+
+mv interfaces.yaml interfaces.eza.yaml
+mv physical_and_external_domains.yaml physical_and_external_domains.eza.yaml
+mv policies.yaml policies.eza.yaml
+mv pools.yaml pools.eza.yaml
+mv switches.yaml switches.eza.yaml

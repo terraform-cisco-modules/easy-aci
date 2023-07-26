@@ -1,0 +1,18 @@
+---
+#======================================
+#   Access -> Switches - Variables
+#======================================
+access:
+  switches:
+    leaf:
+      policy_groups:
+      - cdp_interface_policy: cdpEnabled
+        description: Default Leaf Policy Group
+        lldp_interface_policy: lldpEnabled
+        name: default
+    spine:
+      policy_groups:
+      - cdp_interface_policy: cdpEnabled
+        description: Default Spine Policy Group
+        lldp_interface_policy: lldpEnabled
+        name: default

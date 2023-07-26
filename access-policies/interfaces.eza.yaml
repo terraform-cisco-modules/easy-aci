@@ -1,0 +1,184 @@
+---
+#========================================
+#   Access -> Interfaces - Variables
+#========================================
+access:
+  interfaces:
+    leaf:
+      policy_groups:
+        access:
+        - attachable_entity_profile: accessAep
+          cdp_interface_policy: cdpEnabled
+          description: Basic Access Port
+          link_level_policy: inheritAuto
+          lldp_interface_policy: lldpEnabled
+          mcp_interface_policy: mcpEnabled
+          name: accessPort
+          spanning_tree_interface_policy: bpduFG
+        - attachable_entity_profile: trunkAep
+          cdp_interface_policy: cdpEnabled
+          description: Basic Trunk Port
+          link_level_policy: inheritAuto
+          lldp_interface_policy: lldpEnabled
+          mcp_interface_policy: mcpEnabled
+          name: trunkPort
+          spanning_tree_interface_policy: bpduFG
+        - attachable_entity_profile: infraAep
+          cdp_interface_policy: cdpEnabled
+          description: includes infra VLAN
+          link_level_policy: inheritAuto
+          lldp_interface_policy: lldpEnabled
+          mcp_interface_policy: mcpEnabled
+          name: infraPort
+        breakout:
+        - breakout_map: 100g-2x
+          description: Breakup Map for 2 x 100G
+          name: 100g-2x
+        - breakout_map: 100g-4x
+          description: Breakup Map for 4 x 100G
+          name: 100g-4x
+        - breakout_map: 10g-4x
+          description: Breakup Map for 4 x 10G
+          name: 10g-4x
+        - breakout_map: 25g-4x
+          description: Breakup Map for 4 x 25G
+          name: 25g-4x
+        - breakout_map: 50g-8x
+          description: Breakup Map for 8 x 50G
+          name: 50g-8x
+        bundle:
+        - attachable_entity_profile: trunkAep
+          cdp_interface_policy: cdpEnabled
+          description: trunkAep
+          link_aggregation_type: vpc
+          link_level_policy: inheritAuto
+          lldp_interface_policy: lldpEnabled
+          mcp_interface_policy: mcpEnabled
+          names:
+          - vpc0001
+          - vpc0002
+          - vpc0003
+          - vpc0004
+          - vpc0005
+          - vpc0006
+          - vpc0007
+          - vpc0008
+          - vpc0009
+          - vpc0010
+          - vpc0011
+          - vpc0012
+          - vpc0013
+          - vpc0014
+          - vpc0015
+          - vpc0016
+          - vpc0017
+          - vpc0018
+          - vpc0019
+          - vpc0020
+          - vpc0021
+          - vpc0022
+          - vpc0023
+          - vpc0024
+          - vpc0025
+          - vpc0026
+          - vpc0027
+          - vpc0028
+          - vpc0029
+          - vpc0030
+          - vpc0031
+          - vpc0032
+          - vpc0033
+          - vpc0034
+          - vpc0035
+          - vpc0036
+          - vpc0037
+          - vpc0038
+          - vpc0039
+          - vpc0040
+          - vpc0041
+          - vpc0042
+          - vpc0043
+          - vpc0044
+          - vpc0045
+          - vpc0046
+          - vpc0047
+          - vpc0048
+          - vpc0049
+          - vpc0050
+          - vpc0051
+          - vpc0052
+          - vpc0053
+          - vpc0054
+          - vpc0055
+          - vpc0056
+          - vpc0057
+          - vpc0058
+          - vpc0059
+          - vpc0060
+          - vpc0061
+          - vpc0062
+          - vpc0063
+          - vpc0064
+          - vpc0065
+          - vpc0066
+          - vpc0067
+          - vpc0068
+          - vpc0069
+          - vpc0070
+          - vpc0071
+          - vpc0072
+          - vpc0073
+          - vpc0074
+          - vpc0075
+          - vpc0076
+          - vpc0077
+          - vpc0078
+          - vpc0079
+          - vpc0080
+          - vpc0081
+          - vpc0082
+          - vpc0083
+          - vpc0084
+          - vpc0085
+          - vpc0086
+          - vpc0087
+          - vpc0088
+          - vpc0089
+          - vpc0090
+          - vpc0091
+          - vpc0092
+          - vpc0093
+          - vpc0094
+          - vpc0095
+          - vpc0096
+          - vpc0097
+          - vpc0098
+          - vpc0099
+          - vpc0100
+          - vpc0101
+          - vpc0102
+          - vpc0103
+          - vpc0104
+          - vpc0105
+          - vpc0106
+          - vpc0107
+          - vpc0108
+          port_channel_policy: lacpActive
+          spanning_tree_interface_policy: bpduFG
+        - attachable_entity_profile: accessAep
+          cdp_interface_policy: cdpEnabled
+          description: Basic Trunk Port
+          link_aggregation_type: vpc
+          link_level_policy: inheritAuto
+          lldp_interface_policy: lldpEnabled
+          mcp_interface_policy: mcpEnabled
+          names:
+          - l3out
+          port_channel_policy: lacpActive
+          spanning_tree_interface_policy: bpduFG
+    spine:
+      policy_groups:
+      - attachable_entity_profile: accessAep
+        cdp_interface_policy: cdpEnabled
+        link_level_policy: inheritAuto
+        name: default

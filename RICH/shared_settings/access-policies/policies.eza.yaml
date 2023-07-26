@@ -1,0 +1,36 @@
+---
+#======================================
+#   Access -> Policies - Variables
+#======================================
+access:
+  policies:
+    global:
+      attachable_access_entity_profiles:
+      - description: Basic AEP
+        infra_vlan: false
+        name: accessAep
+        physical_domains:
+        - access
+      - access_or_native_vlan: 1
+        allowed_vlans: 11-13
+        description: AEP for EPG Assignment
+        infra_vlan: false
+        name: l3out
+        l3_domains:
+        - l3out
+      recommended_policies:
+        error_disabled_recovery_policy: true
+        mcp_instance_policy: true
+        qos_class: true
+        vpc_domain: true
+    interface:
+      create_pre_built_interface_policies:
+        cdp_interface: true
+        fibre_channel_interface: false
+        l2_interface: true
+        link_level: true
+        lldp_interface: true
+        mcp_interface: true
+        port_channel: true
+        port_security: true
+        spanning_tree_interface: true

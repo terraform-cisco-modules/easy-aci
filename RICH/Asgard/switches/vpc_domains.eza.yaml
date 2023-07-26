@@ -1,0 +1,6 @@
+---
+switch:
+  vpc_domains:
+    - domain_id: 201
+      name: asgard-leaf201-202
+      switches: [201,202]

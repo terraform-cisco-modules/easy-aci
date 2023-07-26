@@ -1,0 +1,53 @@
+---
+#========================================
+#   Access -> Interfaces - Variables
+#========================================
+access:
+  interfaces:
+    leaf:
+      policy_groups:
+        access:
+        - attachable_entity_profile: trunkAep
+          cdp_interface_policy: cdpEnabled
+          description: Basic Trunk Port
+          link_level_policy: inheritAuto
+          lldp_interface_policy: lldpEnabled
+          mcp_interface_policy: mcpEnabled
+          name: trunkPort
+          spanning_tree_interface_policy: bpduFG
+        - attachable_entity_profile: l3out
+          cdp_interface_policy: cdpEnabled
+          description: L3out Trunk Ports
+          link_level_policy: inheritAuto
+          lldp_interface_policy: lldpEnabled
+          mcp_interface_policy: mcpEnabled
+          name: l3out
+          spanning_tree_interface_policy: bpduFG
+        breakout:
+        - breakout_map: 10g-4x
+          description: Breakup Map for 4 x 10G
+          name: 10g-4x
+        - breakout_map: 25g-4x
+          description: Breakup Map for 4 x 25G
+          name: 25g-4x
+        bundle:
+        - attachable_entity_profile: trunkAep
+          cdp_interface_policy: cdpEnabled
+          description: trunkAep
+          link_aggregation_type: vpc
+          link_level_policy: inheritAuto
+          lldp_interface_policy: lldpEnabled
+          mcp_interface_policy: mcpEnabled
+          names:
+          - vpc03
+          - vpc04
+          - vpc51
+          - vpc52
+          port_channel_policy: lacpActive
+          spanning_tree_interface_policy: bpduFG
+    spine:
+      policy_groups:
+      - attachable_entity_profile: accessAep
+        cdp_interface_policy: cdpEnabled
+        link_level_policy: inheritAuto
+        name: default

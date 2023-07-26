@@ -1,0 +1,79 @@
+---
+switch:
+  switch_profiles:
+    - node_id: 201
+      inband_addressing:
+        ipv4_address: 10.92.64.201/24
+        ipv4_gateway: 10.92.64.254
+        management_epg: inband
+      interfaces:
+        - interface: 1/1
+        - interface: 1/2
+        - interface: 1/3
+          interface_description: r143e-1-A-Eth1/53
+          policy_group: vpc03
+          policy_group_type: bundle
+        - interface: 1/4
+          interface_description: r143e-1-B-Eth1/53
+          policy_group: vpc04
+          policy_group_type: bundle
+        - interface: 1/5
+        - interface: 1/6
+        - interface: 1/7
+        - interface: 1/8
+        - interface: 1/9
+        - interface: 1/10
+        - interface: 1/11
+        - interface: 1/12
+        - interface: 1/13
+        - interface: 1/14
+        - interface: 1/15
+        - interface: 1/16
+        - interface: 1/17
+        - interface: 1/18
+        - interface: 1/19
+        - interface: 1/20
+        - interface: 1/21
+        - interface: 1/22
+        - interface: 1/23
+        - interface: 1/24
+        - interface: 1/25
+          interface_description: LOKI01-eth2/1
+          policy_group: trunkPort
+          policy_group_type: access
+        - interface: 1/26
+          interface_description: LOKI02-eth2/1
+          policy_group: trunkPort
+          policy_group_type: access
+        - interface: 1/27
+          interface_description: LOKI03-eth2/1
+          policy_group: trunkPort
+          policy_group_type: access
+        - interface: 1/28
+          interface_description: LOKI04-eth2/1
+          policy_group: trunkPort
+          policy_group_type: access
+        - interface: 1/29
+          interface_description: r142b-core01-Eth1/27
+          policy_group: l3out
+          policy_group_type: access
+        - interface: 1/30
+          interface_description: r142b-core02-Eth1/27
+          policy_group: l3out
+          policy_group_type: access
+        - interface: 1/31
+        - interface: 1/32
+        - interface: 1/33
+        - interface: 1/34
+        - interface: 1/35
+        - interface: 1/36
+      name: asgard-leaf201
+      node_type: leaf
+      ooband_addressing:
+        ipv4_address: 192.168.64.9/23
+        ipv4_gateway: 192.168.64.1
+        management_epg: ooband
+      pod_id: 1
+      role: leaf
+      serial_number: FDO232415ML
+      site: Asgard

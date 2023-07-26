@@ -1,0 +1,82 @@
+---
+fabric:
+  pods:
+    policy_group:
+      bgp_route_reflector_policy: default
+      coop_group_policy: default
+      isis_policy: default
+      macsec_policy: default
+      management_access_policy: default
+      name: default
+      snmp_policy: default
+    profile:
+      name: default
+      policy_group: default
+      pod_selector_type: ALL
+  policies:
+    global:
+      dns_profiles:
+        - description: System DNS Profile
+          dns_domains:
+            - domain: cisco.com
+            - domain: rich.ciscolabs.com
+              default_domain: true
+          dns_providers:
+            - dns_provider: 10.101.128.15
+              preferred: true
+            - dns_provider: 10.101.128.16
+          ip_version_preference: IPv4 # IPv4 or IPv6
+          management_epg: ooband
+          name: default
+    pod:
+      date_and_time:
+        - management_epg: ooband
+          name: default
+          ntp_servers:
+            - hostname: 10.101.128.15
+              preferred: false
+            - hostname: 10.101.128.16
+              preferred: true
+          time_zone: America/Detroit
+      snmp:
+        - contact: rich-lab@cisco.com
+          include_types:
+            audit_logs: true
+            events: true
+            faults: true
+            session_logs: true
+          location: Asgard - Rack143D
+          name: default
+          snmp_client_groups:
+            - name: ooband
+              clients:
+                - address: 10.101.128.24
+                  name: LNX1
+                - address: 10.101.128.25
+              description: 'Out-of-Band Client Group'
+              management_epg: ooband
+          snmp_communities:
+            - community_variable: 1
+              description: 'Community String 1'
+            - community_variable: 2
+              description: 'Community String 2'
+          snmp_destinations:
+            - host: 10.101.128.24
+              management_epg: ooband
+              username: cisco_user1
+              v3_security_level: priv
+              version: v3
+            - host: 10.101.128.25
+              community_variable: 1
+              management_epg: ooband
+              version: v2c
+          users:
+            - username: cisco_user1
+              authorization_key: 1
+              authorization_type: hmac-sha1-96
+              privacy_key: 1
+              privacy_type: aes-128
+  recommended_settings:
+    fabric_node_controls: true
+    l3_interface: true
+    pods: true

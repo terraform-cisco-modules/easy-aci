@@ -1,0 +1,57 @@
+---
+#======================================
+#   Access -> Policies - Variables
+#======================================
+access:
+  policies:
+    global:
+      attachable_access_entity_profiles:
+      - description: Default AEP
+        infra_vlan: false
+        l3_domains:
+        - l3out
+        name: accessAep
+        physical_domains:
+        - access
+      - access_or_native_vlan: 1
+        allowed_vlans: 100-299,1101-1110
+        description: AEP for EPG Assignment
+        infra_vlan: false
+        name: trunkAep
+        physical_domains:
+        - access
+        vmm_domains:
+        - Asgard
+      - description: AEP for Infra Trunk
+        infra_vlan: true
+        name: infraAep
+        physical_domains:
+        - access
+      dhcp_relay:
+      - epg: prod
+        epg_type: external_epg
+        l3out: asgard-prod
+        dhcp_servers:
+        - 10.101.128.15
+        - 10.101.128.16
+      recommended_policies:
+        error_disabled_recovery_policy: true
+        mcp_instance_policy: true
+        qos_class: true
+        vpc_domain: true # VPC Domain is under Switch but for simplicity added here
+    interface:
+      create_pre_built_interface_policies:
+        cdp_interface: true
+        fibre_channel_interface: false
+        l2_interface: true
+        link_level: true
+        lldp_interface: true
+        mcp_interface: true
+        port_channel: true
+        port_security: true
+        spanning_tree_interface: true
+      link_level:
+        - name: cl74_fc_fec
+          auto_negotiation: on
+          forwarding_error_correction: cl74-fc-fec
+          speed: 25G

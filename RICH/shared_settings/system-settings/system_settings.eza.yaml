@@ -1,0 +1,53 @@
+---
+system_settings:
+  apic_connectivity_preference:
+    interface_to_use_for_external_connections: inband
+  coop_group:
+    description: default
+    type: strict
+  endpoint_controls:
+    ep_loop_protection:
+      action:
+        bd_learn_disable: true
+        port_disable: true
+      administrative_state: enabled
+      loop_detection_interval: 60
+      loop_detection_multiplier: 4
+    ip_aging:
+      administrative_state: enabled
+    rouge_ep_control:
+      administrative_state: enabled
+      hold_interval: 1800
+      rouge_interval: 30
+      rouge_multiplier: 6
+  fabric_wide_settings:
+    disable_remote_ep_learning: true
+    enforce_domain_validation: true
+    enforce_epg_vlan_validation: true
+    enforce_subnet_check: true
+    leaf_opflex_client_authentication: true
+    leaf_ssl_opflex: true
+    reallocate_gipo: true
+    restrict_infra_vlan_traffic: true
+    spine_opflex_client_authentication: true
+    spine_ssl_opflex: true
+    ssl_opflex_versions:
+      TLSv1: false
+      TLSv1_1: false
+      TLSv1_2: true
+  global_aes_encryption_settings:
+    clear_passphrase: true
+    description: default
+    enable_encryption: true
+    passphrase_key_derivation_version: v1
+  recommended_settings: # If you want to make changes to this modify the defaults
+    coop_group: true
+    endpoint_controls:
+      ep_loop_protection: true
+      ip_aging: true
+      rouge_ep_control: true
+    fabric_wide_settings: true
+    global_aes_encryption_settings: true # Make sure to set var.aes_passphrase value if true
+    isis_policy: true
+    port_tracking: true
+    ptp_and_latency_measurement: true

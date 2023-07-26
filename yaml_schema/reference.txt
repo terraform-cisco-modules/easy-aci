@@ -1,0 +1,6 @@
+https://codebeautify.org/yaml-to-json-schema-generator
+
+Visual Studio Code => Settings => YAML Schema: edit settings.json
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/terraform-cisco-modules/easy-aci-complete/main/yaml_schemas/access.json": "/access-policies/*.yaml",
+    },

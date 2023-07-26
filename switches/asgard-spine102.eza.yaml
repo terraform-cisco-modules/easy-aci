@@ -1,0 +1,56 @@
+---
+switch:
+  switch_profiles:
+    - node_id: 102
+      inband_addressing:
+        ipv4_address: 10.92.0.102/24
+        ipv4_gateway: 10.92.0.254
+        management_epg: inband
+      interfaces:
+        - interface: 1/1
+        - interface: 1/2
+        - interface: 1/3
+        - interface: 1/4
+        - interface: 1/5
+        - interface: 1/6
+        - interface: 1/7
+        - interface: 1/8
+        - interface: 1/9
+        - interface: 1/10
+        - interface: 1/11
+        - interface: 1/12
+        - interface: 1/13
+        - interface: 1/14
+        - interface: 1/15
+        - interface: 1/16
+        - interface: 1/17
+        - interface: 1/18
+        - interface: 1/19
+        - interface: 1/20
+        - interface: 1/21
+        - interface: 1/22
+        - interface: 1/23
+        - interface: 1/24
+        - interface: 1/25
+        - interface: 1/26
+        - interface: 1/27
+        - interface: 1/28
+        - interface: 1/29
+          interface_description: 142b-core01-Eth1/24
+          policy_group: default
+        - interface: 1/30
+          interface_description: 142b-core02-Eth1/24
+          policy_group: default
+        - interface: 1/31
+        - interface: 1/32
+        - interface: 1/33
+        - interface: 1/34
+      name: asgard-spine102
+      node_type: spine
+      ooband_addressing:
+        ipv4_address: 192.168.64.12/23
+        ipv4_gateway: 192.168.64.1
+        management_epg: ooband
+      pod_id: 1
+      role: spine
+      serial_number: FDO22220V7Y

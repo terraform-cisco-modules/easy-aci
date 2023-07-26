@@ -1,0 +1,226 @@
+---
+tenants:
+  - name: mgmt
+    node_management_addresses:
+      static_node_management_addresses:
+        - ipv4_address: 10.92.0.1/24
+          ipv4_gateway: 10.92.0.254
+          management_epg: inband
+          node_id: 1
+          pod_id: 1
+    application_profiles:
+      - name: inb
+        application_epgs:
+          - name: inband
+            bridge_domain: 10.92.0.0
+            contracts:
+              - name: inband_out
+                contract_type: consumed
+              - name: inband_in
+                contract_type: provided
+            description: Inband Mgmt EPG
+            domains:
+              - name: access
+            epg_type: inb
+            vlans: [100]
+          - name: ooband
+            contracts:
+              - name: ooband_in
+                contract_type: provided
+            description: 'Ooband Mgmt EPG'
+            domains:
+              - name: access
+            epg_type: oob
+    contracts:
+      contracts:
+        - name: inband_in
+          contract_type: standard
+          description: 'Mgmt Inbound Traffic'
+          subjects:
+            - name: inband_in
+              action: permit
+              apply_both_directions: false
+              directives:
+                enable_policy_compression: false
+                log: false
+              filters:
+                - mgmt_in
+              label_match_criteria: AtleastOne
+              qos_class: unspecified
+              target_dscp: unspecified
+          target_dscp: unspecified
+        - name: inband_out
+          description: Mgmt Outbound Traffic
+          subjects:
+            - name: inband_out
+              apply_both_directions: false
+              action: permit
+              filters: 
+                - mgmt_out
+        - name: ooband_in
+          contract_type: oob
+          description: 'Out-of-Band Inbound Traffic'
+          subjects:
+            - name: ooband_in
+              apply_both_directions: false
+              action: permit
+              filters: 
+                - mgmt_in
+        - name: ooband_out
+          contract_type: oob
+          description: 'Out-of-Band Outbound Traffic'
+          subjects:
+            - name: ooband_out
+              action: permit
+              apply_both_directions: false
+              filters: 
+                - mgmt_out
+      filters:
+        - name: mgmt_in
+          description: Management Inbound Traffic
+          filter_entries:
+            - name: icmp
+              acknowledgement: false
+              description: 'Allow ICMP'
+              ethertype: ip
+              ip_protocol: icmp
+            - name: snmp
+              description: 'Allow SNMP'
+              destination_port_from: '161'
+              destination_port_to: '161'
+              ethertype: ip
+              ip_protocol: udp
+            - name: https
+              description: 'Allow HTTPS'
+              destination_port_from: https
+              destination_port_to: https
+              ethertype: ip
+              ip_protocol: tcp
+              stateful: true
+              tcp_session_rules:
+                established: true
+            - name: ssh
+              description: 'Allow SSH'
+              destination_port_from: '22'
+              destination_port_to: '22'
+              ethertype: ip
+              ip_protocol: tcp
+              stateful: true
+              tcp_session_rules:
+                established: true
+            - name: nd_2022
+              description: 'Nexus Dashboard 2022'
+              destination_port_from: '2022'
+              destination_port_to: '2022'
+              ethertype: ip
+              ip_protocol: tcp
+              stateful: true
+              tcp_session_rules:
+                established: true
+            - name: nd_5640
+              description: 'Nexus Dashboard 5640-5671'
+              destination_port_from: '5640'
+              destination_port_to: '5671'
+              ethertype: ip
+              ip_protocol: udp
+            - name: nd_5965
+              description: 'Nexus Dashboard 5965'
+              destination_port_from: '5965'
+              destination_port_to: '5965'
+              ethertype: ip
+              ip_protocol: udp
+            - name: nd_8884
+              description: 'Nexus Dashboard 8884'
+              destination_port_from: '8884'
+              destination_port_to: '8884'
+              ethertype: ip
+              ip_protocol: tcp
+              stateful: true
+              tcp_session_rules:
+                established: true
+            - name: nd_9989
+              description: 'Nexus Dashboard 9989'
+              destination_port_from: '9989'
+              destination_port_to: '9989'
+              ethertype: ip
+              ip_protocol: tcp
+              stateful: true
+              tcp_session_rules:
+                established: true
+            - name: nd_30000
+              description: 'ND 30000-30001'
+              destination_port_from: '30000'
+              destination_port_to: '30001'
+              ethertype: ip
+              ip_protocol: tcp
+              stateful: true
+              tcp_session_rules:
+                established: true
+        - name: mgmt_out
+          description: 'Management Outbound Traffic'
+          filter_entries:
+            - name: ip
+              description: 'Allow All IP'
+              ethertype: ip
+            - name: icmp
+              description: 'Allow ICMP'
+              ethertype: ip
+              ip_protocol: icmp
+    networking:
+      bridge_domains:
+        - name: 10.92.0.0
+          template: inband_optimize
+          subnets:
+            - gateway_ip: 10.92.0.254/24
+              template: advertise_external
+      l3outs:
+        - name: inband
+          description: 'Inband L3Out'
+          enable_bgp: true
+          external_epgs:
+            - name: inband
+              contracts:
+                - name: inband_out
+                  contract_type: provided
+                - name: inband_in
+                  contract_type: consumed
+              description: 'Inband'
+              subnets:
+                - subnets:
+                    - 0.0.0.0/1
+                    - 128.0.0.0/1
+          l3_domain: l3out
+          logical_node_profiles:
+            - name: asgard-leaf201-202
+              description: 'Asgard Inband LNP'
+              logical_interface_profiles:
+                - name: Vlan11
+                  bgp_peers:
+                    - peer_addresses: [10.92.1.3, 10.92.1.4]
+                      peer_asn: 64701
+                      peer_controls:
+                          bidirectional_forwarding_detection: true
+                  description: '142b-core01-02-l3out-vl11'
+                  encap_scope: local
+                  encap_vlan: 11
+                  interface_or_policy_group: l3out
+                  interface_type: ext-svi
+                  mode: trunk
+                  mtu: inherit
+                  nodes:
+                    - 201
+                    - 202
+                  svi_addresses:
+                    primary_preferred_addresses: [10.92.1.1/29, 10.92.1.2/29]
+              nodes:
+                - node_id: 201
+                  router_id: 10.92.1.201
+                  use_router_id_as_loopback: true
+                - node_id: 202
+                  router_id: 10.92.1.202
+                  use_router_id_as_loopback: true
+              pod_id: 1
+          vrf: inb
+      vrfs:
+        - name: inb
+          description: 'Inband VRF'

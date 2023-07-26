@@ -1,0 +1,31 @@
+---
+templates:
+  application_epgs:
+    - template_name: preferred_group
+      contracts: []
+      domains:
+        - name: access
+        - name: Asgard
+          allow_micro_segmentation: false
+          delimiter: '|'
+          deploy_immediacy: immediate
+          domain_type: vmm
+          number_of_ports: 0
+          port_allocation: none
+          port_binding: default
+          resolution_immediacy: pre-provision
+          security:
+              allow_promiscuous: reject
+              forged_transmits: reject
+              mac_changes: reject
+          switch_provider: VMware
+          vlan_mode: dynamic
+      epg_type: standard
+      flood_in_encapsulation: disabled
+      has_multicast_source: false
+      intra_epg_isolation: unenforced
+      label_match_criteria: AtleastOne
+      monitoring_policy: default
+      preferred_group_member: true
+      qos_class: unspecified
+      useg_epg: false

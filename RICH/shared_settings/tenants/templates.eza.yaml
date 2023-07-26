@@ -1,0 +1,48 @@
+---
+templates:
+  bridge_domains:
+    - advanced_troubleshooting:
+        disable_ip_data_plane_learning_for_pbr: false
+        endpoint_clear: false
+        intersite_bum_traffic_allow: false
+        intersite_l2_stretch: false
+        monitoring_policy: default
+        optimize_wan_bandwidth: false
+      general:
+        advertise_host_routes: false
+        arp_flooding: false
+        endpoint_retention_policy: default
+        igmp_interface_policy: default
+        igmp_snooping_policy: default
+        ipv6_l3_unknown_multicast: flood
+        l2_unknown_unicast: proxy
+        l3_unknown_multicast_flooding: flood
+        limit_ip_learn_to_subnets: true
+        mld_snoop_policy: default
+        multi_destionation_flooding: bd-flood
+        pim: false
+        pimv6: false
+        type: regular
+        vrf:
+          name: inb
+          tenant: mgmt
+      l3_configurations:
+        associated_l3outs:
+            - l3outs: [inband]
+              tenant: mgmt
+        ep_move_detection_mode: false
+        nd_policy: default
+        unicast_routing: true
+      template_name: inband_optimize
+  subnets:
+    - template_name: advertise_external
+      ip_data_plane_learning: enabled
+      make_this_ip_address_primary: false
+      treat_as_virtual_ip_address: false
+      scope:
+        advertise_externally: true
+        shared_between_vrfs: false
+      subnet_control:
+        neighbor_discovery: true
+        no_default_svi_gateway: false
+        querier_ip: false

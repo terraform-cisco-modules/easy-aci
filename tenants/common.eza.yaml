@@ -1,0 +1,285 @@
+---
+#=====================================
+#   Tenants -> common - Variables
+#=====================================
+tenants:
+  - annotations:
+      - key: key_name
+        value: key_value
+    contracts:
+      contracts:
+      - contract_type: taboo
+        description: A Taboo Contract
+        name: taboo_contract
+        qos_class: unspecified
+        scope: global
+        subjects:
+        - action: permit
+          apply_both_directions: true
+          contract_type: taboo
+          directives:
+            enable_policy_compression: false
+            log: false
+          filters:
+          - any
+          label_match_criteria: AtleastOne
+          name: taboo_contract
+          qos_class: unspecified
+          target_dscp: unspecified
+        target_dscp: unspecified
+      - contract_type: standard
+        description: Any Contract
+        name: any
+        qos_class: unspecified
+        scope: global
+        subjects:
+        - action: permit
+          apply_both_directions: true
+          contract_type: standard
+          directives:
+            enable_policy_compression: false
+            log: false
+          filters:
+          - any
+          label_match_criteria: AtleastOne
+          name: any
+          qos_class: unspecified
+          target_dscp: unspecified
+        target_dscp: unspecified
+      filters:
+      - description: Default Filter
+        filter_entries:
+        - arp_flag: unspecified
+          description: Allow Any
+          destination_port_from: unspecified
+          destination_port_to: unspecified
+          ethertype: unspecified
+          icmpv4_type: unspecified
+          icmpv6_type: unspecified
+          ip_protocol: unspecified
+          match_dscp: unspecified
+          match_only_fragments: false
+          name: any
+          source_port_from: unspecified
+          source_port_to: unspecified
+          stateful: false
+        name: any
+    description: Built-In Common tenant
+    monitoring_policy: default
+    name: common
+    networking:
+      l3outs:
+      - description: Asgard DMZ L3Out
+        enable_bgp: true
+        external_epgs:
+        - description: Asgard DMZ
+          flood_on_encapsulation: disabled
+          intra_epg_isolation: unenforced
+          label_match_criteria: AtleastOne
+          name: dmz
+          preferred_group_member: false
+          qos_class: unspecified
+          subnets:
+          - aggregate:
+              aggregate_export: false
+              aggregate_import: false
+              aggregate_shared_routes: false
+            external_epg_classification:
+              external_subnets_for_external_epg: true
+              shared_security_import_subnet: false
+            route_control:
+              export_route_control_subnet: false
+              import_route_control_subnet: false
+              shared_route_control_subnet: false
+            subnets:
+            - 0.0.0.0/1
+            - 128.0.0.0/1
+          target_dscp: unspecified
+        l3_domain: l3out
+        logical_node_profiles:
+        - color_tag: yellow-green
+          description: Asgard DMZ LNP
+          logical_interface_profiles:
+          - auto_state: disabled
+            bgp_peers:
+              - address_type_controls:
+                  af_mcast: false
+                  af_ucast: true
+                allowed_self_as_count: 3
+                bgp_controls:
+                  allow_self_as: false
+                  as_override: false
+                  disable_peer_as_check: false
+                  next_hop_self: false
+                  send_community: true
+                  send_domain_path: false
+                  send_extended_community: true
+                peer_addresses:
+                  - 10.92.2.3
+                  - 10.92.2.4
+                peer_asn: 64701
+                peer_controls:
+                  bidirectional_forwarding_detection: true
+                  disable_connected_check: false
+                private_as_control:
+                  remove_all_private_as: false
+                  remove_private_as: false
+                  replace_private_as_with_local_as: false
+            description: 142b-core01-02-l3out-vl102
+            encap_scope: local
+            encap_vlan: 12
+            interface_or_policy_group: l3out
+            interface_type: ext-svi
+            ipv6_dad: enabled
+            mode: trunk
+            mtu: inherit
+            name: Vlan12
+            nodes:
+              - 201
+              - 202
+            qos_class: unspecified
+            svi_addresses:
+              primary_preferred_addresses:
+              - 10.92.2.1/29
+              - 10.92.2.2/29
+            target_dscp: unspecified
+          name: asgard-leaf201-202
+          nodes:
+          - node_id: 201
+            router_id: 10.92.2.201
+            use_router_id_as_loopback: true
+          - node_id: 202
+            router_id: 10.92.2.202
+            use_router_id_as_loopback: true
+          pod_id: 1
+          target_dscp: unspecified
+        name: asgard-dmz
+        pim: false
+        pimv6: false
+        route_control_enforcement:
+          import: false
+        target_dscp: unspecified
+        vrf: dmz
+      - description: Asgard Production L3Out
+        enable_bgp: true
+        external_epgs:
+        - description: Asgard Prod
+          flood_on_encapsulation: disabled
+          intra_epg_isolation: unenforced
+          label_match_criteria: AtleastOne
+          name: prod
+          preferred_group_member: true
+          qos_class: unspecified
+          subnets:
+          - aggregate:
+              aggregate_export: false
+              aggregate_import: false
+              aggregate_shared_routes: false
+            external_epg_classification:
+              external_subnets_for_external_epg: true
+              shared_security_import_subnet: false
+            route_control:
+              export_route_control_subnet: false
+              import_route_control_subnet: false
+              shared_route_control_subnet: false
+            subnets:
+            - 0.0.0.0/1
+            - 128.0.0.0/1
+          target_dscp: unspecified
+        l3_domain: l3out
+        logical_node_profiles:
+        - color_tag: yellow-green
+          description: Asgard Prod LNP
+          logical_interface_profiles:
+          - auto_state: disabled
+            bgp_peers:
+              - address_type_controls:
+                  af_mcast: false
+                  af_ucast: true
+                allowed_self_as_count: 3
+                bgp_controls:
+                  allow_self_as: false
+                  as_override: false
+                  disable_peer_as_check: false
+                  next_hop_self: false
+                  send_community: true
+                  send_domain_path: false
+                  send_extended_community: true
+                peer_addresses:
+                  - 10.92.3.3
+                  - 10.92.3.4
+                peer_asn: 64701
+                peer_controls:
+                  bidirectional_forwarding_detection: true
+                  disable_connected_check: false
+                private_as_control:
+                  remove_all_private_as: false
+                  remove_private_as: false
+                  replace_private_as_with_local_as: false
+            description: 142b-core01-02-l3out-vl103
+            encap_scope: local
+            encap_vlan: 13
+            interface_or_policy_group: l3out
+            interface_type: ext-svi
+            ipv6_dad: enabled
+            mode: trunk
+            mtu: inherit
+            name: Vlan13
+            nodes:
+             - 201
+             - 202
+            qos_class: unspecified
+            svi_addresses:
+              primary_preferred_addresses:
+                - 10.92.3.1/29
+                - 10.92.3.2/29
+            target_dscp: unspecified
+          name: asgard-leaf201-202
+          nodes:
+          - node_id: 201
+            router_id: 10.92.3.201
+            use_router_id_as_loopback: true
+          - node_id: 202
+            router_id: 10.92.3.202
+            use_router_id_as_loopback: true
+          pod_id: 1
+          target_dscp: unspecified
+        name: asgard-prod
+        pim: false
+        pimv6: false
+        route_control_enforcement:
+          import: false
+        target_dscp: unspecified
+        vrf: prod
+      vrfs:
+      - description: DMZ VRF
+        epg_esg_collection_for_vrfs:
+          contracts:
+          - contract_type: provided
+            name: default
+            qos_class: unspecified
+          label_match_criteria: AtleastOne
+        layer3_multicast: true
+        name: dmz
+      - description: Production VRF
+        layer3_multicast: true
+        name: prod
+        preferred_group: true
+    policies:
+      protocol:
+        bgp:
+          bgp_peer_prefix:
+          - description: Default Prefix Policy
+            name: default
+        ospf:
+          ospf_interface:
+          - advertise_subnet: true
+            bfd: true
+            description: Point-to-Point Policy
+            mtu_ignore: true
+            name: point-to-point
+            network_type: p2p
+            passive_interface: false
+            priority: 1
+            retransmit_interval: 5
+            transmit_delay: 1

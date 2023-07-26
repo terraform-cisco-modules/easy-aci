@@ -1,0 +1,98 @@
+---
+#=========================
+#   Admin - Variables
+#=========================
+admin:
+  aaa:
+    authentication:
+      authentication_default_settings:
+        console_authentication:
+          realm: local
+        default_authentication:
+          realm: local
+        remote_authentication:
+          ping_check: true
+          remote_user_login_policy: no-login
+          retries: 1
+          timeout: 5
+      tacacs:
+      - accounting_include:
+          audit_logs: true
+          events: false
+          faults: false
+          session_logs: true
+        authorization_protocol: pap
+        hosts:
+        - 10.101.128.71
+        - 10.101.128.72
+        login_domain: RICH
+        management_epg: ooband
+        port: 49
+        retries: 2
+        timeout: 5
+    security:
+      web_session_idle_timeout: 65525
+      web_token_timeout: 600
+  external_data_collectors:
+    syslog:
+    - admin_state: enabled
+      format: aci
+      name: default
+      remote_destinations:
+      - admin_state: enabled
+        forwarding_facility: local7
+        hosts:
+        - 10.101.128.24
+        - 10.101.128.25
+        management_epg: ooband
+        port: 514
+        severity: information
+        transport: udp
+      show_milliseconds_in_timestamp: true
+      show_time_zone_in_timestamp: true
+  firmware:
+    switches:
+      firmware_update_groups:
+        - administrative_state: false
+          description: Firmware Update Group A
+          download_state: false
+          graceful_maintenance: true
+          ignore_compatibility: true
+          name: MG_A
+          nodes:
+            - 101
+            - 201
+          notification_condition: notifyOnlyOnFailures
+          scheduler_run_mode: pauseOnlyOnFailures
+          silent_role_package_upgrade: false
+          silent_role_package_version: default
+          smu_operation_flags: smuReloadImmediate
+          smu_operation_type: smuInstall
+          target_version: "6.0(2h)"
+          version_check_override: untriggered
+        - name: MG_B
+          nodes:
+            - 102
+            - 202
+          target_version: "6.0(2h)"
+  import_export:
+    configuration_backups:
+    - authentication_type: usePassword
+      description: LNX Backup Servers
+      format: json
+      include_secure_fields: true
+      management_epg: ooband
+      max_snapshot_count: 0
+      name: Every24Hours
+      protocol: sftp
+      remote_hosts:
+        - lnx2.rich.ciscolabs.com
+      remote_path: /tmp
+      remote_port: 22
+      schedule:
+        days: every-day
+        hour: 0
+        minute: 15
+      snapshot: false
+      start_now: false
+      username: tyscott

@@ -1,0 +1,130 @@
+---
+switch:
+  switch_profiles:
+    - node_id: 202
+      inband_addressing:
+          ipv4_address: 10.92.65.202/24
+          ipv4_gateway: 10.92.65.254
+          management_epg: inband
+      instrumentation_immediacy: immediate
+      interfaces:
+        - interface: 1/1
+          interface_description: OKEYE01-eth2/3
+          access_or_native_vlan: 1
+          allowed_vlans: 101-104
+          policy_group: trunkPort
+          policy_group_type: access
+        - interface: 1/2
+          interface_description: OKEYE02-eth2/3
+          access_or_native_vlan: 1
+          allowed_vlans: 101-104
+          policy_group: trunkPort
+          policy_group_type: access
+        - interface: 1/3
+          interface_description: OKEYE03-eth2/3
+          access_or_native_vlan: 1
+          allowed_vlans: 101-104
+          policy_group: trunkPort
+          policy_group_type: access
+        - interface: 1/4
+          interface_description: OKEYE04-eth2/3
+          access_or_native_vlan: 1
+          allowed_vlans: 101-104
+          policy_group: trunkPort
+          policy_group_type: access
+        - interface: 1/5
+          interface_description: PANTHER01-eth2/3
+          access_or_native_vlan: 1
+          allowed_vlans: 101-104
+          policy_group: trunkPort
+          policy_group_type: access
+        - interface: 1/6
+          interface_description: PANTHER02-eth2/3
+          access_or_native_vlan: 1
+          allowed_vlans: 101-104
+          policy_group: trunkPort
+          policy_group_type: access
+        - interface: 1/7
+          interface_description: PANTHER03-eth2/3
+          access_or_native_vlan: 1
+          allowed_vlans: 101-104
+          policy_group: trunkPort
+          policy_group_type: access
+        - interface: 1/8
+          interface_description: PANTHER04-eth2/3
+          access_or_native_vlan: 1
+          allowed_vlans: 101-104
+          policy_group: trunkPort
+          policy_group_type: access
+        - interface: 1/9
+        - interface: 1/10
+        - interface: 1/11
+        - interface: 1/12
+        - interface: 1/13
+        - interface: 1/14
+        - interface: 1/15
+        - interface: 1/16
+        - interface: 1/17
+        - interface: 1/18
+        - interface: 1/19
+        - interface: 1/20
+        - interface: 1/21
+        - interface: 1/22
+        - interface: 1/23
+        - interface: 1/24
+        - interface: 1/25
+        - interface: 1/26
+        - interface: 1/27
+        - interface: 1/28
+        - interface: 1/29
+        - interface: 1/30
+        - interface: 1/31
+        - interface: 1/32
+        - interface: 1/33
+        - interface: 1/34
+        - interface: 1/35
+        - interface: 1/36
+        - interface: 1/37
+        - interface: 1/38
+        - interface: 1/39
+        - interface: 1/40
+        - interface: 1/41
+        - interface: 1/42
+        - interface: 1/43
+        - interface: 1/44
+        - interface: 1/45
+        - interface: 1/46
+        - interface: 1/47
+        - interface: 1/48
+        - interface: 1/49
+          interface_description: r142b-core01-Eth1/30
+          policy_group: l3out
+          policy_group_type: access
+        - interface: 1/50
+          interface_description: r142b-core02-Eth1/30
+          policy_group: l3out
+          policy_group_type: access
+        - interface: 1/51
+          interface_description: r143e-2-A-Eth1/54
+          access_or_native_vlan: 1
+          allowed_vlans: 101-104
+          policy_group: vpc51
+          policy_group_type: bundle
+        - interface: 1/52
+          interface_description: r143e-2-B-Eth1/54
+          access_or_native_vlan: 1
+          allowed_vlans: 101-104
+          policy_group: vpc52
+          policy_group_type: bundle
+        - interface: 1/53
+        - interface: 1/54
+      name: asgard-leaf202
+      node_type: leaf
+      ooband_addressing:
+          ipv4_address: 192.168.64.88/23
+          ipv4_gateway: 192.168.64.1
+          management_epg: ooband
+      pod_id: 1
+      role: leaf
+      serial_number: FDO23191QGP
+      site: Wakanda

@@ -1,0 +1,39 @@
+---
+#======================================
+#   Virtual Networking - Variables
+#======================================
+virtual_networking:
+  vmm:
+  - controllers:
+    - datacenter: Wakanda
+      dvs_version: '7.0'
+      hostname: vcenter.rich.ciscolabs.com
+      management_epg: ooband
+      monitoring_policy: default
+      stats_collection: enabled
+      switch_scope: vm
+      trigger_inventory_sync: untriggered
+    credentials:
+    - domain_name: Wakanda
+      username: administrator@rich.local
+    domain:
+    - access_mode: read-write
+      delimiter: '|'
+      enable_tag_collection: false
+      enable_vm_folder_data_retrieval: false
+      endpoint_retention_time: 0
+      name: Wakanda
+      site_group: '1'
+      switch_mode: default
+      switch_provider: VMware
+      vlan_pool: all-vlans
+    enhanced_lag_policy:
+    - load_balancing_mode: src-dst-ip
+      mode: active
+      number_of_links: '2'
+    name: Wakanda
+    vswitch_policy:
+    - cdp_interface_policy: cdpEnabled
+      lldp_interface_policy: lldpEnabled
+      mtu_policy: default
+      port_channel_policy: macPin

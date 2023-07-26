@@ -1,0 +1,26 @@
+---
+tenants:
+  - name: dmz
+    application_profiles:
+      - name: nets
+        description: "Default Network Centric Application Profile"
+    networking:
+      bridge_domains:
+        - application_epg:
+            application_profile: nets
+            template: preferred_group
+            vlans: [201]
+          name: 10.92.201.0
+          subnets:
+            - gateway_ip: 10.92.201.1/24
+              template: advertise_external
+          template: dmz_optimize
+        - application_epg:
+            application_profile: nets
+            template: preferred_group
+            vlans: [202]
+          name: 10.92.202.0
+          subnets:
+            - gateway_ip: 10.92.202.1/24
+              template: advertise_external
+          template: dmz_optimize
