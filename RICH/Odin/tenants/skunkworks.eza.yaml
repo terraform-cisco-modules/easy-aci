@@ -1,0 +1,102 @@
+---
+#========================================
+#   Tenants -> terraform - Variables
+#========================================
+tenants:
+  - application_profiles:
+    - application_epgs:
+        - bridge_domain: 10.239.21.0
+          description: Jusbarks Skunkworks21
+          monitoring_policy: default
+          name: dev
+          template: skunkworks
+        - bridge_domain: 10.239.22.0
+          description: Jusbarks Skunkworks22
+          monitoring_policy: default
+          name: maas
+          template: skunkworks
+      monitoring_policy: default
+      name: k8s
+      ndo:
+        schema: skunkworks
+        template: skunkworks
+    - application_epgs:
+        - bridge_domain: 10.239.10.0
+          description: Jusbarks Skunkworks10
+          monitoring_policy: default
+          name: services
+          template: skunkworks
+        - bridge_domain: 10.239.11.0
+          description: Jusbarks Skunkworks11
+          monitoring_policy: default
+          name: pxe
+          template: skunkworks
+        - bridge_domain: 10.239.12.0
+          description: Jusbarks Skunkworks12
+          monitoring_policy: default
+          name: airgap
+          template: skunkworks
+      monitoring_policy: default
+      name: mgmt
+      ndo:
+        schema: skunkworks
+        template: skunkworks
+    create: true
+    description: skunkworks Tenant
+    monitoring_policy: default
+    name: skunkworks
+    ndo:
+      schemas:
+      - create: true
+        description: skunkworks Schema
+        name: skunkworks
+        templates:
+          - name: skunkworks
+            sites:
+              - Asgard
+              - Wakanda
+      - create: false
+        name: common
+        templates:
+          - name: common
+            sites:
+              - Asgard
+              - Wakanda
+      sites:
+      - name: Asgard
+      - name: Wakanda
+      users:
+      - admin
+      - tyscott
+    networking:
+      bridge_domains:
+      - description: Jusbarks SkunkWorks10
+        name: 10.239.10.0
+        subnets:
+        - gateway_ip: 10.239.10.1/24
+          template: advertise_external
+        template: skunkworks_stretched
+      - description: Jusbarks SkunkWorks11
+        name: 10.239.11.0
+        subnets:
+        - gateway_ip: 10.239.11.1/24
+          template: advertise_external
+        template: skunkworks_stretched
+      - description: Jusbarks SkunkWorks12
+        name: 10.239.12.0
+        subnets:
+        - gateway_ip: 10.239.12.1/24
+          template: advertise_external
+        template: skunkworks_stretched
+      - description: Jusbarks SkunkWorks21
+        name: 10.239.21.0
+        subnets:
+        - gateway_ip: 10.239.21.1/24
+          template: advertise_external
+        template: skunkworks_stretched
+      - description: Jusbarks SkunkWorks22
+        name: 10.239.22.0
+        subnets:
+        - gateway_ip: 10.239.22.1/24
+          template: advertise_external
+        template: skunkworks_stretched
