@@ -4,16 +4,16 @@ locals {
 
 data "utils_yaml_merge" "model" {
   input = concat([
-    for file in fileset(path.module, "../Asgard/switches/*.yaml") : file(file)], [
-    for file in fileset(path.module, "../Wakanda/switches/*.yaml") : file(file)], [
-    for file in fileset(path.module, "tenants/*.yaml") : file(file)]
+    for file in fileset(path.module, "../Asgard/switches/*.eza.yaml") : file(file)], [
+    for file in fileset(path.module, "../Wakanda/switches/*.eza.yaml") : file(file)], [
+    for file in fileset(path.module, "*/*.eza.yaml") : file(file)]
   )
 }
 
 module "built_in_tenants" {
   source = "../../../terraform-aci-tenants"
   #source  = "terraform-cisco-modules/tenants/aci"
-  #version = "2.1.9"
+  #version = "2.2.5"
 
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) > 0
@@ -35,7 +35,7 @@ module "tenants" {
   ]
   source = "../../../terraform-aci-tenants"
   #source  = "terraform-cisco-modules/tenants/aci"
-  #version = "2.1.9"
+  #version = "2.2.5"
 
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) == 0
@@ -44,7 +44,8 @@ module "tenants" {
   annotations     = var.annotations
   controller_type = var.controller_type
   model           = each.value
-  switch          = lookup(local.model, "switch", {})
-  templates       = lookup(local.model, "templates", {})
-  tenant          = each.key
+  switch          = {}
+  #switch          = lookup(local.model, "switch", {})
+  templates = lookup(local.model, "templates", {})
+  tenant    = each.key
 }

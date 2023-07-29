@@ -6,18 +6,21 @@ access:
   policies:
     global:
       attachable_access_entity_profiles:
-      - description: Basic AEP
+      - description: Basic AAEP
         infra_vlan: false
         name: accessAep
         physical_domains:
         - access
-      - access_or_native_vlan: 1
-        allowed_vlans: 11-13
-        description: AEP for EPG Assignment
+      - description: interSite AAEP
         infra_vlan: false
-        name: l3out
+        name: interSite
         l3_domains:
-        - l3out
+        - interSite
+      - description: L3Out AAEP
+        infra_vlan: false
+        name: l3Out
+        l3_domains:
+        - l3Out
       recommended_policies:
         error_disabled_recovery_policy: true
         mcp_instance_policy: true

@@ -34,9 +34,9 @@ fabric:
           name: default
           ntp_servers:
             - hostname: 10.101.128.15
-              preferred: false
-            - hostname: 10.101.128.16
               preferred: true
+            - hostname: 10.101.128.16
+              preferred: false
           time_zone: America/Detroit
       snmp:
         - contact: rich-lab@cisco.com

@@ -19,7 +19,7 @@ templates:
         l3_unknown_multicast_flooding: flood
         limit_ip_learn_to_subnets: true
         mld_snoop_policy: default
-        multi_destionation_flooding: bd-flood
+        multi_destination_flooding: bd-flood
         pim: false
         pimv6: false
         type: regular
@@ -31,7 +31,6 @@ templates:
             - l3outs: [inband]
               tenant: mgmt
         ep_move_detection_mode: false
-        nd_policy: default
         unicast_routing: true
       template_name: inband_optimize
   subnets:

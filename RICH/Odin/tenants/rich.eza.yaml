@@ -1,0 +1,63 @@
+---
+#========================================
+#   Tenants -> terraform - Variables
+#========================================
+tenants:
+  - application_profiles:
+    - create: true
+      monitoring_policy: default
+      name: nets
+      ndo:
+        schema: RICH
+        template: RICH
+    create: true
+    description: RICH Tenant
+    monitoring_policy: default
+    name: RICH
+    ndo:
+      schemas:
+      - create: true
+        description: RICH Schema
+        name: RICH
+        templates:
+          - name: RICH
+            sites:
+              - Asgard
+              - Wakanda
+      - create: false
+        name: common
+        templates:
+          - name: common
+            sites:
+              - Asgard
+              - Wakanda
+      sites:
+      - name: Asgard
+      - name: Wakanda
+      users:
+      - admin
+      - tyscott
+    networking:
+      bridge_domains:
+      #- application_epg:
+      #    application_profile: nets
+      #    template: RICH
+      #    vlans:
+      #    - 101
+      #  description: Vlan 101
+      #  name: 198.18.101.0
+      #  subnets:
+      #  - gateway_ip: 198.18.101.254/24
+      #    template: advertise_external
+      #  template: RICH_stretched
+      - application_epg:
+          application_profile: nets
+          template: RICH
+          vlans:
+          - 102
+        description: Vlan 102
+        name: 198.18.102.0
+        subnets:
+        - gateway_ip: 198.18.102.254/24
+          template: advertise_external
+        template: RICH_stretched

@@ -3,8 +3,8 @@ switch:
   switch_profiles:
     - node_id: 201
       inband_addressing:
-        ipv4_address: 10.92.65.201/24
-        ipv4_gateway: 10.92.65.254
+        ipv4_address: 198.18.56.201/24
+        ipv4_gateway: 198.18.56.254
         management_epg: inband
       instrumentation_immediacy: immediate
       interfaces:
@@ -98,11 +98,11 @@ switch:
         - interface: 1/48
         - interface: 1/49
           interface_description: r142b-core01-Eth1/29
-          policy_group: l3out
+          policy_group: l3Out
           policy_group_type: access
         - interface: 1/50
           interface_description: r142b-core02-Eth1/29
-          policy_group: l3out
+          policy_group: l3Out
           policy_group_type: access
         - interface: 1/51
           interface_description: r143e-2-A-Eth1/53
@@ -118,8 +118,7 @@ switch:
           policy_group_type: bundle
         - interface: 1/53
         - interface: 1/54
-        - interface: 1/101
-      name: asgard-leaf201
+      name: wakanda-leaf201
       node_type: leaf
       ooband_addressing:
         ipv4_address: 192.168.64.87/23

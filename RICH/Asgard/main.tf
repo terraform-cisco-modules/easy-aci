@@ -23,7 +23,7 @@ module "access" {
   ]
   #source = "../../../terraform-aci-access"
   source  = "terraform-cisco-modules/access/aci"
-  version = "2.1.7"
+  version = "2.2.5"
 
   for_each = { for v in ["default"] : v => v if length(
     lookup(local.model, "access", {})) > 0 || length(lookup(local.model, "virtual_networking", {})) > 0
@@ -66,7 +66,7 @@ module "built_in_tenants" {
   ]
   #source = "../../../terraform-aci-tenants"
   source  = "terraform-cisco-modules/tenants/aci"
-  version = "2.1.9"
+  version = "2.2.5"
 
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) > 0
@@ -108,7 +108,7 @@ module "switch" {
   ]
   #source = "../../../terraform-aci-switch"
   source  = "terraform-cisco-modules/switch/aci"
-  version = "2.1.7"
+  version = "2.2.5"
 
   for_each     = { for v in ["default"] : v => v if length(lookup(local.model, "switch", {})) > 0 }
   annotations  = var.annotations
@@ -119,7 +119,7 @@ module "switch" {
 module "system_settings" {
   #source = "../../../terraform-aci-system-settings"
   source  = "terraform-cisco-modules/system-settings/aci"
-  version = "2.1.7"
+  version = "2.2.5"
 
   for_each        = { for v in ["default"] : v => v if length(lookup(local.model, "system_settings", {})) > 0 }
   annotations     = var.annotations
@@ -135,7 +135,7 @@ module "tenants" {
   ]
   #source = "../../../terraform-aci-tenants"
   source  = "terraform-cisco-modules/tenants/aci"
-  version = "2.1.9"
+  version = "2.2.5"
 
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) == 0

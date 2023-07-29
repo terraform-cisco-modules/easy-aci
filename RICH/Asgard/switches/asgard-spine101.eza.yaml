@@ -37,10 +37,10 @@ switch:
         - interface: 1/28
         - interface: 1/29
           interface_description: r142b-core01-Eth1/23
-          policy_group: default
+          policy_group: interSite
         - interface: 1/30
           interface_description: r142b-core02-Eth1/23
-          policy_group: default
+          policy_group: interSite
         - interface: 1/31
         - interface: 1/32
         - interface: 1/33

@@ -3,8 +3,8 @@ switch:
   switch_profiles:
     - node_id: 102
       inband_addressing:
-        ipv4_address: 10.92.65.102/24
-        ipv4_gateway: 10.92.65.254
+        ipv4_address: 198.18.56.102/24
+        ipv4_gateway: 198.18.56.254
         management_epg: inband
       interfaces:
         - interface: 1/1
@@ -37,15 +37,15 @@ switch:
         - interface: 1/28
         - interface: 1/29
           interface_description: r142b-core01-Eth1/24
-          policy_group: default
+          policy_group: interSite
         - interface: 1/30
           interface_description: r142b-core02-Eth1/24
-          policy_group: default
+          policy_group: interSite
         - interface: 1/31
         - interface: 1/32
         - interface: 1/33
         - interface: 1/34
-      name: asgard-spine102
+      name: wakanda-spine102
       node_type: spine
       ooband_addressing:
         ipv4_address: 192.168.64.90/23

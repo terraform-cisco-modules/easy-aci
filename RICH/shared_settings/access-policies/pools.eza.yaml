@@ -8,8 +8,10 @@ access:
     - allocation_mode: dynamic
       description: Access VLAN Pool
       encap_blocks:
+      - allocation_mode: inherit
+        vlan_range: '4'
       - allocation_mode: static
-        vlan_range: 4-299
+        vlan_range: 5-52,57-199
       - allocation_mode: inherit
         vlan_range: 1000-1199
-      name: all-vlans
+      name: allVlans

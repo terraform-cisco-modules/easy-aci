@@ -1,7 +1,9 @@
 ---
 system_settings:
+  apic_connectivity_preference:
+    interface_to_use_for_external_connections: ooband
   bgp_route_reflector:
-    autonomous_system_number: 65502
+    autonomous_system_number: 65065
     route_reflector_nodes:
       pods:
       - pod_id: 1

@@ -5,8 +5,10 @@
 access:
   physical_and_external_domains:
     l3_domains:
-    - name: l3out
-      vlan_pool: all-vlans
+    - name: interSite
+      vlan_pool: allVlans
+    - name: l3Out
+      vlan_pool: allVlans
     physical_domains:
     - name: access
-      vlan_pool: all-vlans
+      vlan_pool: allVlans

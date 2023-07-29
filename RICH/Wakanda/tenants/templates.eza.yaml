@@ -5,7 +5,7 @@ templates:
       contracts: []
       domains:
         - name: access
-        - name: Asgard
+        - name: Wakanda
           allow_micro_segmentation: false
           delimiter: '|'
           deploy_immediacy: immediate

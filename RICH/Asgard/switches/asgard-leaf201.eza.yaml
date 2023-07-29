@@ -34,32 +34,32 @@ switch:
         - interface: 1/19
         - interface: 1/20
         - interface: 1/21
-        - interface: 1/22
-        - interface: 1/23
-        - interface: 1/24
-        - interface: 1/25
           interface_description: LOKI01-eth2/1
           policy_group: trunkPort
           policy_group_type: access
-        - interface: 1/26
+        - interface: 1/22
           interface_description: LOKI02-eth2/1
           policy_group: trunkPort
           policy_group_type: access
-        - interface: 1/27
+        - interface: 1/23
           interface_description: LOKI03-eth2/1
           policy_group: trunkPort
           policy_group_type: access
-        - interface: 1/28
+        - interface: 1/24
           interface_description: LOKI04-eth2/1
           policy_group: trunkPort
           policy_group_type: access
+        - interface: 1/25
+        - interface: 1/26
+        - interface: 1/27
+        - interface: 1/28
         - interface: 1/29
           interface_description: r142b-core01-Eth1/27
-          policy_group: l3out
+          policy_group: l3Out
           policy_group_type: access
         - interface: 1/30
           interface_description: r142b-core02-Eth1/27
-          policy_group: l3out
+          policy_group: l3Out
           policy_group_type: access
         - interface: 1/31
         - interface: 1/32

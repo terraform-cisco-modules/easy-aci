@@ -3,16 +3,16 @@ tenants:
   - name: mgmt
     node_management_addresses:
       static_node_management_addresses:
-        - ipv4_address: 10.92.64.1/24
-          ipv4_gateway: 10.92.64.254
+        - ipv4_address: 198.18.54.1/24
+          ipv4_gateway: 198.18.54.254
           management_epg: inband
           node_id: 1
-          pod_id: 1
+          pod_id: 0
     application_profiles:
       - name: inb
         application_epgs:
           - name: inband
-            bridge_domain: 10.92.64.0
+            bridge_domain: 198.18.54.0
             contracts:
               - name: inband_out
                 contract_type: consumed
@@ -22,7 +22,7 @@ tenants:
             domains:
               - name: access
             epg_type: inb
-            vlans: [64]
+            vlans: [54]
           - name: ooband
             contracts:
               - name: ooband_in
@@ -80,7 +80,6 @@ tenants:
           description: Management Inbound Traffic
           filter_entries:
             - name: icmp
-              acknowledgement: false
               description: 'Allow ICMP'
               ethertype: ip
               ip_protocol: icmp
@@ -168,10 +167,10 @@ tenants:
               ip_protocol: icmp
     networking:
       bridge_domains:
-        - name: 10.92.64.0
+        - name: 198.18.54.0
           template: inband_optimize
           subnets:
-            - gateway_ip: 10.92.64.254/24
+            - gateway_ip: 198.18.54.254/24
               template: advertise_external
       l3outs:
         - name: inband
@@ -189,13 +188,16 @@ tenants:
                 - subnets:
                     - 0.0.0.0/1
                     - 128.0.0.0/1
-          l3_domain: l3out
+          l3_domain: l3Out
           logical_node_profiles:
             - name: asgard-leaf201
               description: 'asgard-leaf201 Inband LNP'
               logical_interface_profiles:
                 - bgp_peers:
-                    - peer_addresses: [10.92.11.0]
+                    - bgp_controls:
+                        send_community: true
+                        send_extended_community: true
+                      peer_addresses: [10.101.11.0]
                       peer_asn: 64701
                       peer_controls:
                           bidirectional_forwarding_detection: true
@@ -209,9 +211,12 @@ tenants:
                   name: Eth1-29.11
                   nodes:
                     - 201
-                  primary_preferred_address: 10.92.11.1/31
+                  primary_preferred_address: 10.101.11.1/31
                 - bgp_peers:
-                    - peer_addresses: [10.92.11.8]
+                    - bgp_controls:
+                        send_community: true
+                        send_extended_community: true
+                      peer_addresses: [10.101.11.8]
                       peer_asn: 64701
                       peer_controls:
                           bidirectional_forwarding_detection: true
@@ -225,17 +230,20 @@ tenants:
                   name: Eth1-30.11
                   nodes:
                     - 201
-                  primary_preferred_address: 10.92.11.9/31
+                  primary_preferred_address: 10.101.11.9/31
               nodes:
                 - node_id: 201
-                  router_id: 10.92.11.201
+                  router_id: 10.101.1.201
                   use_router_id_as_loopback: true
               pod_id: 1
             - name: asgard-leaf202
               description: 'asgard-leaf202 Inband LNP'
               logical_interface_profiles:
                 - bgp_peers:
-                    - peer_addresses: [10.92.11.2]
+                    - bgp_controls:
+                        send_community: true
+                        send_extended_community: true
+                      peer_addresses: [10.101.11.2]
                       peer_asn: 64701
                       peer_controls:
                           bidirectional_forwarding_detection: true
@@ -249,9 +257,12 @@ tenants:
                   name: Eth1-29.11
                   nodes:
                     - 202
-                  primary_preferred_address: 10.92.11.3/31
+                  primary_preferred_address: 10.101.11.3/31
                 - bgp_peers:
-                    - peer_addresses: [10.92.11.10]
+                    - bgp_controls:
+                        send_community: true
+                        send_extended_community: true
+                      peer_addresses: [10.101.11.10]
                       peer_asn: 64701
                       peer_controls:
                           bidirectional_forwarding_detection: true
@@ -265,10 +276,10 @@ tenants:
                   name: Eth1-30.11
                   nodes:
                     - 202
-                  primary_preferred_address: 10.92.11.11/31
+                  primary_preferred_address: 10.101.11.11/31
               nodes:
                 - node_id: 202
-                  router_id: 10.92.11.202
+                  router_id: 10.101.1.202
                   use_router_id_as_loopback: true
               pod_id: 1
           vrf: inb

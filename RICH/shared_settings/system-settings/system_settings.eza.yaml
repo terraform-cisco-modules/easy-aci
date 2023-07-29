@@ -1,7 +1,7 @@
 ---
 system_settings:
   apic_connectivity_preference:
-    interface_to_use_for_external_connections: inband
+    interface_to_use_for_external_connections: ooband
   coop_group:
     description: default
     type: strict

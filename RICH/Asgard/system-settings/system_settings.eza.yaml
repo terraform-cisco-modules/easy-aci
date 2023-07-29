@@ -1,7 +1,7 @@
 ---
 system_settings:
   bgp_route_reflector:
-    autonomous_system_number: 65501
+    autonomous_system_number: 65064
     route_reflector_nodes:
       pods:
       - pod_id: 1

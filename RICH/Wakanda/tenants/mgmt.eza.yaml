@@ -3,16 +3,16 @@ tenants:
   - name: mgmt
     node_management_addresses:
       static_node_management_addresses:
-        - ipv4_address: 10.92.65.1/24
-          ipv4_gateway: 10.92.65.254
+        - ipv4_address: 198.18.56.1/24
+          ipv4_gateway: 198.18.56.254
           management_epg: inband
           node_id: 1
-          pod_id: 1
+          pod_id: 0
     application_profiles:
       - name: inb
         application_epgs:
           - name: inband
-            bridge_domain: 10.92.65.0
+            bridge_domain: 198.18.56.0
             contracts:
               - name: inband_out
                 contract_type: consumed
@@ -22,7 +22,7 @@ tenants:
             domains:
               - name: access
             epg_type: inb
-            vlans: [65]
+            vlans: [56]
           - name: ooband
             contracts:
               - name: ooband_in
@@ -80,7 +80,6 @@ tenants:
           description: Management Inbound Traffic
           filter_entries:
             - name: icmp
-              acknowledgement: false
               description: 'Allow ICMP'
               ethertype: ip
               ip_protocol: icmp
@@ -168,10 +167,10 @@ tenants:
               ip_protocol: icmp
     networking:
       bridge_domains:
-        - name: 10.92.65.0
+        - name: 198.18.56.0
           template: inband_optimize
           subnets:
-            - gateway_ip: 10.92.65.254/24
+            - gateway_ip: 198.18.56.254/24
               template: advertise_external
       l3outs:
         - name: inband
@@ -189,13 +188,16 @@ tenants:
                 - subnets:
                     - 0.0.0.0/1
                     - 128.0.0.0/1
-          l3_domain: l3out
+          l3_domain: l3Out
           logical_node_profiles:
             - name: wakanda-leaf201
               description: 'wakanda-leaf201 Inband LNP'
               logical_interface_profiles:
                 - bgp_peers:
-                    - peer_addresses: [10.92.11.4]
+                    - bgp_controls:
+                        send_community: true
+                        send_extended_community: true
+                      peer_addresses: [10.101.11.4]
                       peer_asn: 64701
                       peer_controls:
                           bidirectional_forwarding_detection: true
@@ -206,12 +208,15 @@ tenants:
                   interface_type: sub-interface
                   mode: trunk
                   mtu: inherit
-                  name: Eth1-29.11
+                  name: Eth1-49.11
                   nodes:
                     - 201
-                  primary_preferred_address: 10.92.11.5/31
+                  primary_preferred_address: 10.101.11.5/31
                 - bgp_peers:
-                    - peer_addresses: [10.92.11.12]
+                    - bgp_controls:
+                        send_community: true
+                        send_extended_community: true
+                      peer_addresses: [10.101.11.12]
                       peer_asn: 64701
                       peer_controls:
                           bidirectional_forwarding_detection: true
@@ -222,20 +227,23 @@ tenants:
                   interface_type: sub-interface
                   mode: trunk
                   mtu: inherit
-                  name: Eth1-30.11
+                  name: Eth1-50.11
                   nodes:
                     - 201
-                  primary_preferred_address: 10.92.11.13/31
+                  primary_preferred_address: 10.101.11.13/31
               nodes:
                 - node_id: 201
-                  router_id: 10.92.11.201
+                  router_id: 10.101.11.201
                   use_router_id_as_loopback: true
               pod_id: 1
             - name: wakanda-leaf202
               description: 'wakanda-leaf202 Inband LNP'
               logical_interface_profiles:
                 - bgp_peers:
-                    - peer_addresses: [10.92.11.6]
+                    - bgp_controls:
+                        send_community: true
+                        send_extended_community: true
+                      peer_addresses: [10.101.11.6]
                       peer_asn: 64701
                       peer_controls:
                           bidirectional_forwarding_detection: true
@@ -246,12 +254,15 @@ tenants:
                   interface_type: sub-interface
                   mode: trunk
                   mtu: inherit
-                  name: Eth1-29.11
+                  name: Eth1-49.11
                   nodes:
                     - 202
-                  primary_preferred_address: 10.92.11.7/31
+                  primary_preferred_address: 10.101.11.7/31
                 - bgp_peers:
-                    - peer_addresses: [10.92.11.14]
+                    - bgp_controls:
+                        send_community: true
+                        send_extended_community: true
+                      peer_addresses: [10.101.11.14]
                       peer_asn: 64701
                       peer_controls:
                           bidirectional_forwarding_detection: true
@@ -262,13 +273,13 @@ tenants:
                   interface_type: sub-interface
                   mode: trunk
                   mtu: inherit
-                  name: Eth1-30.11
+                  name: Eth1-50.11
                   nodes:
                     - 202
-                  primary_preferred_address: 10.92.11.15/31
+                  primary_preferred_address: 10.101.11.15/31
               nodes:
                 - node_id: 202
-                  router_id: 10.92.11.202
+                  router_id: 10.101.11.202
                   use_router_id_as_loopback: true
               pod_id: 1
           vrf: inb

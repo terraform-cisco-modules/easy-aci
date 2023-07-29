@@ -4,7 +4,7 @@ access:
     global:
       attachable_access_entity_profiles:
       - access_or_native_vlan: 1
-        allowed_vlans: 100-299,1101-1110
+        allowed_vlans: 100-199,1000-1199
         description: AEP for EPG Assignment
         infra_vlan: false
         name: trunkAep
