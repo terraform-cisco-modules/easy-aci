@@ -1,0 +1,52 @@
+---
+#========================================
+#   Tenants -> terraform - Variables
+#========================================
+tenants:
+  - application_profiles:
+    - create: true
+      monitoring_policy: default
+      name: nets
+      ndo:
+        schema: test
+        template: test
+    create: true
+    description: test Tenant
+    monitoring_policy: default
+    name: test
+    ndo:
+      schemas:
+      - create: true
+        description: test Schema
+        name: test
+        templates:
+          - name: test
+            sites:
+              - Asgard
+              - Wakanda
+      - create: false
+        name: common
+        templates:
+          - name: common
+            sites:
+              - Asgard
+              - Wakanda
+      sites:
+      - name: Asgard
+      - name: Wakanda
+      users:
+      - admin
+      - tyscott
+    networking:
+      bridge_domains:
+      - application_epg:
+          application_profile: nets
+          template: test
+          vlans:
+          - 110
+        description: Vlan 110
+        name: 198.18.110.0
+        subnets:
+        - gateway_ip: 198.18.110.254/24
+          template: advertise_external
+        template: test_stretched

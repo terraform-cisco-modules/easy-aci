@@ -1908,25 +1908,25 @@
             "properties": {
                 "bpdu_filter": {
                     "type": "string",
-                    "apicApi": "automaxspeed",
+                    "apicApi": "ctrl:bpdu-filter",
                     "default": "disabled",
                     "description": "The interface level control that enables the BPDU filter for extended chassis ports.  Options are:\n  * disabled: (default)\n  * enabled",
                     "enum": [
                         "disabled",
                         "enabled"
                     ],
-                    "title": "bpdu_filter - "
+                    "title": "bpdu_filter - ctrl:bpdu-filter"
                 },
                 "bpdu_guard": {
                     "type": "string",
-                    "apicApi": "automaxspeed",
+                    "apicApi": "ctrl:bpdu-guard",
                     "default": "disabled",
                     "description": "The interface level control that enables the BPDU guard for extended chassis ports.  Options are:\n  * disabled: (default)\n  * enabled",
                     "enum": [
                         "disabled",
                         "enabled"
                     ],
-                    "title": "bpdu_guard - "
+                    "title": "bpdu_guard - ctrl:bpdu-guard"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
@@ -1952,34 +1952,39 @@
             "properties": {
                 "vpc_domain": {
                     "type": "array",
-                    "description": "Required Attributes are:\n  * name\n\nOptional Attributes are:\n  * dead_interval\n  * delay_restore_timer\n  * description",
+                    "description": "Required Attributes are:\n  * name\n\nOptional Attributes are:\n  * dead_interval\n  * delay_restore_timer\n  * description\nAPI Information:\n - Class: `vpcInstPol`\n - Distinguished Name: `uni/fabric/vpcInst-{name}`\nGUI Location:\n - Fabric -> Access Policies -> Policies -> Switch -> VPC Domain -> Create VPC Domain Policy",
                     "items": {
                         "$ref": "#/definitions/Access:Policies:Switch:VPCDomain"
                     },
-                    "title": "vpc_domain - Policies > Switch > VPC Domain"
+                    "title": "vpc_domain"
                 }
             },
-            "title": "switch - Policies > Switch"
+            "title": "switch"
         },
         "Access:Policies:Switch:VPCDomain": {
             "type": "object",
             "additionalProperties": false,
+            "class": "vpcInstPol",
+            "description": "",
+            "dn": "uni/fabric/vpcInst-{name}",
             "properties": {
                 "dead_interval": {
                     "type": "integer",
+                    "apicApi": "deadIntvl",
                     "default": 200,
                     "description": "Default value is `200`.  The VPC peer dead interval time of object VPC Domain Policy. Range: `200-600`.",
                     "minimum": 200,
                     "maximum": 600,
-                    "title": "dead_interval"
+                    "title": "dead_interval - deadIntvl"
                 },
                 "delay_restore_timer": {
                     "type": "integer",
+                    "apicApi": "delayRestoreTmr",
                     "default": 200,
                     "description": "Default value is `120`.  Delay before restoring (bringing up) the VPCs. Range: `120-600`.",
                     "minimum": 200,
                     "maximum": 600,
-                    "title": "delay_restore_timer"
+                    "title": "delay_restore_timer - delayRestoreTmr"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
@@ -2000,42 +2005,46 @@
             "properties": {
                 "vlan": {
                     "type": "array",
-                    "description": "Required Attributes are:\n  * encap_blocks\n  * name\n\nOptional Attributes are:\n  * allocation_mode\n  * description",
+                    "description": "Array of VLAN Pools.\n\nRequired Attributes are:\n  * encap_blocks\n  * name\n\nOptional Attributes are:\n  * allocation_mode\n  * description\nAPI Information:\n - Class: `fvnsVlanInstP`\n - Distinguished name: `uni/infra/vlanns-[{name}]-{allocation_mode}`\nGUI Location:\n - Fabric > Access Policies > Pools > VLAN:[{name}]",
                     "items": {
                         "$ref": "#/definitions/Access:Pools:VLAN"
                     },
-                    "title": "vlan - Pools > VLAN"
+                    "title": "vlan"
                 }
             },
             "required": [
                 "vlan"
             ],
-            "title": "pools - Fabric > Access Policies > Pools"
+            "title": "pools"
         },
         "Access:Pools:VLAN": {
             "type": "object",
             "additionalProperties": false,
+            "class": "fvnsVlanInstP",
+            "description": "",
+            "dn": "uni/infra/vlanns-[{name}]-{allocation_mode}",
             "properties": {
                 "allocation_mode": {
                     "type": "string",
+                    "apicApi": "allocMode",
                     "default": "dynamic",
                     "description": "The allocation mode. The values can be:\n  * dynamic: (default) - Managed internally by the APIC to allocate VLANs for endpoint groups (EPGs). A vCenter Domain can associate only to a dynamic pool.\n  * static - One or more EPGs are associated with a domain, and that domain is associated with a static range of VLANs. You must configure statically deployed EPGs within that range of VLANs.",
                     "enum": [
                         "dynamic",
                         "static"
                     ],
-                    "title": "allocation_mode"
+                    "title": "allocation_mode - allocMode"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
                 },
                 "encap_blocks": {
                     "type": "array",
-                    "description": "Required Attributes are:\n  * vlan_range\n\nOptional Attributes are:\n  * allocation_mode\n  * description\n  * role",
+                    "description": "Blocks of VLANs to Add to the Pool.\n\nRequired Attributes are:\n  * vlan_range\n\nOptional Attributes are:\n  * allocation_mode\n  * description\n  * role",
                     "items": {
                         "$ref": "#/definitions/Access:Pools:VLAN:EncapBlock"
                     },
-                    "title": "encap_blocks"
+                    "title": "encap_blocks - VLAN Pool Encapsulation Blocks"
                 },
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
@@ -2050,39 +2059,48 @@
         "Access:Pools:VLAN:EncapBlock": {
             "type": "object",
             "additionalProperties": false,
+            "class": "fvnsEncapBlk",
+            "description": "",
+            "dn": "uni/infra/vlanns-[{name}]-{allocation_mode}/from-[vlan-{beginning_vlan}]-to-[vlan-{ending_vlan}]",
             "properties": {
                 "allocation_mode": {
                     "default": "inherit",
+                    "apicApi": "allocMode",
                     "description": "The allocation mode. The values can be:\n  * dynamic - Managed internally by the APIC to allocate VLANs for endpoint groups (EPGs). A vCenter Domain can associate only to a dynamic pool.\n  * inherit: (default)\n  * static - One or more EPGs are associated with a domain, and that domain is associated with a static range of VLANs. You must configure statically deployed EPGs within that range of VLANs.",
                     "enum": [
                         "dynamic",
                         "inherit",
                         "static"
-                    ]
+                    ],
+                    "title": "allocation_mode - allocMode"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
                 },
                 "role": {
                     "default": "external",
+                    "apicApi": "role",
                     "description": "Role of the VLAN range. The options are:\n  * external: (default) - Used for allocating VLANs for each EPG assigned to the domain. The VLANs are used when packets are sent to or from leafs.\n  * Internal - Used for private VLAN allocations in the internal vSwitch by the Cisco ACI Virtual Edge (AVE). The VLANs are not seen outside the ESX host or on the wire.",
                     "enum": [
                         "external",
                         "Internal"
-                    ]
+                    ],
+                    "title": "role"
                 },
                 "vlan_range": {
                     "type": "string",
+                    "apicApi": "not_applicable",
                     "description": "Single VLAN; i.e. 1.  range of VLANs; i.e. 1-5. Or List of VLANs; i.e. 1-5,10-15",
                     "minLength": 1,
                     "maxLength": 128,
-                    "pattern": "^(((\\d+)|(\\d+-\\d+))(,((\\d+)|(\\d+-\\d+)))*)$"
+                    "pattern": "^(((\\d+)|(\\d+-\\d+))(,((\\d+)|(\\d+-\\d+)))*)$",
+                    "title": "vlan_range"
                 }
             },
             "required": [
                 "vlan_range"
             ],
-            "title": "encap_blocks - VLAN Pool Encapsulation Blocks"
+            "title": "encap_blocks"
         },
         "Access:Switches": {
             "type": "object",
@@ -2096,7 +2114,7 @@
                     "$ref": "#/definitions/Access:Switches:SpineSwitches"
                 }
             },
-            "title": "switches - Fabric > Access Policies > Switches"
+            "title": "switches"
         },
         "Access:Switches:LeafSwitches": {
             "type": "object",
@@ -2105,214 +2123,193 @@
             "properties": {
                 "policy_groups": {
                     "type": "array",
-                    "description": "Required Attributes are:\n  * name\n\nOptional Attributes are:\n  * bfd_ipv4_policy\n  * bfd_ipv6_policy\n  * bfd_multihop_ipv4_policy\n  * bfd_multihop_ipv6_policy\n  * cdp_interface_policy\n  * copp_leaf_policy\n  * copp_pre_filter\n  * description\n  * dot1x_node_authentication_policy\n  * equipment_flash_config\n  * fast_link_failover_policy\n  * fibre_channel_node_policy\n  * fibre_channel_san_policy\n  * forward_scale_profile_policy\n  * lldp_interface_policy\n  * monitoring_policy\n  * netflow_node_policy\n  * poe_node_policy\n  * ptp_node_policy\n  * spanning_tree_interface_policy\n  * synce_node_policy\n  * usb_configuration_policy",
+                    "description": "An Array of Spine Switch Policy Groups.\n\nRequired Attributes are:\n  * name\n\nOptional Attributes are:\n  * bfd_ipv4_policy\n  * bfd_ipv6_policy\n  * bfd_multihop_ipv4_policy\n  * bfd_multihop_ipv6_policy\n  * cdp_interface_policy\n  * copp_leaf_policy\n  * copp_pre_filter\n  * description\n  * dot1x_node_authentication_policy\n  * equipment_flash_config\n  * fast_link_failover_policy\n  * fibre_channel_node_policy\n  * fibre_channel_san_policy\n  * forward_scale_profile_policy\n  * lldp_interface_policy\n  * monitoring_policy\n  * netflow_node_policy\n  * poe_node_policy\n  * ptp_node_policy\n  * spanning_tree_interface_policy\n  * synce_node_policy\n  * usb_configuration_policy\nAPI Information:\n - Class: `infraAccNodePGrp`\n - Distinguished Name: `uni/infra/funcprof/accnodepgrp-{name}`\nGUI Location:\n - Fabric > Access Policies > Switches > Leaf Switches > Policy Groups: {name}",
                     "items": {
                         "$ref": "#/definitions/Access:Switches:LeafSwitches:PolicyGroups"
                     },
-                    "title": "policy_groups - Switches > Leaf Switches > Policy Groups."
+                    "title": "policy_groups"
                 }
             },
             "required": [
                 "policy_groups"
             ],
-            "title": "leaf - Switches > Leaf Switches."
+            "title": "leaf"
         },
         "Access:Switches:LeafSwitches:PolicyGroups": {
             "type": "object",
             "additionalProperties": false,
+            "class": "fvnsEncapBlk",
+            "description": "",
+            "dn": "uni/infra/vlanns-[{name}]-{allocation_mode}/from-[vlan-{beginning_vlan}]-to-[vlan-{ending_vlan}]",
             "properties": {
                 "bfd_ipv4_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsBfdIpv4InstPol",
                     "description": "The BFD IPv4 policy name.  Bidirectional Forwarding Detection (BFD) is used to provide sub-second failure detection times in the forwarding path between Cisco ACI fabric border leaf switches configured to support peering router connections.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "bfd_ipv4_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsbfdIpv4InstPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/bfdIpv4Inst-{bfd_ipv4_policy}",
+                    "title": "bfd_ipv4_policy - infraRsBfdIpv4InstPol"
                 },
                 "bfd_ipv6_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsBfdIpv6InstPol",
                     "description": "The BFD IPv6 policy name.  Bidirectional Forwarding Detection (BFD) is used to provide sub-second failure detection times in the forwarding path between Cisco ACI fabric border leaf switches configured to support peering router connections.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "bfd_ipv6_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsbfdIpv6InstPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/bfdIpv6Inst-{bfd_ipv6_policy}",
+                    "title": "bfd_ipv6_policy - infraRsBfdIpv6InstPol"
                 },
                 "bfd_multihop_ipv4_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsBfdMhIpv4InstPol",
                     "description": "The BFD multihop IPv4 policy name.  Bidirectional Forwarding Detection (BFD) multihop for IPv4 provides subsecond forwarding failure detection for a destination with more than one hop and up to 255 hops.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "bfd_multihop_ipv4_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsbfdMhIpv4InstPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/bfdMhIpv4Inst-{bfd_multihop_ipv4_policy}",
+                    "title": "bfd_multihop_ipv4_policy - infraRsBfdMhIpv4InstPol"
                 },
                 "bfd_multihop_ipv6_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsBfdMhIpv6InstPol",
                     "description": "The BFD multihop IPv6 policy name.  Bidirectional Forwarding Detection (BFD) multihop for IPv6 provides subsecond forwarding failure detection for a destination with more than one hop and up to 255 hops.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "bfd_multihop_ipv6_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsbfdMhIpv6InstPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/bfdMhIpv6Inst-{bfd_multihop_ipv6_policy}",
+                    "title": "bfd_multihop_ipv6_policy - infraRsBfdMhIpv6InstPol"
                 },
                 "cdp_interface_policy": {
-                    "type": "string",
-                    "default": "default",
-                    "description": "The Name of the CDP Interface Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "cdp_interface_policy"
+                    "class": "infraRsLeafPGrpToCdpIfPol",
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsleafPGrpToCdpIfPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/cdpIfP-{cdp_interface_policy}",
+                    "title": "cdp_interface_policy - infraRsLeafPGrpToCdpIfPol"
                 },
                 "copp_leaf_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsLeafCoppProfile",
                     "description": "The leaf CoPP policy name.  Control Plane Policing (CoPP) protects the control plane, which ensures network stability, reachability, and packet delivery.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "copp_leaf_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsleafCoppProfile",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/coppleafp-{copp_leaf_policy}",
+                    "title": "copp_leaf_policy - infraRsLeafCoppProfile"
                 },
                 "copp_pre_filter": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsIaclLeafProfile",
                     "description": "The CoPP Pre-Filter name.  A CoPP prefilter profile is used on spine and leaf switches to filter access to authentication services based on specified sources and TCP ports to protect against DDoS attacks. When deployed on a switch, control plane traffic is denied by default. Only the traffic specified in the CoPP prefilter profile is permitted.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "copp_pre_filter"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsiaclLeafProfile",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/iaclleafp-{copp_pre_filter}",
+                    "title": "copp_pre_filter - infraRsIaclLeafProfile"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
                 },
                 "dot1x_node_authentication_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsL2NodeAuthPol",
                     "description": "The 802.1x node authentication policy name.  An 802.1x node authorization policy is a client and server-based access control and authentication protocol that restricts unauthorized clients from connecting to a LAN through publicly accessible ports.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "dot1x_node_authentication_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsl2NodeAuthPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/nodeauthpol-{dot1x_authentication_policy}",
+                    "title": "dot1x_node_authentication_policy - infraRsL2NodeAuthPol"
                 },
                 "equipment_flash_config": {
-                    "type": "string",
-                    "default": "default",
-                    "description": "The Name of the Flash Configuration Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "equipment_flash_config"
+                    "class": "infraRsEquipmentFlashConfigPol",
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsequipmentFlashConfigPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/flashconfigpol-{equipment_flash_config}",
+                    "title": "equipment_flash_config - infraRsEquipmentFlashConfigPol"
                 },
                 "fast_link_failover_policy": {
-                    "type": "string",
+                    "class": "infraRsTopoctrlFastLinkFailoverInstPol",
                     "description": "The fast link failover policy name.  A fast link failover policy provides better convergence of the network.  Fast link failover policies are not supported on the same port as port profiles or remote leaf switch connections.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "fast_link_failover_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rstopoctrlFastLinkFailoverInstPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/fastlinkfailoverinstpol-{fast_link_failover_policy}",
+                    "title": "fast_link_failover_policy - infraRsTopoctrlFastLinkFailoverInstPol"
                 },
                 "fibre_channel_node_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsFcInstPol",
                     "description": "The default Fibre Channel node policy name.  Fibre channel node policies specify FCoE-related settings, such as the load balance options and FIP keep alive intervals.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "fibre_channel_node_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsfcInstPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/fcinstpol-{fibre_channel_node_policy}",
+                    "title": "fibre_channel_node_policy - infraRsFcInstPol"
                 },
                 "fibre_channel_san_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsFcFabricPol",
                     "description": "The Fibre Channel SAN policy name.  Fibre Channel SAN policies specify FCoE-related settings: Error detect timeout values (EDTOV), resource allocation timeout values (RATOV), and the MAC address prefix (also called FC map) used by the leaf switch. Typically the default value 0E:FC:00 is used. ",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "fibre_channel_san_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsfcFabricPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/fcfabricpol-{fibre_channel_san_policy}",
+                    "title": "fibre_channel_san_policy - infraRsFcFabricPol"
                 },
                 "forward_scale_profile_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsTopoctrlFwdScaleProfPol",
                     "description": "The forwarding scale profile policy name.  The forwarding scale profile policy provides different scalability options. The scaling types are:      * Dual Stack - Provides scalability of up to 12,000 endpoints for IPv6 configurations and up to 24,000 endpoints for IPv4 configurations.\n  * High LPM - Provides scalability similar to the dual-stack policy, except that the longest prefix match (LPM) scale is 128,000 and the policy scale is 8,000.\n  * IPv4 Scale - Enables systems with no IPv6 configurations to increase scalability to 48,000 IPv4 endpoints.\n  * High Dual Stack - Provides scalability of up to 64,000 MAC endpoints, 64,000 IPv4 endpoints, and 24,000 IPv6 endpoints.\nFor more information about this feature, see the Cisco APIC Forwarding Scale Profiles document.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "forward_scale_profile_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rstopoctrlFwdScaleProfPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/fwdscalepol-{forward_scale_profile_policy}",
+                    "title": "forward_scale_profile_policy - infraRsTopoctrlFwdScaleProfPol"
                 },
                 "lldp_interface_policy": {
-                    "type": "string",
-                    "default": "default",
-                    "description": "The Name of the LLDP Interface Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "lldp_interface_policy"
+                    "class": "infraRsLeafPGrpToLldpIfPol",
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsleafPGrpToLldpIfPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/lldpIfP-{lldp_interface_policy}",
+                    "title": "lldp_interface_policy - infraRsLeafPGrpToLldpIfPol"
                 },
                 "monitoring_policy": {
-                    "type": "string",
-                    "default": "default",
-                    "description": "The Name of the Monitoring Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "monitoring_policy"
+                    "class": "infraRsMonNodeInfraPol",
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsmonNodeInfraPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/moninfra-{monitoring_policy}",
+                    "title": "monitoring_policy - infraRsMonNodeInfraPol"
                 },
                 "netflow_node_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsNetflowNodePol",
                     "description": "The NetFlow node policy name.  The node-level policy deploys two different NetFlow timers that specify the rate at which flow records are sent to the external collector.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "netflow_node_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsnetflowNodePol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/nodepol-{netflow_node_policy}",
+                    "title": "netflow_node_policy - infraRsNetflowNodePol"
                 },
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
                 },
                 "poe_node_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsPoeInstPol",
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rspoeInstPol",
                     "description": "The PoE node policy name.  PoE node policies control the overall power setting for the switch.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "poe_node_policy"
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/poeInstP-{poe_node_policy}",
+                    "title": "poe_node_policy - infraRsPoeInstPol"
                 },
                 "ptp_node_policy": {
-                    "type": "string",
+                    "class": "infraRsPtpInstPol",
                     "description": "The PTP node policy name.  The Precision Time Protocol (PTP) synchronizes distributed clocks in a system using Ethernet networks.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "ptp_node_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsptpInstPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/ptpInstP-{ptp_node_policy}",
+                    "title": "ptp_node_policy - infraRsPtpInstPol"
                 },
                 "spanning_tree_interface_policy": {
-                    "type": "string",
-                    "default": "default",
-                    "description": "The Name of the Spanning Tree Interface Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "spanning_tree_interface_policy"
+                    "class": "infraRsMstInstPol",
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsmstInstPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/mstpInstPol-{spanning_tree_policy}",
+                    "title": "spanning_tree_interface_policy - infraRsMstInstPol"
                 },
                 "synce_node_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsSynceInstPol",
                     "description": "The SyncE Node policy name.  Synchronous Ethernet (SyncE) provides high-quality clock synchronization over Ethernet ports by using known common precision frequency references.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "synce_node_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rssynceInstPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/synceInstP-{synce_node_policy}",
+                    "title": "synce_node_policy - infraRsSynceInstPol"
                 },
                 "usb_configuration_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsLeafTopoctrlUsbConfigProfilePol",
                     "description": "The USB configuration policy name.  The USB configuration policy can disable the USB port on a Cisco ACI-mode switch to prevent someone booting the switch from a USB image that contains malicious code.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "usb_configuration_policy"
+                    "dn": "uni/infra/funcprof/accnodepgrp-{name}/rsleafTopoctrlUsbConfigProfilePol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/usbconfigprofilepol-default",
+                    "title": "usb_configuration_policy - infraRsLeafTopoctrlUsbConfigProfilePol"
                 }
             },
             "required": [
@@ -2327,11 +2324,11 @@
             "properties": {
                 "policy_groups": {
                     "type": "array",
-                    "description": "Required Attributes are:\n  * name\n\nOptional Attributes are:\n  * bfd_ipv4_policy\n  * bfd_ipv6_policy\n  * cdp_interface_policy\n  * copp_pre_filter\n  * copp_spine_policy\n  * description\n  * lldp_interface_policy\n  * usb_configuration_policy",
+                    "description": "An Array of Spine Switch Policy Groups.\n\nRequired Attributes are:\n  * name\n\nOptional Attributes are:\n  * bfd_ipv4_policy\n  * bfd_ipv6_policy\n  * cdp_interface_policy\n  * copp_pre_filter\n  * copp_spine_policy\n  * description\n  * lldp_interface_policy\n  * usb_configuration_policy\nAPI Information:\n - Class: `infraSpineAccNodePGrp`\n - Distinguished Name: `uni/infra/funcprof/spaccnodepgrp-{name}`\nGUI Location:\n - Fabric > Access Policies > Switches > Spine Switches > Policy Groups: {name}",
                     "items": {
                         "$ref": "#/definitions/Access:Switches:SpineSwitches:PolicyGroups"
                     },
-                    "title": "policy_groups - Switches > Spine Switches > Policy Groups."
+                    "title": "policy_groups"
                 }
             },
             "required": [
@@ -2342,85 +2339,79 @@
         "Access:Switches:SpineSwitches:PolicyGroups": {
             "type": "object",
             "additionalProperties": false,
+            "class": "fvnsEncapBlk",
+            "description": "",
+            "dn": "uni/infra/vlanns-[{name}]-{allocation_mode}/from-[vlan-{beginning_vlan}]-to-[vlan-{ending_vlan}]",
             "properties": {
                 "bfd_ipv4_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsSpineBfdIpv4InstPol",
                     "description": "The BFD IPv4 policy name.  Bidirectional Forwarding Detection (BFD) is used to provide sub-second failure detection times in the forwarding path between Cisco ACI fabric border leaf switches configured to support peering router connections.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "bfd_ipv4_policy"
+                    "dn": "uni/infra/funcprof/spaccnodepgrp-{name}/rsspineBfdIpv4InstPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/bfdIpv4Inst-{bfd_ipv4_policy}",
+                    "title": "bfd_ipv4_policy - infraRsSpineBfdIpv4InstPol"
                 },
                 "bfd_ipv6_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsSpineBfdIpv6InstPol",
                     "description": "The BFD IPv6 policy name.  Bidirectional Forwarding Detection (BFD) is used to provide sub-second failure detection times in the forwarding path between Cisco ACI fabric border leaf switches configured to support peering router connections.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "bfd_ipv6_policy"
+                    "dn": "uni/infra/funcprof/spaccnodepgrp-{name}/rsspineBfdIpv6InstPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/bfdIpv6Inst-{bfd_ipv6_policy}",
+                    "title": "bfd_ipv6_policy - infraRsSpineBfdIpv6InstPol"
                 },
                 "cdp_interface_policy": {
-                    "type": "string",
-                    "default": "default",
-                    "description": "The Name of the CDP Interface Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "cdp_interface_policy"
+                    "class": "infraRsSpinePGrpToCdpIfPol",
+                    "dn": "uni/infra/funcprof/spaccnodepgrp-{name}/rsspinePGrpToCdpIfPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/cdpIfP-{cdp_interface_policy}",
+                    "title": "cdp_interface_policy - infraRsSpinePGrpToCdpIfPol"
                 },
                 "copp_pre_filter": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsIaclSpineProfile",
                     "description": "The CoPP Pre-Filter name.  A CoPP prefilter profile is used on spine and leaf switches to filter access to authentication services based on specified sources and TCP ports to protect against DDoS attacks. When deployed on a switch, control plane traffic is denied by default. Only the traffic specified in the CoPP prefilter profile is permitted.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "copp_pre_filter"
+                    "dn": "uni/infra/funcprof/spaccnodepgrp-default/rsiaclSpineProfile",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/iaclspinep-{copp_pre_filter}",
+                    "title": "copp_pre_filter - infraRsIaclSpineProfile"
                 },
                 "copp_spine_policy": {
-                    "type": "string",
-                    "default": "default",
-                    "description": "The Spine CoPP policy name.  Control Plane Policing (CoPP) protects the control plane, which ensures network stability, reachability, and packet delivery.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "copp_spine_policy"
+                    "class": "infraRsSpineCoppProfile",
+                    "description": "The leaf CoPP policy name.  Control Plane Policing (CoPP) protects the control plane, which ensures network stability, reachability, and packet delivery.",
+                    "dn": "uni/infra/funcprof/spaccnodepgrp-{name}/rsspineCoppProfile",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/coppleafp-{copp_leaf_policy}",
+                    "title": "copp_spine_policy - infraRsSpineCoppProfile"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
                 },
                 "lldp_interface_policy": {
-                    "type": "string",
-                    "default": "default",
-                    "description": "The Name of the LLDP Interface Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "lldp_interface_policy"
+                    "class": "infraRsSpinePGrpToLldpIfPol",
+                    "dn": "uni/infra/funcprof/spaccnodepgrp-{name}/rsspinePGrpToLldpIfPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/lldpIfP-{lldp_interface_policy}",
+                    "title": "lldp_interface_policy - infraRsSpinePGrpToLldpIfPol"
                 },
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
                 },
                 "usb_configuration_policy": {
-                    "type": "string",
-                    "default": "default",
+                    "class": "infraRsSpineTopoctrlUsbConfigProfilePol",
                     "description": "The USB configuration policy name.  The USB configuration policy can disable the USB port on a Cisco ACI-mode switch to prevent someone booting the switch from a USB image that contains malicious code.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "usb_configuration_policy"
+                    "dn": "uni/infra/funcprof/spaccnodepgrp-{name}/rsspineTopoctrlUsbConfigProfilePol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/usbconfigprofilepol-default",
+                    "title": "usb_configuration_policy - infraRsSpineTopoctrlUsbConfigProfilePol"
                 }
             },
             "required": [
                 "name"
             ],
-            "title": "policy_groups - Spine Switch Policy Groups"
+            "title": "policy_groups"
         },
         "Admin": {
             "type": "object",
-            "description": "Attributes are:\n  * aaa\n  * external_data_collectors\n  * firmware\n  * import_export",
+            "description": "GUI Location:\n - Admin\n\nAttributes are:\n  * aaa\n  * external_data_collectors\n  * firmware\n  * import_export",
             "additionalProperties": false,
             "properties": {
                 "aaa": {
@@ -2440,7 +2431,7 @@
         },
         "Admin:AAA": {
             "type": "object",
-            "description": "Attributes are:\n  * authentication\n  * security",
+            "description": "GUI Location:\n - Admin > AAA\n\nAttributes are:\n  * authentication\n  * security",
             "additionalProperties": false,
             "properties": {
                 "authentication": {
@@ -2450,12 +2441,12 @@
                     "$ref": "#/definitions/Admin:AAA:Security"
                 }
             },
-            "title": "aaa\nGUI Location: Admin > AAA"
+            "title": "aaa"
         },
         "Admin:AAA:Authentication": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Authentication",
+            "description": "GUI Location:\n - Admin > AAA > Authentication\n\nAttributes are:\n  * authentication_default_settings\n  * radius\n  * tacacs",
             "properties": {
                 "authentication_default_settings": {
                     "$ref": "#/definitions/Admin:AAA:Authentication:AuthenticationDefaultSettings"
@@ -2465,143 +2456,174 @@
                     "items": {
                         "$ref": "#/definitions/Admin:AAA:Authentication:Radius"
                     },
-                    "title": "radius\nGUI Location: Admin > AAA > Login Domains/Providers type RADIUS."
+                    "title": "radius"
                 },
                 "tacacs": {
                     "description": "Required Attributes are:\n  * hosts\n  * login_domain\n\nOptional Attributes are:\n  * accounting_include\n  * authorization_protocol\n  * description\n  * management_epg\n  * port\n  * retries\n  * server_monitoring\n  * timeout",
                     "items": {
                         "$ref": "#/definitions/Admin:AAA:Authentication:Tacacs"
                     },
-                    "title": "tacacs\nGUI Location: Admin > AAA > Authentication: Login Domains/Providers."
+                    "title": "tacacs"
                 }
             },
-            "title": "aaa\nGUI Location: Admin > AAA > Authentication."
+            "title": "aaa"
         },
         "Admin:AAA:Authentication:AuthenticationDefaultSettings": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Attributes are:\n  * console_authentication\n  * default_authentication\n  * remote_authentication\n",
+            "description": "GUI Location:\n - Admin > AAA > Authentication: Authentication Default Settings\n\nAttributes are:\n  * console_authentication\n  * default_authentication\n  * remote_authentication\n",
             "properties": {
                 "console_authentication": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "description": "Attributes are:\n  * login_domain\n  * realm",
-                    "properties": {
-                        "login_domain": {
-                            "type": "string",
-                            "default": "default",
-                            "description": "Name of the Login Domain to assign to console authentication.",
-                            "minLength": 1,
-                            "maxLength": 64,
-                            "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                            "title": "login_domain"
-                        },
-                        "realm": {
-                            "type": "string",
-                            "default": "local",
-                            "description": "The security method for processing authentication and authorization requests. The realm allows the protected resources on the associated server to be partitioned into a set of protection spaces, each with its own authentication authorization database. This is an abstract class and cannot be instantiated.   Options are:\n  * duo_proxy_ldap\n  * duo_proxy_radius\n  * ldap\n  * local: (default)\n  * radius\n  * rsa\n  * saml\n  * tacacs",
-                            "enum": [
-                                "duo_proxy_ldap",
-                                "duo_proxy_radius",
-                                "ldap",
-                                "local",
-                                "radius",
-                                "rsa",
-                                "saml",
-                                "tacacs"
-                            ],
-                            "title": "realm"
-                        }
-                    },
-                    "required": [
-                        "realm"
-                    ],
-                    "title": "console_authentication\nGUI Location: Admin > AAA > Authentication: Authentication Default Settings: Console Authentication."
+                    "$ref": "#/definitions/Admin:AAA:Authentication:AuthenticationDefaultSettings:ConsoleAuthentication"
                 },
                 "default_authentication": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "description": "Attributes are:\n  * fallback_check\n  * login_domain\n  * realm",
-                    "properties": {
-                        "fallback_check": {
-                            "type": "boolean",
-                            "default": false,
-                            "description": "Flag to allow fallback to local authentication in the event the Login Domain is unavailable.",
-                            "title": "fallback_check"
-                        },
-                        "login_domain": {
-                            "type": "string",
-                            "default": "default",
-                            "description": "Name of the Login Domain to assign to default authentication.",
-                            "minLength": 1,
-                            "maxLength": 64,
-                            "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                            "title": "login_domain"
-                        },
-                        "realm": {
-                            "type": "string",
-                            "default": "local",
-                            "description": "The security method for processing authentication and authorization requests. The realm allows the protected resources on the associated server to be partitioned into a set of protection spaces, each with its own authentication authorization database. This is an abstract class and cannot be instantiated.   Options are:\n  * duo_proxy_ldap\n  * duo_proxy_radius\n  * ldap\n  * local: (default)\n  * radius\n  * rsa\n  * saml\n  * tacacs",
-                            "enum": [
-                                "duo_proxy_ldap",
-                                "duo_proxy_radius",
-                                "ldap",
-                                "local",
-                                "radius",
-                                "rsa",
-                                "saml",
-                                "tacacs"
-                            ],
-                            "title": "realm"
-                        }
-                    },
-                    "required": [
-                        "realm"
-                    ],
-                    "title": "default_authentication\nGUI Location: Admin > AAA > Authentication: Authentication Default Settings: Default Authentication."
+                    "$ref": "#/definitions/Admin:AAA:Authentication:AuthenticationDefaultSettings:DefaultAuthentication"
                 },
                 "remote_authentication": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "description": "Attributes are:\n  * ping_check\n  * remote_user_login_policy\n  * retries\n  * timeout",
-                    "properties": {
-                        "ping_check": {
-                            "type": "boolean",
-                            "default": false,
-                            "description": "Heart beat ping checks for RADIUS/TACACS/LDAP/SAML/RSA server reachability.",
-                            "title": "ping_check"
-                        },
-                        "remote_user_login_policy": {
-                            "type": "string",
-                            "default": "no-login",
-                            "description": "The default role policy of remote user. Allowed values are:\n  * assign-default-role\n  * no-login: (default)",
-                            "enum": [
-                                "assign-default-role",
-                                "no-login"
-                            ],
-                            "title": "remote_user_login_policy"
-                        },
-                        "retries": {
-                            "type": "integer",
-                            "default": 1,
-                            "description": "The number of attempts that the authentication method is tried. Allowed range: '0-5'.  Default is 1.",
-                            "minimum": 0,
-                            "maximum": 5,
-                            "title": "retries"
-                        },
-                        "timeout": {
-                            "type": "integer",
-                            "default": 5,
-                            "description": "The amount of time between authentication attempts. Allowed range: '1-60'.  Default is 5.",
-                            "minimum": 1,
-                            "maximum": 60,
-                            "title": "timeout"
-                        }
-                   },
-                   "title": "remote_authentication\nGUI Location: Admin > AAA > Authentication: Authentication Default Settings: Remote Authentication."
+                    "$ref": "#/definitions/Admin:AAA:Authentication:AuthenticationDefaultSettings:RemoteAuthentication"
                 }
             },
-            "title": "authentication_default_settings\nGUI Location: Admin > AAA > Authentication: Authentication Default Settings"
+            "title": "authentication_default_settings"
+        },
+        "Admin:AAA:Authentication:AuthenticationDefaultSettings:ConsoleAuthentication": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "aaaConsoleAuth",
+            "description": "Required Attributes are:\n  * realm\n\nOptional Attributes are:\n  * login_domain\nAPI Information:\n - Class: `aaaConsoleAuth`\n - Distinguished Named: `uni/userext/authrealm/consoleauth`\nGUI Location:\n - Admin > AAA > Authentication: Authentication Default Settings: Console Authentication",
+            "dn": "uni/userext/authrealm/consoleauth",
+            "properties": {
+                "login_domain": {
+                    "type": "string",
+                    "apicApi": "providerGroup",
+                    "default": "default",
+                    "description": "Name of the Login Domain to assign to console authentication.",
+                    "minLength": 1,
+                    "maxLength": 64,
+                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "login_domain - providerGroup"
+                },
+                "realm": {
+                    "type": "string",
+                    "apicApi": "realm/realmSubType",
+                    "default": "local",
+                    "description": "The security method for processing authentication and authorization requests. The realm allows the protected resources on the associated server to be partitioned into a set of protection spaces, each with its own authentication authorization database. This is an abstract class and cannot be instantiated.   Options are:\n  * duo_proxy_ldap\n  * duo_proxy_radius\n  * ldap\n  * local: (default)\n  * radius\n  * rsa\n  * saml\n  * tacacs",
+                    "enum": [
+                        "duo_proxy_ldap",
+                        "duo_proxy_radius",
+                        "ldap",
+                        "local",
+                        "radius",
+                        "rsa",
+                        "saml",
+                        "tacacs"
+                    ],
+                    "title": "realm - realm/realmSubType"
+                }
+            },
+            "required": [
+                "realm"
+            ],
+            "title": "console_authentication"
+        },
+        "Admin:AAA:Authentication:AuthenticationDefaultSettings:DefaultAuthentication": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "aaaDefaultAuth",
+            "description": "Required Attributes are:\n  * realm\n\nOptional Attributes are:\n  * fallback_check\n  * login_domain\nAPI Information:\n - Class: `aaaDefaultAuth`\n - Distinguished Named: `uni/userext/authrealm/defaultauth`\nGUI Location:\n - Admin > AAA > Authentication: Authentication Default Settings: Default Authentication",
+            "dn": "uni/userext/authrealm/defaultauth",
+            "properties": {
+                "fallback_check": {
+                    "type": "boolean",
+                    "apicApi": "fallbackCheck",
+                    "default": false,
+                    "description": "Flag to allow fallback to local authentication in the event the Login Domain is unavailable.",
+                    "title": "fallback_check - fallbackCheck"
+                },
+                "login_domain": {
+                    "type": "string",
+                    "apicApi": "providerGroup",
+                    "default": "default",
+                    "description": "Name of the Login Domain to assign to default authentication.",
+                    "minLength": 1,
+                    "maxLength": 64,
+                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "login_domain - providerGroup"
+                },
+                "realm": {
+                    "type": "string",
+                    "apicApi": "realm/realmSubType",
+                    "default": "local",
+                    "description": "The security method for processing authentication and authorization requests. The realm allows the protected resources on the associated server to be partitioned into a set of protection spaces, each with its own authentication authorization database. This is an abstract class and cannot be instantiated.   Options are:\n  * duo_proxy_ldap\n  * duo_proxy_radius\n  * ldap\n  * local: (default)\n  * radius\n  * rsa\n  * saml\n  * tacacs",
+                    "enum": [
+                        "duo_proxy_ldap",
+                        "duo_proxy_radius",
+                        "ldap",
+                        "local",
+                        "radius",
+                        "rsa",
+                        "saml",
+                        "tacacs"
+                    ],
+                    "title": "realm - realm/realmSubType"
+                }
+            },
+            "required": [
+                "realm"
+            ],
+            "title": "default_authentication"
+        },
+        "Admin:AAA:Authentication:AuthenticationDefaultSettings:RemoteAuthentication": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "multiple",
+            "classes": [
+                "aaaAuthRealm",
+                "aaaPingEp"
+            ],
+            "description": "Attributes are:\n  * ping_check\n  * remote_user_login_policy\n  * retries\n  * timeout\nAPI Information:\n - Classes: `aaaAuthRealm` & `aaaPingEp`\n - Distinguished Named: `uni/userext/authrealm`\n - Distinguished Named: `uni/userext/pingext`\nGUI Location:\n - Admin > AAA > Authentication: Authentication Default Settings: Remote Authentication",
+            "dns": [
+                "uni/userext/authrealm",
+                "uni/userext/pingext"
+            ],
+            "properties": {
+                "ping_check": {
+                    "type": "boolean",
+                    "apicApi": "aaaPingEp:pingCheck",
+                    "default": false,
+                    "description": "Heart beat ping checks for RADIUS/TACACS/LDAP/SAML/RSA server reachability.",
+                    "title": "ping_check - aaaPingEp:pingCheck"
+                },
+                "remote_user_login_policy": {
+                    "type": "string",
+                    "apicApi": "aaaAuthRealm:defRolePolicy",
+                    "default": "no-login",
+                    "description": "The default role policy of remote user. Allowed values are:\n  * assign-default-role\n  * no-login: (default)",
+                    "enum": [
+                        "assign-default-role",
+                        "no-login"
+                    ],
+                    "title": "remote_user_login_policy - aaaAuthRealm:defRolePolicy"
+                },
+                "retries": {
+                    "type": "integer",
+                    "apicApi": "aaaPingEp:retries",
+                    "default": 1,
+                    "description": "The number of attempts that the authentication method is tried. Allowed range: '0-5'.  Default is 1.",
+                    "minimum": 0,
+                    "maximum": 5,
+                    "title": "retries - aaaPingEp:retries"
+                },
+                "timeout": {
+                    "type": "integer",
+                    "apicApi": "aaaPingEp:timeout",
+                    "default": 5,
+                    "description": "The amount of time between authentication attempts. Allowed range: '1-60'.  Default is 5.",
+                    "minimum": 1,
+                    "maximum": 60,
+                    "title": "timeout - aaaPingEp:timeout"
+                }
+            },
+            "title": "remote_authentication"
         },
         "Admin:AAA:Authentication:Radius": {
             "type": "object",
@@ -13785,13 +13807,13 @@
             "type": "object",
             "additionalProperties": false,
             "class": "compUni",
-            "description": "The top level class for all compute related objects.  Use for VMM Integrations.\nAttributes are:\n  * domains",
+            "description": "GUI Location:\n - Virtual Networking\n\nThe top level class for all compute related objects.  Use for VMM Integrations.\nAttributes are:\n  * domains",
             "rn": "comp",
             "properties": {
                 "domains": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of VMM Domains to Add to the Fabric.  The VMM domain profile is a policy for grouping VM controllers with similar networking policy requirements. For example, the VM controllers can share VLAN or VXLAN space and application endpoint groups. The APIC communicates with the controller to publish network configurations such as port groups that are then applied to the virtual workloads.\nRequired Attributes:\n  * controllers\n  * name\n\nOptional Attributes:\n  * access_mode\n  * control_knob\n  * delimiter\n  * enable_tag_collection\n  * enable_vm_folder_data_retrieval\n  * encapsulation\n  * endpoint_inventory_type\n  * endpoint_retention_time\n  * enforcement\n  * preferred_encapsulation\n  * switch_mode\n  * switch_provider\n  * switch_scope\n  * uplink_names\n  * vlan_pool\n  * vswitch_policy",
+                    "description": "List of VMM Domains to Add to the Fabric.  The VMM domain profile is a policy for grouping VM controllers with similar networking policy requirements. For example, the VM controllers can share VLAN or VXLAN space and application endpoint groups. The APIC communicates with the controller to publish network configurations such as port groups that are then applied to the virtual workloads.\nRequired Attributes:\n  * controllers\n  * name\n\nOptional Attributes:\n  * access_mode\n  * control_knob\n  * delimiter\n  * enable_tag_collection\n  * enable_vm_folder_data_retrieval\n  * encapsulation\n  * endpoint_inventory_type\n  * endpoint_retention_time\n  * enforcement\n  * preferred_encapsulation\n  * switch_mode\n  * switch_provider\n  * switch_scope\n  * uplink_names\n  * vlan_pool\n  * vswitch_policy\nAPI Information:\n - Class: `vmmDomP`\n - Distinguished Name: `uni/vmmp-{switch_provider}/dom-{name}`\nGUI Location:\n - Virtual Networking -> {switch_provider} -> {domain_name}",
                     "items": {
                         "$ref": "#/definitions/VirtualNetworking:Domains"
                     },
@@ -13801,7 +13823,7 @@
             "required": [
                 "domains"
             ],
-            "title": "virtual_networking - compUni\nGUI Location: Virtual Networking."
+            "title": "virtual_networking"
         },
         "VirtualNetworking:Domains": {
             "type": "object",
@@ -13835,11 +13857,11 @@
                 "controllers": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Controllers to Associate to the VMM Domain.  The VMM controller profile specifies how to connect to a single VM management controller that is part of a policy enforcement domain. For example, the VMM controller profile could be a policy to connect a VMware vCenter that is part of a VMM domain.\nRequired Attributes are:\n  * credentials\n  * datacenter\n  * hostname\n\nOptional Attributes are:\n  * dvs_version\n  * management_epg\n  * monitoring_policy\n  * name\n  * port\n  * sequence_number\n  * stats_collection\n  * trigger_inventory_sync\n  * vxlan_pool",
+                    "description": "List of Controllers to Associate to the VMM Domain.  The VMM controller profile specifies how to connect to a single VM management controller that is part of a policy enforcement domain. For example, the VMM controller profile could be a policy to connect a VMware vCenter that is part of a VMM domain.\nRequired Attributes are:\n  * credentials\n  * datacenter\n  * hostname\n\nOptional Attributes are:\n  * dvs_version\n  * management_epg\n  * monitoring_policy\n  * name\n  * port\n  * sequence_number\n  * stats_collection\n  * trigger_inventory_sync\n  * vxlan_pool\nAPI Information:\n - Class: `vmmCtrlrP`\n - Distinguished Name: `uni/vmmp-{switch_provider}/dom-{name}/ctrlr-{name}`\nGUI Location:\n - Virtual Networking -> {switch_provider} -> {domain_name} -> {controller_name}",
                     "items": {
                         "$ref": "#/definitions/VirtualNetworking:Domains:Controllers"
                     },
-                    "title": "controllers - fvAp\nGUI Location: Virtual Networking > {provider}."
+                    "title": "controllers"
                 },
                 "delimiter": {
                     "type": "string",
@@ -13980,21 +14002,22 @@
                 "uplink_names": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Application Profiles.  Required Attributes are:\n  * name\n\nOptional Attributes are:\n  * alias\n  * annotations\n  * application_epgs\n  * create\n  * description\n  * global_alias\n  * monitoring_policy\n  * qos_class\n\nIf this is for Nexus Dashboard Orchestrator it requires:\n  * ndo\nAPI Information:\n  * Class: fvAp\n  * DN: Distinguished Name: 'uni/tn-{tenant}/ap-{application_profile}'\nGUI Location:\n  * Tenants > Application Profiles.",
+                    "description": "List of Uplink Names.  This will also determine the number of uplinks to assign to the Distrubed Virtual Switch.  i.e. `[\"uplink1\", \"uplink2\"]",
                     "items": {
-                        "$ref": "#/definitions/VirtualNetworking:Domains:Controllers"
+                        "class": "vmmUplinkP",
+                        "description": "Name of the Uplink.",
+                        "dn": "uni/vmmp-{switch_provider}/dom-{name}/uplinkpcont/{uplink_name}",
+                        "$ref": "#/definitions/AbstractSettings/properties/name",
+                        "title": "Uplink Name"
                     },
-                    "title": "uplink_names - fvAp\nGUI Location: Tenants > Application Profiles."
+                    "title": "uplink_names"
                 },
                 "vlan_pool": {
-                    "type": "string",
-                    "apicApi": "fvTenant",
-                    "default": "",
-                    "description": "Name of the VLAN Pool to Assign to the policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "vlan_pool - fvTenant"
+                    "class": "infraRsVlanNs",
+                    "dn": "uni/vmmp-{switch_provider}/dom-{name}/rsvlanNs",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/vlanns-[{vlan_pool}]-{pool_type}",
+                    "title": "vlan_pool - infraRsVlanNs"
                 },
                 "vswitch_policy": {
                     "$ref": "#/definitions/VirtualNetworking:Domains:vSwitchPolicy"
@@ -14010,9 +14033,9 @@
         "VirtualNetworking:Domains:Controllers": {
             "type": "object",
             "additionalProperties": false,
-            "class": "compProv",
+            "class": "vmmCtrlrP",
             "description": "",
-            "rn": "comp/prov-{switch_provider}/",
+            "rn": "uni/vmmp-{switch_provider}/dom-{domain}/ctrlr-{name}",
             "properties": {
                 "credentials": {
                     "$ref": "#/definitions/VirtualNetworking:Domains:Controllers:Credentials"
@@ -14020,7 +14043,7 @@
                 "datacenter": {
                     "type": "string",
                     "apicApi": "rootContName",
-                    "default": "dc1",
+                    "default": "default",
                     "description": "Name of the DataCenter in vCenter to Create the Virtual Switch Folder within.",
                     "minLength": 1,
                     "maxLength": 64,
@@ -14031,7 +14054,7 @@
                     "type": "string",
                     "apicApi": "dvsVersion",
                     "default": "unmanaged",
-                    "description": "Dvs Version. Allowed values are:\n  * 7.0\n  * 6.6\n  * 6.5\n  * 6.0\n  * 5.5\n  * 5.1\n  * unmanaged",
+                    "description": "Dvs Version. Allowed values are:\n  * 7.0\n  * 6.6\n  * 6.5\n  * 6.0\n  * 5.5\n  * 5.1\n  * unmanaged: (default)",
                     "enum": [
                         "7.0",
                         "6.6",
@@ -14054,45 +14077,22 @@
                     "title": "hostname - hostOrIp"
                 },
                 "management_epg": {
-                    "type": "string",
-                    "apicApi": "fvTenant",
-                    "default": "default",
+                    "class": "vmmRsMgmtEPg",
+                    "dn": "uni/vmmp-{switch_provider}/dom-{domain}/ctrlr-{name}/rsmgmtEPg",
                     "description": "Name of the Management EPG.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "management_epg - fvTenant"
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/tn-mgmt/out-{management_epg_type}/instP-{management_epg}",
+                    "title": "management_epg - vmmRsMgmtEPg"
                 },
                 "monitoring_policy": {
-                    "type": "string",
-                    "apicApi": "monPolDn",
-                    "default": "default",
-                    "description": "Name of the Tenant that Tenant policies are created.  Most often if this is set it would be the `common` tenant.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "monitoring_policy - monPolDn"
+                    "class": "infraRsVlanNs",
+                    "dn": "uni/vmmp-{switch_provider}/dom-{domain}/ctrlr-{name}/rsctrlrPMonPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/moninfra-{monitoring_policy}",
+                    "title": "monitoring_policy - vmmRsCtrlrPMonPol"
                 },
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
-                },
-                "port": {
-                    "type": "integer",
-                    "apicApi": "port",
-                    "default": 0,
-                    "description": "Default is `0`.  The Port Number.  Range is `0-65535`.",
-                    "minimum": 0,
-                    "maximum": 65535,
-                    "title": "port"
-                },
-                "sequence_number": {
-                    "type": "integer",
-                    "apicApi": "seqNum",
-                    "default": 0,
-                    "description": "Default is `0`.  An ISIS link-state packet sequence number.",
-                    "minimum": 0,
-                    "maximum": 600,
-                    "title": "sequence_number - seqNum"
                 },
                 "stats_collection": {
                     "type": "string",
@@ -14116,16 +14116,6 @@
                         "untriggered"
                     ],
                     "title": "trigger_inventory_sync - inventoryTrigSt"
-                },
-                "vxlan_pool": {
-                    "type": "string",
-                    "apicApi": "fvnsVxlanInstP",
-                    "default": "",
-                    "description": "Name of the VxLAN Pool.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "vxlan_pool - fvnsVxlanInstP"
                 }
             },
             "required": [
@@ -14139,7 +14129,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "vmmUsrAccP",
-            "description": "Credential Policy for the Controller.  Required Attributes:\n  * username\n\nOptional Attributes:\n  * description\n  * name",
+            "description": "Credential Policy for the Controller.  Required Attributes:\n  * username\n\nOptional Attributes:\n  * description\n  * name\nAPI Information:\n - Class: `vmmUsrAccP`\n - Distinguished Name: `uni/vmmp-{switch_provider}/dom-{name}/usracc-{name}`\nGUI Location:\n - Virtual Networking -> {switch_provider} -> {domain_name} -> Credentials",
             "rn": "uni/vmmp-{switch_provider}/dom-{domain}/usracc-{name}",
             "properties": {
                 "description": {
@@ -14151,7 +14141,7 @@
                 "username": {
                     "type": "string",
                     "apicApi": "usr",
-                    "default": "",
+                    "default": "administrator@vsphere.local",
                     "description": "Username to use for login to the controller, in the format `administrator@vsphere.local`.",
                     "minLength": 8,
                     "maxLength": 128,
@@ -14168,69 +14158,54 @@
             "type": "object",
             "additionalProperties": false,
             "class": "vmmVSwitchPolicyCont",
-            "description": "vSwitch Parameters for the Domain.\nOptional Attributes:\n  * cdp_policy\n  * enhanced_lag_policy\n  * firewall_policy\n  * lldp_policy\n  * mtu_policy\n  * netflow_export_policy_parameters\n  * port_channel_policy",
+            "description": "vSwitch Parameters for the Domain.\nOptional Attributes:\n  * cdp_policy\n  * enhanced_lag_policy\n  * firewall_policy\n  * lldp_policy\n  * mtu_policy\n  * netflow_export_policy_parameters\n  * port_channel_policy\nAPI Information:\n - Class: `vmmVSwitchPolicyCont`\n - Distinguished Name: `uni/vmmp-{switch_provider}/dom-{name}/vswitchpolcont`\nGUI Location:\n - Virtual Networking -> {switch_provider} -> {domain_name} -> VSwitch Policy",
             "rn": "uni/vmmp-{switch_provider}/dom-{domain}/vswitchpolcont",
             "properties": {
                 "cdp_policy": {
-                    "type": "string",
-                    "apicApi": "vmmRsVswitchOverrideCdpIfPol",
-                    "default": "default",
-                    "description": "Name of the CDP Interface Policy to Assign to the vSwitch Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "class": "vmmRsVswitchOverrideCdpIfPol",
+                    "dn": "uni/vmmp-{switch_provider}/dom-{domain}/vswitchpolcont/rsvswitchOverrideCdpIfPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/cdpIfP-{cdp_policy}",
                     "title": "cdp_policy - vmmRsVswitchOverrideCdpIfPol"
                 },
                 "enhanced_lag_policy": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Application Profiles.  Required Attributes are:\n  * name\n\nOptional Attributes are:\n  * alias\n  * annotations\n  * application_epgs\n  * create\n  * description\n  * global_alias\n  * monitoring_policy\n  * qos_class\n\nIf this is for Nexus Dashboard Orchestrator it requires:\n  * ndo\nAPI Information:\n  * Class: fvAp\n  * DN: Distinguished Name: 'uni/tn-{tenant}/ap-{application_profile}'\nGUI Location:\n  * Tenants > Application Profiles.",
+                    "description": "Array of Enhanced Lag Policies to Create.\nRequired Attributes:\n  * name\n\nOptional  Attributes:\n  * load_balancing_mode\n  * mode\n  * number_of_links\nAPI Information:\n - Class: `lacpEnhancedLagPol`\n - Distinguished Name: `uni/vmmp-{switch_provider}/dom-{domain}/vswitchpolcont/enlacplagp-{name}`\nGUI Location:\n - Virtual Networking -> {switch_provider} -> {domain_name} -> VSwitch Policy: Enhanced Lag Policy",
                     "items": {
                         "$ref": "#/definitions/VirtualNetworking:Domains:vSwitchPolicy:EnhancedLagPolicy"
                     },
                     "title": "enhanced_lag_policy - lacpEnhancedLagPol"
                 },
                 "firewall_policy": {
-                    "type": "string",
-                    "apicApi": "mmRsVswitchOverrideFwPol",
-                    "default": "default",
-                    "description": "Name of the LLDP Interface Policy to Assign to the vSwitch Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "firewall_policy - mmRsVswitchOverrideFwPol"
+                    "class": "vmmRsVswitchOverrideFwPol",
+                    "dn": "uni/vmmp-{switch_provider}/dom-{domain}/vswitchpolcont/rsvswitchOverrideFwPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/fwP-{firewall_policy}",
+                    "title": "firewall_policy - vmmRsVswitchOverrideFwPol"
                 },
                 "lldp_policy": {
-                    "type": "string",
-                    "apicApi": "vmmRsVswitchOverrideLldpIfPol",
-                    "default": "default",
-                    "description": "Name of the LLDP Interface Policy to Assign to the vSwitch Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "class": "vmmRsVswitchOverrideLldpIfPol",
+                    "dn": "uni/vmmp-{switch_provider}/dom-{domain}/vswitchpolcont/rsvswitchOverrideLldpIfPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/lldpIfP-{lldp_policy}",
                     "title": "lldp_policy - vmmRsVswitchOverrideLldpIfPol"
                 },
                 "mtu_policy": {
-                    "type": "string",
-                    "apicApi": "vmmRsVswitchOverrideMtuPol",
-                    "default": "default",
-                    "description": "Name of the MTU Policy to Assign to the vSwitch Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "class": "vmmRsVswitchOverrideLldpIfPol",
+                    "dn": "uni/vmmp-{switch_provider}/dom-{domain}/vswitchpolcont/rsvswitchOverrideMtuPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/l2pol-{mtu_policy}",
                     "title": "mtu_policy - vmmRsVswitchOverrideMtuPol"
                 },
                 "netflow_export_policy_parameters": {
                     "$ref": "#/definitions/VirtualNetworking:Domains:vSwitchPolicy:NetflowExportPolicyParameters"
                 },
                 "port_channel_policy": {
-                    "type": "string",
-                    "apicApi": "vmmRsVswitchOverrideLacpPol",
-                    "default": "default",
-                    "description": "Name of the Port-Channel Policy to Assign to the vSwitch Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "class": "vmmRsVswitchOverrideLldpIfPol",
+                    "dn": "uni/vmmp-{switch_provider}/dom-{domain}/vswitchpolcont/rsvswitchOverrideLacpPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/lacplagp-{port_channel_policy}",
                     "title": "port_channel_policy - vmmRsVswitchOverrideLacpPol"
                 }
             },
@@ -14306,7 +14281,7 @@
             "additionalProperties": false,
             "class": "vmmRsVswitchExporterPol",
             "description": "List of VMM Integrations to assign to ",
-            "rn": "comp/prov-{switch_provider}/",
+            "rn": "uni/vmmp-{switch_provider}/dom-{domain}/vswitchpolcont/rsvswitchExporterPol-[uni/infra/vmmexporterpol-{netflow_export_policy}]",
             "properties": {
                 "active_flow_timeout": {
                     "type": "integer",
@@ -14327,14 +14302,11 @@
                     "title": "idle_flow_timeout - idleFlowTimeOut"
                 },
                 "netflow_export_policy": {
-                    "type": "string",
-                    "apicApi": "netflowVmmExporterPol",
-                    "default": "",
-                    "description": "The Name of the Netflow Exporters for VM Networking Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "netflow_export_policy - netflowVmmExporterPol"
+                    "class": "vmmRsVswitchExporterPol",
+                    "dn": "uni/vmmp-{switch_provider}/dom-{domain}/vswitchpolcont/rsvswitchExporterPol-[uni/infra/vmmexporterpol-{netflow_export_policy}]",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/vmmexporterpol-{netflow_export_policy}",
+                    "title": "netflow_export_policy - vmmRsVswitchExporterPol"
                 },
                 "sample_rate": {
                     "type": "integer",
