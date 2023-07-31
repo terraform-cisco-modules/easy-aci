@@ -50,6 +50,15 @@ module "admin" {
   annotations     = var.annotations
   management_epgs = var.management_epgs
   # Sensitive Variables for Admin Policies
+  # APIC Certificate Sensitive Variables
+  apic_certificate_1 = fileexists(var.apic_certificate_1) ? file(var.apic_certificate_1) : ""
+  apic_certificate_2 = fileexists(var.apic_certificate_2) ? file(var.apic_certificate_2) : ""
+  apic_ca_certificate_chain_1 = fileexists(var.apic_ca_certificate_chain_1
+  ) ? file(var.apic_ca_certificate_chain_1) : ""
+  apic_ca_certificate_chain_2 = fileexists(var.apic_ca_certificate_chain_2
+  ) ? file(var.apic_ca_certificate_chain_2) : ""
+  apic_private_key_1 = fileexists(var.apic_private_key_1) ? file(var.apic_private_key_1) : ""
+  apic_private_key_2 = fileexists(var.apic_private_key_2) ? file(var.apic_private_key_2) : ""
   # Configuration Backup Sensitive Variables
   remote_password    = var.remote_password
   ssh_key_contents   = var.ssh_key_contents
@@ -117,15 +126,6 @@ module "fabric" {
   fabric          = lookup(local.model, "fabric", {})
   management_epgs = var.management_epgs
   # Sensitive Variables for Fabric Policies
-  # APIC Certificate Sensitive Variables
-  apic_certificate_1 = fileexists(var.apic_certificate_1) ? file(var.apic_certificate_1) : ""
-  apic_certificate_2 = fileexists(var.apic_certificate_2) ? file(var.apic_certificate_2) : ""
-  apic_intermediate_plus_root_ca_1 = fileexists(var.apic_intermediate_plus_root_ca_1
-  ) ? file(var.apic_intermediate_plus_root_ca_1) : ""
-  apic_intermediate_plus_root_ca_2 = fileexists(var.apic_intermediate_plus_root_ca_2
-  ) ? file(var.apic_intermediate_plus_root_ca_2) : ""
-  apic_private_key_1 = fileexists(var.apic_private_key_1) ? file(var.apic_private_key_1) : ""
-  apic_private_key_2 = fileexists(var.apic_private_key_2) ? file(var.apic_private_key_2) : ""
   # Date and Time/NTP Sensitive Variables
   ntp_key_1 = var.ntp_key_1
   ntp_key_2 = var.ntp_key_2

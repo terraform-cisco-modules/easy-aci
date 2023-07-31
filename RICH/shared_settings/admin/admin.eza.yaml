@@ -31,8 +31,9 @@ admin:
         retries: 2
         timeout: 5
     security:
-      web_session_idle_timeout: 65525
-      web_token_timeout: 9600
+      security_default_settings:
+        web_session_idle_timeout: 65525
+        web_token_timeout: 9600
   external_data_collectors:
     syslog:
     - admin_state: enabled

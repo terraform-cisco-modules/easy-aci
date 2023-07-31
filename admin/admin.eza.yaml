@@ -42,8 +42,15 @@ admin:
         retries: 2
         timeout: 5
     security:
-      web_session_idle_timeout: 65525
-      web_token_timeout: 600
+      #certificate_authorities_and_key_rings:
+      #  - activate_certificate: true
+      #    modulus: 2048
+      #    name: mycert
+      #    trustpoint: mytrustpoint
+      #    var_identity: 1
+      security_default_settings:
+        web_session_idle_timeout: 65525
+        web_token_timeout: 600
   external_data_collectors:
     smart_callhome:
     - admin_state: enabled

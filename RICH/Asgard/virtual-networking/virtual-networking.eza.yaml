@@ -21,6 +21,6 @@ virtual_networking:
     vlan_pool: allVlans
     vswitch_policy:
       cdp_policy: cdpEnabled
-      lldp_policy: lldpEnabled
+      lldp_policy: lldpDisabled
       mtu_policy: default
       port_channel_policy: macPin

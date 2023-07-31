@@ -29,12 +29,6 @@ fabric:
           management_epg: ooband
           name: default
     pod:
-      #apic_certificates:
-      #  - activate_certificate: true
-      #    modulus: 2048
-      #    name: default
-      #    trustpoint: default
-      #    var_identity: 1
       date_and_time:
         - management_epg: ooband
           name: default

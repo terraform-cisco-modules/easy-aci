@@ -23,7 +23,7 @@ access:
         - l3Out
       recommended_policies:
         error_disabled_recovery_policy: true
-        mcp_instance_policy: true
+        mcp_instance_policy_default: true
         qos_class: true
         vpc_domain: true
     interface:
