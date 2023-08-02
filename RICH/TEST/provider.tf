@@ -1,7 +1,12 @@
 #_______________________________________________________________________
 #
-# Terraform Required Parameters - Intersight Provider
-# https://registry.terraform.io/providers/CiscoDevNet/aci/latest
+# Terraform Required Parameters:
+#  - ACI Provider
+#    https://registry.terraform.io/providers/CiscoDevNet/aci/latest
+#  - MSO Provider
+#    https://registry.terraform.io/providers/CiscoDevNet/mso/latest
+#  - Utils Provider
+#    https://registry.terraform.io/providers/netascode/utils/latest
 #_______________________________________________________________________
 
 terraform {
@@ -12,7 +17,7 @@ terraform {
     }
     mso = {
       source  = "CiscoDevNet/mso"
-      version = "0.11.0"
+      version = "0.11.1"
     }
     utils = {
       source  = "netascode/utils"

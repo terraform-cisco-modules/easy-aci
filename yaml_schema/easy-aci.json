@@ -675,7 +675,7 @@
             "properties": {
                 "policy_groups": {
                     "type": "array",
-                    "description": "Required Attributes are:\n  * attachable_entity_profile\n  * name\n\nOptional Attributes are:\n  * cdp_interface_policy\n  * description\n  * global_alias\n  * link_flap_policy\n  * link_level_policy\n  * macsec_policy\n\nAPI Information:\n - Class: `infraSpAccPortGrp`\n - Distinguished Name: `uni/infra/funcprof/spaccportgrp-{name}`\nGUI Location:\n - Fabric > Access Policies > Interfaces > Spine Interfaces > Policy Groups",
+                    "description": "Required Attributes are:\n  * attachable_entity_profile\n  * name\n\nOptional Attributes are:\n  * cdp_interface_policy\n  * copp_interface_policy\n  * description\n  * global_alias\n  * link_flap_policy\n  * link_level_policy\n  * macsec_policy\n\nAPI Information:\n - Class: `infraSpAccPortGrp`\n - Distinguished Name: `uni/infra/funcprof/spaccportgrp-{name}`\nGUI Location:\n - Fabric > Access Policies > Interfaces > Spine Interfaces > Policy Groups",
                     "items": {
                         "$ref": "#/definitions/Access:Interfaces:SpineInterfaces:PolicyGroups"
                     },
@@ -704,6 +704,13 @@
                     "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/infra/cdpIfP-{cdp_interface_policy}",
                     "title": "cdp_interface_policy - infraRsCdpIfPol"
+                },
+                "copp_interface_policy": {
+                    "class": "infraRsCoppIfPol",
+                    "dn": "uni/infra/funcprof/spaccportgrp-{name}/rsQosEgressDppIfPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/infra/coppifpol-{copp_interface_policy}",
+                    "title": "copp_interface_policy - infraRsCoppIfPol"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
@@ -2452,21 +2459,21 @@
                     "$ref": "#/definitions/Admin:AAA:Authentication:AuthenticationDefaultSettings"
                 },
                 "radius": {
-                    "description": "Required Attributes are:\n  * hosts\n  * login_domain\n\nOptional Attributes are:\n  * authorization_protocol\n  * description\n  * management_epg\n  * port\n  * retries\n  * server_monitoring\n  * timeout\n  * type",
+                    "description": "Required Attributes are:\n  * hosts\n  * login_domain\n\nOptional Attributes are:\n  * authorization_protocol\n  * description\n  * management_epg\n  * port\n  * retries\n  * server_monitoring\n  * timeout\n  * type\n##### RADIUS PROVIDER #####\n\nAPI Information:\n - Class: `aaaRadiusProvider`\n - Distinguished Name: `uni/userext/radiusext/radiusprovider-{host}`\nGUI Location:\n - Admin > AAA > Authentication:RADIUS > Create RADIUS Provider\n\n##### RADIUS LOGIN DOMAIN #####\n\nAPI Information:\n - Class: `aaaProviderRef`\n - Distinguished Name: `uni/userext/radiusext/radiusprovidergroup-{login_domain}/providerref-{host}`\nGUI Location:\n - Admin > AAA > Authentication:AAA > Login Domain",
                     "items": {
                         "$ref": "#/definitions/Admin:AAA:Authentication:Radius"
                     },
                     "title": "radius"
                 },
                 "tacacs": {
-                    "description": "Required Attributes are:\n  * hosts\n  * login_domain\n\nOptional Attributes are:\n  * accounting_include\n  * authorization_protocol\n  * description\n  * management_epg\n  * port\n  * retries\n  * server_monitoring\n  * timeout",
+                    "description": "Required Attributes are:\n  * hosts\n  * login_domain\n\nOptional Attributes are:\n  * accounting_include\n  * authorization_protocol\n  * description\n  * management_epg\n  * port\n  * retries\n  * server_monitoring\n  * timeout\n##### TACACS PROVIDER #####\n\nAPI Information:\n - Class: `aaaTacacsPlusProvider`\n - Distinguished Name: `userext/tacacsext/tacacsplusprovider-{host}`\nGUI Location:\n - Admin > AAA > Authentication:TACACS > Create TACACS Provider\n\n##### TACACS LOGIN DOMAIN #####\n\nAPI Information:\n - Class: `aaaProviderRef`\n - Distinguished Name: `uni/userext/tacacsext/tacacsplusprovidergroup-{login_domain}/providerref-{host}`\nGUI Location:\n - Admin > AAA > Authentication:AAA > Login Domain\n\n##### TACACS ACCOUNTING #####\n\nAPI Information:\n - Class: `tacacsGroup`\n - Distinguished Name: `uni/fabric/tacacsgroup-{accounting_destination_group}`\nGUI Location:\n - Admin > External Data Collectors > Monitoring Destinations > TACACS > {accounting_destination_group}\n\nAPI Information:\n - Class: `tacacsTacacsDest`\n - Distinguished Name: `uni/fabric/tacacsgroup-{accounting_destination_group}/tacacsdest-{host}-port-{port}`\nGUI Location:\n - Admin > External Data Collectors > Monitoring Destinations > TACACS > {accounting_destination_group} > [TACACS Destinations]\n\nAPI Information:\n - Class: `tacacsSrc`\n - Distinguished Name: `uni/fabric/moncommon/tacacssrc-{accounting_source_group}`\nGUI Location:\n - Fabric > Fabric Policies > Policies > Monitoring > Common Policies > Callhome/Smart Callhome/SNMP/Syslog/TACACS:TACACS > Create TACACS Source",
                     "items": {
                         "$ref": "#/definitions/Admin:AAA:Authentication:Tacacs"
                     },
                     "title": "tacacs"
                 }
             },
-            "title": "aaa"
+            "title": "authentication"
         },
         "Admin:AAA:Authentication:AuthenticationDefaultSettings": {
             "type": "object",
@@ -2628,7 +2635,9 @@
         "Admin:AAA:Authentication:Radius": {
             "type": "object",
             "additionalProperties": false,
-            "description": "RADIUS Providers.",
+            "class": "fvnsEncapBlk",
+            "description": "",
+            "dn": "uni/infra/vlanns-[{name}]-{allocation_mode}/from-[vlan-{beginning_vlan}]-to-[vlan-{ending_vlan}]",
             "properties": {
                 "authorization_protocol": {
                     "type": "string",
@@ -2743,7 +2752,9 @@
         "Admin:AAA:Authentication:Tacacs": {
             "type": "object",
             "additionalProperties": false,
-            "description": "TACACS+ Providers.",
+            "class": "fvnsEncapBlk",
+            "description": "",
+            "dn": "uni/infra/vlanns-[{name}]-{allocation_mode}/from-[vlan-{beginning_vlan}]-to-[vlan-{ending_vlan}]",
             "properties": {
                 "accounting_include": {
                     "type": "object",
@@ -2874,7 +2885,7 @@
                 "type": {
                     "type": "string",
                     "default": "radius",
-                    "description": "COOP protocol is enhanced to support two ZMQ authentication modes:\n  * compatible - Type COOP accepts both MD5 authenticated and non-authenticated ZMQ connections for message transportation.\n  * strict: (defualt) - COOP allows MD5 authenticated ZMQ connections only.\nNote: The APIC provides a managed object (fabric:SecurityToken), that includes an attribute to be used for the MD5 password. An attribute in this managed object, called 'token', is a string that changes every hour. COOP obtains the notification from the DME to update the password for ZMQ authentication. The attribute token value is not displayed.",
+                    "description": "COOP protocol is enhanced to support two ZMQ authentication modes:\n  * compatible - Type COOP accepts both MD5 authenticated and non-authenticated ZMQ connections for message transportation.\n  * strict: (default) - COOP allows MD5 authenticated ZMQ connections only.\nNote: The APIC provides a managed object (fabric:SecurityToken), that includes an attribute to be used for the MD5 password. An attribute in this managed object, called 'token', is a string that changes every hour. COOP obtains the notification from the DME to update the password for ZMQ authentication. The attribute token value is not displayed.",
                     "enum": [
                         "duo",
                         "radius"
@@ -2889,7 +2900,7 @@
         },
         "Admin:AAA:Security": {
             "type": "object",
-            "description": "Attributes are:\n  * certificate_authorities_and_key_rings\n  * security_default_settings",
+            "description": "GUI Location:\n - Admin > AAA > Security\n\nAttributes are:\n  * certificate_authorities_and_key_rings\n  * security_default_settings",
             "additionalProperties": false,
             "properties": {
                 "certificate_authorities_and_key_rings": {
@@ -2911,7 +2922,9 @@
         "Admin:AAA:Security:CertificateAuthoritiesAndKeyRings": {
             "type": "object",
             "additionalProperties": false,
+            "class": "fvnsEncapBlk",
             "description": "",
+            "dn": "uni/infra/vlanns-[{name}]-{allocation_mode}/from-[vlan-{beginning_vlan}]-to-[vlan-{ending_vlan}]",
             "properties": {
                 "activate_certificate": {
                     "type": "boolean",
@@ -2971,7 +2984,9 @@
         "Admin:AAA:Security:SecurityDefaultSettings": {
             "type": "object",
             "additionalProperties": false,
+            "class": "fvnsEncapBlk",
             "description": "Attributes are:\n  * lockout_user\n  * maximum_validity_period\n  * no_change_interval\n  * password_change_interval\n  * password_change_interval_enforce\n  * password_changes_within_interval\n  * password_expiration_warn_time\n  * password_strength_check\n  * user_passwords_to_store_count\n  * web_session_idle_timeout\n  * web_token_timeout",
+            "dn": "uni/infra/vlanns-[{name}]-{allocation_mode}/from-[vlan-{beginning_vlan}]-to-[vlan-{ending_vlan}]",
             "properties": {
                 "lockout_user": {
                     "type": "object",
@@ -3096,12 +3111,12 @@
                     "title": "web_token_timeout"
                 }
             },
-            "title": "security: Admin > AAA > Security."
+            "title": "security"
         },
         "Admin:ExternalDataCollectors": {
             "type": "object",
             "additionalProperties": false,
-            "description": "external_data_collectors - Attributes are:\n  * smart_callhome\n  * syslog",
+            "description": "GUI Location: Admin > External Data Collectors\n\nAttributes are:\n  * smart_callhome\n  * syslog",
             "properties": {
                 "smart_callhome": {
                     "description": "Required Attributes are:\n  * contract_id\n  * customer_contact_email\n  * name\n  *smart_destinations\n  *smtp_server\n\nOptional Attributes are:\n  * admin_state\n  * contact_information\n  * customer_contact_email\n  * customer_id\n  * description\n  * from_email\n  * phone_contact\n  * reply_to_email\n  * site_id\n  * street_address",
@@ -3118,12 +3133,14 @@
                     "title": "syslog\nGUI Location: Admin > External Data Collectors > Syslog."
                 }
             },
-            "title": "external_data_collectors\nGUI Location: Admin > External Data Collectors."
+            "title": "external_data_collectors"
         },
         "Admin:ExternalDataCollectors:SmartCallhome": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Smart Callhome.",
+            "class": "fvnsEncapBlk",
+            "description": "",
+            "dn": "uni/infra/vlanns-[{name}]-{allocation_mode}/from-[vlan-{beginning_vlan}]-to-[vlan-{ending_vlan}]",
             "properties": {
                 "admin_state": {
                     "$ref": "#/definitions/AbstractSettings:AdminState/properties/admin_state"
@@ -3307,7 +3324,9 @@
         "Admin:ExternalDataCollectors:Syslog": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Syslog.",
+            "class": "fvnsEncapBlk",
+            "description": "",
+            "dn": "uni/infra/vlanns-[{name}]-{allocation_mode}/from-[vlan-{beginning_vlan}]-to-[vlan-{ending_vlan}]",
             "properties": {
                 "admin_state": {
                     "$ref": "#/definitions/AbstractSettings:AdminState/properties/admin_state"
@@ -3556,7 +3575,7 @@
         },
         "Admin:Firmware:Switches": {
             "type": "object",
-            "description": "Attributes are:\n  * firmware_update_groups",
+            "description": "GUI Location: Admin > Firmware > Switches\n\nAttributes are:\n  * firmware_update_groups",
             "additionalProperties": false,
             "properties": {
                 "firmware_update_groups": {
@@ -3569,12 +3588,14 @@
                     "title": "firmware_update_groups\nGUI Location: Admin > Firmware > Switches: {firmware_update_name}"
                 }
             },
-            "title": "firmware\nGUI Location: Admin > Firmware > Switches"
+            "title": "firmware"
         },
         "Admin:Firmware:Switches:FirmwareUpdates": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Firmware Updates",
+            "class": "fvnsEncapBlk",
+            "description": "",
+            "dn": "uni/infra/vlanns-[{name}]-{allocation_mode}/from-[vlan-{beginning_vlan}]-to-[vlan-{ending_vlan}]",
             "properties": {
                 "administrative_state": {
                     "type": "boolean",
@@ -3721,50 +3742,128 @@
         },
         "Admin:ImportExport": {
             "type": "object",
-            "description": "import_export - Attribute is:\n  * configuration_backups",
+            "description": "GUI Location:\n - Admin > Import/Export\n\nAttribute is:\n  * configuration_backups",
             "additionalProperties": false,
             "properties": {
                 "configuration_backups": {
-                    "description": "Required Attributes are:\n  * name\n  * remote_hosts\n\nAdditional Attributes are:\n  * description\nImport/Export > Export Policies > Configuration\n  * format\n  * include_secure_fields\n  * max_snapshot_count\n  * snapshot\n  * start_now\nImport/Export > Remote Locations\n  * authentication_type\n  * management_epg\n  * protocol\n  * remote_hosts\n  * remote_path\n  * remote_port\n  * username\nSchedulers > Fabric\n  * delay_between_node_upgrades\n  * maximum_concurrent_nodes\n  * maximum_running_time\n  * processing_break\n  * processing_size_capacity\n  * schedule\n  * window_type",
+                    "description": "An Array of Configuration Backup Remote Locations to Configure.\nRequired Attributes are:\n  * remote_locations\n  * scheduler\n\nOptional Attributes:\n  * authentication_type\n  * management_epg\n  * path\n  * port\n  * protocol\n  * username\n\nAPI Information:\n - Class: `fileRemotePath`\n - Distinguished Name: `uni/fabric/path-{remote_host}`\nGUI Location:\n - Admin > Import/Export > Remote Locations:{remote_host}",
                     "items": {
                         "$ref": "#/definitions/Admin:ImportExport:ConfigurationBackups"
                     },
-                    "title": "configuration_backups - Admin > Import/Export - Configuration Backups with Export Policies, Remote Locations, and Schedulers"
+                    "title": "configuration_backups"
+                },
+                "schedulers": {
+                    "description": "An array of Schedulers for Configuration Backup Tasks.\nRequired Attributes\n  * name\n  * windows\n\nOptional Attributes\n  * description\n\nAPI Information:\n - Class: `trigSchedP`\n - Distinguished Name: `uni/fabric/schedp-{scheduler_name}`\nGUI Location:\n - Admin > Schedulers > Fabric > {scheduler_name}",
+                    "items": {
+                        "$ref": "#/definitions/Admin:ImportExport:Schedulers"
+                    },
+                    "title": "schedulers"
                 }
             },
             "required": [
-                "configuration_backups"
+                "configuration_backups",
+                "schedulers"
             ],
-            "title": "import_export - Admin > Import/Export - Configuration Backups with Export Policies, Remote Locations, and Schedulers"
+            "title": "import_export"
         },
         "Admin:ImportExport:ConfigurationBackups": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Syslog.",
+            "class": "fileRemotePath",
+            "description": "",
+            "dn": "uni/fabric/path-{remote_host}",
             "properties": {
                 "authentication_type": {
                     "type": "string",
+                    "apicApi": "authType",
                     "default": "usePassword",
-                    "description": "Authentication Type Choice. Allowed values are:\n  * usePassword: (default)\n  * useSshKeyContents",
+                    "description": "Authentication Type Choice. Allowed values are:\n  * usePassword: (default)\n  * useSshKeyContents\nNOTES:\n  * When using the useSshKeyContents be sure to set the variables `ssh_key_contents` and  `ssh_key_passphrase`.\n  * If using password make sure to set the `remote_password` variable.",
                     "enum": [
                         "usePassword",
                         "useSshKeyContents"
                     ],
-                    "title": "authentication_type"
+                    "title": "authentication_type - authType"
                 },
-                "delay_between_node_upgrades": {
+                "export_policy": {
+                    "$ref": "#/definitions/Admin:ImportExport:ConfigurationBackups:ExportPolicy"
+                },
+                "management_epg": {
+                    "class": "fileRsARemoteHostToEpg",
+                    "dn": "uni/fabric/path-{host}/rsARemoteHostToEpg",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/tn-mgmt/mgmtp-default/{mgmt_epg_type}-{management_epg}",
+                    "title": "management_epg - fileRsARemoteHostToEpg"
+                },
+                "protocol": {
+                    "type": "string",
+                    "apicApi": "protocol",
+                    "default": "sftp",
+                    "description": "Transfer protocol to be used for data export of object File Remote Path .  Allowed values are:\n  * ftp\n  * scp\n  * sftp: (default)\nNote: Value 'ftp' cannot be set if authentication_type is equal to 'useSshKeyContents'",
+                    "enum": [
+                        "ftp",
+                        "scp",
+                        "sftp"
+                    ],
+                    "title": "protocol"
+                },
+                "remote_locations": {
+                    "type": "array",
+                    "description": "Array of Remote Hosts to utilize as Configuration Export locations.\nRequired Attributes are:\n  * host\n\nOptional Attributes are:\n  * description",
+                    "additionalProperties": false,
+                    "items": {
+                        "$ref": "#/definitions/Admin:ImportExport:ConfigurationBackups:RemoteLocations"
+                    },
+                    "title": "remote_locations"
+                },
+                "remote_path": {
+                    "type": "string",
+                    "apicApi": "remotePath",
+                    "default": "/tmp",
+                    "description": "Remote Path on the Hosts.",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[a-zA-Z0-9\\\\!#$%()*,-\\./:;@ _{|}~?&+]+$",
+                    "title": "remote_path - remotePath"
+                },
+                "remote_port": {
                     "type": "integer",
-                    "default": 0,
-                    "description": "Delay between node upgrades. Delay between node upgrades in seconds. Range: '0-18000'.  The default is 0.",
-                    "minimum": 0,
-                    "maximum": 18000,
-                    "title": "delay_between_node_upgrades"
+                    "apicApi": "remotePort",
+                    "default": 22,
+                    "description": "Remote Protocol Port 0-65535.  The default is 22.",
+                    "minimum": 1,
+                    "maximum": 65535,
+                    "title": "remote_port - remotePort"
                 },
-                "description": {
-                    "$ref": "#/definitions/AbstractSettings/properties/description"
+                "remote_username": {
+                    "type": "string",
+                    "apicApi": "userName",
+                    "default": "",
+                    "description": "Username for the Remote Host when authentication_type is set to 'usePassword'.",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[a-zA-Z0-9\\\\!#$%()*,-\\./:;@ _{|}~?&+]+$",
+                    "title": "remote_username - userName"
                 },
+                "scheduler_name": {
+                    "class": "configRsExportScheduler",
+                    "dn": "uni/fabric/configexp-{host}/rsExportScheduler",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/fabric/schedp-{scheduler_name}",
+                    "title": "scheduler_name - configRsExportScheduler"
+                }
+            },
+            "title": "configuration_backups"
+        },
+        "Admin:ImportExport:ConfigurationBackups:ExportPolicy": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "configExportP",
+            "description": "Required Attributes are:\n  * name\n\nOptional Attributes are:\n  * description\n  * format\n  * include_secure_fields\n  * max_snapshot_count\n  * snapshot\n  * start_now\n\nAPI Information:\n - Class: `configExportP`\n - Distinguished Name: `uni/fabric/configexp-{export_name}`\nGUI Location:\n - Admin > Import/Export > Export Policies > Configuration > {export_name}",
+            "dn": "uni/fabric/configexp-{export_name}",
+            "properties": {
                 "format": {
                     "type": "string",
+                    "apicApi": "format",
                     "default": "json",
                     "description": "The data format to be used when exporting the configuration export policy. The format can be:\n  * json: (default)\n  * xml",
                     "enum": [
@@ -3775,174 +3874,243 @@
                 },
                 "include_secure_fields": {
                     "type": "boolean",
+                    "apicApi": "includeSecureFields",
                     "default": false,
                     "description": "This requires the Global AES Setting to be enabled for this to be set to true.  Default is false.",
-                    "title": "include_secure_fields"
-                },
-                "management_epg": {
-                    "type": "string",
-                    "default": "default",
-                    "description": "The name of the Management EPG to assign to the server.  Default is 'default'.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "management_epg"
+                    "title": "include_secure_fields - includeSecureFields"
                 },
                 "max_snapshot_count": {
                     "type": "integer",
+                    "apicApi": "maxSnapshotCount",
                     "default": 0,
                     "description": "A value between 0-10.  The default is 0.",
                     "minimum": 0,
                     "maximum": 10,
-                    "title": "max_snapshot_count"
+                    "title": "max_snapshot_count - maxSnapshotCount"
+                },
+                "name": {
+                    "$ref": "#/definitions/AbstractSettings/properties/name"
+                },
+                "snapshot": {
+                    "type": "boolean",
+                    "apicApi": "snapshot",
+                    "default": false,
+                    "description": "Flag to set Snapshot for object configuration export policy.  Default is false.",
+                    "title": "snapshot - snapshot"
+                },
+                "start_now": {
+                    "type": "boolean",
+                    "apicApi": "adminSt",
+                    "default": false,
+                    "description": "Flag to start the export now.  Default is false.",
+                    "title": "start_now - adminSt"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "configuration_backups - Admin > Schedulers > Fabric: One-Time/Recuring Windows and Admin > Import/Export > [ Export Policies > Configuration | Remote Locations ]."
+        },
+        "Admin:ImportExport:ConfigurationBackups:RemoteLocations": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "description": {
+                    "$ref": "#/definitions/AbstractSettings/properties/description"
+                },
+                "host": {
+                    "type": "string",
+                    "apicApi": "host",
+                    "default": "198.18.1.22",
+                    "description": "The hostname or IP address for the export remote location.",
+                    "minLength": 7,
+                    "maxLength": 128,
+                    "pattern": "(^(((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))|((([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([A-Za-z|[A-Za-z][A-Za-z0-9\\-]*[A-Za-z0-9])))$|(?:^|(?<=\\s))(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(?=\\s|$))",
+                    "title": "host"
+                }
+            },
+            "required": [
+                "host"
+            ],
+            "title": "remote_locations"
+        },
+        "Admin:ImportExport:Schedulers": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "trigSchedP",
+            "description": "",
+            "dn": "uni/fabric/schedp-{scheduler_name}",
+            "properties": {
+                "description": {
+                    "$ref": "#/definitions/AbstractSettings/properties/description"
+                },
+                "name": {
+                    "$ref": "#/definitions/AbstractSettings/properties/name"
+                },
+                "windows": {
+                    "type": "array",
+                    "additionalProperties": false,
+                    "description": "Required Attributes:\n  * schedule\n\nOptional Attributes:\n  * delay_between_node_upgrades\n  * maximum_concurrent_nodes\n  * maximum_running_time\n  * processing_break\n  * processing_size_capacity\n  * window_type\n\nAPI Information:\n - Class: `trigRecurrWindowP`\n - Distinguished Name: `uni/fabric/schedp-{scheduler_name}/recurrwinp-{days}`\nGUI Location:\n - Admin > Schedulers > Fabric > {scheduler_name} > Recurring Window {days}\nOR\n\nAPI Information:\n - Class: `trigAbsWindowP`\n - Distinguished Name: `uni/fabric/schedp-{scheduler_name}/abswinp-{date}`\nGUI Location:\n - Admin > Schedulers > Fabric > {scheduler_name} > One Time Windows:{date}",
+                    "items": {
+                        "$ref": "#/definitions/Admin:ImportExport:Scheduler:Windows"
+                    },
+                    "title": "windows"
+                    
+                }
+            },
+            "title": "scheduler"
+        },
+        "Admin:ImportExport:Scheduler:Windows": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "multiple",
+            "classes": [
+                "trigAbsWindowP",
+                "trigRecurrWindowP"
+            ],
+            "description": "",
+            "dns": [
+                "uni/fabric/schedp-{scheduler_name}/abswinp-{date}",
+                "uni/fabric/schedp-{scheduler_name}/recurrwinp-{days}"
+            ],
+            "properties": {
+                "delay_between_node_upgrades": {
+                    "type": "integer",
+                    "apicApi": "nodeUpgInterval",
+                    "default": 0,
+                    "description": "Default is `0`.  Delay between node upgrades. Delay between node upgrades in seconds. Range: '0-18000'.\nNOTE: Only Applicable to One Time Windows.",
+                    "minimum": 0,
+                    "maximum": 18000,
+                    "title": "delay_between_node_upgrades - nodeUpgInterval"
+                },
+                "description": {
+                    "$ref": "#/definitions/AbstractSettings/properties/description"
                 },
                 "maximum_concurrent_nodes": {
                     "type": "integer",
+                    "apicApi": "concurCap",
                     "default": 0,
-                    "description": "The concurrency capacity limit. This is the maximum number of tasks that can be processed concurrently.  The default is 0.",
+                    "description": "Default is `0`, aka `unlimited.  The concurrency capacity limit. This is the maximum number of tasks that can be processed concurrently.",
                     "minimum": 0,
                     "maximum": 100,
-                    "title": "maximum_concurrent_nodes"
+                    "title": "maximum_concurrent_nodes - concurCap"
                 },
                 "maximum_running_time": {
                     "type": "integer",
+                    "apicApi": "timeCap",
                     "default": 0,
-                    "description": "The processing time capacity limit. This is the maximum duration of the window. The range is 0 to (2^64 to 1) milliseconds. The default value of 0 indicates unlimited, meaning there is no time limit enforced on the scheduler window.  The default is 0.",
+                    "description": "Default is `0`, aka `unlimited.  The processing time capacity limit. This is the maximum duration of the window. The range is 0 to (2^64 to 1) milliseconds. The default value of 0 indicates unlimited, meaning there is no time limit enforced on the scheduler window.",
                     "minimum": 0,
                     "maximum": 18446744073709551615,
-                    "title": "maximum_running_time"
+                    "title": "maximum_running_time - timeCap"
                 },
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
                 },
                 "processing_break": {
                     "type": "string",
+                    "apicApi": "procBreak",
                     "default": "none",
                     "description": "A period of time taken between processing of items within the concurrency cap. Allowed Min Value: '00:00:00:00.001'(Format is DD:HH:MM:SS.Milliseconds).\n* NOTE: (If user sets '00:00:00:00.000' as a value, provider will accept it but it'll set it as 'none').",
                     "minLength": 4,
                     "maxLength": 15,
                     "pattern": "^(none|([\\d]{2}:){3}\\.[\\d]{3})$",
-                    "title": "processing_break"
+                    "title": "processing_break - procBreak"
                 },
                 "processing_size_capacity": {
                     "type": "integer",
+                    "apicApi": "procCap",
                     "default": 0,
                     "description": "Processing size capacity limitation specification. Indicates the limit of items to be processed within this window. Range: 1-65535.  The default is 0.",
                     "minimum": 0,
                     "maximum": 10,
-                    "title": "processing_size_capacity"
-                },
-                "protocol": {
-                    "type": "string",
-                    "default": "sftp",
-                    "description": "Transfer protocol to be used for data export of object File Remote Path .  Allowed values are:\n  * ftp\n  * scp\n  * sftp: (default)\nNote: Value 'ftp' cannot be set if authentication_type is equal to 'useSshKeyContents'",
-                    "enum": [
-                        "ftp",
-                        "scp",
-                        "sftp"
-                    ],
-                    "title": "protocol"
-                },
-                "remote_hosts": {
-                    "type": "array",
-                    "description": "List of Remote Hosts to Export the Policy to.",
-                    "additionalProperties": false,
-                    "items": {
-                        "type": "string",
-                        "default": "198.18.1.22",
-                        "description": "The hostname or IP address for the export destination.",
-                        "minLength": 7,
-                        "maxLength": 128,
-                        "pattern": "(^(((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))|((([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([A-Za-z|[A-Za-z][A-Za-z0-9\\-]*[A-Za-z0-9])))$|(?:^|(?<=\\s))(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(?=\\s|$))"
-                    },
-                    "title": "remote_hosts"
-                },
-                "remote_path": {
-                    "type": "string",
-                    "default": "/tmp",
-                    "description": "Remote Path on the Hosts.",
-                    "minLength": 1,
-                    "maxLength": 128,
-                    "pattern": "^[a-zA-Z0-9\\\\!#$%()*,-\\./:;@ _{|}~?&+]+$",
-                    "title": "remote_path"
-                },
-                "remote_port": {
-                    "type": "integer",
-                    "default": 22,
-                    "description": "Remote Protocol Port 0-65535.  The default is 22.",
-                    "minimum": 1,
-                    "maximum": 65535,
-                    "title": "remote_port"
-                },
-                "snapshot": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Flag to set Snapshot for object configuration export policy.  Default is false.",
-                    "title": "snapshot"
-                },
-                "start_now": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Flag to start the export now.  Default is false.",
-                    "title": "start_now"
+                    "title": "processing_size_capacity - procCap"
                 },
                 "schedule": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "description": "schedule - Attributes are:\n  * days\n  * hour\n  * minute\nSyslog settings for Console.",
-                    "properties": {
-                        "days": {
-                            "type": "string",
-                            "default": "every-day",
-                            "description": "Recurring Window Schedule Day(s). Options are:\n  * every-day: (default)\n  * even-day\n  * odd-day\n  * Sunday\n  * Monday\n  * Tuesday\n  * Wednesday\n  * Thursday\n  * Friday\n  * Saturday\n  * Sunday",
-                            "enum": [
-                                "Sunday",
-                                "Monday",
-                                "Tuesday",
-                                "Wednesday",
-                                "Thursday",
-                                "Friday",
-                                "Saturday",
-                                "every-day",
-                                "even-day",
-                                "odd-day"
-                            ],
-                            "title": "days"
-                        },
-                        "hour": {
-                            "type": "integer",
-                            "default": 23,
-                            "description": "The hour that the recurring window begins.  The default is 23.",
-                            "minimum": 0,
-                            "maximum": 24,
-                            "title": "hour"
-                        },
-                        "minute": {
-                            "type": "integer",
-                            "default": 45,
-                            "description": "The minute that the recurring window begins.  The default is 45.",
-                            "minimum": 0,
-                            "maximum": 59,
-                            "title": "minute"
-                        }
-                    },
-                    "title": "schedule"
+                    "$ref": "#/definitions/Admin:ImportExport:Scheduler:Windows:Schedule"
                 },
-                "username": {
+                "window_type": {
                     "type": "string",
-                    "default": "",
-                    "description": "Username for the Remote Host when authentication_type is set to 'usePassword'.",
-                    "minLength": 1,
-                    "maxLength": 128,
-                    "pattern": "^[a-zA-Z0-9\\\\!#$%()*,-\\./:;@ _{|}~?&+]+$",
-                    "title": "username"
+                    "apicApi": "not_applicable",
+                    "default": "recurring",
+                    "description": "The Type of Scheduler Window to Create.  Options are:\n  * one-time\n  * recurring: (default)",
+                    "enum": [
+                        "one-time",
+                        "recurring"
+                    ],
+                    "title": "window_type"
                 }
             },
             "required": [
-                "name",
-                "remote_hosts"
+                "schedule"
             ],
-            "title": "configuration_backups - Admin > Schedulers > Fabric: One-Time/Recuring Windows and Admin > Import/Export > [ Export Policies > Configuration | Remote Locations ]."
+            "title": "windows"
+        },
+        "Admin:ImportExport:Scheduler:Windows:Schedule": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "not_applicable",
+            "description": "Schedulers > Fabric\n  * delay_between_node_upgrades\n  * maximum_concurrent_nodes\n  * maximum_running_time\n  * processing_break\n  * processing_size_capacity\n  * schedule\n  * window_type\n##### SCHEDULER/WINDOW #####\n\nAPI Information:\n - Class: `trigSchedP`\n - Distinguished Name: `uni/fabric/schedp-{scheduler_name}`\nGUI Location:\n - Admin > Schedulers > Fabric > {scheduler_name}\n\nAPI Information:\n - Class: `trigRecurrWindowP`\n - Distinguished Name: `uni/fabric/schedp-{scheduler_name}/recurrwinp-{scheduler_name}`\nGUI Location:\n - Admin > Schedulers > Fabric > {scheduler_name} > Recurring Window {scheduler_name}",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "apicApi": "date",
+                    "default": "2024-01-01",
+                    "description": "Date in the Format `YYYY-MM-DD`.\nNOTE: Only Applicable to One Time Windows.",
+                    "minLength": 4,
+                    "maxLength": 15,
+                    "pattern": "^\\d{4}\\-[0-1]\\d\\-[0-3]\\d$",
+                    "title": "date"
+                },
+                "days": {
+                    "type": "string",
+                    "apicApi": "nodeUpgInterval",
+                    "default": "every-day",
+                    "description": "Recurring Window Schedule Day(s). Options are:\n  * every-day: (default)\n  * even-day\n  * odd-day\n  * Sunday\n  * Monday\n  * Tuesday\n  * Wednesday\n  * Thursday\n  * Friday\n  * Saturday\n  * Sunday\nNOTE: Only Applicable to Recurring Windows.",
+                    "enum": [
+                        "Sunday",
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday",
+                        "every-day",
+                        "even-day",
+                        "odd-day"
+                    ],
+                    "title": "days - day"
+                },
+                "hour": {
+                    "type": "integer",
+                    "apicApi": "hour",
+                    "default": 23,
+                    "description": "The hour that the recurring window begins.  The default is 23.",
+                    "minimum": 0,
+                    "maximum": 24,
+                    "title": "hour"
+                },
+                "minute": {
+                    "type": "integer",
+                    "apicApi": "minute",
+                    "default": 45,
+                    "description": "The minute that the recurring window begins.  The default is 45.",
+                    "minimum": 0,
+                    "maximum": 59,
+                    "title": "minute"
+                },
+                "offset": {
+                    "type": "string",
+                    "apicApi": "date",
+                    "default": "-00:00",
+                    "description": "OffSet from Greenwich Mean Time. i.e. -04:00 for EDT or +02:00 for CDT.\nNOTE: Only Applicable to One Time Windows.",
+                    "minLength": 4,
+                    "maxLength": 15,
+                    "pattern": "^[\\-\\+][0-1]\\d:[0-5]\\d$",
+                    "title": "offset - date"
+                }
+            },
+            "title": "schedule"
         },
         "EasyAci": {
             "type": "object",
@@ -5084,10 +5252,10 @@
                                         "address": {
                                             "type": "string",
                                             "default": "snmp-client.example.com",
-                                            "description": "The SNMP client profile IPv4/IPv6 address or Hostname.",
+                                            "description": "The SNMP client profile IPv4/IPv6 Address, Hostname, or Network.",
                                             "minLength": 7,
                                             "maxLength": 128,
-                                            "pattern": "(^(((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))|((([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([A-Za-z|[A-Za-z][A-Za-z0-9\\-]*[A-Za-z0-9])))$|(?:^|(?<=\\s))(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(?=\\s|$))",
+                                            "pattern": "(^(((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))(\\/(\\d|[1-2]\\d|3[1-2]))?|((([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([A-Za-z|[A-Za-z][A-Za-z0-9\\-]*[A-Za-z0-9])))$|(?:^|(?<=\\s))(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(\\/(\\d|\\d{2}|1[0-1]\\d|12[1-8]))?(?=\\s|$))",
                                             "title": "address"
                                         },
                                         "name": {
@@ -5358,7 +5526,7 @@
                 "switch_profiles": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Switch Profiles.\nRequired Attributes:\n  * interfaces\n  * name\n  * node_id\n  * node_type\n  * serial_number\n\nOptional Attributes:\n  * inband_addressing\n  * instrumentation_immediacy\n  * ooband_addressing\n  * pod_id\n  * role",
+                    "description": "Array of Switch Profiles.\nRequired Attributes:\n  * interfaces\n  * name\n  * node_id\n  * node_type\n  * serial_number\n\nOptional Attributes:\n  * inband_addressing\n  * instrumentation_immediacy\n  * ooband_addressing\n  * pod_id\n  * role\n##### FABRIC MEMBERSHIP #####\n\nAPI Information:\n - Class: `fabricNodeIdentP`\n - Distinguished Name: `uni/controller/nodeidentpol/nodep-{serial_number}`\nGUI Location:\n - Fabric > Access Policies > Inventory > Fabric Membership:[Registered Nodes or Nodes Pending Registration]\n\n##### LEAF INTERFACE PROFILES #####\n\nAPI Information:\n - Class: `infraAccPortP`\n - Distinguished Name: `uni/infra/accportprof-{name}`\nGUI Location:\n - Fabric > Access Policies > Interfaces > Leaf Interfaces > Profiles > {name}\n\n##### LEAF PROFILES #####\n\nAPI Information:\n - Class: `infraLeafS`\n - Distinguished Name: `uni/infra/nprof-{Name}`\nGUI Location:\n - Fabric > Access Policies > Switches > Leaf Switches > Profiles > {Name}\n\nAPI Information:\n - Class: `infraRsAccNodePGrp`\n - Distinguished Name: `uni/infra/nprof-{name}/leaves-{selector_name}-typ-range`\nGUI Location:\n - Fabric > Access Policies > Switches > Leaf Switches > Profiles > {name}: Leaf Selectors Policy Group: {selector_name}\n\n##### SPINE INTERFACE PROFILE #####\n\nAPI Information:\n - Class: `infraSpAccPortP`\n - Distinguished Name: `uni/infra/spaccportprof-{name}`\nGUI Location:\n - Fabric > Access Policies > Interfaces > Spine Interfaces > Profiles > {name}\n\n##### SPINE PROFILE #####\n\nAPI Information:\n - Class: `infraSpineS`\n - Distinguished Name: `uni/infra/nprof-{Name}`\nGUI Location:\n - Fabric > Access Policies > Switches > Spine Switches > Profiles > {Name}\n\nAPI Information:\n - Class: `infraSpineS`\n - Distinguished Name: `uni/infra/spprof-{name}/spines-{name}-typ-range`\nGUI Location:\n - Fabric > Access Policies > Switches > Spine Switches > Profiles > {name}: Spine Selectors [{name}]\n\nAPI Information:\n - Class: `infraNodeBlk`\n - Distinguished Name: `uni/infra/spprof-{name}/spines-{name}-typ-range/nodeblk-blk{node_id}-{node_id}`\nGUI Location:\n - Fabric > Access Policies > Switches > Spine Switches > Profiles > {name}: Spine Selectors [{name}]",
                     "items": {
                         "$ref": "#/definitions/Switch:SwitchProfiles"
                     },
@@ -5367,7 +5535,7 @@
                 "vpc_domains": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of VPC Domains.\nRequired Attributes:\n  * domain_id\n  * name\n  * switches\n\nOptional Attributes:\n  * vpc_domain_policy",
+                    "description": "Array of VPC Domains.\nRequired Attributes:\n  * domain_id\n  * name\n  * switches\n\nOptional Attributes:\n  * vpc_domain_policy\nAPI Information:\n - Class: `fabricExplicitGEp`\n - Distinguished Name: `uni/fabric/protpol/expgep-{name}`\nGUI Location:\n - Fabric > Access Policies > Policies > Virtual Port Channel default",
                     "items": {
                         "$ref": "#/definitions/Switch:VpcDomains"
                     },
@@ -5428,56 +5596,58 @@
                 },
                 "external_pool_id": {
                     "type": "integer",
+                    "apicApi": "",
                     "default": 1,
                     "description": "External Pool ID for a remote leaf. Default value: 0.",
                     "minimum": 1,
                     "maximum": 64,
-                    "title": "external_pool_id"
+                    "title": "external_pool_id - "
                 },
                 "inband_addressing": {
                     "$ref": "#/definitions/Switch:SwitchProfiles:BandAddressing"
                 },
                 "instrumentation_immediacy": {
                     "type": "string",
+                    "apicApi": "RsPathAtt:instrImedcy",
                     "default": "on-demand",
-                    "description": "The Static Path Binding deployment immediacy.  Options are:\n  * immediate - Specifies that EPG policies (including contracts and filters) are downloaded to the associated leaf switch software upon deployment.\n  * on-demand: (default) - Specifies that a policy (for example, VLAN, VXLAN bindings, contracts, or filters) is pushed to the leaf node only when an endpoint is discovered, attached to the (EPG).",
+                    "description": "The Static Path Binding deployment immediacy.  At this top level it will apply to all interfaces unless over-written on an individual interface with the same argument of instrumentation_immediacy.\nOptions are:\n  * immediate - Specifies that EPG policies (including contracts and filters) are downloaded to the associated leaf switch software upon deployment.\n  * on-demand: (default) - Specifies that a policy (for example, VLAN, VXLAN bindings, contracts, or filters) is pushed to the leaf node only when an endpoint is discovered, attached to the (EPG).",
                     "enum": [
                         "immediate",
                         "on-demand"
                     ],
-                    "title": "instrumentation_immediacy"
+                    "title": "instrumentation_immediacy - RsPathAtt:instrImedcy"
                 },
                 "interfaces": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Interface Selectors to Assign to the Interface Profile.\nRequired Attributes:\n  * interface\n\nOptional Attributes:\n  * access_or_native_vlan\n  * allowed_vlans\n  * description\n  * interface_description\n  * policy_group\n  * policy_group_type",
+                    "description": "List of Interface Selectors to Assign to the Interface Profile.\nRequired Attributes:\n  * interface\n\nOptional Attributes:\n  * access_or_native_vlan\n  * allowed_vlans\n  * description\n  * interface_description\n  * policy_group\n  * policy_group_type\n##### LEAF INTERFACE SELECTORS #####\nAPI Information:\n - Class: `infraHPortS`\n - Distinguished Name: `uni/infra/accportprof-{interface_profile}/hports-{interface_selector}-typ-range`\nGUI Location:\n - Fabric > Access Policies > Interfaces > Leaf Interfaces > Profiles > {interface_profile}:{interface_selector}\nAPI Information:\n - Class: `infraPortBlk`\n - Distinguished Name: ` uni/infra/accportprof-{interface_profile}/hports-{interface_selector}-typ-{selector_type}/portblk-{interface_selector}`\nGUI Location:\n - Fabric > Access Policies > Interfaces > Leaf Interfaces > Profiles > {interface_profile}:{interface_selector}\n\n##### SPINE INTERFACE SELECTORS #####\n\nAPI Information:\n - Class: `infraHPortS`\n - Distinguished Name: `uni/infra/spaccportprof-{interface_profile}/shports-{interface_selector}-typ-range`\nGUI Location:\n - Fabric > Access Policies > Interfaces > Spine Interfaces > Profiles > {interface_profile}:{interface_selector}\nAPI Information:\n - Class: `infraPortBlk`\n - Distinguished Name: `uni/infra/spaccportprof-{interface_profile}/shports-{interface_selector}-typ-range/portblk-{interface_block}`\nGUI Location:\n - Fabric > Access Policies > Interfaces > Spine Interfaces > Profiles > {interface_profile}:{interface_selector}",
                     "items": {
                         "$ref": "#/definitions/Switch:SwitchProfiles:Interfaces"
                     },
-                    "title": "intefaces"
+                    "title": "interfaces"
                 },
                 "monitoring_policy": {
-                    "type": "string",
-                    "default": "default",
-                    "description": "Name of the Monitoring Policy to assign to the Profile.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "monitoring_policy"
+                    "class": "monPolDn",
+                    "dn": "uni/fabric/monfab-{monitoring_policy}",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/fabric/monfab-{monitoring_policy}",
+                    "title": "monitoring_policy - monPolDn"
                 },
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
                 },
                 "node_id": {
                     "type": "integer",
+                    "apicApi": "fabricNode:id",
                     "default": 101,
                     "description": "Default value: `101`.  Node ID Number for the new Fabric Node Member. Allowed value range: 101-4000.",
                     "minimum": 101,
                     "maximum": 4000,
-                    "title": "node_id"
+                    "title": "node_id - fabricNode:id"
                 },
                 "node_type": {
                     "type": "string",
+                    "apicApi": "fabricNode:nodeType",
                     "default": "leaf",
                     "description": "Node type for object Fabric Node member. Allowed values:\n  * leaf: (default)\n  * remote-leaf-wan\n  * tier-2-leaf\n  * spine\n  * virtual - virtual controller",
                     "enum": [
@@ -5487,30 +5657,41 @@
                         "tier-2-leaf",
                         "virtual"
                     ],
-                    "title": "node_type"
+                    "title": "node_type - fabricNode:nodeType"
                 },
                 "ooband_addressing": {
                     "$ref": "#/definitions/Switch:SwitchProfiles:BandAddressing"
                 },
                 "policy_group": {
                     "type": "string",
-                    "default": "default",
-                    "description": "Name of the Leaf/Spine Switches > Policy Groups to Assign to the Switch Profile.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "policy_group"
+                    "class": "multiple",
+                    "classes": [
+                        "infraRsAccNodePGrp",
+                        "infraRsSpineAccNodePGrp"
+                    ],
+                    "dns": [
+                        "uni/infra/nprof-{name}/leaves-{selector_name}-typ-range/rsaccNodePGrp",
+                        "uni/infra/spprof-{name}/spines-{selector_name}-typ-range/rsspineAccNodePGrp"
+                    ],
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDns": [
+                        "uni/infra/funcprof/accnodepgrp-{policy_group}",
+                        "uni/infra/funcprof/spaccnodepgrp-{policy_group}"
+                    ],
+                    "title": "policy_group - [infraRsAccNodePGrp|infraRsSpineAccNodePGrp]"
                 },
                 "pod_id": {
                     "type": "integer",
+                    "apicApi": "fabricNode:[topology/pod-{pod_id}/node-{node_id}]",
                     "default": 1,
                     "description": "Pod Identifier",
                     "minimum": 0,
                     "maximum": 64,
-                    "title": "pod_id"
+                    "title": "pod_id - fabricNode:[topology/pod-{pod_id}/node-{node_id}]"
                 },
                 "role": {
                     "type": "string",
+                    "apicApi": "fabricNode:role",
                     "default": "unspecified",
                     "description": "Default value: `unspecified`.  Role for the new Fabric Node Member. Allowed values:\n  * leaf\n  * spine\n  * unspecified",
                     "enum": [
@@ -5518,19 +5699,21 @@
                         "spine",
                         "unspecified"
                     ],
-                    "title": "role"
+                    "title": "role - fabricNode:role"
                 },
                 "serial_number": {
                     "type": "string",
+                    "apicApi": "",
                     "default": "",
                     "description": "Serial Number for the new Fabric Node Member.",
                     "minLength": 9,
                     "maxLength": 11,
                     "pattern": "^([A-Z]{3}[2-3]\\d([0][1-9]|[1-4][0-9]|[5][1-3])[\\dA-Z]{4}|TEP-1-[\\d]{3})$",
-                    "title": "serial_number"
+                    "title": "serial_number - fabricNode:serial"
                 },
                 "site": {
                     "type": "string",
+                    "apicApi": "not_applicable",
                     "default": "",
                     "description": "Name of the ACI Site for Nexus Dashboard Orchestrator.",
                     "minLength": 1,
@@ -5540,6 +5723,7 @@
                 },
                 "two_slot_leaf": {
                     "type": "boolean",
+                    "apicApi": "not_applicable",
                     "default": true,
                     "description": "Flag to inform the automation that the Interface Selectors should be in the format Eth1-001 instead of Eth1-01, in example.  Required when the switch has more than 99 ports.",
                     "title": "two_slot_leaf"
@@ -5557,52 +5741,64 @@
         "Switch:SwitchProfiles:BandAddressing": {
             "type": "object",
             "additionalProperties": false,
-            "description": "IP Settings for Inband/OOBand.  Options are:\n  * ipv4_address\n  * ipv4_gateway\n  * ipv6_address\n  * ipv6_gateway",
+            "class": "multiple",
+            "classes": [
+                "mgmtRsInBStNode",
+                "mgmtRsOoBStNode"
+            ],
+            "description": "IP Settings for Inband/OOBand.  Options are:\n  * ipv4_address\n  * ipv4_gateway\n  * ipv6_address\n  * ipv6_gateway\nAPI Information:\n - Class: `mgmtRsInBStNode` or `mgmtRsOoBStNode`\n - Distinguished Name: `uni/tn-mgmt/mgmtp-default/inb-{management_epg}/rsinBStNode-[topology/pod-{pod_id}/node-{node_id}]`\n or\n - Distinguished Name: `uni/tn-mgmt/mgmtp-default/oob-{management_epg}/rsooBStNode-[topology/pod-{pod_id}/node-{node_id}]`\nGUI Location:\n - Tenants > mgmt > Node Management Addresses > Static Node Management Addresses",
+            "dns": [
+                "uni/tn-mgmt/mgmtp-default/inb-{management_epg}/rsinBStNode-[topology/pod-{pod_id}/node-{node_id}]",
+                "uni/tn-mgmt/mgmtp-default/oob-{management_epg}/rsooBStNode-[topology/pod-{pod_id}/node-{node_id}]"
+            ],
             "properties": {
                 "ipv4_address": {
                     "type": "string",
+                    "apicApi": "addr",
                     "default": "198.18.1.11/24",
                     "description": "IPv4 Address/Prefix.",
                     "minLength": 9,
                     "maxLength": 18,
                     "pattern": "^(([1-9]|[1-9][0-9]{1}|1[0-9]{2}|2[0-1][0-9]|22[0-3])\\.)(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\\.){2}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])/(\\d|[1-2]\\d)$",
-                    "title": "ipv4_address"
+                    "title": "ipv4_address - addr"
                 },
                 "ipv4_gateway": {
                     "type": "string",
+                    "apicApi": "gw",
                     "default": "198.18.1.1",
                     "description": "IPv4 Gateway.",
                     "minLength": 7,
                     "maxLength": 15,
                     "pattern": "^(([1-9]|[1-9][0-9]{1}|1[0-9]{2}|2[0-1][0-9]|22[0-3])\\.)(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\\.){2}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
-                    "title": "ipv4_gateway"
+                    "title": "ipv4_gateway - gw"
                 },
                 "ipv6_address": {
                     "type": "string",
+                    "apicApi": "v6Addr",
                     "default": "2001:db8::10/64",
                     "description": "IPv6 IP Address.",
                     "minLength": 8,
                     "maxLength": 43,
                     "pattern": "^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)/(\\d|\\d\\d|1[0-1]\\d|12[0-4)$",
-                    "title": "ipv6_address"
+                    "title": "ipv6_address - v6Addr"
                 },
                 "ipv6_gateway": {
                     "type": "string",
+                    "apicApi": "v6Gw",
                     "default": "2001:db8::1",
                     "description": "IPv6 Gateway",
                     "minLength": 6,
                     "maxLength": 39,
                     "pattern": "^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$",
-                    "title": "ipv6_gateway"
+                    "title": "ipv6_gateway - v6Gw"
                 },
                 "management_epg": {
-                    "type": "string",
-                    "default": "default",
-                    "description": "Name of the Management EPG to Use for this.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "management_epg"
+                    "class": "mgmtRsOoBStNode",
+                    "description": "Name of the Management EPG.",
+                    "dn": "uni/tn-mgmt/mgmtp-default/{management_epg_type}-{management_epg}/rsooBStNode-[topology/pod-{pod_id}/node-{node_id}]",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/tn-mgmt/out-{management_epg_type}/instP-{management_epg}",
+                    "title": "management_epg - mgmtRsOoBStNode"
                 }
             },
             "required": [
@@ -5617,24 +5813,28 @@
             "properties": {
                 "access_or_native_vlan": {
                     "type": "integer",
+                    "apicApi": "RsPathAtt:mode:native",
                     "default": 0,
                     "description": "This is used to assign the native vlan if this is a trunk or access vlan if a single vlan is being assigned.",
                     "minimum": 0,
                     "maximum": 4093,
-                    "title": "access_or_native_vlan"
+                    "title": "access_or_native_vlan - RsPathAtt:mode:native"
                 },
                 "allowed_vlans": {
                     "type": "string",
+                    "apicApi": "RsPathAtt:encap",
                     "description": "A string containing the List of VLANs Allowed on the ports attached to the AAEP.  This will act much like `switch trunk allowed vlan list`, but will be used to assign/filter the EPG's to be assigned to the AAEP.\nIn example: '1-5', '1,3,5', '1-5,10-16', or just '1'.",
                     "minLength": 1,
                     "maxLength": 256,
-                    "pattern": "^(((\\d+)|(\\d+-\\d+))(,((\\d+)|(\\d+-\\d+)))*)$"
+                    "pattern": "^(((\\d+)|(\\d+-\\d+))(,((\\d+)|(\\d+-\\d+)))*)$",
+                    "title": "allowed_vlans - RsPathAtt:encap"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
                 },
                 "encapsulation_type": {
                     "type": "string",
+                    "apicApi": "not_applicable",
                     "default": "vlan",
                     "description": "The Static Path Binding Encapsulation Type.  Options are:\n  * micro_seg - perform micro-segmentation with private vlans on the port\n  * qinq - Requires two VLANs on the EPG and is only supported by the APIC\n  * vlan: (default)\n  * vxlan",
                     "enum": [
@@ -5647,37 +5847,53 @@
                 },
                 "instrumentation_immediacy": {
                     "type": "string",
+                    "apicApi": "RsPathAtt:instrImedcy",
                     "default": "on-demand",
                     "description": "The Static Path Binding deployment immediacy.  Options are:\n  * immediate - Specifies that EPG policies (including contracts and filters) are downloaded to the associated leaf switch software upon deployment.\n  * on-demand: (default) - Specifies that a policy (for example, VLAN, VXLAN bindings, contracts, or filters) is pushed to the leaf node only when an endpoint is discovered, attached to the (EPG).",
                     "enum": [
                         "immediate",
                         "on-demand"
                     ],
-                    "title": "instrumentation_immediacy"
+                    "title": "instrumentation_immediacy - RsPathAtt:instrImedcy"
                 },
                 "interface": {
                     "type": "string",
+                    "apicApi": "[fromCard|fromPort|toCard|toPort]",
                     "default": "1/1",
-                    "description": "",
+                    "description": "Interface Value in the format `slot/interface`, or for a breakout `slot/interface/sub_port`",
                     "minLength": 1,
                     "maxLength": 64,
                     "pattern": "^(\\d|1[0-6])/(\\d|\\d\\d|10[0-8])(/[1-4])?$",
-                    "title": "interface"
+                    "title": "interface - [fromCard|fromPort|toCard|toPort]"
                 },
                 "interface_description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
                 },
                 "policy_group": {
                     "type": "string",
+                    "class": "multiple",
+                    "classes": [
+                        "infraRsAccBaseGrp",
+                        "infraRsSpAccGrp"
+                    ],
                     "default": "",
                     "description": "Name of the Policy Group [Leaf Access Port|Leaf Breakout Port Group|PC Interface|VPC Interface] to assign to the port.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "policy_group"
+                    "dns": [
+                        "uni/infra/accportprof-{interface_profile}/hports-{interface_selector}-typ-range/rsaccBaseGrp",
+                        "uni/infra/spaccportprof-{interface_profile}/shports-{interface_selector}-typ-range/rsspAccGrp"
+                    ],
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDns": [
+                        "uni/infra/funcprof/accportgrp-{policy_group}",
+                        "uni/infra/funcprof/brkoutportgrp-{policy_group}",
+                        "uni/infra/funcprof/accbundle-{policy_group}",
+                        "uni/infra/funcprof/spaccportgrp-{policy_group}"
+                    ],
+                    "title": "policy_group - [infraRsAccBaseGrp|infraRsSpAccGrp]"
                 },
                 "policy_group_type": {
                     "type": "string",
+                    "apicApi": "not_applicable",
                     "default": "access",
                     "description": "Default is `access`.  Type of Policy Group [Leaf Access Port|Leaf Breakout Port Group|PC Interface|VPC Interface] to assign to the port.  Valid values:\n  * access\n  * breakout\n  * bundle",
                     "enum": [
@@ -5689,8 +5905,9 @@
                 },
                 "sub_port": {
                     "type": "boolean",
+                    "apicApi": "not_applicable",
                     "default": false,
-                    "description": "Defualt is `false`.  Flag to Tell the Switch that the port is a breakout port.",
+                    "description": "Default is `false`.  Flag to Tell the Switch that the port is a breakout port.",
                     "title": "sub_port"
                 }
             },
@@ -5702,15 +5919,18 @@
         "Switch:VpcDomains": {
             "type": "object",
             "additionalProperties": false,
+            "class": "fabricExplicitGEp",
             "description": "",
+            "dn": "uni/fabric/protpol/expgep-{name}",
             "properties": {
                 "domain_id": {
                     "type": "integer",
+                    "apicApi": "id",
                     "default": 1,
                     "description": "VPC Domain Identifier.",
                     "minimum": 1,
                     "maximum": 1000,
-                    "title": "domain_id"
+                    "title": "domain_id - id"
                 },
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
@@ -5721,21 +5941,21 @@
                     "description": "List of Node Identifiers to assign to the VPC Domain.  This should be a List of two node_id's",
                     "items": {
                         "type": "integer",
+                        "class": "fabricNodePEp",
                         "default": 101,
                         "description": "Node Id.",
+                        "dn": "uni/fabric/protpol/expgep-{name}/nodepep-{node_id}",
                         "minimum": 101,
                         "maximum": 4000,
-                        "title": "node_id"
+                        "title": "node_id - fabricNodePEp"
                     }
                 },
                 "vpc_domain_policy": {
-                    "type": "string",
-                    "default": "default",
-                    "description": "Name of the VPC Policy to Assign to the VPC Domain.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "vpc_domain_policy"
+                    "class": "fabricRsVpcInstPol",
+                    "dn": "uni/fabric/protpol/expgep-{name}/rsvpcInstPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/fabric/vpcInst-{vpc_domain_policy}",
+                    "title": "vpc_domain_policy - fabricRsVpcInstPol"
                 }
             },
             "required": [
@@ -5903,7 +6123,7 @@
                 "type": {
                     "type": "string",
                     "default": "strict",
-                    "description": "COOP protocol is enhanced to support two ZMQ authentication modes:\n  * compatible - Type COOP accepts both MD5 authenticated and non-authenticated ZMQ connections for message transportation.\n  * strict: (defualt) - COOP allows MD5 authenticated ZMQ connections only.\nNote: The APIC provides a managed object (fabric:SecurityToken), that includes an attribute to be used for the MD5 password. An attribute in this managed object, called 'token', is a string that changes every hour. COOP obtains the notification from the DME to update the password for ZMQ authentication. The attribute token value is not displayed.",
+                    "description": "COOP protocol is enhanced to support two ZMQ authentication modes:\n  * compatible - Type COOP accepts both MD5 authenticated and non-authenticated ZMQ connections for message transportation.\n  * strict: (default) - COOP allows MD5 authenticated ZMQ connections only.\nNote: The APIC provides a managed object (fabric:SecurityToken), that includes an attribute to be used for the MD5 password. An attribute in this managed object, called 'token', is a string that changes every hour. COOP obtains the notification from the DME to update the password for ZMQ authentication. The attribute token value is not displayed.",
                     "enum": [
                         "inband",
                         "strict"
@@ -6792,14 +7012,14 @@
                 },
                 "intra_epg_isolation": {
                     "type": "string",
-                    "apicApi": "",
+                    "apicApi": "pcEnfPref",
                     "default": false,
                     "description": "Intra-EPG endpoint isolation policies provide full isolation for virtual or physical endpoints; no communication is allowed between endpoints in an EPG that is operating with isolation enforced. Isolation enforced EPGs reduce the number of EPG encapsulations required when many clients access a common service but are not allowed to communicate with each other.  An EPG is isolation enforced for all Cisco Application Centric Infrastructure (ACI) network domains or none. While the Cisco ACI fabric implements isolation directly to connected endpoints, switches connected to the fabric are made aware of isolation rules according to a primary VLAN (PVLAN) tag.",
                     "enum": [
                         "enforced",
                         "unenforced"
                     ],
-                    "title": "intra_epg_isolation - "
+                    "title": "intra_epg_isolation - pcEnfPref"
                 },
                 "monitoring_policy": {
                     "$ref": "#/definitions/Tenants:SharedSettings/properties/monitoring_policy"
@@ -8672,6 +8892,17 @@
                     ],
                     "title": "flood_on_encapsulation - floodOnEncap"
                 },
+                "intra_ext_epg_isolation": {
+                    "type": "string",
+                    "apicApi": "pcEnfPref",
+                    "default": false,
+                    "description": "Intra-Ext-EPG endpoint isolation policies provide full isolation for virtual or physical endpoints; no communication is allowed between endpoints in an EPG that is operating with isolation enforced. Isolation enforced EPGs reduce the number of EPG encapsulations required when many clients access a common service but are not allowed to communicate with each other.  An EPG is isolation enforced for all Cisco Application Centric Infrastructure (ACI) network domains or none. While the Cisco ACI fabric implements isolation directly to connected endpoints, switches connected to the fabric are made aware of isolation rules according to a primary VLAN (PVLAN) tag.",
+                    "enum": [
+                        "enforced",
+                        "unenforced"
+                    ],
+                    "title": "intra_ext_epg_isolation - pcEnfPref"
+                },
                 "label_match_criteria": {
                     "$ref": "#/definitions/Tenants:SharedSettings/properties/label_match_criteria"
                 },
@@ -8791,21 +9022,21 @@
                     "type": "boolean",
                     "apicApi": "export-rtctrl",
                     "default": false,
-                    "description": "Defualt is `false`.  Exports all routes of a subnet (0/0 subnets).",
+                    "description": "Default is `false`.  Exports all routes of a subnet (0/0 subnets).",
                     "title": "aggregate_export - export-rtctrl"
                 },
                 "aggregate_import": {
                     "type": "boolean",
                     "apicApi": "import-rtctrl",
                     "default": false,
-                    "description": "Defualt is `false`.  Imports all routes of a subnet (0/0 subnets).",
+                    "description": "Default is `false`.  Imports all routes of a subnet (0/0 subnets).",
                     "title": "aggregate_import - import-rtctrl"
                 },
                 "aggregate_shared_routes": {
                     "type": "boolean",
                     "apicApi": "shared-rtctrl",
                     "default": false,
-                    "description": "Defualt is `false`.  When a route is learned in one VRF that needs to be leaked into another VRF, the routes can be leaked by matching the subnet exactly, or can be leaked aggregated according to a subnet mask.",
+                    "description": "Default is `false`.  When a route is learned in one VRF that needs to be leaked into another VRF, the routes can be leaked by matching the subnet exactly, or can be leaked aggregated according to a subnet mask.",
                     "title": "aggregate_shared_routes - shared-rtctrl"
                 }
             },
@@ -8823,14 +9054,14 @@
                     "type": "boolean",
                     "apicApi": "import-security",
                     "default": true,
-                    "description": "Defualt is `true`.  A classifier for the external EPG, similar to an Access Control List (ACL). The rules and contracts in the external EPG apply at the VRF level to networks matching this subnet.",
+                    "description": "Default is `true`.  A classifier for the external EPG, similar to an Access Control List (ACL). The rules and contracts in the external EPG apply at the VRF level to networks matching this subnet.",
                     "title": "external_subnets_for_external_epg - import-security"
                 },
                 "shared_security_import_subnet": {
                     "type": "boolean",
                     "apicApi": "shared-security",
                     "default": false,
-                    "description": "Defualt is `false`.  Configures the classifier for the subnets in the VRF where the routes are leaked.",
+                    "description": "Default is `false`.  Configures the classifier for the subnets in the VRF where the routes are leaked.",
                     "title": "shared_security_import_subnet - shared-security"
                 }
             },
@@ -8848,21 +9079,21 @@
                     "type": "boolean",
                     "apicApi": "export-rtctrl",
                     "default": false,
-                    "description": "Defualt is `false`.  Controls which external networks are advertised out of the fabric using route-maps and IP prefix lists. An IP prefix list is created on the border leaf switch for each subnet that is defined. The export control policy is enabled by default and is supported for BGP, EIGRP, and OSPF.",
+                    "description": "Default is `false`.  Controls which external networks are advertised out of the fabric using route-maps and IP prefix lists. An IP prefix list is created on the border leaf switch for each subnet that is defined. The export control policy is enabled by default and is supported for BGP, EIGRP, and OSPF.",
                     "title": "export_route_control_subnet - export-rtctrl"
                 },
                 "import_route_control_subnet": {
                     "type": "boolean",
                     "apicApi": "import-rtctrl",
                     "default": false,
-                    "description": "Defualt is `false`.  Controls the subnets allowed into the fabric, and can include set and match rules to filter routes. Supported for BGP and OSPF, but not for EIGRP; if the user enables the import control policy for an unsupported protocol, it will be automatically ignored. The import control policy is not enabled by default, but you can enable it by navigating to the configured L3Out. Click the Policy/Main tabs to display the Properties window for the configured L3Out, then check the box next to Route Control Enforcement.",
+                    "description": "Default is `false`.  Controls the subnets allowed into the fabric, and can include set and match rules to filter routes. Supported for BGP and OSPF, but not for EIGRP; if the user enables the import control policy for an unsupported protocol, it will be automatically ignored. The import control policy is not enabled by default, but you can enable it by navigating to the configured L3Out. Click the Policy/Main tabs to display the Properties window for the configured L3Out, then check the box next to Route Control Enforcement.",
                     "title": "import_route_control_subnet - import-rtctrl"
                 },
                 "shared_route_control_subnet": {
                     "type": "boolean",
                     "apicApi": "shared-rtctrl",
                     "default": false,
-                    "description": "Defualt is `false`.  Controls which external prefixes are advertised to other VRFs, which have a contract interface for shared L3Out services.",
+                    "description": "Default is `false`.  Controls which external prefixes are advertised to other VRFs, which have a contract interface for shared L3Out services.",
                     "title": "shared_route_control_subnet"
                 }
             },
@@ -8896,7 +9127,7 @@
                 "logical_interface_profiles": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Logical Interface Profiles to add to the Logical Node Profile.\nRequired Attributes:\n  * interface_or_policy_group\n  * interface_type\n  * name\n  * nodes\n\nOptional Attributes:\n  * arp_policy\n  * auto_state\n  * bgp_peers\n  * color_tag\n  * custom_qos_policy\n  * data_plane_policing_egress\n  * data_plane_policing_ingress\n  * description\n  * encap_scope\n  * encap_vlan\n  * hsrp_interface_profiles\n  * ipv6_dad\n  * link_local_address\n  * mac_address\n  * mode\n  * mtu\n  * nd_policy\n  * netflow_monitor_policies\n  * ospf_interface_profile\n  * primary_preferred_address\n  * qos_class\n  * secondary_addresses\n  * svi_addresses",
+                    "description": "List of Logical Interface Profiles to add to the Logical Node Profile.\nRequired Attributes:\n  * interface_or_policy_group\n  * interface_type\n  * name\n  * nodes\n\nOptional Attributes:\n  * arp_policy\n  * auto_state\n  * bgp_peers\n  * color_tag\n  * custom_qos_policy\n  * data_plane_policing_egress\n  * data_plane_policing_ingress\n  * description\n  * encap_scope\n  * encap_vlan\n  * hsrp_interface_profiles\n  * ipv6_dad\n  * link_local_address\n  * mac_address\n  * mode\n  * mtu\n  * nd_policy\n  * netflow_monitor_policies\n  * ospf_interface_profile\n  * primary_preferred_address\n  * qos_class\n  * secondary_addresses\n  * svi_addresses\n  * target_dscp",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:L3Outs:LogicalNodeProfiles:LogicalInterfaceProfiles"
                     },
@@ -9196,6 +9427,9 @@
                 },
                 "svi_addresses": {
                     "$ref": "#/definitions/Tenants:Networking:L3Outs:LogicalNodeProfiles:LogicalInterfaceProfiles:SviAddresses"
+                },
+                "target_dscp": {
+                    "$ref": "#/definitions/Tenants:SharedSettings/properties/target_dscp"
                 }
             },
             "required": [
@@ -9558,7 +9792,7 @@
                     "type": "integer",
                     "apicApi": "groupId",
                     "default": 0,
-                    "description": "Defualt is `0`.  Group id for L3out HSRP interface group object.  Range is `0-4095`.",
+                    "description": "Default is `0`.  Group id for L3out HSRP interface group object.  Range is `0-4095`.",
                     "minimum": 0,
                     "maximum": 4095,
                     "title": "group_id - groupId"
@@ -9849,13 +10083,7 @@
                     "title": "fallback_preference - pref"
                 },
                 "next_hop_addresses": {
-                    "type": "array",
-                    "additionalProperties": false,
-                    "description": "List of Next Hop Addresses to assign to the Static Route Prefixes.\nRequired Attributes:\n  * next_hop_ips\n\nOptional Attributes:\n  * alias\n  * description\n  * preference\n  * next_hop_type\n  * track_list\n  * track_member",
-                    "items": {
-                        "$ref": "#/definitions/Tenants:Networking:L3Outs:LogicalNodeProfiles:StaticRoutes:NextHopAddresses"
-                    },
-                    "title": "next_hop_addresses - ipNexthopP"
+                    "$ref": "#/definitions/Tenants:Networking:L3Outs:LogicalNodeProfiles:StaticRoutes:NextHopAddresses"
                 },
                 "prefixes": {
                     "type": "array",
@@ -9867,7 +10095,7 @@
                         "description": "IPv4/IPv6 Subnet to add a Static Route for.",
                         "minLength": 8,
                         "maxLength": 43,
-                        "pattern": "^((([1-9]|[1-9][0-9]{1}|1[0-9]{2}|2[0-1][0-9]|22[0-3])\\.)(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\\.){2}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])/(\\d|[1-2]\\d|3[0-2])$|^(([a-fA-F]|[a-fA-F][a-fA-F0-9\\-]*[a-fA-F0-9])\\.)*([A-Fa-f]|[A-Fa-f][A-Fa-f0-9\\-]*[A-Fa-f0-9])$|^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::)))))/(\\d|\\d\\d|1[0-1]\\d|12[0-8])$",
+                        "pattern": "^::/0$|(^((([0-9]|[1-9][0-9]{1}|1[0-9]{2}|2[0-1][0-9]|22[0-3])\\.)(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\\.){2}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])/(\\d|[1-2]\\d|3[0-2])$)|(^(([a-fA-F]|[a-fA-F][a-fA-F0-9\\-]*[a-fA-F0-9])\\.)*([A-Fa-f]|[A-Fa-f][A-Fa-f0-9\\-]*[A-Fa-f0-9])$|^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::)))))/(\\d|\\d\\d|1[0-1]\\d|12[0-8])$)",
                         "title": "prefix - ip"
                     },
                     "title": "prefixes"
@@ -9875,7 +10103,7 @@
                 "route_control": {
                     "$ref": "#/definitions/Tenants:Networking:L3Outs:LogicalNodeProfiles:StaticRoutes:RouteControl"
                 },
-                "track_policy": {
+                "track_list_policy": {
                     "type": "string",
                     "apicApi": "tDn",
                     "class": "ipRsRouteTrack",
@@ -9885,8 +10113,8 @@
                     "minLength": 1,
                     "maxLength": 64,
                     "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "tDn": "uni/tn-{tenant}/tracklist-{track_policy}",
-                    "title": "track_policy - ipRsRouteTrack"
+                    "tDn": "uni/tn-{tenant}/tracklist-{track_list_policy}",
+                    "title": "track_list_policy - ipRsRouteTrack"
                 }
             },
             "required": [
@@ -9899,7 +10127,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "ipNexthopP",
-            "description": "",
+            "description": "Next Hop Addresses to assign to the Static Route Prefixes.\nRequired Attributes:\n  * next_hop_ips\n\nOptional Attributes:\n  * alias\n  * description\n  * next_hop_type\n  * track_list\n  * track_member",
             "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{name}/rsnodeL3OutAtt-[topology/pod-{pod_id}/node-{node_id}]/rt-[{prefix}]/nh-[{next_hop_ip}]",
             "properties": {
                 "alias": {
@@ -9908,28 +10136,13 @@
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
                 },
-                "preference": {
-                    "type": "integer",
-                    "apicApi": "pref",
-                    "default": 1,
-                    "description": "Default is `1`.  Route preference, the administrative distance assigned to this route.  Range is `1-255`.",
-                    "minimum": 1,
-                    "maximum": 255,
-                    "title": "preference - pref"
-                },
                 "next_hop_ips": {
                     "type": "array",
-                    "description": "List of IPv4/IPv6 Next Hop Address(s) for the Static Route Prefix(s).",
+                    "description": "An array of Next Hop IP Addresses.\nRequired Attribute:\n  * next_hop_ip\n\nOptional Attribute:\n  * preference",
                     "items": {
-                        "type": "string",
-                        "apicApi": "nhAddr",
-                        "default": "198.18.1.1",
-                        "description": "IPv4/IPv6 Next Hop Address for the Static Route Prefix(s).",
-                        "minLength": 8,
-                        "maxLength": 43,
-                        "pattern": "^((([1-9]|[1-9][0-9]{1}|1[0-9]{2}|2[0-1][0-9]|22[0-3])\\.)(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\\.){2}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-fA-F]|[a-fA-F][a-fA-F0-9\\-]*[a-fA-F0-9])\\.)*([A-Fa-f]|[A-Fa-f][A-Fa-f0-9\\-]*[A-Fa-f0-9])$|^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::)))))$",
-                        "title": "next_hop_ip - nhAddr"
-                    }
+                        "$ref": "#/definitions/Tenants:Networking:L3Outs:LogicalNodeProfiles:StaticRoutes:NextHopAddresses:NextHopIps"
+                    },
+                    "title": "next_hop_ips"
                 },
                 "next_hop_type": {
                     "type": "string",
@@ -9942,7 +10155,7 @@
                     ],
                     "title": "next_hop_type - type"
                 },
-                "track_policy": {
+                "track_list_policy": {
                     "type": "string",
                     "apicApi": "tDn",
                     "class": "ipRsNextHopRouteTrack",
@@ -9952,8 +10165,8 @@
                     "minLength": 1,
                     "maxLength": 64,
                     "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "tDn": "uni/tn-{tenant}/tracklist-{track_policy}",
-                    "title": "track_policy - ipRsNextHopRouteTrack"
+                    "tDn": "uni/tn-{tenant}/tracklist-{track_list_policy}",
+                    "title": "track_list_policy - ipRsNextHopRouteTrack"
                 },
                 "track_member": {
                     "type": "boolean",
@@ -9966,7 +10179,39 @@
             "required": [
                 "next_hop_ips"
             ],
-            "title": "NextHopAddresses"
+            "title": "next_hop_addresses - ipNexthopP"
+        },
+        "Tenants:Networking:L3Outs:LogicalNodeProfiles:StaticRoutes:NextHopAddresses:NextHopIps": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "ipNexthopP",
+            "description": "Next Hop Addresses to assign to the Static Route Prefixes.\nRequired Attributes:\n  * next_hop_ips\n\nOptional Attributes:\n  * alias\n  * description\n  * preference\n  * next_hop_type\n  * track_list\n  * track_member",
+            "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{name}/rsnodeL3OutAtt-[topology/pod-{pod_id}/node-{node_id}]/rt-[{prefix}]/nh-[{next_hop_ip}]",
+            "properties": {
+                "preference": {
+                    "type": "integer",
+                    "apicApi": "pref",
+                    "default": 0,
+                    "description": "Default is `0` or `undefined`.  Route preference, the administrative distance assigned to this route.  Range is `1-255`.",
+                    "minimum": 0,
+                    "maximum": 255,
+                    "title": "preference - pref"
+                },
+                "next_hop_ip": {
+                    "type": "string",
+                    "apicApi": "nhAddr",
+                    "default": "198.18.1.1",
+                    "description": "IPv4/IPv6 Next Hop Address for the Static Route Prefix(s).",
+                    "minLength": 8,
+                    "maxLength": 43,
+                    "pattern": "^((([1-9]|[1-9][0-9]{1}|1[0-9]{2}|2[0-1][0-9]|22[0-3])\\.)(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\\.){2}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-fA-F]|[a-fA-F][a-fA-F0-9\\-]*[a-fA-F0-9])\\.)*([A-Fa-f]|[A-Fa-f][A-Fa-f0-9\\-]*[A-Fa-f0-9])$|^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::)))))$",
+                    "title": "next_hop_ip - nhAddr"
+                }
+            },
+            "required": [
+                "next_hop_ip"
+            ],
+            "title": "next_hop_addresses - ipNexthopP"
         },
         "Tenants:Networking:L3Outs:LogicalNodeProfiles:StaticRoutes:RouteControl": {
             "type": "object",

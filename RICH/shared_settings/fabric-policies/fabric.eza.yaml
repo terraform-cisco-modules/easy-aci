@@ -33,9 +33,9 @@ fabric:
         - management_epg: ooband
           name: default
           ntp_servers:
-            - hostname: 10.101.128.15
+            - hostname: 10.87.0.1
               preferred: true
-            - hostname: 10.101.128.16
+            - hostname: 10.87.0.2
               preferred: false
           time_zone: America/Detroit
       snmp:

@@ -3,8 +3,8 @@ switch:
   switch_profiles:
     - node_id: 101
       inband_addressing:
-        ipv4_address: 10.92.64.101/24
-        ipv4_gateway: 10.92.64.254
+        ipv4_address:  198.18.54.101/24
+        ipv4_gateway:  198.18.54.254
         management_epg: inband
       interfaces:
         - interface: 1/1

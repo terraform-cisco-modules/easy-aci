@@ -1,0 +1,91 @@
+---
+#=====================================
+#   Tenants -> common - Variables
+#=====================================
+tenants:
+  - annotations:
+      - key: key_name
+        value: key_value
+    create: false
+    name: common
+    networking:
+      l3outs:
+      - description: Asgard Production L3Out
+        enable_bgp: true
+        external_epgs:
+        - description: Asgard Prod
+          name: prod
+          preferred_group_member: true
+          subnets:
+          - external_epg_classification:
+              external_subnets_for_external_epg: true
+            subnets:
+            - 0.0.0.0/1
+            - 128.0.0.0/1
+        l3_domain: l3Out
+        logical_node_profiles:
+        - description: Asgard Prod LNP
+          logical_interface_profiles:
+          - bgp_peers:
+              - bgp_controls:
+                  send_community: true
+                  send_extended_community: true
+                peer_addresses:
+                  - 10.92.3.3
+                  - 10.92.3.4
+                peer_asn: 64701
+                peer_controls:
+                  bidirectional_forwarding_detection: true
+            description: 142b-core01-02-l3out-vl103
+            encap_vlan: 13
+            interface_or_policy_group: l3out
+            interface_type: ext-svi
+            mode: trunk
+            mtu: inherit
+            name: Vlan13
+            nodes:
+             - 201
+             - 202
+            svi_addresses:
+              primary_preferred_addresses:
+                - 10.92.3.2/29
+                - 10.92.3.3/29
+              secondary_addresses:
+                - 10.92.3.1/29
+                - 10.92.3.1/29
+          name: asgard-leaf201-202
+          nodes:
+          - node_id: 201
+            router_id: 10.92.3.201
+            use_router_id_as_loopback: true
+          - node_id: 202
+            router_id: 10.92.3.202
+            use_router_id_as_loopback: true
+          pod_id: 1
+        name: asgard-prod
+        pim: true
+        vrf: prod
+      vrfs:
+      - description: Production VRF
+        layer3_multicast: true
+        name: prod
+        preferred_group: true
+    policies:
+      protocol:
+        bgp:
+          bgp_peer_prefix:
+          - description: Default Prefix Policy
+            name: default
+        ospf:
+          ospf_interface:
+          - description: Point-to-Point Policy
+            interface_controls:
+              advertise_subnet: true
+              bfd: true
+              mtu_ignore: true
+              passive_participation: false
+            name: point-to-point
+            network_type: p2p
+            priority: 1
+            retransmit_interval: 5
+            transmit_delay: 1

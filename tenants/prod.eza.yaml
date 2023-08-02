@@ -1,12 +1,6 @@
 ---
 tenants:
   - name: prod
-    apics_inband_mgmt_addresses:
-      ipv4_address: "198.18.1.10/24"
-      ipv4_gateway: "198.18.1.1"
-      management_epg: default
-      node_id: 1
-      pod_id: 1
     application_profiles:
       - name: nets
         description: "Default Network Centric Application Profile"

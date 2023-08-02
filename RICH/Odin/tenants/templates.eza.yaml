@@ -113,14 +113,10 @@ templates:
         intersite_l2_stretch: true
         monitoring_policy: default
         optimize_wan_bandwidth: true
-      #dhcp_relay_labels:
-      #  - dhcp_option_policy: default
-      #    dhcp_option_policy_version: 3
-      #    dhcp_servers: 
-      #      - 10.101.128.15
-      #      - 10.101.128.16
-      #    scope: infra
-      #    version: 0
+      dhcp_relay_labels:
+        - dhcp_servers: 
+            - 10.101.128.15
+            - 10.101.128.16
       general:
         advertise_host_routes: false
         arp_flooding: false
@@ -167,14 +163,10 @@ templates:
         intersite_l2_stretch: true
         monitoring_policy: default
         optimize_wan_bandwidth: true
-      #dhcp_relay_labels:
-      #  - dhcp_option_policy: default
-      #    dhcp_option_policy_version: 3
-      #    dhcp_servers: 
-      #      - 10.101.128.15
-      #      - 10.101.128.16
-      #    scope: infra
-      #    version: 0
+      dhcp_relay_labels:
+        - dhcp_servers:
+            - 10.101.128.15
+            - 10.101.128.16
       general:
         advertise_host_routes: false
         arp_flooding: false

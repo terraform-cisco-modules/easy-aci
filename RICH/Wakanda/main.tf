@@ -21,9 +21,9 @@ module "access" {
   depends_on = [
     module.system_settings
   ]
-  #source = "../../../terraform-aci-access"
-  source  = "terraform-cisco-modules/access/aci"
-  version = "2.2.5"
+  source = "../../../terraform-aci-access"
+  #source  = "terraform-cisco-modules/access/aci"
+  #version = "2.2.5"
 
   for_each = { for v in ["default"] : v => v if length(
     lookup(local.model, "access", {})) > 0 || length(lookup(local.model, "virtual_networking", {})) > 0
@@ -45,9 +45,9 @@ module "admin" {
   depends_on = [
     module.built_in_tenants
   ]
-  #source = "../../../terraform-aci-admin"
-  source          = "terraform-cisco-modules/admin/aci"
-  version         = "2.1.7"
+  source = "../../../terraform-aci-admin"
+  #source          = "terraform-cisco-modules/admin/aci"
+  #version         = "2.1.7"
   for_each        = { for v in ["default"] : v => v if length(lookup(local.model, "admin", {})) > 0 }
   admin           = lookup(local.model, "admin", {})
   annotations     = var.annotations
@@ -64,9 +64,9 @@ module "built_in_tenants" {
   depends_on = [
     module.access
   ]
-  #source = "../../../terraform-aci-tenants"
-  source  = "terraform-cisco-modules/tenants/aci"
-  version = "2.2.5"
+  source = "../../../terraform-aci-tenants"
+  #source  = "terraform-cisco-modules/tenants/aci"
+  #version = "2.2.5"
 
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) > 0
@@ -106,9 +106,9 @@ module "switch" {
   depends_on = [
     module.built_in_tenants
   ]
-  #source = "../../../terraform-aci-switch"
-  source  = "terraform-cisco-modules/switch/aci"
-  version = "2.2.5"
+  source = "../../../terraform-aci-switch"
+  #source  = "terraform-cisco-modules/switch/aci"
+  #version = "2.2.5"
 
   for_each     = { for v in ["default"] : v => v if length(lookup(local.model, "switch", {})) > 0 }
   annotations  = var.annotations
@@ -133,9 +133,9 @@ module "tenants" {
   depends_on = [
     module.built_in_tenants
   ]
-  #source = "../../../terraform-aci-tenants"
-  source  = "terraform-cisco-modules/tenants/aci"
-  version = "2.2.5"
+  source = "../../../terraform-aci-tenants"
+  #source  = "terraform-cisco-modules/tenants/aci"
+  #version = "2.2.5"
 
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) == 0

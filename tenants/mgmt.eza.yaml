@@ -80,7 +80,6 @@ tenants:
           description: Management Inbound Traffic
           filter_entries:
             - name: icmp
-              acknowledgement: false
               description: 'Allow ICMP'
               ethertype: ip
               ip_protocol: icmp

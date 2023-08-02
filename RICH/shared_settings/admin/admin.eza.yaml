@@ -79,21 +79,33 @@ admin:
   import_export:
     configuration_backups:
     - authentication_type: usePassword
-      description: LNX Backup Servers
-      format: json
-      include_secure_fields: true
+      export_policy:
+        format: json
+        include_secure_fields: true
+        max_snapshot_count: 0
+        name: default
+        snapshot: false
+        start_now: false
       management_epg: ooband
-      max_snapshot_count: 0
-      name: Every24Hours
       protocol: sftp
-      remote_hosts:
-        - lnx2.rich.ciscolabs.com
+      remote_locations:
+        - host: lnx2.rich.ciscolabs.com
       remote_path: /tmp
       remote_port: 22
-      schedule:
-        days: every-day
-        hour: 0
-        minute: 15
-      snapshot: false
-      start_now: false
-      username: tyscott
+      remote_username: tyscott
+      scheduler_name: Every24Hours
+    schedulers:
+      - description: Backup Configuration every 24 Hours
+        name: Every24Hours
+        windows:
+          - delay_between_node_upgrades: 0
+            description: default
+            maximum_concurrent_nodes: 0
+            maximum_running_time: 0
+            processing_break: none
+            processing_size_capacity: 0
+            schedule:
+              days: every-day
+              hour: 0
+              minute: 45
+            window_type: recurring
