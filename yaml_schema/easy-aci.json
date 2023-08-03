@@ -75,6 +75,26 @@
             },
             "title": "abstract_settings - admin_state"
         },
+        "AbstractSettings:AdministrativeState": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "not_applicable",
+            "description": "Abstract/Shared Settings for the Objects or Policies.",
+            "properties": {
+                "administrative_state": {
+                    "type": "string",
+                    "apicApi": "adminSt",
+                    "default": "enabled",
+                    "description": "The administrative state of the object or policy. Allowed values are:\n  * disabled\n  * enabled: (default)",
+                    "enum": [
+                        "disabled",
+                        "enabled"
+                    ],
+                    "title": "administrative_state - adminSt"
+                }
+            },
+            "title": "abstract_settings - administrative_state"
+        },
         "AbstractSettings:PolicyName": {
             "type": "object",
             "additionalProperties": false,
@@ -4733,15 +4753,7 @@
             "description": "BLAH",
             "properties": {
                 "administrative_state": {
-                    "type": "string",
-                    "apicApi": "monitorServer",
-                    "default": "enabled",
-                    "description": "The NTP protocol can be enabled or disabled. If enabled, the system uses the NTP protocol. The NTP protocol can be either of the following:\n  * enabled: (default) - NTP protocol is enabled.\n  * disabled - NTP protocol is disabled.",
-                    "enum": [
-                        "disabled",
-                        "enabled"
-                    ],
-                    "title": "administrative_state - "
+                    "$ref": "#/definitions/AbstractSettings:AdministrativeState/properties/administrative_state"
                 },
                 "authentication_keys": {
                     "type": "array",
@@ -6400,15 +6412,7 @@
                     "title": "action"
                 },
                 "administrative_state": {
-                    "type": "string",
-                    "apicApi": "monitorServer",
-                    "default": "enabled",
-                    "description": "The administrative state of the endpoint loop protection policy, options are:\n  * disabled\n  * enabled",
-                    "enum": [
-                        "disabled",
-                        "enabled"
-                    ],
-                    "title": "administrative_state - "
+                    "$ref": "#/definitions/AbstractSettings:AdministrativeState/properties/administrative_state"
                 },
                 "loop_detection_interval": {
                     "type": "integer",
@@ -6437,15 +6441,7 @@
             "description": "Attribute is:\n  * administrative_state",
             "properties": {
                 "administrative_state": {
-                    "type": "string",
-                    "apicApi": "monitorServer",
-                    "default": "enabled",
-                    "description": "Enables and disables the IP aging policy, options are:\n  * disabled\n  * enabled",
-                    "enum": [
-                        "disabled",
-                        "enabled"
-                    ],
-                    "title": "administrative_state - "
+                    "$ref": "#/definitions/AbstractSettings:AdministrativeState/properties/administrative_state"
                 }
             },
             "title": "ip_aging - Endpoint Controls > IP Aging."
@@ -6456,15 +6452,7 @@
             "description": "Attributes are:\n  * administrative_state\n  * hold_interval\n  * rouge_interval\n  * rouge_multiplier",
             "properties": {
                 "administrative_state": {
-                    "type": "string",
-                    "apicApi": "monitorServer",
-                    "default": "enabled",
-                    "description": "The administrative state of the Rogue EP Control policy, options are:\n  * disabled\n  * enabled",
-                    "enum": [
-                        "disabled",
-                        "enabled"
-                    ],
-                    "title": "administrative_state - "
+                    "$ref": "#/definitions/AbstractSettings:AdministrativeState/properties/administrative_state"
                 },
                 "hold_interval": {
                     "type": "integer",

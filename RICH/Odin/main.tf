@@ -14,7 +14,6 @@ module "built_in_tenants" {
   source = "../../../terraform-aci-tenants"
   #source  = "terraform-cisco-modules/tenants/aci"
   #version = "2.2.5"
-
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) > 0
   }
@@ -36,7 +35,6 @@ module "tenants" {
   source = "../../../terraform-aci-tenants"
   #source  = "terraform-cisco-modules/tenants/aci"
   #version = "2.2.5"
-
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) == 0
   }
