@@ -80,9 +80,9 @@ module "fabric" {
   depends_on = [
     module.built_in_tenants
   ]
-  #source = "../../../terraform-aci-fabric"
-  source          = "terraform-cisco-modules/fabric/aci"
-  version         = "2.1.7"
+  source = "../../../terraform-aci-fabric"
+  #source          = "terraform-cisco-modules/fabric/aci"
+  #version         = "2.1.7"
   for_each        = { for v in ["default"] : v => v if length(lookup(local.model, "fabric", {})) > 0 }
   fabric          = lookup(local.model, "fabric", {})
   management_epgs = var.management_epgs
@@ -109,9 +109,9 @@ module "switch" {
 }
 
 module "system_settings" {
-  #source = "../../../terraform-aci-system-settings"
-  source  = "terraform-cisco-modules/system-settings/aci"
-  version = "2.2.5"
+  source = "../../../terraform-aci-system-settings"
+  #source  = "terraform-cisco-modules/system-settings/aci"
+  #version = "2.2.5"
 
   for_each        = { for v in ["default"] : v => v if length(lookup(local.model, "system_settings", {})) > 0 }
   annotations     = var.annotations
