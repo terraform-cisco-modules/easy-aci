@@ -5480,7 +5480,7 @@
                     "additionalProperties": false,
                     "description": "List of Client Groups to assign to the SNMP Policy.\nclients - Required Attributes are:\n  * address\n\nOptional Attributes are:\n  * name\nIf Name is undefined Address will be assigned as the name.",
                     "items": {
-                        "$ref": "Fabric:Policies:Pod:SNMP:SnmpClientGroups:Clients"
+                        "$ref": "#/definitions/Fabric:Policies:Pod:SNMP:SnmpClientGroups:Clients"
                     },
                     "title": "clients - SNMP > Client Group > Clients"
                 },
