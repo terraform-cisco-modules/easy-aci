@@ -8371,7 +8371,7 @@
         "Tenants:Networking": {
             "type": "object",
             "additionalProperties": false,
-            "description": "\nGUI Location: Tenants > Networking\n\nTenant Networking Properties.\nAttributes are:\n  * bridge_domains\n  * l3outs\n  * vrfs",
+            "description": "GUI Location: Tenants > Networking\n\nTenant Networking Properties.\nAttributes are:\n  * bridge_domains\n  * l3outs\n  * vrfs",
             "properties": {
                 "bridge_domains": {
                     "type": "array",
@@ -9109,7 +9109,7 @@
                 "logical_node_profiles": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Logical Node Profiles.\nRequired:\n  * logical_interface_profiles\n  * name\n  * nodes\nOptional:\n  * alias\n  * annotations\n  * color_tag\n  * description\n  * static_routes\n  * pod_id\n  * target_dscp",
+                    "description": "List of Logical Node Profiles.\nRequired:\n  * logical_interface_profiles\n  * name\n  * nodes\nOptional:\n  * alias\n  * annotations\n  * color_tag\n  * description\n  * static_routes\n  * pod_id\n  * target_dscp\n=================================================\nAPI Information:\n - Class: `l3extLNodeP`\n - Distinguished Name: `uni/tn-{tenant}/out-{l3out}/lnodep-{node_profile}`\nGUI Location:\ntenants > {tenant} > Networking > L3Outs > {l3out} > Logical Node Profile > {node_profile}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:L3Outs:LogicalNodeProfiles"
                     },
@@ -9223,7 +9223,7 @@
                     "type": "string",
                     "apicApi": "always",
                     "default": "no",
-                    "description": "A property to indicate whether or not to always advertise the default route leak (OSPF specific).  Options are:\n  * no: (default)\n  * yes",
+                    "description": "A property to indicate whether to always advertise the default route leak (OSPF specific).  Options are:\n  * no: (default)\n  * yes",
                     "enum": [
                         "no",
                         "yes"
@@ -9259,15 +9259,15 @@
                     "type": "boolean",
                     "apicApi": "ctx",
                     "default": false,
-                    "description": "Use for Type-7 OSPF Route Leaking.",
-                    "title": "context"
+                    "description": "Default is `false`.  Use for Type-7 OSPF Route Leaking.",
+                    "title": "context - ctx"
                 },
                 "outside": {
                     "type": "boolean",
                     "apicApi": "l3-out",
                     "default": false,
-                    "description": "Use for BGP or Type-5 OSPF Route Leaking.",
-                    "title": "context"
+                    "description": "Default is `false`.  Use for BGP or Type-5 OSPF Route Leaking.",
+                    "title": "outside - l3-out"
                 }
             },
             "title": "scope"
@@ -9287,7 +9287,7 @@
                     "type": "integer",
                     "apicApi": "exceptionTag",
                     "default": 0,
-                    "description": "Contracts between EPGs are enhanced to include exceptions to subjects or contracts. This enables a subset of EPGs to be excluded in contract filtering. For example, a provider EPG can communicate with all consumer EPGs except those that match criteria configured in a Subject Exception in the contract governing their communication.  Assign a Tag Attribute to the EPG.",
+                    "description": "Default is `0`.  Contracts between EPGs are enhanced to include exceptions to subjects or contracts. This enables a subset of EPGs to be excluded in contract filtering. For example, a provider EPG can communicate with all consumer EPGs except those that match criteria configured in a Subject Exception in the contract governing their communication.  Assign a Tag Attribute to the EPG.",
                     "minimum": 0,
                     "maximum": 512,
                     "title": "contract_exception_tag - exceptionTag"
@@ -9295,7 +9295,7 @@
                 "contracts": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Contracts and their attributes to assign to the EPG.\nRequired:\n  * name\nOptional:\n  * contract_type\n  * ndo\n  * qos_class\n  * tenant",
+                    "description": "List of Contracts and their attributes to assign to the EPG.\nRequired:\n  * name\nOptional:\n  * contract_type\n  * ndo\n  * qos_class\n  * tenant\n=================================================\nAPI Information:\n - Consumer Class: `fvRsCons`\n - Interface Class: `vzRsAnyToConsIf`\n - Provider Class: `fvRsProv`\n - Taboo Class: `fvRsProtBy`\n - Consumer Distinguised Name: `uni/tn-{tenant}/out-{l3out}/instP-{external_epg}/rsintraEpg-{contract}`\n - Interface Distinguised Name: `uni/tn-{tenant}/out-{l3out}/instP-{external_epg}/rsconsIf-{contract}`\n - Provider Distinguised Name: `uni/tn-{tenant}/out-{l3out}/instP-{external_epg}/rsprov-{contract}`\n - Taboo Distinguised Name: `uni/tn-{tenant}/out-{l3out}/instP-{external_epg}/rsprotBy-{contract}`\nGUI Location:\n - All Contracts: tenants > {tenant} > Networking > L3Outs > {l3out} > External EPGs > {external_epg}: Contracts",
                     "items": {
                         "$ref": "#/definitions/Tenants:Contracts:ContractApply"
                     },
@@ -9318,8 +9318,8 @@
                 "intra_ext_epg_isolation": {
                     "type": "string",
                     "apicApi": "pcEnfPref",
-                    "default": false,
-                    "description": "Intra-Ext-EPG endpoint isolation policies provide full isolation for virtual or physical endpoints; no communication is allowed between endpoints in an EPG that is operating with isolation enforced. Isolation enforced EPGs reduce the number of EPG encapsulations required when many clients access a common service but are not allowed to communicate with each other.  An EPG is isolation enforced for all Cisco Application Centric Infrastructure (ACI) network domains or none. While the Cisco ACI fabric implements isolation directly to connected endpoints, switches connected to the fabric are made aware of isolation rules according to a primary VLAN (PVLAN) tag.",
+                    "default": "unenforced",
+                    "description": "Intra-Ext-EPG endpoint isolation policies provide full isolation for virtual or physical endpoints; no communication is allowed between endpoints in an EPG that is operating with isolation enforced. Isolation enforced EPGs reduce the number of EPG encapsulations required when many clients access a common service but are not allowed to communicate with each other.  An EPG is isolation enforced for all Cisco Application Centric Infrastructure (ACI) network domains or none. While the Cisco ACI fabric implements isolation directly to connected endpoints, switches connected to the fabric are made aware of isolation rules according to a primary VLAN (PVLAN) tag.\nOptions are:\n  * enforced\n  * unenforced: (default)",
                     "enum": [
                         "enforced",
                         "unenforced"
@@ -9345,7 +9345,7 @@
                 "subnets": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Subnets and their associated settings to Assign to the External EPG.\nRequired:\n  * subnets\nOptional:\n  * aggregate\n  * description\n  * external_epg_classification\n  * route_control\n  * route_control_profiles\n  * route_summarization_policy",
+                    "description": "List of Subnets and their associated settings to Assign to the External EPG.\nRequired:\n  * subnets\nOptional:\n  * aggregate\n  * description\n  * external_epg_classification\n  * route_control\n  * route_control_profiles\n  * route_summarization_policy\n=================================================\nAPI Information:\n - Class: `l3extSubnet`\n - Distinguised Name: `uni/tn-{tenant}/out-{l3out}/instP-{external_epg}/extsubnet-[{subnet}]`\nGUI Location:\n - tenants > {tenant} > Networking > L3Outs > {l3out} > External EPGs > {external_epg}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:L3Outs:ExternalEpgs:Subnets"
                     },
@@ -9404,9 +9404,7 @@
                     "class": "l3extRsSubnetToRtSumm",
                     "default": "",
                     "description": "Available if you set export_route_control_subnet to true.  The Name of the BGP Route Summarization Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/bgprtsum-{route_summarization_policy}",
                     "title": "route_summarization_policy - l3extRsSubnetToRtSumm"
                 },
@@ -9544,7 +9542,7 @@
                 "logical_interface_profiles": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Logical Interface Profiles to add to the Logical Node Profile.\nRequired:\n  * interface_or_policy_group\n  * interface_type\n  * name\n  * nodes\nOptional:\n  * arp_policy\n  * auto_state\n  * bgp_peers\n  * color_tag\n  * custom_qos_policy\n  * data_plane_policing_egress\n  * data_plane_policing_ingress\n  * description\n  * encap_scope\n  * encap_vlan\n  * hsrp_interface_profiles\n  * ipv6_dad\n  * link_local_address\n  * mac_address\n  * mode\n  * mtu\n  * nd_policy\n  * netflow_monitor_policies\n  * ospf_interface_profile\n  * primary_preferred_address\n  * qos_class\n  * secondary_addresses\n  * svi_addresses\n  * target_dscp",
+                    "description": "List of Logical Interface Profiles to add to the Logical Node Profile.\nRequired:\n  * interface_or_policy_group\n  * interface_type\n  * name\n  * nodes\nOptional:\n  * arp_policy\n  * auto_state\n  * bgp_peers\n  * color_tag\n  * custom_qos_policy\n  * data_plane_policing_egress\n  * data_plane_policing_ingress\n  * description\n  * encap_scope\n  * encap_vlan\n  * hsrp_interface_profiles\n  * ipv6_dad\n  * link_local_address\n  * mac_address\n  * mode\n  * mtu\n  * nd_policy\n  * netflow_monitor_policies\n  * ospf_interface_profile\n  * primary_preferred_address\n  * qos_class\n  * secondary_addresses\n  * svi_addresses\n  * target_dscp\n=================================================\nAPI Information:\n - Class: `l3extLIfP`\n - Distinguished Name: `uni/tn-{tenant}/out-{l3out}/lnodep-{name}`\nGUI Location:\n - tenants > {tenant} > Networking > L3Outs > {l3out} > Logical Node Profile > {node_profile} > Logical Interface Profiles {interface_profile}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:L3Outs:LogicalNodeProfiles:LogicalInterfaceProfiles"
                     },
@@ -9565,7 +9563,7 @@
                 "static_routes": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Static routes to assign to the Logical Node Profile.\nRequired:\n  * next_hop_addresses\n  * prefixes\nOptional:\n  * aggregate\n  * alias\n  * description\n  * fallback_preference\n  * route_control\n  * track_list",
+                    "description": "List of Static routes to assign to the Logical Node Profile.\nRequired:\n  * next_hop_addresses\n  * prefixes\nOptional:\n  * aggregate\n  * alias\n  * description\n  * fallback_preference\n  * route_control\n  * track_list\n=================================================\nAPI Information:\n - Class: `ipRouteP`\n - Distinguished Name: `uni/tn-{tenant}/out-{l3out}/lnodep-{node_profile}/rsnodeL3OutAtt-[topology/pod-{pod_id}/node-{node_id}]/rt-[{route}]/`\nGUI Location:\n - tenants > {tenant} > Networking > L3Outs > {l3out} > Logical Node Profile {node_profile} > Logical Interface Profile > {interface_profile} > Nodes > {node_id} > Static Routes",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:L3Outs:LogicalNodeProfiles:StaticRoutes"
                     },
@@ -9601,12 +9599,9 @@
                 "arp_policy": {
                     "type": "string",
                     "apicApi": "tDn",
-                    "default": "default",
-                    "description": "Name of the Arp Interface Policy to Attach to the Logical interface Profile.",
+                    "class": "l3extRsArpIfPol",
                     "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{logical_node_profile}/lifp-{name}/rsArpIfPol",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "rn": "rsArpIfPol",
                     "tDn": "uni/tn-{tenant}/arpifpol-{arp_policy}",
                     "title": "arp_policy - l3extRsArpIfPol"
@@ -9625,7 +9620,7 @@
                 "bgp_peers": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of BGP Peers\nRequired:\n  * peer_addresses\n  * peer_asn\nOptional:\n  * address_type_controls\n  * admin_state\n  * allowed_self_as_count\n  * bgp_controls\n  * bgp_peer_prefix_policy\n  * description\n  * ebgp_multihop_ttl\n  * local_as_number\n  * local_as_number_config\n  * password\n  * peer_controls\n  * peer_level\n  * private_as_control\n  * route_control_profiles\n  * weight_for_routes_from_neighbor",
+                    "description": "List of BGP Peers\nRequired:\n  * peer_addresses\n  * peer_asn\nOptional:\n  * address_type_controls\n  * admin_state\n  * allowed_self_as_count\n  * bgp_controls\n  * bgp_peer_prefix_policy\n  * description\n  * ebgp_multihop_ttl\n  * local_as_number\n  * local_as_number_config\n  * password\n  * peer_controls\n  * peer_level\n  * private_as_control\n  * route_control_profiles\n  * weight_for_routes_from_neighbor\n=================================================\nAPI Information:\n - Class: `bgpPeerP`\n - Distinguished Name: `uni/tn-{tenant}/out-{l3out}/lnodep-{node_profile}/lifp-{Interface_Profile}/rspathL3OutAtt-[topology/pod-{Pod_ID}/{PATH}/pathep-[{Interface_or_PG}]]/peerP-[{Peer_IP}]`\nGUI Location:\n - tenants > {tenant} > Networking > L3Outs > {l3out} > Logical Node Profile {node_profile} > Logical Interface Profile > {Interface_Profile} > OSPF Interface Profile",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:L3Outs:LogicalNodeProfiles:LogicalInterfaceProfiles:BGPPeers"
                     },
@@ -9639,11 +9634,8 @@
                     "apicApi": "tDn",
                     "class": "l3extRsLIfPCustQosPol",
                     "default": "",
-                    "description": "Name of a Custom QoS Policy to assign to the object or policy.",
                     "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{logical_node_profile}/lifp-{name}/rslIfPCustQosPol",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "rn": "rslIfPCustQosPol",
                     "tDn": "uni/tn-{tenant}/qoscustom-{arp_policy}",
                     "title": "custom_qos_policy - l3extRsLIfPCustQosPol"
@@ -9653,11 +9645,8 @@
                     "apicApi": "tDn",
                     "class": "l3extRsEgressQosDppPol",
                     "default": "",
-                    "description": "Name of the Data Plane Policing Egress Policy.",
                     "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{logical_node_profile}/lifp-{name}/rsegressQosDppPol",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "rn": "rsegressQosDppPol",
                     "tDn": "uni/tn-{tenant}/qosdpppol-{arp_policy}",
                     "title": "data_plane_policing_egress - l3extRsEgressQosDppPol"
@@ -9667,11 +9656,8 @@
                     "apicApi": "tDn",
                     "class": "l3extRsIngressQosDppPol",
                     "default": "",
-                    "description": "Name of the Data Plane Policing Ingress Policy.",
                     "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{logical_node_profile}/lifp-{name}/rsingressQosDppPol",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "rn": "rsingressQosDppPol",
                     "tDn": "uni/tn-{tenant}/qosdpppol-{arp_policy}",
                     "title": "data_plane_policing_ingress - l3extRsIngressQosDppPol"
@@ -9785,11 +9771,8 @@
                     "apicApi": "tDn",
                     "class": "l3extRsNdIfPol",
                     "default": "",
-                    "description": "",
                     "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{logical_node_profile}/lifp-{name}/ndIfPol",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "rn": "ndIfPol",
                     "tDn": "uni/tn-{tenant}/ndifpol-{nd_policy}",
                     "title": "nd_policy - l3extRsNdIfPol"
@@ -9887,11 +9870,7 @@
                     "apicApi": "tDn",
                     "class": "bgpRsPeerPfxPol",
                     "default": "",
-                    "description": "The Name of the BGP Peer Prefix Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "tDn": "uni/tn-{tenant}/bgpPfxP-{bgp_peer_prefix_policy}",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "title": "bgp_peer_prefix_policy - bgpRsPeerPfxPol"
                 },
                 "description": {
@@ -9912,7 +9891,7 @@
                     "default": 1,
                     "description": "The local autonomous system number (ASN).",
                     "minimum": 1,
-                    "maximum": 64,
+                    "maximum": 4294967294,
                     "title": "local_as_number - localAsnP:localAsn"
                 },
                 "local_as_number_config": {
@@ -9950,7 +9929,7 @@
                         "default": "198.18.1.20",
                         "description": "BGP Peer IP Address.",
                         "minLength": 7,
-                        "maxLength": 15,
+                        "maxLength": 39,
                         "pattern": "^((([1-9]|[1-9][0-9]{1}|1[0-9]{2}|2[0-1][0-9]|22[0-3])\\.)(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\\.){2}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-fA-F]|[a-fA-F][a-fA-F0-9\\-]*[a-fA-F0-9])\\.)*([A-Fa-f]|[A-Fa-f][A-Fa-f0-9\\-]*[A-Fa-f0-9])$|^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::)))))$",
                         "title": "peer_address"
                     },
@@ -10144,7 +10123,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "hsrpIfP",
-            "description": "HSRP Interface Configuration to Apply to the Logical Interface Profile.\nNote: Not supported with a ext-svi Interface Type.\nRequired:\n  * groups\nOptional:\n  * alias\n  * description\n  * hsrp_interface_policy\n  * version",
+            "description": "HSRP Interface Configuration to Apply to the Logical Interface Profile.\nNote: Not supported with a ext-svi Interface Type.\nRequired:\n  * groups\nOptional:\n  * alias\n  * description\n  * hsrp_interface_policy\n  * version\n=================================================\nAPI Information:\n - Class: `hsrpIfP`\n - Distinguished Name:  uni/tn-{tenant}/out-{l3out}/lnodep-{logical_node_profile}/lifp-{logical_interface_profile}/hsrpIfP\nGUI Location:\nTenants > {tenant} > L3Outs > {l3out} > Logical Node Profiles > {logical_node_profile} > Logical Interface Profiles >\n{logical_interface_profile} > Create HSRP Interface Profile",
             "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{logical_node_profile}/lifp-{name}/hsrpIfP",
             "properties": {
                 "alias": {
@@ -10156,7 +10135,7 @@
                 "groups": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of HSRP group objects.\nRequired:\n  * name\n  * ip_address\nOptional:\n  * alias\n  * description\n  * group_id\n  * group_name\n  * group_type\n  * hsrp_group_policy\n  * ip_obtain_mode\n  * mac_address\n  * secondary_virtual_ips",
+                    "description": "List of HSRP group objects.\nRequired:\n  * name\n  * ip_address\nOptional:\n  * alias\n  * description\n  * group_id\n  * group_name\n  * group_type\n  * hsrp_group_policy\n  * ip_obtain_mode\n  * mac_address\n  * secondary_virtual_ips\n=================================================\nAPI Information:\n - Class: `hsrpGroupP`\n - Distinguished Name: uni/tn-{tenant}/out-{l3out}/lnodep-{logical_node_profile}/lifp-{logical_interface_profile}/hsrpIfP/hsrpGroupP-{name}\nGUI Location:\nTenants > {tenant} > L3Outs > {l3out} > Logical Node Profiles > {logical_node_profile} > Logical Interface Profiles > {logical_interface_profile} > Create HSRP Interface Profile",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:L3Outs:LogicalNodeProfiles:LogicalInterfaceProfiles:HsrpInterfaceProfiles:Groups"
                     },
@@ -10166,12 +10145,7 @@
                     "type": "string",
                     "apicApi": "tDn",
                     "class": "hsrpRsIfPol",
-                    "default": "default",
-                    "description": "Name of the HSRP Interface Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "tDn": "uni/tn-{tenant}/hsrpIfPol-{hsrp_interface_policy}",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "title": "hsrp_interface_policy - hsrpRsIfPol"
                 },
                 "version": {
@@ -10241,9 +10215,7 @@
                     "class": "hsrpRsGroupPol",
                     "default": "default",
                     "description": "Name of the HSRP Group Policy",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/hsrpGroupPol-{hsrp_group_policy}",
                     "title": "hsrp_group_policy - hsrpRsGroupPol"
                 },
@@ -10252,8 +10224,8 @@
                     "apicApi": "ip",
                     "default": "",
                     "description": "HSRP primary Virtual IP address (VIP)",
-                    "minLength": 7,
-                    "maxLength": 15,
+                    "minLength": 6,
+                    "maxLength": 39,
                     "pattern": "^((([1-9]|[1-9][0-9]{1}|1[0-9]{2}|2[0-1][0-9]|22[0-3])\\.)(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\\.){2}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-fA-F]|[a-fA-F][a-fA-F0-9\\-]*[a-fA-F0-9])\\.)*([A-Fa-f]|[A-Fa-f][A-Fa-f0-9\\-]*[A-Fa-f0-9])$|^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::)))))$",
                     "title": "ip_address - ip"
                 },
@@ -10286,7 +10258,7 @@
                     "type": "array",
                     "apicApi": "dn",
                     "class": "hsrpSecVip",
-                    "description": "List of secondary virtual IP's to assign to the HSRP group.",
+                    "description": "List of secondary virtual IP's to assign to the HSRP group.\n=================================================\nAPI Information:\n - Class: `hsrpSecVip`\n - Distinguished Name: uni/tn-{tenant}/out-{l3out}/lnodep-{logical_node_profile}/lifp-{logical_interface_profile}/hsrpIfP/hsrpGroupP-{name}/hsrpSecVip-[{secondar_ip}]\nGUI Location:\nTenants > {tenant} > L3Outs > {l3out} > Logical Node Profiles > {logical_node_profile} > Logical Interface Profiles >\n{logical_interface_profile} > Create HSRP Interface Profile",
                     "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{logical_node_profile}/lifp-{logical_interface_profile}/hsrpIfP/hsrpGroupP-{name}/hsrpSecVip-[{secondary_virtual_ip}]",
                     "items": {
                         "type": "string",
@@ -10321,7 +10293,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "ospfIfP",
-            "description": "The OSPF interface profile enables OSPF on the interface. Optionally, the OSPF interface profile can have a relation to an OSPF interface policy for more granular control over interface proprieties.\nRequired:\n  * ospf_interface_policy\nOptional:\n  * authentication_type\n  * description\n  * ospf_key",
+            "description": "The OSPF interface profile enables OSPF on the interface. Optionally, the OSPF interface profile can have a relation to an OSPF interface policy for more granular control over interface proprieties.\nRequired:\n  * ospf_interface_policy\nOptional:\n  * authentication_type\n  * description\n  * ospf_key\n=================================================\nAPI Information:\n - Class: `ospfIfP`\n - Distinguished Name: `uni/tn-{tenant}/out-{l3out}/nodep-{node_profile}/lifp-{interface_profile}/ospfIfP`\nGUI Location:\n - tenants > {tenant} > Networking > L3Outs > {l3out} > Logical Node Profile {node_profile} > Logical Interface Profile > {interface_profile} > OSPF Interface Profile",
             "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{logical_node_profile}/lifp-{name}/ospfIfP",
             "properties": {
                 "authentication_type": {
@@ -10527,9 +10499,7 @@
                     "default": "",
                     "description": "Name of the Track List Policy to Assign to the Static Route Prefixes.",
                     "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{name}/rsnodeL3OutAtt-[topology/pod-{pod_id}/node-{node_id}]/rt-[{prefix}]/rsRouteTrack",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/tracklist-{track_list_policy}",
                     "title": "track_list_policy - ipRsRouteTrack"
                 }
@@ -10544,7 +10514,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "ipNexthopP",
-            "description": "Next Hop Addresses to assign to the Static Route Prefixes.\nRequired:\n  * next_hop_ips\nOptional:\n  * alias\n  * description\n  * next_hop_type\n  * track_list\n  * track_member",
+            "description": "Next Hop Addresses to assign to the Static Route Prefixes.\nRequired:\n  * next_hop_ips\nOptional:\n  * alias\n  * description\n  * next_hop_type\n  * track_list\n  * track_member\n=================================================\nAPI Information:\n - Class: `ipNexthopP`\n - Distinguished Name: `uni/tn-{tenant}/out-{l3out}/lnodep-{node_profile}/rsnodeL3OutAtt-[topology/pod-{pod_id}/node-{node_id}]/rt-[{route}]/nh-[{next_hop_ip}]`\nGUI Location:\n - tenants > {tenant} > Networking > L3Outs > {l3out} > Logical Node Profile {node_profile} > Logical Interface Profile > {interface_profile} > Nodes > {node_id} > Static Routes",
             "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{name}/rsnodeL3OutAtt-[topology/pod-{pod_id}/node-{node_id}]/rt-[{prefix}]/nh-[{next_hop_ip}]",
             "properties": {
                 "alias": {
@@ -10579,9 +10549,7 @@
                     "default": "",
                     "description": "Name of the Track List Policy to Assign to the Static Route Prefixes.",
                     "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{name}/rsnodeL3OutAtt-[topology/pod-{pod_id}/node-{node_id}]/rt-[{prefix}]/RsNextHopRouteTrack",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/tracklist-{track_list_policy}",
                     "title": "track_list_policy - ipRsNextHopRouteTrack"
                 },
@@ -10681,7 +10649,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "ospfExtP",
-            "description": "The OSPF external profile information.\nRequired:\n  * ospf_area_id\nOptional:\n  * ospf_area_cost\n  * ospf_area_control",
+            "description": "The OSPF external profile information.\nRequired:\n  * ospf_area_id\nOptional:\n  * ospf_area_cost\n  * ospf_area_control\n=================================================\nAPI Information:\n - Class: `ospfExtP`\n - Distinguished Name: `uni/tn-{tenant}/out-{l3out}/ospfExtP`\nGUI Location:\n - tenants > {tenant} > Networking > L3Outs > {l3out}: OSPF",
             "dn": "uni/tn-{tenant}/ospfExtP",
             "properties": {
                 "ospf_area_cost": {
@@ -10733,24 +10701,24 @@
             "properties": {
                 "send_redistribution_lsas_into_nssa_area": {
                     "type": "boolean",
-                    "apicApi": "redistribute",
+                    "apicApi": "areaCtrl:redistribute",
                     "default": true,
                     "description": "Default is `true`.  LSA generated by the ASBR within a not-so-stubby area (NSSA). This LSA includes the link cost to an external autonomous system destination. NSSA External LSAs are flooded only within the local NSSA.  ABRs Originate summary LSAs into other areas. Typically it is off in stubby areas (stub/nssa area). This knob is isued to turn on generating summary lsas into stub/ nssa areas.  Redistribution enabled, used with nssa areas only. Send redistributed LSAs into nssa area.",
-                    "title": "send_redistribution_lsas_into_nssa_area - redistribute"
+                    "title": "send_redistribution_lsas_into_nssa_area - areaCtrl:redistribute"
                 },
                 "originate_summary_lsa": {
                     "type": "boolean",
-                    "apicApi": "summary",
+                    "apicApi": "areaCtrl:summary",
                     "default": true,
                     "description": "Default is `true`.  LSA sent by the area border router to an external area.  ABRs Originate summary LSAs into other areas. Typically it is off in stubby areas (stub/nssa area). This knob is isued to turn on generating summary lsas into stub/ nssa areas.",
-                    "title": "originate_summary_lsa - summary"
+                    "title": "originate_summary_lsa - areaCtrl:summary"
                 },
                 "suppress_forwarding_address": {
                     "type": "boolean",
-                    "apicApi": "suppress-fa",
+                    "apicApi": "areaCtrl:suppress-fa",
                     "default": false,
                     "description": "Default is `false`.  LSA generated by the ASBR within a not-so-stubby area (NSSA). This LSA does not include the link cost to an external autonomous system destination.  LSA translation policy, suppress forwarding address in type7-type5 translated LSAs.",
-                    "title": "suppress_forwarding_address - suppress-fa"
+                    "title": "suppress_forwarding_address - areaCtrl:suppress-fa"
                 }
             },
             "title": "ospf_area_control - areaCtrl"
@@ -10798,9 +10766,7 @@
                     "class": "rtctrlProfile/rsdampeningPol",
                     "default": "default",
                     "description": "The Name of a Route Map for import and export route control.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "rn": "prof-{route_map}",
                     "tDn": "uni/tn-{tenant}/prof-{route_map}",
                     "title": "route_map - name"
@@ -10835,9 +10801,7 @@
                     "apicApi": "name",
                     "default": "default",
                     "description": "The Name of the Route Map for Import/Export route control.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "title": "route_map - name"
                 },
                 "tenant": {
@@ -10868,11 +10832,7 @@
                 "route_map": {
                     "type": "string",
                     "apicApi": "tDn",
-                    "default": "default",
-                    "description": "The Name of the Route Map for Redistribution.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/prof-{route_map}",
                     "title": "route_map - name"
                 },
@@ -10920,9 +10880,7 @@
                     "class": "fvRsBgpCtxPol",
                     "default": "",
                     "description": "Assign a BGP timers policies to the VRF.\nIf you use the `policy_tenant`, defined under tenant, you can enter this as `policy_name`.  Or if you want to point to something else you can use `un/tn-{policy_tenant}/ospfCtxP-{policy_name}`",
-                    "minLength": 1,
-                    "maxLength": 128,
-                    "pattern": "^[a-zA-Z0-9_\\.\\:\\-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "un/tn-{policy_tenant}/bgpCtxP-{bgp_timers}",
                     "title": "bgp_timers - fvRsBgpCtxPol"
                 },
@@ -10965,9 +10923,7 @@
                     "class": "fvRsCtxToEpRet",
                     "default": "",
                     "description": "(APIC Only) Provides the parameters for the lifecycle of the endpoint group in the VRF.  This will assign the policy to the VRF.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "un/tn-{policy_tenant}/epRPol-{endpoint_retention_policy}",
                     "title": "endpoint_retention_policy - fvRsCtxToEpRet"
                 },
@@ -11010,9 +10966,7 @@
                     "class": "fvRsOspfCtxPol",
                     "default": "",
                     "description": "Assign an OSPF timers policies to the VRF.\nIf you use the `policy_tenant`, defined under tenant, you can enter this as `policy_name`.  Or if you want to point to something else you can use `un/tn-{policy_tenant}/ospfCtxP-{policy_name}`",
-                    "minLength": 1,
-                    "maxLength": 128,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "un/tn-{policy_tenant}/ospfCtxP-{ospf_timers}",
                     "title": "ospf_timers - fvRsOspfCtxPol"
                 },
@@ -11051,7 +11005,7 @@
                     "type": "boolean",
                     "apicApi": "vzAny:prefGrMemb",
                     "default": false,
-                    "description": "Enable the Preferred Group feature to allow preferred group members in the VRF to communicate with each other without requiring a contract between them.\n  * false: (default) - Contracts are required for EPGs in the VRF to communicate with each other.\n  * true - For EPGs that are preferred group members in the VRF, contracts are not required to communicate with each other.",
+                    "description": "Default is `false`.  Enable the Preferred Group feature to allow preferred group members in the VRF to communicate with each other without requiring a contract between them.\n  * false: (default) - Contracts are required for EPGs in the VRF to communicate with each other.\n  * true - For EPGs that are preferred group members in the VRF, contracts are not required to communicate with each other.",
                     "title": "preferred_group - vzAny:prefGrMemb"
                 },
                 "transit_route_tag_policy": {
@@ -11059,10 +11013,8 @@
                     "apicApi": "tDn",
                     "class": "fvRsCtxToExtRouteTagPol",
                     "default": "",
-                    "description": "\nIn a transit routing scenario where external routers are used to route between multiple VRFs, and when an entry other than the default route tag (4294967295) is used to identify the policy in different VRFs, there is a risk of routing loops when there's one or more routes withdrawn from a tenant L3Out in OSPF or EIGRP.\nThis is expected behavior. Upon the EIGRP/OSPF redistribution of routes into the ACI fabric, the default iBGP anti-routing loop mechanisms on the border leaf switches either use the specific default route tag 4294967295 or they use the same tag that is assigned in the Transit Route Tag Policy field in the VRF/Policy page.\nIf you configure a different, specific transit route tag for each VRF, the default anti-routing loop mechanism does not work. In order to avoid this situation, use the same value for the Transit Route Tag Policy field across all VRFs. For additional details regarding route-maps and tags usage, see the row for \"OSPF or EIGRP in Back to Back Configuration\" and other information on route control profile policies in this table.\nNote:  The route tag policy is configured in the Create Route Tag Policy page, which is accessed through the Transit Route Tag Policy field in the VRF/Policy page:\nTenants > tenant_name > Networking > VRFs > VRF_name",
-                    "minLength": 1,
-                    "maxLength": 128,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "description": "In a transit routing scenario where external routers are used to route between multiple VRFs, and when an entry other than the default route tag (4294967295) is used to identify the policy in different VRFs, there is a risk of routing loops when there's one or more routes withdrawn from a tenant L3Out in OSPF or EIGRP.\nThis is expected behavior. Upon the EIGRP/OSPF redistribution of routes into the ACI fabric, the default iBGP anti-routing loop mechanisms on the border leaf switches either use the specific default route tag 4294967295 or they use the same tag that is assigned in the Transit Route Tag Policy field in the VRF/Policy page.\nIf you configure a different, specific transit route tag for each VRF, the default anti-routing loop mechanism does not work. In order to avoid this situation, use the same value for the Transit Route Tag Policy field across all VRFs. For additional details regarding route-maps and tags usage, see the row for \"OSPF or EIGRP in Back to Back Configuration\" and other information on route control profile policies in this table.\nNote:  The route tag policy is configured in the Create Route Tag Policy page, which is accessed through the Transit Route Tag Policy field in the VRF/Policy page:\nTenants > tenant_name > Networking > VRFs > VRF_name",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "un/tn-{policy_tenant}/rttag-{transit_route_tag_policy}",
                     "title": "transit_route_tag_policy - fvRsCtxToExtRouteTagPol"
                 }
@@ -11101,13 +11053,13 @@
             "type": "object",
             "additionalProperties": false,
             "class": "vzAny",
-            "description": "",
+            "description": "Collection of Contracts to Assign to vzAny/VRF.\n=================================================\nAPI Information:\n - Class: `vzAny`\n - Distinguished Name: `uni/tn-{tenant}/ctx-{vrf}/any`\nGUI Location:\n - Tenants > {tenant} > Networking > VRFs > {vrf}: Policy >  Preferred Group\n - Tenants > {tenant} > Networking > VRFs > {vrf} > EPG|ESG Collection for VRF",
             "dn": "uni/tn-{tenant}/any",
             "properties": {
                 "contracts": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Contracts and their attributes to assign to the EPG.\nRequired:\n  * name\nOptional:\n  * contract_type\n  * ndo\n  * qos_class\n  * tenant",
+                    "description": "List of Contracts and their attributes to assign to the EPG.\nRequired:\n  * name\nOptional:\n  * contract_type\n  * ndo\n  * qos_class\n  * tenant\n=================================================\n##### Provided Contracts #####\nAPI Information:\n - Class: `vzRsAnyToProv`\n - Distinguished Name: `uni/tn-{tenant}/ctx-{vrf}/any/rsanyToProv-{contract}`\nGUI Location:\n - Tenants > {tenant} > Networking > VRFs > {vrf} > EPG Collection for VRF: [Provided Contracts]\n\n=================================================\n##### Consumed Contracts #####\nAPI Information:\n - Class: `vzRsAnyToCons`\n - Distinguished Name: `uni/tn-{tenant}/ctx-{vrf}/any/rsanyToCons-{contract}`\nGUI Location:\n - Tenants > {tenant} > Networking > VRFs > {vrf} > EPG Collection for VRF: [Consumer Contracts]\n\n=================================================\n##### Consumed Interface Contracts #####\nAPI Information:\n - Class: `vzRsAnyToConsIf`\n - Distinguished Name: `uni/tn-{tenant}/ctx-{vrf}/any/rsanyToCons-{contract}`\nGUI Location:\n - Tenants > {tenant} > Networking > VRFs > {vrf} > EPG Collection for VRF: [Consumer Interface Contracts]",
                     "items": {
                         "$ref": "#/definitions/Tenants:Contracts:ContractApply"
                     },
@@ -11547,7 +11499,7 @@
                 "static_node_management_addresses": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Static Node Management Addresses.  Only for Mgmt Tenant.\nRequired:\n  * node_id\nOptional:\n  * ipv4_address\n  * ipv4_gateway\n  * ipv6_address\n  * ipv6_gateway\n  * management_epg\n  * pod_id\nShould assign either `ipv4_address` and `ipv4_gateway` or `ipv6_address` and `ipv6_gateway`\n=================================================\nAPI Information:\n  * Classes: mgmtRsInBStNode or mgmtRsOoBStNode\n  * Distinguished Names:\n    - `uni/tn-mgmt/mgmtp-default/inb-{management_epg}/rsinBStNode-[topology/pod-{pod_id}/node-{node_id}]`\n    - `uni/tn-mgmt/mgmtp-default/oob-{management_epg}/rsooBStNode-[topology/pod-{pod_id}/node-{node_id}]`\nGUI Location:\n  * Tenants > mgmt > Node Management Addresses > Static Node Management Addresses",
+                    "description": "List of Static Node Management Addresses.  Only for Mgmt Tenant.\nRequired:\n  * node_id\nOptional:\n  * ipv4_address\n  * ipv4_gateway\n  * ipv6_address\n  * ipv6_gateway\n  * management_epg\n  * pod_id\nShould assign either `ipv4_address` and `ipv4_gateway` or `ipv6_address` and `ipv6_gateway`\n=================================================\nAPI Information:\n  * Classes: mgmtRsInBStNode or mgmtRsOoBStNode\n  * Distinguished Names:\n    - `uni/tn-mgmt/mgmtp-default/inb-{management_epg}/rsinBStNode-[topology/pod-{pod_id}/node-{node_id}]`\n    - `uni/tn-mgmt/mgmtp-default/oob-{management_epg}/rsooBStNode-[topology/pod-{pod_id}/node-{node_id}]`\nGUI Location:\n  * Tenants > mgmt > Node Management Addresses > Static Node Management Addresses\n=================================================\nAPI Information:\n - Class: `mgmtRsInBStNode` or `mgmtRsOoBStNode`\n - Distinguished Name: `uni/tn-mgmt/mgmtp-default/inb-{management_epg}/rsinBStNode-[topology/pod-{pod_id}/node-{node_id}]`\n or\n - Distinguished Name: `uni/tn-mgmt/mgmtp-default/oob-{management_epg}/rsooBStNode-[topology/pod-{pod_id}/node-{node_id}]`\nGUI Location:\n - Tenants > mgmt > Node Management Addresses > Static Node Management Addresses",
                     "items": {
                         "$ref": "#/definitions/Tenants:NodeManagementAddresses:StaticNodeManagementAddresses"
                     },
@@ -11645,7 +11597,7 @@
         "Tenants:Policies": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Tenant Policies.",
+            "description": "GUI Location: Tenants > Policies\n\nTenant Policies.",
             "properties": {
                 "protocol": {
                     "$ref": "#/definitions/Tenants:Policies:Protocol"
@@ -11659,12 +11611,12 @@
         "Tenants:Policies:Protocol": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Tenant Protocol Policies.\nOptions are:\n  * bfd_interface\n  * bgp\n  * dhcp\n  * endpoint_retention\n  * hsrp\n  * ip_sla\n  * l4-l7_policy-based_redirect\n  * l4-l7_redirect_health_groups\n  * ospf\n  * route_maps_for_route_control\n  * route_map_match_rules\n  * route_map_set_rules",
+            "description": "GUI Location: Tenants > Policies > Protocol\n\nTenant Protocol Policies.\nOptions are:\n  * bfd_interface\n  * bgp\n  * dhcp\n  * endpoint_retention\n  * hsrp\n  * ip_sla\n  * l4-l7_policy-based_redirect\n  * l4-l7_redirect_health_groups\n  * ospf\n  * route_maps_for_route_control\n  * route_map_match_rules\n  * route_map_set_rules",
             "properties": {
                 "bfd_interface": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "\nRequired:\n  * name\nOptional:\n  * admin_state\n  * description\n  * detection_multiplier\n  * echo_admin_state\n  * echo_recieve_interval\n  * enable_sub_interface_optimization\n  * minimum_recieve_interval\n  * minimum_transmit_interval",
+                    "description": "Required:\n  * name\nOptional:\n  * admin_state\n  * description\n  * detection_multiplier\n  * echo_admin_state\n  * echo_recieve_interval\n  * enable_sub_interface_optimization\n  * minimum_recieve_interval\n  * minimum_transmit_interval\n=================================================\nAPI Information:\n - Class: `bfdIfPol`\n - Distinguised Name: `uni/tn-{name}/bfdIfPol-{name}`\nGUI Location:\n - Tenants > {tenant} > Policies > Protocol > BFD > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:BFDInterface"
                     },
@@ -11679,7 +11631,7 @@
                 "endpoint_retention": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "The endpoint retention policy provides the parameters for the lifecycle of the endpoints.\nRequired:\n  * name\nOptional:\n  * bounce_entry_aging_interval\n  * bounce_trigger\n  * description\n  * hold_interval\n  * local_endpoint_aging_interval\n  * move_frequency\n  * remote_endpoint_aging_interval",
+                    "description": "The endpoint retention policy provides the parameters for the lifecycle of the endpoints.\nRequired:\n  * name\nOptional:\n  * bounce_entry_aging_interval\n  * bounce_trigger\n  * description\n  * hold_interval\n  * local_endpoint_aging_interval\n  * move_frequency\n  * remote_endpoint_aging_interval\n=================================================\nAPI Information:\n - Class: `fvEpRetPol`\n - Distinguised Name: `uni/tn-{name}/epRPol-{name}`\nGUI Location:\n - Tenants > {tenant} > Policies > Protocol > End Point Retention > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:EndpointRetention"
                     },
@@ -11694,7 +11646,7 @@
                 "l4-l7_policy-based_redirect": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "\nRequired:\n  * destinations\n  * name\nOptional:\n  * anycast_enabled\n  * description\n  * destination_type\n  * enable_pod_id_aware_redirection\n  * hashing_algorithm\n  * ip_sla_monitoring_policy\n  * max_threshold_percentage\n  * min_threshold_percentage\n  * resilient_hashing_enabled\n  * threshold_enable\n  * threshold_down_action",
+                    "description": "Required:\n  * destinations\n  * name\nOptional:\n  * anycast_enabled\n  * description\n  * destination_type\n  * enable_pod_id_aware_redirection\n  * hashing_algorithm\n  * ip_sla_monitoring_policy\n  * max_threshold_percentage\n  * min_threshold_percentage\n  * resilient_hashing_enabled\n  * threshold_enable\n  * threshold_down_action\n=================================================\nAPI Information:\n - Class: `vnsSvcRedirectPol`\n - Distinguished Name: `uni/tn-{tenant}/svcCont/svcRedirectPol-{name}`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > L4-L7 Policy-Based Redirect > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:L4L7PolicyBasedRedirect"
                     },
@@ -11703,7 +11655,7 @@
                 "l4-l7_redirect_health_groups": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "\nRequired:\n  * name\nOptional:\n  * description",
+                    "description": "Required:\n  * name\nOptional:\n  * description\n=================================================\nAPI Information:\n - Class: `vnsRedirectHealthGroup`\n - Distinguished Name: `uni/tn-{tenant}/svcCont/redirectHealthGroup-{name}``\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > L4-L7 Redirect Health Group > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:L4L7RedirectHealthGroups"
                     },
@@ -11715,7 +11667,7 @@
                 "route_map_match_rules": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "Reference For Guidance: https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/guide-c07-743150.html\nRequired:\n  * name\nOptional:\n  * alias\n  * description\n  * match_community_terms\n  * match_regex_community_terms\n  * match_route_destination_rule",
+                    "description": "Reference For Guidance: https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/guide-c07-743150.html\nRequired:\n  * name\nOptional:\n  * alias\n  * description\n  * match_community_terms\n  * match_regex_community_terms\n  * match_route_destination_rule\n=================================================\nAPI Information:\n - Class: `rtctrlSubjP`\n - Distinguised Name: `uni/tn-{name}/subj-{name}`\nGUI Location:\n - Tenants > {tenant} > Policies > Protocol > Match Rules > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:RouteMapMatchRules"
                     },
@@ -11724,7 +11676,7 @@
                 "route_map_set_rules": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "Reference For Guidance: https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/guide-c07-743150.html\nRequired:\n  * name\nOptional:\n  * alias\n  * description\n  * additional_communities\n  * multipath\n  * next_hop_propegation\n  * set_as_path\n  * set_communities\n  * set_dampening\n  * set_external_epg\n  * set_metric\n  * set_metric_type\n  * set_next_hop_address\n  * set_preference\n  * set_route_tag\n  * set_weight",
+                    "description": "Reference For Guidance: https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/guide-c07-743150.html\nRequired:\n  * name\nOptional:\n  * alias\n  * description\n  * additional_communities\n  * multipath\n  * next_hop_propegation\n  * set_as_path\n  * set_communities\n  * set_dampening\n  * set_external_epg\n  * set_metric\n  * set_metric_type\n  * set_next_hop_address\n  * set_preference\n  * set_route_tag\n  * set_weight\n=================================================\nAPI Information:\n - Class: `rtctrlAttrP`\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:RouteMapSetRules"
                     },
@@ -11822,13 +11774,13 @@
             "type": "object",
             "additionalProperties": false,
             "class": "",
-            "description": "List of Tenant BGP Protocol Policies.\nAttributes are:\n  * bgp_address_family_context\n  * bgp_best_path\n  * bgp_peer_prefix\n  * bgp_route_summarization\n  * bgp_timers",
+            "description": "GUI Location: Tenants > Policies > Protocol > BGP\n\nList of Tenant BGP Protocol Policies.\nAttributes are:\n  * bgp_address_family_context\n  * bgp_best_path\n  * bgp_peer_prefix\n  * bgp_route_summarization\n  * bgp_timers",
             "dn": "",
             "properties": {
                 "bgp_address_family_context": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of BGP Address Family Context Policies.\nRequired:\n  * name\nOptional:\n  * description\n  * ebgp_distance\n  * ebgp_max_ecmp\n  * enable_host_route_leak\n  * ibgp_distance\n  * ibgp_max_ecmp\n  * local_distance",
+                    "description": "List of BGP Address Family Context Policies.\nRequired:\n  * name\nOptional:\n  * description\n  * ebgp_distance\n  * ebgp_max_ecmp\n  * enable_host_route_leak\n  * ibgp_distance\n  * ibgp_max_ecmp\n  * local_distance\n=================================================\nAPI Information:\n - Class: `bgpCtxAfPol`\n - Distinguised Name: `uni/tn-{name}/bgpCtxAfP-{name}`\nGUI Location:\n - Tenants > {tenant} > Policies > Protocol > BGP > BGP Address Family Context > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:BGP:BGPAddressFamilyContext"
                     },
@@ -11837,7 +11789,7 @@
                 "bgp_best_path": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of BGP Best Path Policies.  Allow load sharing across providers with different AS paths.\nRequired:\n  * name\nOptional:",
+                    "description": "List of BGP Best Path Policies.  Allow load sharing across providers with different AS paths.\nRequired:\n  * name\nOptional:\n  * description\n  * relax_as_path_restriction\n=================================================\nAPI Information:\n - Class: `bgpBestPathCtrlPol`\n - Distinguised Name: `uni/tn-{name}/bestpath-{name}`\nGUI Location:\n - Tenants > {tenant} > Policies > Protocol > BGP > BGP Best Path > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:BGP:BGPBestPath"
                     },
@@ -11846,7 +11798,7 @@
                 "bgp_peer_prefix": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of BGP Peer Prefix Policies.  The peer prefix policy defines how many prefixes can be received from a neighbor and the action to take when the number of allowed prefixes is exceeded. This feature is commonly used for external BGP peers, but can also be applied to internal BGP peers.\nRequired:\n  * name\nOptional:\n  * action\n  * description\n  * maximum_number_of_prefixes\n  * restart_time\n  * threshold",
+                    "description": "List of BGP Peer Prefix Policies.  The peer prefix policy defines how many prefixes can be received from a neighbor and the action to take when the number of allowed prefixes is exceeded. This feature is commonly used for external BGP peers, but can also be applied to internal BGP peers.\nRequired:\n  * name\nOptional:\n  * action\n  * description\n  * maximum_number_of_prefixes\n  * restart_time\n  * threshold\n=================================================\nAPI Information:\n - Class: `bgpPeerPfxPol`\n - Distinguished Name: `uni/tn-{tenant}/bgpPfxP-{name}`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > BGP >  BGP Peer Prefix > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:BGP:BGPPeerPrefix"
                     },
@@ -11855,7 +11807,7 @@
                 "bgp_route_summarization": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of BGP Route Summarization Policies.\nRequired:\n  * name\nOptional:\n  * description\n  * control_state\n  * address_type_controls",
+                    "description": "List of BGP Route Summarization Policies.\nRequired:\n  * name\nOptional:\n  * description\n  * control_state\n  * address_type_controls\n=================================================\nAPI Information:\n - Class: `bgpRtSummPol`\n - Distinguised Name: `uni/tn-{name}/bgprtsum-{name}`\nGUI Location:\n - Tenants > {tenant} > Policies > Protocol > BGP > BGP Route Summarization > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:BGP:BGPRouteSummarization"
                     },
@@ -11864,7 +11816,7 @@
                 "bgp_timers": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of BGP Timers Policies.  The BGP timers policy uses timers to control periodic activities such as the frequency keepalive messages that are sent to its peer, the amount of time the system waits to declare a peer dead after keepalive messages stop being received, and the amount of time before restarting a dead peer. The BGP timer policy enables you to specify the intervals for the periodic activities and supplies two options for graceful restart control: the graceful restart helper option, which configures the local BGP router to support the graceful restart of a remote BGP peer, and the complete graceful restart option, which allows BGP graceful restart to be enabled or disable for an individual neighbor.\nRequired:\n  * name\nOptional:\n  * description\n  * graceful_restart_helper\n  * hold_interval\n  * keepalive_interval\n  * maximum_as_limit\n  * stale_interval",
+                    "description": "List of BGP Timers Policies.  The BGP timers policy uses timers to control periodic activities such as the frequency keepalive messages that are sent to its peer, the amount of time the system waits to declare a peer dead after keepalive messages stop being received, and the amount of time before restarting a dead peer. The BGP timer policy enables you to specify the intervals for the periodic activities and supplies two options for graceful restart control: the graceful restart helper option, which configures the local BGP router to support the graceful restart of a remote BGP peer, and the complete graceful restart option, which allows BGP graceful restart to be enabled or disable for an individual neighbor.\nRequired:\n  * name\nOptional:\n  * description\n  * graceful_restart_helper\n  * hold_interval\n  * keepalive_interval\n  * maximum_as_limit\n  * stale_interval\n=================================================\nAPI Information:\n - Class: `bgpCtxPol`\n - Distinguised Name: `uni/tn-{name}/bgpCtxP-{name}`\nGUI Location:\n - Tenants > {tenant} > Policies > Protocol > BGP > BGP Timers > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:BGP:BGPTimers"
                     },
@@ -12160,13 +12112,13 @@
             "type": "object",
             "additionalProperties": false,
             "class": "",
-            "description": "Tenant DHCP Protocol Policies.\n  * option_policies\n  * relay_policies",
+            "description": "GUI Location: Tenants > Policies > Protocol > DHCP\n\nTenant DHCP Protocol Policies.\n  * option_policies\n  * relay_policies",
             "dn": "",
             "properties": {
                 "option_policies": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of DHCP Option Policies.  The DHCP option is used to supply DHCP clients with configuration parameters such as a domain, name server, subnet, and network address. DHCP provides a framework for passing configuration information to clients on a TCP/IP network. The configuration parameters, and other control information, are carried in tagged data items that are stored in the options field of a DHCP message. The data items themselves are also called options. You can view, set, unset, and edit DHCP option values. When you set an option value, the DHCP server replaces any existing value or creates a new one as needed for the given option name.\nRequired:\n  * name\n  * options\nOptional:\n  * description",
+                    "description": "List of DHCP Option Policies.  The DHCP option is used to supply DHCP clients with configuration parameters such as a domain, name server, subnet, and network address. DHCP provides a framework for passing configuration information to clients on a TCP/IP network. The configuration parameters, and other control information, are carried in tagged data items that are stored in the options field of a DHCP message. The data items themselves are also called options. You can view, set, unset, and edit DHCP option values. When you set an option value, the DHCP server replaces any existing value or creates a new one as needed for the given option name.\nRequired:\n  * name\n  * options\nOptional:\n  * description\n=================================================\nAPI Information:\n - Class: `dhcpOptionPol`\n - Distinguised Name: `uni/tn-{name}/dhcpoptpol-{name}`\nGUI Location:\n - Tenants > {tenant} > Policies > Protocol > DHCP > Options Policies > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:DHCP:OptionPolicies"
                     },
@@ -12175,7 +12127,7 @@
                 "relay_policies": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Tenant DHCP Relay Policies.\nRequired:\n  * dhcp_servers\n  * epg\nOptional:\n  * description\n  * application_profile\n  * epg_type\n  * l3out\n  * mode",
+                    "description": "List of Tenant DHCP Relay Policies.\nRequired:\n  * dhcp_servers\n  * epg\nOptional:\n  * description\n  * application_profile\n  * epg_type\n  * l3out\n  * mode\n=================================================\nAPI Information:\n - Class: `dhcpRelayPol`\n - Distinguised Name: `uni/tn-{name}/relayp-{name}`\nGUI Location:\n - Tenants > {tenant} > Policies > Protocol > DHCP > Relay Policies > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:DHCP:RelayPolicies"
                     },
@@ -12421,13 +12373,13 @@
             "type": "object",
             "additionalProperties": false,
             "class": "vzFilter",
-            "description": "List of Tenant HSRP Protocol Policies.\nOptions are:\n  * group_policies\n  * interface_policies",
+            "description": "GUI Location: Tenants > Policies > Protocol > HSRP\n\nList of Tenant HSRP Protocol Policies.\nOptions are:\n  * group_policies\n  * interface_policies",
             "dn": "uni/tn-{tenant}/flt-{name}",
             "properties": {
                 "group_policies": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Tenant Protocol HSRP Interface Policies.\nRequired:\n  * name\nOptional:\n  * description\n  * enable_preemption_for_the_group\n  * hello_interval\n  * hold_interval\n  * key\n  * max_seconds_to_prevent_preemption\n  * min_preemption_delay\n  * preemption_delay_after_reboot\n  * priority\n  * timeout",
+                    "description": "List of Tenant Protocol HSRP Interface Policies.\nRequired:\n  * name\nOptional:\n  * description\n  * enable_preemption_for_the_group\n  * hello_interval\n  * hold_interval\n  * key\n  * max_seconds_to_prevent_preemption\n  * min_preemption_delay\n  * preemption_delay_after_reboot\n  * priority\n  * timeout\n=================================================\nAPI Information:\n - Class: `hsrpGroupPol`\n - Distinguished Name: `uni/tn-{tenant}/hsrpGroupPol-{name}`\nGUI Location:\ntenants > {tenant} > Policies > Protocol > HSRP > Group Policies > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:Hsrp:GroupPolicies"
                     },
@@ -12436,7 +12388,7 @@
                 "interface_policies": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Tenant Protocol HSRP Interface Policies.\nRequired:\n  * name\nOptional:\n  * description\n  * control\n  * delay\n  * reload_delay",
+                    "description": "List of Tenant Protocol HSRP Interface Policies.\nRequired:\n  * name\nOptional:\n  * description\n  * control\n  * delay\n  * reload_delay\n=================================================\nAPI Information:\n - Class: `hsrpIfPol`\n - Distinguished Name: `uni/tn-{tenant}/hsrpIfPol-{name}`\nGUI Location:\ntenants > {tenant} > Policies > Protocol > HSRP > Interface Policies > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:Hsrp:InterfacePolicies"
                     },
@@ -12613,13 +12565,13 @@
             "type": "object",
             "additionalProperties": false,
             "class": "",
-            "description": "Attributes are:\n  * ip_sla_monitoring_policies",
+            "description": "GUI Location: Tenants > Policies > Protocol > IP Sla\n\nAttributes are:\n  * ip_sla_monitoring_policies",
             "dn": "",
             "properties": {
                 "ip_sla_monitoring_policies": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "\nRequired:\n  * name\nOptional:\n  * detect_multiplier\n  * http_uri\n  * http_version\n  * operation_timeout\n  * request_data_size\n  * sla_frequency\n  * sla_port\n  * sla_type\n  * threshold\n  * traffic_class_value\n  * type_of_service",
+                    "description": "\nRequired:\n  * name\nOptional:\n  * detect_multiplier\n  * http_uri\n  * http_version\n  * operation_timeout\n  * request_data_size\n  * sla_frequency\n  * sla_port\n  * sla_type\n  * threshold\n  * traffic_class_value\n  * type_of_service\n=================================================\nAPI Information:\n - Class: `fvIPSLAMonitoringPo`\n - Distinguished Name: `uni/tn-{tenant}/ipslaMonitoringPol-{name}`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > IP SLA >  IP SLA Monitoring Policies > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:IPSla:IPSlaMonitoringPolicies"
                     },
@@ -12957,13 +12909,13 @@
             "type": "object",
             "additionalProperties": false,
             "class": "",
-            "description": "Tenant OSPF Protocol Policies.\nOptions are:\n  * ospf_interface\n  * ospf_route_summarization\n  * ospf_timers",
+            "description": "GUI Location: Tenants > Policies > Protocol > OSPF\n\nTenant OSPF Protocol Policies.\nOptions are:\n  * ospf_interface\n  * ospf_route_summarization\n  * ospf_timers",
             "dn": "",
             "properties": {
                 "ospf_interface": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Tenant OSPF Interface Policies.\nRequired:\n  * name\nOptional:\n  * cost_of_interface\n  * dead_interval\n  * description\n  * hello_interval\n  * interface_controls\n  * network_type\n  * priority\n  * retransmit_interval\n  * transmit_delay",
+                    "description": "List of Tenant OSPF Interface Policies.\nRequired:\n  * name\nOptional:\n  * cost_of_interface\n  * dead_interval\n  * description\n  * hello_interval\n  * interface_controls\n  * network_type\n  * priority\n  * retransmit_interval\n  * transmit_delay\n=================================================\nAPI Information:\n - Class: `ospfIfPol`\n - Distinguished Name: `uni/tn-{tenant}/ospfIfPol-{name}`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > OSPF >  OSPF Interface > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:OSPF:OSPFInterface"
                     },
@@ -12972,7 +12924,7 @@
                 "ospf_route_summarization": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Tenant OSPF Route Summarization Policies.\nRequired:\n  * name\nOptional:\n  * cost\n  * description\n  * inter_area_enabled",
+                    "description": "List of Tenant OSPF Route Summarization Policies.\nRequired:\n  * name\nOptional:\n  * cost\n  * description\n  * inter_area_enabled\n=================================================\nAPI Information:\n - Class: `ospfRtSummPol`\n - Distinguished Name: `uni/tn-{tenant}/ospfrtsumm-{name}`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > OSPF >  OSPF Route Summarization > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:OSPF:OSPFRouteSummarization"
                     },
@@ -12981,7 +12933,7 @@
                 "ospf_timers": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Tenant OSPF Timers Policies.  The context-level OSPF timer policy provides the Hello timer and Dead timer intervals configuration.\nRequired:\n  * name\nOptional:\n  * admin_distance_preference\n  * bandwidth_reference\n  * control_knobs\n  * description\n  * graceful_restart_helper\n  * initial_spf_scheduled_delay_interval\n  * lsa_group_pacing_interval\n  * lsa_generation_throttle_hold_interval\n  * lsa_generation_throttle_maximum_interval\n  * lsa_generation_throttle_start_wait_interval\n  * lsa_maximum_action\n  * lsa_threshold\n  * maximum_ecmp\n  * maximum_lsa_reset_interval\n  * maximum_lsa_sleep_count\n  * maximum_lsa_sleep_interval\n  * maximum_number_of_not_self_generated_lsas\n  * minimum_hold_time_between_spf_calculations\n  * minimum_interval_between_arrival_of_a_lsa\n  * maximum_wait_time_between_spf_calculations",
+                    "description": "List of Tenant OSPF Timers Policies.  The context-level OSPF timer policy provides the Hello timer and Dead timer intervals configuration.\nRequired:\n  * name\nOptional:\n  * admin_distance_preference\n  * bandwidth_reference\n  * control_knobs\n  * description\n  * graceful_restart_helper\n  * initial_spf_scheduled_delay_interval\n  * lsa_group_pacing_interval\n  * lsa_generation_throttle_hold_interval\n  * lsa_generation_throttle_maximum_interval\n  * lsa_generation_throttle_start_wait_interval\n  * lsa_maximum_action\n  * lsa_threshold\n  * maximum_ecmp\n  * maximum_lsa_reset_interval\n  * maximum_lsa_sleep_count\n  * maximum_lsa_sleep_interval\n  * maximum_number_of_not_self_generated_lsas\n  * minimum_hold_time_between_spf_calculations\n  * minimum_interval_between_arrival_of_a_lsa\n  * maximum_wait_time_between_spf_calculations\n=================================================\nAPI Information:\n - Class: `ospfCtxPol`\n - Distinguished Name: `uni/tn-{tenant}/ospfCtxP-{name}`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > OSPF >  OSPF Timers > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:OSPF:OSPFTimers"
                     },
@@ -13376,7 +13328,7 @@
                 "match_community_terms": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "This is to create match criteria using the BGP community. ACI supports both a Regular and an Extended community type. The community is in a format of AS2:NN2 (two-bytes AS and two-bytes user-defined Network Number) or AS4:NN2 (four-bytes AS number and two-bytes user-defined Network Number) in an extended community. The community syntax when configured on APIC is as follows:\n  * Regular: regular:as2-nn2:<2bytes AS number>:<2 bytes Network Number>  Example `regular:as2-nn2:65001:100`\n  * Extended: extended:as4-nn2:<4 bytes AS number>:<2 bytes Network Number> Example `extended:as4-nn2:65536:100`\nAn Extended community type supports the following two scopes:\n  * Transitive: The community will be propagated across eBGP peering (that is, across AS’s):\n  * Non Transitive: The community will not be propagated across eBGP peering (that is, across AS’s).\nThe standalone NX-OS equivalent commands are the following:\nip community-list standard <list-name> permit <as2:nn community>\nip extcommunity-list standard <list-name> permit 4bytegeneric {transitive | nontransitive} <as4:nn community>\n!\nroute-map <rm-name>\n  match community <list-name>\n  match extcommunity <list-name>\nRequired:\n  * match_community_factors\n  * name\nOptional:\n  * description",
+                    "description": "This is to create match criteria using the BGP community. ACI supports both a Regular and an Extended community type. The community is in a format of AS2:NN2 (two-bytes AS and two-bytes user-defined Network Number) or AS4:NN2 (four-bytes AS number and two-bytes user-defined Network Number) in an extended community. The community syntax when configured on APIC is as follows:\n  * Regular: regular:as2-nn2:<2bytes AS number>:<2 bytes Network Number>  Example `regular:as2-nn2:65001:100`\n  * Extended: extended:as4-nn2:<4 bytes AS number>:<2 bytes Network Number> Example `extended:as4-nn2:65536:100`\nAn Extended community type supports the following two scopes:\n  * Transitive: The community will be propagated across eBGP peering (that is, across AS’s):\n  * Non Transitive: The community will not be propagated across eBGP peering (that is, across AS’s).\nThe standalone NX-OS equivalent commands are the following:\nip community-list standard <list-name> permit <as2:nn community>\nip extcommunity-list standard <list-name> permit 4bytegeneric {transitive | nontransitive} <as4:nn community>\n!\nroute-map <rm-name>\n  match community <list-name>\n  match extcommunity <list-name>\nRequired:\n  * match_community_factors\n  * name\nOptional:\n  * description\n=================================================\nAPI Information:\n - Class: `rtctrlMatchCommTerm`\n - Distinguised Name: `uni/tn-{name}/subj-{match_rule}/commtrm-{name}`\nGUI Location:\n - Tenants > {tenant} > Policies > Protocol > Match Rules > {name}: Match Community Terms",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:RouteMapMatchRules:MatchCommunityTerms"
                     },
@@ -13385,7 +13337,7 @@
                 "match_regex_community_terms": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "This is to create match criteria using the regular expression (regex) community. If the same type of community (Regular or Extended) is configured as a non-regex community match in the same Match Rule Policy, it cannot be configured as a regex community match.\n  * The standalone NX-OS equivalent commands are the following:\n  * ip community-list expanded <list-name> permit <regular expression>\n  * ip extcommunity-list expanded <list-name> permit <regular expression>\n  * !\n  * route-map <rm-name>\n  *   match community <list-name>\n  *   match extcommunity <list-name>\nRequired:\n  * name\n  * regular_expression\nOptional:\n  * community_type\n  * description",
+                    "description": "This is to create match criteria using the regular expression (regex) community. If the same type of community (Regular or Extended) is configured as a non-regex community match in the same Match Rule Policy, it cannot be configured as a regex community match.\n  * The standalone NX-OS equivalent commands are the following:\n  * ip community-list expanded <list-name> permit <regular expression>\n  * ip extcommunity-list expanded <list-name> permit <regular expression>\n  * !\n  * route-map <rm-name>\n  *   match community <list-name>\n  *   match extcommunity <list-name>\nRequired:\n  * name\n  * regular_expression\nOptional:\n  * community_type\n  * description\n=================================================\nAPI Information:\n - Class: `rtctrlMatchCommRegexTerm`\n - Distinguised Name: `uni/tn-{name}/subj-{match_rule}/commrxtrm-{name}`\nGUI Location:\n - Tenants > {tenant} > Policies > Protocol > Match Rules > {name}: Match Regex Community Terms",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:RouteMapMatchRules:MatchRegexCommunityTerms"
                     },
@@ -13394,7 +13346,7 @@
                 "match_route_destination_rule": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "This is to create match criteria using the IP prefix-list. This option was introduced in APIC Release 2.1(1). It is referred to as Explicit Prefix List, in comparison to IP prefix-lists implicitly created by other APIC policies, such for “Export Route Control Subnet”.\nWhen the “Aggregate” option is enabled, the IP prefix-list adds “le 32” to the prefix. This prefix does not have to be 0.0.0.0/0. This can be used as an alternative for “Aggregate Export/Import” for an “Export/Import Route Control Subnet” scope in case an aggregation is required for a non-0.0.0.0/0 subnet. Please remember that “Export/Import Route Control Subnet” scope only supports 0.0.0.0/0 to use “Aggregate Export/Import” option.\nThe standalone NX-OS equivalent commands are the following:\nip prefix-list <list-name> permit <prefix>/<mask> {le 32}\n!\nroute-map <rm-name>\n  match ip address prefix-list <list-name>\nRequired:\n  * ip\nOptional:\n  * description\n  * greater_than_mask\n  * less_than_mask",
+                    "description": "This is to create match criteria using the IP prefix-list. This option was introduced in APIC Release 2.1(1). It is referred to as Explicit Prefix List, in comparison to IP prefix-lists implicitly created by other APIC policies, such for “Export Route Control Subnet”.\nWhen the “Aggregate” option is enabled, the IP prefix-list adds “le 32” to the prefix. This prefix does not have to be 0.0.0.0/0. This can be used as an alternative for “Aggregate Export/Import” for an “Export/Import Route Control Subnet” scope in case an aggregation is required for a non-0.0.0.0/0 subnet. Please remember that “Export/Import Route Control Subnet” scope only supports 0.0.0.0/0 to use “Aggregate Export/Import” option.\nThe standalone NX-OS equivalent commands are the following:\nip prefix-list <list-name> permit <prefix>/<mask> {le 32}\n!\nroute-map <rm-name>\n  match ip address prefix-list <list-name>\nRequired:\n  * ip\nOptional:\n  * description\n  * greater_than_mask\n  * less_than_mask\n=================================================\nAPI Information:\n - Class: `rtctrlMatchRtDest`\n - Distinguished Name: `uni/tn-{tenant}/subj-{match_rule}/dest-[{network}]`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Match Rules > {name}: Match Prefix",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:RouteMapMatchRules:MatchRouteDestinationRule"
                     },
@@ -13567,7 +13519,7 @@
                 "additional_communities": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Additional Communities to add to the Route Map Set Rule.\nRequired:\n  * community\nOptional:\n  * description",
+                    "description": "List of Additional Communities to add to the Route Map Set Rule.\nRequired:\n  * community\nOptional:\n  * description\n=================================================\nAPI Information:\n - Class: `rtctrlSetAddComm`\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}/saddcomm-{community}`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:RouteMapSetRules:AdditionalCommunities"
                     },
@@ -13583,7 +13535,7 @@
                     "type": "boolean",
                     "apicApi": "rtctrlSetRedistMultipath",
                     "default": false,
-                    "description": "Default value is `false`.  \nIMPORTANT: Multipath configurations are incomplete without Local Max ECMP for unicast address family. Please navigate to the following to configure Local Max ECMP value greater than 0. VRF > Policy > BGP Context Per Address Family > BGP Address Family Context.",
+                    "description": "Default value is `false`.  \nIMPORTANT: Multipath configurations are incomplete without Local Max ECMP for unicast address family. Please navigate to the following to configure Local Max ECMP value greater than 0. VRF > Policy > BGP Context Per Address Family > BGP Address Family Context.\n===============================================\nAPI Informatio\n - Class: `rtctrlSetRedistMultipat\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}/redistmpat\nGUI Locatio\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}: Multipath",
                     "title": "multipath - rtctrlSetRedistMultipath"
                 },
                 "name": {
@@ -13593,13 +13545,13 @@
                     "type": "boolean",
                     "apicApi": "rtctrlSetNhUnchanged",
                     "default": false,
-                    "description": "Default value is `false`.  ",
+                    "description": "Default value is `false`.\n=================================================\nAPI Information:\n - Class: `rtctrlSetNhUnchanged`\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}/nhunchanged`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}: Next Hop Propegation",
                     "title": "next_hop_propegation - rtctrlSetNhUnchanged"
                 },
                 "set_as_path": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "A BGP peer can influence the best-path selection by a remote peer by increasing the length of the AS-Path attribute. AS-Path Prepend provides a mechanism that can be used to increase the length of the AS-Path attribute by prepending a specified number of AS numbers to it.\nAS-Path prepending can only be applied in the outbound direction using route-maps. AS Path prepending does not work in iBGP sessions.\nRequired:\n  * criterial\nOptional:\n  * autonomous_systems\n  * last_as_count",
+                    "description": "A BGP peer can influence the best-path selection by a remote peer by increasing the length of the AS-Path attribute. AS-Path Prepend provides a mechanism that can be used to increase the length of the AS-Path attribute by prepending a specified number of AS numbers to it.\nAS-Path prepending can only be applied in the outbound direction using route-maps. AS Path prepending does not work in iBGP sessions.\nRequired:\n  * criterial\nOptional:\n  * autonomous_systems\n  * last_as_count\n=================================================\nAPI Information:\n - Class: `rtctrlSetASPath`\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}/saspath-{criteria}`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}: Set AS Path",
                     "items": {
                         "$ref": "#/definitions/Tenants:Policies:Protocol:RouteMapSetRules:SetAsPath"
                     },
@@ -13618,7 +13570,7 @@
                     "type": "integer",
                     "apicApi": "rtctrlSetRtMetric:metric",
                     "default": 1,
-                    "description": "Default value is `1`.  This is to set the metric for OSPF or BGP routes, or to set the minimum bandwidth for EIGRP routes.\nThe standalone NX-OS equivalent commands are the following:\nroute-map <rm-name>\n  set metric <num>\nRange: `1-4294967295`.",
+                    "description": "Default value is `1`.  This is to set the metric for OSPF or BGP routes, or to set the minimum bandwidth for EIGRP routes.\nThe standalone NX-OS equivalent commands are the following:\nroute-map <rm-name>\n  set metric <num>\nRange: `1-4294967295`.\n=================================================\nAPI Information:\n - Class: `rtctrlSetRtMetric`\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}/smetric`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}: Set Metric",
                     "minimum": 1,
                     "maximum": 4294967295,
                     "title": "set_metric - rtctrlSetRtMetric:metric"
@@ -13627,7 +13579,7 @@
                     "type": "string",
                     "apicApi": "rtctrlSetRtMetricType:metricType",
                     "default": "ospf-type1",
-                    "description": "Default value is `ospf-type1`.  This is to set the OSPF external metric type (Type 1 or Type 2). OSPF uses Type 2 by default, which does not include the cost (metric) to reach the ASBR that originated the external route, whereas Type 1 includes the cost to the ASBR.\nOptions are:\n  * ospf-type1: (default)\n  * ospf-type2",
+                    "description": "Default value is `ospf-type1`.  This is to set the OSPF external metric type (Type 1 or Type 2). OSPF uses Type 2 by default, which does not include the cost (metric) to reach the ASBR that originated the external route, whereas Type 1 includes the cost to the ASBR.\nOptions are:\n  * ospf-type1: (default)\n  * ospf-type2\n=================================================\nAPI Information:\n - Class: `rtctrlSetRtMetricType`\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}/smetrict`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}: Set Metric Type",
                     "enum": [
                         "ospf-type1",
                         "ospf-type2"
@@ -13638,7 +13590,7 @@
                     "type": "string",
                     "apicApi": "rtctrlSetNh:addr",
                     "default": "",
-                    "description": "This is to overwrite the next-hop IPv4/IPv6 in BGP routes.\nThe standalone NX-OS equivalent commands are the following:\nroute-map <rm-name>\n  set ip next-hop <next-hop ip>",
+                    "description": "This is to overwrite the next-hop IPv4/IPv6 in BGP routes.\nThe standalone NX-OS equivalent commands are the following:\nroute-map <rm-name>\n  set ip next-hop <next-hop ip>\n=================================================\nAPI Information:\n - Class: `rtctrlAttrP`\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}/nh`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}: Set Next Hop Address",
                     "minLength": 6,
                     "maxLength": 39,
                     "pattern": "^((([1-9]|[1-9][0-9]{1}|1[0-9]{2}|2[0-1][0-9]|22[0-3])\\.)(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\\.){2}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-fA-F]|[a-fA-F][a-fA-F0-9\\-]*[a-fA-F0-9])\\.)*([A-Fa-f]|[A-Fa-f][A-Fa-f0-9\\-]*[A-Fa-f0-9])$|^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::)))))$",
@@ -13648,7 +13600,7 @@
                     "type": "integer",
                     "apicApi": "rtctrlSetPref:localPref",
                     "default": 0,
-                    "description": "Default value is `0`.  This is to set the BGP local preference.\nThe standalone NX-OS equivalent commands are the following:\nroute-map <rm-name>\n  set local-preference <num>\nRange: `1-4294967295`.",
+                    "description": "Default value is `0`.  This is to set the BGP local preference.\nThe standalone NX-OS equivalent commands are the following:\nroute-map <rm-name>\n  set local-preference <num>\nRange: `1-4294967295`.\n=================================================\nAPI Information:\n - Class: `rtctrlSetPref`\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}/spref`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}: Set Preference",
                     "minimum": 0,
                     "maximum": 4294967295,
                     "title": "set_preference - rtctrlSetPref:localPref"
@@ -13657,7 +13609,7 @@
                     "type": "integer",
                     "apicApi": "rtctrlSetTag:tag",
                     "default": 0,
-                    "description": "Default value is `0`.  This is to set a Route Tag. This does not apply for routes that are given a tag by the VRF Tag Policy such as routes advertised (exported) to the outside.\nThe standalone NX-OS equivalent commands are the following:\nroute-map <rm-name>\n  set tag <num>\n\nRange: `1-4294967295`.",
+                    "description": "Default value is `0`.  This is to set a Route Tag. This does not apply for routes that are given a tag by the VRF Tag Policy such as routes advertised (exported) to the outside.\nThe standalone NX-OS equivalent commands are the following:\nroute-map <rm-name>\n  set tag <num>\n\nRange: `1-4294967295`.\n=================================================\nAPI Information:\n - Class: `rtctrlSetTag`\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}/srttag`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}: Set Route Tag",
                     "minimum": 0,
                     "maximum": 4294967295,
                     "title": "set_route_tag - rtctrlSetTag:tag"
@@ -13666,7 +13618,7 @@
                     "type": "integer",
                     "apicApi": "rtctrlSetWeight:weight",
                     "default": 0,
-                    "description": "Default value is `0`.  This is to set the BGP weight. If the same BGP weight needs to be set for all routes from a particular BGP peer, the weight can be set in the BGP Peer Connectivity Profile instead.  Range: `1-65535`.",
+                    "description": "Default value is `0`.  This is to set the BGP weight. If the same BGP weight needs to be set for all routes from a particular BGP peer, the weight can be set in the BGP Peer Connectivity Profile instead.  Range: `1-65535`.\n=================================================\nAPI Information:\n - Class: `rtctrlSetWeight`\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}/sweight`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}: Set Weight",
                     "minimum": 1,
                     "maximum": 65535,
                     "title": "set_weight - rtctrlSetWeight:weight"
@@ -13754,7 +13706,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "rtctrlSetAddComm",
-            "description": "This is to set the BGP Community. The syntax is the same as for Match Community. The available options are as follows:",
+            "description": "This is to set the BGP Community. The syntax is the same as for Match Community.\n=================================================\nAPI Information:\n - Class: `rtctrlSetAddComm`\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}/scomm`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}: Set community",
             "dn": "uni/tn-{tenant}/attr-{set_rule}/scomm",
             "properties": {
                 "community": {
@@ -13789,7 +13741,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "vzFilter",
-            "description": "This is used to stop advertising flapping routes. When a BGP route status changes from available to unavailable or vice versa, a penalty of 1000 is added to the route. When the penalty exceeds the Suppress Limit, the route is marked as dampened, and a router stops advertising the route. The penalty of each route will be reduced by half once the Half Life time has passed. Once the penalty goes below half of the Reuse Limit, the penalty is completely removed from the route.\nAttributes are:\n  * half_life\n  * max_suprress_time\n  * reuse_limit\n  * suppress_limit",
+            "description": "This is used to stop advertising flapping routes. When a BGP route status changes from available to unavailable or vice versa, a penalty of 1000 is added to the route. When the penalty exceeds the Suppress Limit, the route is marked as dampened, and a router stops advertising the route. The penalty of each route will be reduced by half once the Half Life time has passed. Once the penalty goes below half of the Reuse Limit, the penalty is completely removed from the route.\nAttributes are:\n  * half_life\n  * max_suprress_time\n  * reuse_limit\n  * suppress_limit\n=================================================\nAPI Information:\n - Class: `rtctrlSetDamp`\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}/sdamp`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}: Set Dampening",
             "dn": "uni/tn-{tenant}/attr-{set_rule}/flt-{name}",
             "properties": {
                 "half_life": {
@@ -13835,7 +13787,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "rtctrlRsSetPolicyTagToInstP",
-            "description": "Route-map with a set external EPG configuration can be applied either on L3Out using default-import or on BGP peer by using route control profile. External EPG and contract configuration on L3Out remains same as before. Based on the route-map, a particular external EPG and associated contract is determined for prefixes.\nNote: External EPG selection made through route-map has precedence over the external EPG subnets configured on L3Out. For example, if route-map configuration associates 10.1.1.0/24 to external EPG1, and subnet 10.1.1.0/24 is configured on external EPG2, then external EPG1 will be programmed in hardware for 10.1.1.0/24 because external EPG determination through route-map is preferred.\nRequired:\n  * external_epg\n  * l3out\n  * tenant",
+            "description": "Route-map with a set external EPG configuration can be applied either on L3Out using default-import or on BGP peer by using route control profile. External EPG and contract configuration on L3Out remains same as before. Based on the route-map, a particular external EPG and associated contract is determined for prefixes.\nNote: External EPG selection made through route-map has precedence over the external EPG subnets configured on L3Out. For example, if route-map configuration associates 10.1.1.0/24 to external EPG1, and subnet 10.1.1.0/24 is configured on external EPG2, then external EPG1 will be programmed in hardware for 10.1.1.0/24 because external EPG determination through route-map is preferred.\nRequired:\n  * external_epg\n  * l3out\n  * tenant\n=================================================\nAPI Information:\n - Class: `rtctrlSetPolicyTag`\n - Distinguished Name: `uni/tn-{tenant}/attr-{name}/sptag`\nGUI Location:\n - Tenants > {tenant} > Networking > Policies > Protocol > Set Rules > {name}: Set External EPG",
             "dn": "uni/tn-{tenant}/attr-{set_rule}/flt-{name}",
             "properties": {
                 "external_epg": {
