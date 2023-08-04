@@ -12,49 +12,49 @@ switch:
           interface_description: OKEYE01-eth2/3
           access_or_native_vlan: 1
           allowed_vlans: 101-104
-          policy_group: trunkPort
+          policy_group: trunkPort25G
           policy_group_type: access
         - interface: 1/2
           interface_description: OKEYE02-eth2/3
           access_or_native_vlan: 1
           allowed_vlans: 101-104
-          policy_group: trunkPort
+          policy_group: trunkPort25G
           policy_group_type: access
         - interface: 1/3
           interface_description: OKEYE03-eth2/3
           access_or_native_vlan: 1
           allowed_vlans: 101-104
-          policy_group: trunkPort
+          policy_group: trunkPort25G
           policy_group_type: access
         - interface: 1/4
           interface_description: OKEYE04-eth2/3
           access_or_native_vlan: 1
           allowed_vlans: 101-104
-          policy_group: trunkPort
+          policy_group: trunkPort25G
           policy_group_type: access
         - interface: 1/5
           interface_description: PANTHER01-eth2/3
           access_or_native_vlan: 1
           allowed_vlans: 101-104
-          policy_group: trunkPort
+          policy_group: trunkPort25G
           policy_group_type: access
         - interface: 1/6
           interface_description: PANTHER02-eth2/3
           access_or_native_vlan: 1
           allowed_vlans: 101-104
-          policy_group: trunkPort
+          policy_group: trunkPort25G
           policy_group_type: access
         - interface: 1/7
           interface_description: PANTHER03-eth2/3
           access_or_native_vlan: 1
           allowed_vlans: 101-104
-          policy_group: trunkPort
+          policy_group: trunkPort25G
           policy_group_type: access
         - interface: 1/8
           interface_description: PANTHER04-eth2/3
           access_or_native_vlan: 1
           allowed_vlans: 101-104
-          policy_group: trunkPort
+          policy_group: trunkPort25G
           policy_group_type: access
         - interface: 1/9
         - interface: 1/10

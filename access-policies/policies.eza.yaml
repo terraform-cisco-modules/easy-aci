@@ -36,7 +36,7 @@ access:
         - 10.101.128.16
       recommended_policies:
         error_disabled_recovery_policy: true
-        mcp_instance_policy: true
+        mcp_instance_policy_default: true
         qos_class: true
         vpc_domain: true # VPC Domain is under Switch but for simplicity added here
     interface:

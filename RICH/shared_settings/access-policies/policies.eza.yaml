@@ -37,3 +37,8 @@ access:
         port_channel: true
         port_security: true
         spanning_tree_interface: true
+      link_level:
+        - name: cl91_rs_fec
+          auto_negotiation: on
+          forwarding_error_correction: cl91-rs-fec
+          speed: 25G
