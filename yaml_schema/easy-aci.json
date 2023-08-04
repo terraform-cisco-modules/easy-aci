@@ -4309,11 +4309,11 @@
                 "tenants": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "Required:\n  * name\nOptional:\n  * alias\n  * annotations\n  * apics_inband_mgmt_addresses\n  * application_profiles\n  * contracts\n  * create\n  * description\n  * global_alias\n  * monitoring_policy\n  * networking\n  * policies\n  * policy_tenant\n\nIf this is for Nexus Dashboard Orchestrator it requires:\n  * ndo\n=================================================\nAPI Information:\n  * Class: fvTenant\n  * DN: Distinguished Name: `uni/tn-{tenant}`\nGUI Location:\n  * Tenants",
+                    "description": "Required:\n  * name\nIf this is for Nexus Dashboard Orchestrator it requires:\n  * ndo\nOptional:\n  * alias\n  * annotations\n  * apics_inband_mgmt_addresses\n  * application_profiles\n  * contracts\n  * create\n  * description\n  * global_alias\n  * monitoring_policy\n  * networking\n  * policies\n  * policy_tenant\n\n=================================================\nAPI Information:\n  * Class: fvTenant\n  * DN: Distinguished Name: `uni/tn-{tenant}`\nGUI Location:\n  * Tenants",
                     "items": {
                         "$ref": "#/definitions/Tenants"
                     },
-                    "title": "tenants - fvTenant\nGUI Location: Tenants"
+                    "title": "tenants - fvTenant"
                 },
                 "virtual_networking": {
                     "$ref": "#/definitions/VirtualNetworking"
@@ -5728,7 +5728,7 @@
                 "switch_profiles": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "Array of Switch Profiles.\nRequired:\n  * interfaces\n  * name\n  * node_id\n  * node_type\n  * serial_number\nOptional:\n  * inband_addressing\n  * instrumentation_immediacy\n  * ooband_addressing\n  * pod_id\n  * role\n##### FABRIC MEMBERSHIP #####\n=================================================\nAPI Information:\n - Class: `fabricNodeIdentP`\n - Distinguished Name: `uni/controller/nodeidentpol/nodep-{serial_number}`\nGUI Location:\n - Fabric > Access Policies > Inventory > Fabric Membership:[Registered Nodes or Nodes Pending Registration]\n\n##### LEAF INTERFACE PROFILES #####\n=================================================\nAPI Information:\n - Class: `infraAccPortP`\n - Distinguished Name: `uni/infra/accportprof-{name}`\nGUI Location:\n - Fabric > Access Policies > Interfaces > Leaf Interfaces > Profiles > {name}\n\n##### LEAF PROFILES #####\n=================================================\nAPI Information:\n - Class: `infraLeafS`\n - Distinguished Name: `uni/infra/nprof-{Name}`\nGUI Location:\n - Fabric > Access Policies > Switches > Leaf Switches > Profiles > {Name}\n=================================================\nAPI Information:\n - Class: `infraRsAccNodePGrp`\n - Distinguished Name: `uni/infra/nprof-{name}/leaves-{selector_name}-typ-range`\nGUI Location:\n - Fabric > Access Policies > Switches > Leaf Switches > Profiles > {name}: Leaf Selectors Policy Group: {selector_name}\n\n##### SPINE INTERFACE PROFILE #####\n=================================================\nAPI Information:\n - Class: `infraSpAccPortP`\n - Distinguished Name: `uni/infra/spaccportprof-{name}`\nGUI Location:\n - Fabric > Access Policies > Interfaces > Spine Interfaces > Profiles > {name}\n\n##### SPINE PROFILE #####\n=================================================\nAPI Information:\n - Class: `infraSpineS`\n - Distinguished Name: `uni/infra/nprof-{Name}`\nGUI Location:\n - Fabric > Access Policies > Switches > Spine Switches > Profiles > {Name}\n=================================================\nAPI Information:\n - Class: `infraSpineS`\n - Distinguished Name: `uni/infra/spprof-{name}/spines-{name}-typ-range`\nGUI Location:\n - Fabric > Access Policies > Switches > Spine Switches > Profiles > {name}: Spine Selectors [{name}]\n=================================================\nAPI Information:\n - Class: `infraNodeBlk`\n - Distinguished Name: `uni/infra/spprof-{name}/spines-{name}-typ-range/nodeblk-blk{node_id}-{node_id}`\nGUI Location:\n - Fabric > Access Policies > Switches > Spine Switches > Profiles > {name}: Spine Selectors [{name}]",
+                    "description": "An array of Switch Profiles.\nRequired:\n  * interfaces\n  * name\n  * node_id\n  * node_type\n  * serial_number\nOptional:\n  * inband_addressing\n  * instrumentation_immediacy\n  * ooband_addressing\n  * pod_id\n  * role\n=================================================\n##### FABRIC MEMBERSHIP #####\nAPI Information:\n - Class: `fabricNodeIdentP`\n - Distinguished Name: `uni/controller/nodeidentpol/nodep-{serial_number}`\nGUI Location:\n - Fabric > Access Policies > Inventory > Fabric Membership:[Registered Nodes or Nodes Pending Registration]\n\n=================================================\n##### LEAF INTERFACE PROFILES #####\nAPI Information:\n - Class: `infraAccPortP`\n - Distinguished Name: `uni/infra/accportprof-{name}`\nGUI Location:\n - Fabric > Access Policies > Interfaces > Leaf Interfaces > Profiles > {name}\n\n=================================================\n##### LEAF PROFILES #####\nAPI Information:\n - Class: `infraLeafS`\n - Distinguished Name: `uni/infra/nprof-{Name}`\nGUI Location:\n - Fabric > Access Policies > Switches > Leaf Switches > Profiles > {Name}\n=================================================\nAPI Information:\n - Class: `infraRsAccNodePGrp`\n - Distinguished Name: `uni/infra/nprof-{name}/leaves-{selector_name}-typ-range`\nGUI Location:\n - Fabric > Access Policies > Switches > Leaf Switches > Profiles > {name}: Leaf Selectors Policy Group: {selector_name}\n\n=================================================\n##### SPINE INTERFACE PROFILE #####\nAPI Information:\n - Class: `infraSpAccPortP`\n - Distinguished Name: `uni/infra/spaccportprof-{name}`\nGUI Location:\n - Fabric > Access Policies > Interfaces > Spine Interfaces > Profiles > {name}\n\n=================================================\n##### SPINE PROFILE #####\nAPI Information:\n - Class: `infraSpineS`\n - Distinguished Name: `uni/infra/nprof-{Name}`\nGUI Location:\n - Fabric > Access Policies > Switches > Spine Switches > Profiles > {Name}\n=================================================\nAPI Information:\n - Class: `infraSpineS`\n - Distinguished Name: `uni/infra/spprof-{name}/spines-{name}-typ-range`\nGUI Location:\n - Fabric > Access Policies > Switches > Spine Switches > Profiles > {name}: Spine Selectors [{name}]\n=================================================\nAPI Information:\n - Class: `infraNodeBlk`\n - Distinguished Name: `uni/infra/spprof-{name}/spines-{name}-typ-range/nodeblk-blk{node_id}-{node_id}`\nGUI Location:\n - Fabric > Access Policies > Switches > Spine Switches > Profiles > {name}: Spine Selectors [{name}]",
                     "items": {
                         "$ref": "#/definitions/Switch:SwitchProfiles"
                     },
@@ -6071,7 +6071,9 @@
                     "title": "interface - [fromCard|fromPort|toCard|toPort]"
                 },
                 "interface_description": {
-                    "$ref": "#/definitions/AbstractSettings/properties/description"
+                    "description": "This will be the description that will show in a `show interface description`/`show interface status`.",
+                    "$ref": "#/definitions/AbstractSettings/properties/description",
+                    "title": "interface_description"
                 },
                 "policy_group": {
                     "type": "string",
@@ -6171,7 +6173,7 @@
         },
         "SystemSettings": {
             "type": "object",
-            "description": "Object Types are:\n  * apic_connectivity_preference\n  * bgp_route_reflector\n  * coop_group\n  * endpoint_controls\n  * fabric_wide_settings\n  * global_aes_encryption_settings\n  * isis_policy\n  * port_tracking\n  * ptp_and_latency_measurement\n  * recommended_settings",
+            "description": "GUI Location:\n - System > System Settings\n\nObject Types are:\n  * apic_connectivity_preference\n  * bgp_route_reflector\n  * coop_group\n  * endpoint_controls\n  * fabric_wide_settings\n  * global_aes_encryption_settings\n  * isis_policy\n  * port_tracking\n  * ptp_and_latency_measurement\n  * recommended_settings",
             "additionalProperties": false,
             "properties": {
                 "apic_connectivity_preference": {
@@ -6205,92 +6207,73 @@
                     "$ref": "#/definitions/SystemSettings:RecommendedSettings"
                 }
             },
-            "title": "System > System Settings"
+            "title": "system_settings"
         },
         "SystemSettings:ApicConnectivityPreference": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Attribute is:\n  * interface_to_use_for_external_connections",
+            "class": "mgmtConnectivityPrefs",
+            "description": "Attribute is:\n  * interface_to_use_for_external_connections\n=================================================\nAPI Information:\n - Class: `mgmtConnectivityPrefs`\n - Distinguished Named `uni/fabric/connectivityPrefs`\nGUI Location:\n - System > System Settings > APIC Connectivity Preferences",
+            "dn": "uni/fabric/connectivityPrefs",
             "properties": {
                 "interface_to_use_for_external_connections": {
                     "type": "string",
-                    "apicApi": "monitorServer",
+                    "apicApi": "interfacePref",
                     "default": "ooband",
                     "description": "The preferred management connectivity preference. Options are:\n  * inband - Executes in-band management connectivity between the APIC server to external devices through leaf switches on the ACI fabric.\n  * ooband: (default) - Executes out-of-band management connectivity between the APIC server to external devices through connections external to the ACI fabric.",
                     "enum": [
                         "inband",
                         "ooband"
                     ],
-                    "title": "interface_to_use_for_external_connections - "
+                    "title": "interface_to_use_for_external_connections - interfacePref"
                 }
             },
             "required": [
                 "interface_to_use_for_external_connections"
             ],
-            "title": "apic_connectivity_preference - APIC Connectivity Preference."
+            "title": "apic_connectivity_preference - mgmtConnectivityPrefs"
         },
         "SystemSettings:BgpRouteReflector": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Attributes are:\n  * autonomous_system_number\n * bgp_route_refector",
+            "class": "bgpAsP",
+            "description": "Attributes are:\n  * autonomous_system_number\n * bgp_route_refector\n=================================================\nAPI Information:\n - Class: `bgpAsP`\n - Distinguished Name: `uni/fabric/bgpInstP-default`\nGUI Location:\n - System > System Settings > BGP Route Reflector: {asn}",
+            "dn": "uni/fabric/bgpInstP-default/as",
             "properties": {
                 "autonomous_system_number": {
+                    "type": "integer",
+                    "apicApi": "asn",
                     "default": 65001,
                     "description": "BGP Autonomous System Number.",
                     "minimum": 1,
                     "maximum": 4294967294,
-                    "title": "autonomous_system_number - "
+                    "title": "autonomous_system_number - asn"
                 },
                 "route_reflector_nodes": {
+                    "type": "array",
+                    "additionalProperties": false,
+                    "description": "Attribute is:\n  * pods\n=================================================\nAPI Information:\n - Class: `bgpRRNodePEp`\n - Distinguished Name: `uni/fabric/bgpInstP-default/rr/node-{node_id}`\nGUI Location:\n - System > System Settings > BGP Route Reflector: Route Reflector Nodes",
                     "items": {
                         "$ref": "#/definitions/SystemSettings:BgpRouteReflector:RouteReflectorNodes"
                     },
-                    "title": "route_reflector_nodes - "
+                    "title": "route_reflector_nodes - bgpRRNodePEp"
                 }
             },
             "required": [
                 "autonomous_system_number"
             ],
-            "title": "bgp - BGP Autonomous System Number."
+            "title": "bgp - bgpAsP"
         },
         "SystemSettings:BgpRouteReflector:RouteReflectorNodes": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Attribute is:\n  * pods",
+            "description": "",
             "properties": {
                 "pods": {
                     "type": "array",
                     "description": "Required:\n  * pod_id\n  * route_reflector_nodes",
                     "items": {
-                        "type": "object",
-                        "additionalProperties": false,
-                        "description": "",
-                        "properties": {
-                            "pod_id": {
-                                "type": "integer",
-                                "default": 1,
-                                "description": "ACI Pod Identifier.",
-                                "minimum": 1,
-                                "maximum": 12,
-                                "title": "pod_id - "
-                            },
-                            "route_reflector_nodes": {
-                                "type": "array",
-                                "description": "List of BGP Route Reflector Nodes.",
-                                "items": {
-                                    "type": "integer",
-                                    "default": 101,
-                                    "description": "Spine Node Identifier.",
-                                    "minimum": 1,
-                                    "maximum": 4000
-                                },
-                                "title": "route_reflector_nodes - "
-                            }
-                        },
-                        "required": [
-                            "pod_id",
-                            "route_reflector_nodes"
-                        ]
+                        "$ref": "#/definitions/SystemSettings:BgpRouteReflector:RouteReflectorNodes:Pods"
                     },
                     "title": "pods"
                 }
@@ -6298,37 +6281,76 @@
             "required": [
                 "pods"
             ],
-            "title": "bgp_route_reflectors - Pod(s) BGP Route Reflectors."
+            "title": "route_reflector_nodes"
+        },
+        "SystemSettings:BgpRouteReflector:RouteReflectorNodes:Pods": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "bgpRRNodePEp",
+            "description": "",
+            "dn": "uni/fabric/bgpInstP-default/rr/node-{node_id}",
+            "properties": {
+                "pod_id": {
+                    "type": "integer",
+                    "apicApi": "podId",
+                    "default": 1,
+                    "description": "Default is `1`.  ACI Pod Identifier.",
+                    "minimum": 1,
+                    "maximum": 12,
+                    "title": "pod_id - podId"
+                },
+                "route_reflector_nodes": {
+                    "type": "array",
+                    "description": "List of BGP Route Reflector Nodes.",
+                    "items": {
+                        "type": "integer",
+                        "apicApi": "id",
+                        "default": 101,
+                        "description": "Spine Node Identifier.",
+                        "minimum": 1,
+                        "maximum": 4000,
+                        "title": "node_id - id"
+                    },
+                    "title": "route_reflector_nodes"
+                }
+            },
+            "required": [
+                "pod_id",
+                "route_reflector_nodes"
+            ],
+            "title": "pods"
         },
         "SystemSettings:CoopGroup": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Required:\n  * type\n\n Optional Attribute is:\n  * description",
+            "class": "coopPol",
+            "description": "Required:\n  * type\n\n Optional Attribute is:\n  * description\n=================================================\nAPI Information:\n - Class: `coopPol`\n - Distinguished Named `uni/fabric/pol-default`\nGUI Location:\n - System > System Settings > Coop Group > Type",
+            "dn": "uni/fabric/pol-default",
             "properties": {
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
                 },
                 "type": {
                     "type": "string",
-                    "apicApi": "monitorServer",
+                    "apicApi": "type",
                     "default": "strict",
                     "description": "COOP protocol is enhanced to support two ZMQ authentication modes:\n  * compatible - Type COOP accepts both MD5 authenticated and non-authenticated ZMQ connections for message transportation.\n  * strict: (default) - COOP allows MD5 authenticated ZMQ connections only.\nNote: The APIC provides a managed object (fabric:SecurityToken), that includes an attribute to be used for the MD5 password. An attribute in this managed object, called `token`, is a string that changes every hour. COOP obtains the notification from the DME to update the password for ZMQ authentication. The attribute token value is not displayed.",
                     "enum": [
                         "inband",
                         "strict"
                     ],
-                    "title": "type - "
+                    "title": "type"
                 }
             },
             "required": [
                 "type"
             ],
-            "title": "coop_group - COOP Group."
+            "title": "coop_group - coopPol"
         },
         "SystemSettings:EndpointControls": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Attributes are:\n  * ep_loop_protection\n  * ip_aging\n  * rouge_ep_control",
+            "description": "GUI Location:\n - System > System Settings > Endpoint Controls\n\nAttributes are:\n  * ep_loop_protection\n  * ip_aging\n  * rouge_ep_control",
             "properties": {
                 "ep_loop_protection": {
                     "$ref": "#/definitions/SystemSettings:EndpointControls:EpLoopProtection"
@@ -6345,448 +6367,477 @@
         "SystemSettings:EndpointControls:EpLoopProtection": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Attributes are:\n  * action\n  * administrative_state\n  * loop_detection_interval\n  * loop_detection_multiplier",
+            "class": "epLoopProtectP",
+            "description": "Attributes are:\n  * action\n  * administrative_state\n  * loop_detection_interval\n  * loop_detection_multiplier\n=================================================\nAPI Information:\n - Class: `epLoopProtectP`\n - Distinguished Name: `uni/infra/epLoopProtectP-default`\nGUI Location:\n - System > System Settings > Endpoint Controls > Ep Loop Protection",
+            "dn": "uni/infra/epLoopProtectP-default",
             "properties": {
                 "action": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "description": "Attributes are:\n  * bd_learn_disablebd_learn_disable\n  * port_disable\nAction to Perform when a Loop is dected.",
-                    "properties": {
-                        "bd_learn_disable": {
-                            "type": "boolean",
-                            "default": true,
-                            "description": "Disable bridge domain learning when a loop is detected.",
-                            "title": "bd_learn_disable - "
-                        },
-                        "port_disable": {
-                            "type": "boolean",
-                            "default": true,
-                            "description": "Disable the Port when a loop is detected.",
-                            "title": "port_disable - "
-                        }
-                    },
-                    "title": "action"
+                    "$ref": "#/definitions/SystemSettings:EndpointControls:EpLoopProtection:Action"
                 },
                 "administrative_state": {
                     "$ref": "#/definitions/AbstractSettings:AdministrativeState/properties/administrative_state"
                 },
                 "loop_detection_interval": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "loopDetectIntvl",
                     "default": 60,
-                    "description": "Sets the loop detection interval, which specifies the time to detect a loop. The interval range is from 30 to 300 seconds.",
+                    "description": "Default is `60`.  Sets the loop detection interval, which specifies the time to detect a loop. The interval range is from 30 to 300 seconds.",
                     "minimum": 30,
                     "maximum": 300,
-                    "title": "loop_detection_interval - "
+                    "title": "loop_detection_interval - loopDetectIntvl"
                 },
                 "loop_detection_multiplier": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "loopDetectMult",
                     "default": 4,
-                    "description": "Sets the loop detection multiplication factor, which is the number of times a single EP moves between ports within the loop detection interval.",
+                    "description": "Default is `4`.  Sets the loop detection multiplication factor, which is the number of times a single EP moves between ports within the loop detection interval.",
                     "minimum": 1,
                     "maximum": 255,
-                    "title": "loop_detection_multiplier - "
+                    "title": "loop_detection_multiplier - loopDetectMult"
                 }
             },
-            "title": "ep_loop_protection - Endpoint Controls > EP Loop Protection."
+            "title": "ep_loop_protection - epLoopProtectP"
+        },
+        "SystemSettings:EndpointControls:EpLoopProtection:Action": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Attributes are:\n  * bd_learn_disablebd_learn_disable\n  * port_disable\nAction to Perform when a Loop is dected.",
+            "properties": {
+                "bd_learn_disable": {
+                    "type": "boolean",
+                    "apicApi": "action:bd-learn-disable",
+                    "default": false,
+                    "description": "Default is `false`.  Disable bridge domain learning when a loop is detected.",
+                    "title": "bd_learn_disable - action:bd-learn-disable"
+                },
+                "port_disable": {
+                    "type": "boolean",
+                    "apicApi": "action:port-disable",
+                    "default": true,
+                    "description": "Default is `true`.  Disable the Port when a loop is detected.",
+                    "title": "port_disable - action:port-disable"
+                }
+            },
+            "title": "action"
         },
         "SystemSettings:EndpointControls:IpAging": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Attribute is:\n  * administrative_state",
+            "class": "epIpAgingP",
+            "description": "Attribute is:\n  * administrative_state\n=================================================\nAPI Information:\n - Class: `epIpAgingP`\n - Distinguished Name: `uni/infra/ipAgingP-default`\nGUI Location:\n - System > System Settings > Endpoint Controls > Ip Aging",
+            "dn": "uni/infra/ipAgingP-default",
             "properties": {
                 "administrative_state": {
                     "$ref": "#/definitions/AbstractSettings:AdministrativeState/properties/administrative_state"
                 }
             },
-            "title": "ip_aging - Endpoint Controls > IP Aging."
+            "title": "ip_aging - epIpAgingP"
         },
         "SystemSettings:EndpointControls:RougeEpControl": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Attributes are:\n  * administrative_state\n  * hold_interval\n  * rouge_interval\n  * rouge_multiplier",
+            "class": "epControlP",
+            "description": "Attributes are:\n  * administrative_state\n  * hold_interval\n  * rouge_interval\n  * rouge_multiplier\nAPI Information:\n - Class: `epControlP`\n - Distinguished Name: `uni/infra/epCtrlP-default`\nGUI Location:\n - System > System Settings > Rogue EP Control",
+            "dn": "uni/infra/epCtrlP-default",
             "properties": {
                 "administrative_state": {
                     "$ref": "#/definitions/AbstractSettings:AdministrativeState/properties/administrative_state"
                 },
                 "hold_interval": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "holdIntvl",
                     "default": 1800,
-                    "description": "Interval in seconds after the endpoint is declared rogue, where it is kept static so learning is prevented and the traffic to and from the rogue endpoint is dropped. After this interval, the endpoint is deleted. Valid values are from 300 to 3600.Interval in seconds after the endpoint is declared rogue, where it is kept static so learning is prevented and the traffic to and from the rogue endpoint is dropped. After this interval, the endpoint is deleted. Valid values are from 300 to 3600.",
+                    "description": "Default is `1800`.  Interval in seconds after the endpoint is declared rogue, where it is kept static so learning is prevented and the traffic to and from the rogue endpoint is dropped. After this interval, the endpoint is deleted. Valid values are from 300 to 3600.Interval in seconds after the endpoint is declared rogue, where it is kept static so learning is prevented and the traffic to and from the rogue endpoint is dropped. After this interval, the endpoint is deleted. Valid values are from 300 to 3600.",
                     "minimum": 300,
                     "maximum": 3600,
-                    "title": "hold_interval - "
+                    "title": "hold_interval - holdIntvl"
                 },
                 "rouge_interval": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "rogueEpDetectIntvl",
                     "default": 30,
-                    "description": "Sets the Rogue EP detection interval, which specifies the time to detect rogue endpoints. Valid values are from 0 to 65535 seconds.",
+                    "description": "Default is `30`.  Sets the Rogue EP detection interval, which specifies the time to detect rogue endpoints. Valid values are from 0 to 65535 seconds.",
                     "minimum": 0,
                     "maximum": 65535,
-                    "title": "rouge_interval - "
+                    "title": "rouge_interval - rogueEpDetectIntvl"
                 },
                 "rouge_multiplier": {
                     "type": "integer",
-                    "apicApi": "monitorServer - ",
+                    "apicApi": "rogueEpDetectMult",
                     "default": 6,
-                    "description": "Sets the Rogue EP Detection multiplication factor for determining if an endpoint is unauthorized. If the endpoint moves more times than this number, within the EP detection interval, the endpoint is declared rogue. Valid values are from 2 to 10.",
+                    "description": "Default is `6`.  Sets the Rogue EP Detection multiplication factor for determining if an endpoint is unauthorized. If the endpoint moves more times than this number, within the EP detection interval, the endpoint is declared rogue. Valid values are from 2 to 10.",
                     "minimum": 2,
                     "maximum": 10,
-                    "title": "rouge_multiplier - "
+                    "title": "rouge_multiplier - rogueEpDetectMult"
                 }
             },
-            "title": "rouge_ep_control - Endpoint Controls > Rouge EP Control."
+            "title": "rouge_ep_control - epControlP"
         },
         "SystemSettings:FabricWideSettings": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Optional Attribute are:\n  * disable_remote_ep_learning\n  * enforce_domain_validation\n  * enforce_epg_vlan_validation\n  * enforce_subnet_check\n  * leaf_opflex_client_authentication\n  * leaf_ssl_opflex\n  * reallocate_gipo\n  * restrict_infra_vlan_traffic\n  * ssl_opflex_versions\n  * spine_opflex_client_authentication\n  * spine_ssl_opflex",
+            "class": "infraSetPol",
+            "description": "Attribute are:\n  * disable_remote_ep_learning\n  * enforce_domain_validation\n  * enforce_epg_vlan_validation\n  * enforce_subnet_check\n  * leaf_opflex_client_authentication\n  * leaf_ssl_opflex\n  * reallocate_gipo\n  * restrict_infra_vlan_traffic\n  * ssl_opflex_versions\n  * spine_opflex_client_authentication\n  * spine_ssl_opflex\n=================================================\nAPI Information:\n - Class: `infraSetPol`\n - Distinguished Name: `uni/infra/settings`\nGUI Location:\n - System > System Settings > Fabric Wide Settings",
+            "dn": "uni/infra/settings",
             "properties": {
                 "disable_remote_ep_learning": {
                     "type": "boolean",
-                    "apicApi": "monitorServer",
+                    "apicApi": "unicastXrEpLearnDisable",
                     "default": true,
                     "description": "Default is `true`.  You should enable this policy in fabrics which include the Cisco Nexus 9000 series switches, 93128TX, 9396PX, or 9396TX switches with the N9K-M12PQ uplink module, after all the nodes have been successfully upgraded to APIC Release 2.2(2x).\n  * Note: After any of the following configuration changes, you may need to manually flush previously learned IP endpoints:\n  * Remote IP endpoint learning is disabled.\n  * The VRF is configured for ingress policy enforcement.\n  * At least one Layer 3 interface exists in the VRF.\n  * To manually flush previously learned IP endpoints, enter the following command on both VPC peers: vsh -c `clear system internal epm endpoint vrf <vrf-name> remote`",
-                    "title": "disable_remote_ep_learning - "
+                    "title": "disable_remote_ep_learning - unicastXrEpLearnDisable"
                 },
                 "enforce_domain_validation": {
                     "type": "boolean",
-                    "apicApi": "monitorServer",
+                    "apicApi": "domainValidation",
                     "default": true,
                     "description": "Default is `true`.  Enable a validation check when static paths are added, to ensure that a domain is attached to the EPG on the path.",
-                    "title": "enforce_domain_validation - "
+                    "title": "enforce_domain_validation - domainValidation"
                 },
                 "enforce_epg_vlan_validation": {
                     "type": "boolean",
-                    "apicApi": "monitorServer",
+                    "apicApi": "validateOverlappingVlans",
                     "default": false,
                     "description": "Default is `false`.  When checked, the system globally prevents overlapping VLAN pools from being assigned to EPGs.\n  * Note:  If overlapping VLAN pools already exist and this parameter is checked, the system returns an error. You must assign VLAN pools that are not overlapping to the EPGs before choosing this feature.\n  * If this parameter is checked and an attempt is made to add an overlapping VLAN pool to an EPG, the system returns an error.",
-                    "title": "enforce_epg_vlan_validation - "
+                    "title": "enforce_epg_vlan_validation - validateOverlappingVlans"
                 },
                 "enforce_subnet_check": {
                     "type": "boolean",
-                    "apicApi": "monitorServer",
+                    "apicApi": "enforceSubnetCheck",
                     "default": false,
                     "description": "Default is `false`.  When checked, IP address learning on outside of subnets configured in a VRF, for all VRFs are disabled.",
-                    "title": "enforce_subnet_check - "
+                    "title": "enforce_subnet_check - enforceSubnetCheck"
                 },
                 "leaf_opflex_client_authentication": {
                     "type": "boolean",
-                    "apicApi": "monitorServer",
+                    "apicApi": "leafOpflexpAuthenticateClients",
                     "default": true,
                     "description": "Default is `true`.  To enforce Opflex client certificate authentication on leaf switches for GOLF and Linux.",
-                    "title": "leaf_opflex_client_authentication - "
+                    "title": "leaf_opflex_client_authentication - leafOpflexpAuthenticateClients"
                 },
                 "leaf_ssl_opflex": {
                     "type": "boolean",
-                    "apicApi": "monitorServer - ",
+                    "apicApi": "leafOpflexpUseSsl",
                     "default": true,
                     "description": "Default is `true`.  To enable SSL Opflex transport for leaf switches.",
-                    "title": "leaf_ssl_opflex - "
+                    "title": "leaf_ssl_opflex - leafOpflexpUseSsl"
                 },
                 "reallocate_gipo": {
                     "type": "boolean",
-                    "apicApi": "monitorServer",
+                    "apicApi": "reallocateGipo",
                     "default": false,
                     "description": "Default is `false`.  Enable reallocating group IP outer addresses (Gipos) on non-stretched BDs to make room for stretched BDs.",
-                    "title": "reallocate_gipo - "
+                    "title": "reallocate_gipo - reallocateGipo"
                 },
                 "restrict_infra_vlan_traffic": {
                     "type": "boolean",
-                    "apicApi": "monitorServer",
+                    "apicApi": "restrictInfraVLANTraffic",
                     "default": false,
                     "description": "Default is `false`.  This feature restricts Infra VLAN traffic to only network paths specified by Infra security entry policies. When this feature is enabled, each leaf switch limits Infra VLAN traffic between compute nodes to allow only iVXLAN traffic. The switch also limits traffic to fabric nodes to allow only OpFlex and iVXLAN/VXLAN traffic. APIC management traffic is allowed on front panel ports on the Infra VLAN.",
-                    "title": "restrict_infra_vlan_traffic - "
+                    "title": "restrict_infra_vlan_traffic - restrictInfraVLANTraffic"
                 },
                 "spine_opflex_client_authentication": {
                     "type": "boolean",
-                    "apicApi": "monitorServer",
+                    "apicApi": "opflexpAuthenticateClients",
                     "default": true,
-                    "description": "Default is `true`.  Default is `true`.  To enforce Opflex client certificate authentication on spine switches for GOLF and Linux.",
-                    "title": "spine_opflex_client_authentication - "
+                    "description": "Default is `true`.  To enforce Opflex client certificate authentication on spine switches for GOLF and Linux.",
+                    "title": "spine_opflex_client_authentication - opflexpAuthenticateClients"
                 },
                 "spine_ssl_opflex": {
                     "type": "boolean",
-                    "apicApi": "monitorServer",
+                    "apicApi": "opflexpUseSsl",
                     "default": true,
                     "description": "Default is `true`.  To enable SSL Opflex transport for spine switches..",
-                    "title": "spine_ssl_opflex - "
+                    "title": "spine_ssl_opflex - opflexpUseSsl"
                 },
                 "ssl_opflex_versions": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "description": "Attributes are:\n  * TLSv1\n  * TLSv1_1\n  * TLSv1_2\nThis is only applicable to APIC version 5.2 and greater.",
-                    "properties": {
-                        "TLSv1": {
-                            "type": "boolean",
-                            "default": false,
-                            "description": "Default is `false`.  Enable TLS Version 1.",
-                            "title": "TLSv1 - "
-                        },
-                        "TLSv1_1": {
-                            "type": "boolean",
-                            "default": false,
-                            "description": "Default is `false`.  Enable TLS Version 1.1.",
-                            "title": "TLSv1_1 - "
-                        },
-                        "TLSv1_2": {
-                            "type": "boolean",
-                            "default": true,
-                            "description": "Default is `true`.  Enable TLS Version 1.2.",
-                            "title": "TLSv1_2 - "
-                        }
-                    },
-                    "title": "ssl_opflex_versions - SSL Opflex Versions."
+                    "$ref": "#/definitions/SystemSettings:FabricWideSettings:SslOpflexVersions"
                 }
             },
-            "title": "fabric_wide_settings - Fabric Wide Settings."
+            "title": "fabric_wide_settings - infraSetPol"
+        },
+        "SystemSettings:FabricWideSettings:SslOpflexVersions": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "infraSetPol",
+            "description": "Attributes are:\n  * TLSv1\n  * TLSv1_1\n  * TLSv1_2\nThis is only applicable to APIC version 5.2 and greater.",
+            "dn": "uni/infra/settings",
+            "properties": {
+                "TLSv1": {
+                    "type": "boolean",
+                    "apicApi": "TLSv1",
+                    "default": false,
+                    "description": "Default is `false`.  Enable TLS Version 1.",
+                    "title": "TLSv1 - TLSv1"
+                },
+                "TLSv1_1": {
+                    "type": "boolean",
+                    "apicApi": "TLSv1.1",
+                    "default": false,
+                    "description": "Default is `false`.  Enable TLS Version 1.1.",
+                    "title": "TLSv1_1 - TLSv1.1"
+                },
+                "TLSv1_2": {
+                    "type": "boolean",
+                    "apicApi": "TLSv1.2",
+                    "default": true,
+                    "description": "Default is `true`.  Enable TLS Version 1.2.",
+                    "title": "TLSv1_2 - TLSv1.2"
+                }
+            },
+            "title": "ssl_opflex_versions - opflexpSslProtocols"
         },
         "SystemSettings:GlobalAesEncryptionSettings": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Optional Attribute are:\n  * clear_passphrase\n  * description\n  * enable_encryption\n  * passphrase_key_derivation_version",
+            "class": "pkiExportEncryptionKey",
+            "description": "Optional Attribute are:\n  * clear_passphrase\n  * description\n  * enable_encryption\n  * passphrase_key_derivation_version\n=================================================\nAPI Information:\n - Class: `pkiExportEncryptionKey`\n - Distinguished Name: `uni/exportcryptkey`\nGUI Location:\n - System > System Settings > Global AES Passphrase Encryption Settings",
+            "dn": "uni/exportcryptkey",
             "properties": {
                 "clear_passphrase": {
                     "type": "boolean",
-                    "apicApi": "monitorServer",
-                    "default": true,
-                    "description": "Flag to clear the passphrase when disabling Global AES Encryption.",
-                    "title": "clear_passphrase - "
+                    "apicApi": "clearEncryptionKey",
+                    "default": false,
+                    "description": "Default is `false`.  Flag to clear the passphrase when disabling Global AES Encryption.",
+                    "title": "clear_passphrase - clearEncryptionKey"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
                 },
                 "enable_encryption": {
                     "type": "boolean",
-                    "apicApi": "monitorServer",
+                    "apicApi": "not_applicable",
                     "default": true,
-                    "description": "Enables strong encryption on the import or export policy.",
-                    "title": "enable_encryption - "
+                    "description": "Default is `true`.  Enables strong encryption on the import or export policy.",
+                    "title": "enable_encryption"
                 },
                 "passphrase_key_derivation_version": {
                     "type": "string",
-                    "apicApi": "monitorServer",
+                    "apicApi": "passphraseKeyDerivationVersion",
                     "default": "v1",
                     "description": "v1 is the only option today. Options are:\n  * v1",
                     "enum": [
                         "v1"
                     ],
-                    "title": "passphrase_key_derivation_version - "
+                    "title": "passphrase_key_derivation_version - passphraseKeyDerivationVersion"
                 }
             },
-            "title": "global_aes_encryption_settings - Global AES Encryption Settings."
+            "title": "global_aes_encryption_settings - pkiExportEncryptionKey"
         },
         "SystemSettings:ISISPolicy": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Optional Attribute are:\n  * isis_mtu\n  * isis_metric_for_redistributed_routes\n  * lsp_fast_flood_mode\n  * lsp_generation_initial_wait_interval\n  * lsp_generation_maximum_wait_interval\n  * lsp_generation_second_wait_interval\n  * sfp_computation_frequency_initial_wait_interval\n  * sfp_computation_frequency_maximum_wait_interval\n  * sfp_computation_frequency_second_wait_interval",
+            "class": "isisDomPol",
+            "description": "Optional Attribute are:\n  * isis_mtu\n  * isis_metric_for_redistributed_routes\n  * lsp_fast_flood_mode\n  * lsp_generation_initial_wait_interval\n  * lsp_generation_maximum_wait_interval\n  * lsp_generation_second_wait_interval\n  * sfp_computation_frequency_initial_wait_interval\n  * sfp_computation_frequency_maximum_wait_interval\n  * sfp_computation_frequency_second_wait_interval\n=================================================\nAPI Information:\n - Class: `isisDomPol`\n - Distinguished Name: `uni/fabric/isisDomP-default`\nGUI Location:\n - System > System Settings > ISIS Policy",
+            "dn": "uni/fabric/isisDomP-default",
             "properties": {
                 "isis_mtu": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "mtu",
                     "default": 1492,
-                    "description": "The IS-IS Domain policy LSP MTU. The MTU is from 128 to 4352.",
+                    "description": "Default is `1492`.  The IS-IS Domain policy LSP MTU. The MTU is from 128 to 4352.",
                     "minimum": 128,
                     "maximum": 4352,
-                    "title": "isis_mtu - "
+                    "title": "isis_mtu - mtu"
                 },
                 "isis_metric_for_redistributed_routes": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "redistribMetric",
                     "default": 63,
-                    "description": "The IS-IS metric that is used for all imported routes into IS-IS. The values available are from 1 to 63.",
+                    "description": "Default is `63`.  The IS-IS metric that is used for all imported routes into IS-IS. The values available are from 1 to 63.",
                     "minimum": 1,
                     "maximum": 63,
-                    "title": "isis_metric_for_redistributed_routes - "
+                    "title": "isis_metric_for_redistributed_routes - redistribMetric"
                 },
                 "lsp_fast_flood_mode": {
                     "type": "string",
-                    "apicApi": "monitorServer",
+                    "apicApi": "isisLvlComp:lspFastFlood",
                     "default": "enabled",
-                    "description": "The IS-IS Fast-Flooding of LSPs improves Intermediate System-to-Intermediate System (IS-IS) convergence time when new link-state packets (LSPs) are generated in the network and shortest path first (SPF) is triggered by the new LSPs. The mode can be:\n  * disabled\n  * enabled",
+                    "description": "The IS-IS Fast-Flooding of LSPs improves Intermediate System-to-Intermediate System (IS-IS) convergence time when new link-state packets (LSPs) are generated in the network and shortest path first (SPF) is triggered by the new LSPs. The mode can be:\n  * disabled\n  * enabled: (default)",
                     "enum": [
                         "disabled",
                         "enabled"
                     ],
-                    "title": "lsp_fast_flood_mode - "
+                    "title": "lsp_fast_flood_mode - isisLvlComp:lspFastFlood"
                 },
                 "lsp_generation_initial_wait_interval": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "isisLvlComp:lspGenInitIntvl",
                     "default": 50,
-                    "description": "The LSP generation initial wait interval. This is used in the LSP generation interval for the LSP MTU.  Permitted Values are 50 to 120000.",
+                    "description": "Default is `50`.  The LSP generation initial wait interval. This is used in the LSP generation interval for the LSP MTU.  Permitted Values are 50 to 120000.",
                     "minimum": 50,
                     "maximum": 120000,
-                    "title": "lsp_generation_initial_wait_interval - "
+                    "title": "lsp_generation_initial_wait_interval - isisLvlComp:lspGenInitIntvl"
                 },
                 "lsp_generation_maximum_wait_interval": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "isisLvlComp:lspGenMaxIntvl",
                     "default": 8000,
-                    "description": "The LSP generation maximum wait interval. This is used in the LSP generation interval for the LSP MTU.  Permitted Values are 50 to 120000.",
+                    "description": "Default is `8000`.  The LSP generation maximum wait interval. This is used in the LSP generation interval for the LSP MTU.  Permitted Values are 50 to 120000.",
                     "minimum": 50,
                     "maximum": 120000,
-                    "title": "lsp_generation_maximum_wait_interval - "
+                    "title": "lsp_generation_maximum_wait_interval - isisLvlComp:lspGenMaxIntvl"
                 },
                 "lsp_generation_second_wait_interval": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "isisLvlComp:lspGenSecIntvl",
                     "default": 50,
-                    "description": "The LSP generation second wait interval. This is used in the LSP generation interval for the LSP MTU.  Permitted Values are 50 to 120000.",
+                    "description": "Default is `50`.  The LSP generation second wait interval. This is used in the LSP generation interval for the LSP MTU.  Permitted Values are 50 to 120000.",
                     "minimum": 50,
                     "maximum": 120000,
-                    "title": "lsp_generation_second_wait_interval - "
+                    "title": "lsp_generation_second_wait_interval - isisLvlComp:lspGenSecIntvl"
                 },
                 "sfp_computation_frequency_initial_wait_interval": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "isisLvlComp:spfCompInitIntvl",
                     "default": 50,
-                    "description": "The SPF computation frequency initial wait interval. This is used in the SPF computations for the LSP MTU.  Permitted Values are 50 to 120000.",
+                    "description": "Default is `50`.  The SPF computation frequency initial wait interval. This is used in the SPF computations for the LSP MTU.  Permitted Values are 50 to 120000.",
                     "minimum": 50,
                     "maximum": 120000,
-                    "title": "sfp_computation_frequency_initial_wait_interval - "
+                    "title": "sfp_computation_frequency_initial_wait_interval - isisLvlComp:spfCompInitIntvl"
                 },
                 "sfp_computation_frequency_maximum_wait_interval": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "isisLvlComp:spfCompMaxIntvl",
                     "default": 8000,
-                    "description": "The SPF computation frequency maximum wait interval. This is used in the SPF computations for the LSP MTU.  Permitted Values are 50 to 120000.",
+                    "description": "Default is `8000`.  The SPF computation frequency maximum wait interval. This is used in the SPF computations for the LSP MTU.  Permitted Values are 50 to 120000.",
                     "minimum": 50,
                     "maximum": 120000,
-                    "title": "sfp_computation_frequency_maximum_wait_interval - "
+                    "title": "sfp_computation_frequency_maximum_wait_interval - isisLvlComp:spfCompMaxIntvl"
                 },
                 "sfp_computation_frequency_second_wait_interval": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "isisLvlComp:spfCompSecIntvl",
                     "default": 50,
-                    "description": "The SPF computation frequency second wait interval. This is used in the SPF computations for the LSP MTU.  Permitted Values are 50 to 120000.",
+                    "description": "Default is `50`.  The SPF computation frequency second wait interval. This is used in the SPF computations for the LSP MTU.  Permitted Values are 50 to 120000.",
                     "minimum": 50,
                     "maximum": 120000,
-                    "title": "sfp_computation_frequency_second_wait_interval - "
+                    "title": "sfp_computation_frequency_second_wait_interval - isisLvlComp:spfCompSecIntvl"
                 }
             },
-            "title": "isis_policy - ISIS Policy."
+            "title": "isis_policy - isisDomPol"
         },
         "SystemSettings:PortTracking": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Optional Attribute are:\n  * delay_restore_timer\n  * include_apic_ports\n  * number_of_active_ports\n  * port_tracking_state",
+            "class": "infraPortTrackPol",
+            "description": "Optional Attribute are:\n  * delay_restore_timer\n  * include_apic_ports\n  * number_of_active_ports\n  * port_tracking_state\n=================================================\nAPI Information:\n - Class: `infraPortTrackPol`\n - Distinguished Name: `uni/infra/trackEqptFabP-default`\nGUI Location:\n - System > System Settings > Port Tracking",
+            "dn": "uni/infra/trackEqptFabP-default",
             "properties": {
                 "delay_restore_timer": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "delay",
                     "default": 120,
-                    "description": "The timer that controls the delay restore interval time in seconds. The range is from 1 second to 300 seconds.",
+                    "description": "Default is `120`.  The timer that controls the delay restore interval time in seconds. The range is from 1 second to 300 seconds.",
                     "minimum": 1,
                     "maximum": 300,
-                    "title": "delay_restore_timer - "
+                    "title": "delay_restore_timer - delay"
                 },
                 "include_apic_ports": {
                     "type": "boolean",
-                    "apicApi": "monitorServer",
+                    "apicApi": "includeApicPorts",
                     "default": false,
-                    "description": "If you put a check in the box, port tracking brings down the Cisco Application Policy Infrastructure Controller (APIC) ports when the leaf switch loses connectivity to all fabric ports (that is, there are 0 fabric links). Enable this feature only if the Cisco APICs are dual- or multi-homed to the fabric. Bringing down the Cisco APIC ports helps in switching over to the secondary link in the case of a dual-homed Cisco APIC.",
-                    "title": "include_apic_ports - "
+                    "description": "Default is `false`.  If you put a check in the box, port tracking brings down the Cisco Application Policy Infrastructure Controller (APIC) ports when the leaf switch loses connectivity to all fabric ports (that is, there are 0 fabric links). Enable this feature only if the Cisco APICs are dual- or multi-homed to the fabric. Bringing down the Cisco APIC ports helps in switching over to the secondary link in the case of a dual-homed Cisco APIC.",
+                    "title": "include_apic_ports - includeApicPorts"
                 },
                 "number_of_active_ports": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "minlinks",
                     "default": 0,
-                    "description": "Number of active spine links that triggers port tracking. The range is from 0 to 12.",
+                    "description": "Default is `0`.  Number of active spine links that triggers port tracking. The range is from 0 to 12.",
                     "minimum": 0,
                     "maximum": 12,
-                    "title": "number_of_active_ports - "
+                    "title": "number_of_active_ports - minlinks"
                 },
                 "port_tracking_state": {
                     "type": "string",
-                    "apicApi": "monitorServer",
+                    "apicApi": "adminSt",
                     "default": "on",
-                    "description": "The administrative port tracking state. The state can be:\n  * off\n  * on",
+                    "description": "The administrative port tracking state. The state can be:\n  * off\n  * on: (default)",
                     "enum": [
                         "off",
                         "on"
                     ],
-                    "title": "port_tracking_state - "
+                    "title": "port_tracking_state - adminSt"
                 }
             },
-            "title": "port_tracking - Port Tracking."
+            "title": "port_tracking - infraPortTrackPol"
         },
         "SystemSettings:PtpAndLatencyMeasurement": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Optional Attribute are:\n  * announce_interval\n  * announce_timeout\n  * delay_request_interval\n  * global_domain\n  * global_priority_1\n  * global_priority_2\n  * precision_time_protocol\n  * ptp_profile\n  * sync_interval",
+            "class": "latencyPtpMode",
+            "description": "Optional Attribute are:\n  * announce_interval\n  * announce_timeout\n  * delay_request_interval\n  * global_domain\n  * global_priority_1\n  * global_priority_2\n  * precision_time_protocol\n  * ptp_profile\n  * sync_interval\n=================================================\nAPI Information:\n - Class: `latencyPtpMode`\n - Distinguished Name: `uni/fabric/ptpmode`\nGUI Location:\n - System > System Settings > PTP and Latency Measurement",
+            "dn": "uni/fabric/ptpmode",
             "properties": {
                 "announce_interval": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "fabAnnounceIntvl",
                     "default": 1,
-                    "description": "Specifies the logarithm of the mean interval in seconds with base 2 for a master port to send announce messages. The range depends on the chosen profile:\n  * AES67-2015: 0 to 4. These values result in a range of 1 to 16 seconds.\n  * Default: 0 to 4. These values result in a range of 1 to 16 seconds.\n  * SMPTE-2059-2: -3 to 1. These values result in a range of 0.125 to 2 seconds.\nThe value is applied to all PTP-enabled fabric links.",
+                    "description": "Default is `1`.  Specifies the logarithm of the mean interval in seconds with base 2 for a master port to send announce messages. The range depends on the chosen profile:\n  * AES67-2015: 0 to 4. These values result in a range of 1 to 16 seconds.\n  * Default: 0 to 4. These values result in a range of 1 to 16 seconds.\n  * SMPTE-2059-2: -3 to 1. These values result in a range of 0.125 to 2 seconds.\nThe value is applied to all PTP-enabled fabric links.",
                     "minimum": -3,
                     "maximum": 16,
-                    "title": "announce_interval - "
+                    "title": "announce_interval - fabAnnounceIntvl"
                 },
                 "announce_timeout": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "fabAnnounceTimeout",
                     "default": 3,
-                    "description": "Specifies the number of announce messages that the system waits before the PTP announce message is considered expired. The range and the default depend on the chosen PTP profile:\n  * AES67-2015: 2 to 10.\n  * Default: 2 to 10.\n  * SMPTE-2059-2: 2 to 10.\nThe value is applied to all PTP-enabled fabric links.",
+                    "description": "Default is `120`.  Specifies the number of announce messages that the system waits before the PTP announce message is considered expired. The range and the default depend on the chosen PTP profile:\n  * AES67-2015: 2 to 10.\n  * Default: 2 to 10.\n  * SMPTE-2059-2: 2 to 10.\nThe value is applied to all PTP-enabled fabric links.",
                     "minimum": 2,
                     "maximum": 10,
-                    "title": "announce_timeout - "
+                    "title": "announce_timeout - fabAnnounceTimeout"
                 },
                 "delay_request_interval": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "fabDelayIntvl",
                     "default": -2,
-                    "description": "Specifies the logarithm of the mean interval in seconds with base 2 for a slave port to send delay request messages. The range depends on the chosen PTP profile:\n  * AES67-2015: -3 to 5. These values result in a range of 0.125 to 32 seconds.\n  * Default: 0 to 5. These values result in a range of 0.5 to 2 seconds.\n  * SMPTE-2059-2: 0 to 5. These values result in a range of 0.5 to 2 seconds.\nThe value is applied to all PTP-enabled fabric links.",
+                    "description": "Default is `-2`.  Specifies the logarithm of the mean interval in seconds with base 2 for a slave port to send delay request messages. The range depends on the chosen PTP profile:\n  * AES67-2015: -3 to 5. These values result in a range of 0.125 to 32 seconds.\n  * Default: 0 to 5. These values result in a range of 0.5 to 2 seconds.\n  * SMPTE-2059-2: 0 to 5. These values result in a range of 0.5 to 2 seconds.\nThe value is applied to all PTP-enabled fabric links.",
                     "minimum": -3,
                     "maximum": 32,
-                    "title": "delay_request_interval - "
+                    "title": "delay_request_interval - fabDelayIntvl"
                 },
                 "global_domain": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "globalDomain",
                     "default": 0,
-                    "description": "Specifies the PTP domain number. Although multiple PTP domains are not supported in Cisco ACI, you can still change the domain number used in Cisco ACI. The same value is used on all leaf and spine nodes.  The valid range of values is 0 to 128. The default is 0.",
+                    "description": "Default is `0`.  Specifies the PTP domain number. Although multiple PTP domains are not supported in Cisco ACI, you can still change the domain number used in Cisco ACI. The same value is used on all leaf and spine nodes.  The valid range of values is 0 to 128.",
                     "minimum": 0,
                     "maximum": 128,
-                    "title": "global_domain - "
+                    "title": "global_domain - globalDomain"
                 },
                 "global_priority_1": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "prio1",
                     "default": 255,
-                    "description": "Specifies a value that is used to decide the grandmaster clock. The same value is used on all leaf and spine nodes. The ftag0 root spine switch uses the configured value, minus 1.  The valid range of values is 1 to 255. The default is 255 so that the root spine of ftag0 tree can be the grandmaster in case there is no external node that can serve as the grandmaster.",
+                    "description": "Default is `255`.  Specifies a value that is used to decide the grandmaster clock. The same value is used on all leaf and spine nodes. The ftag0 root spine switch uses the configured value, minus 1.  The valid range of values is 1 to 255. The default is 255 so that the root spine of ftag0 tree can be the grandmaster in case there is no external node that can serve as the grandmaster.",
                     "minimum": 1,
                     "maximum": 255,
-                    "title": "global_priority_1 - "
+                    "title": "global_priority_1 - prio1"
                 },
                 "global_priority_2": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "prio2",
                     "default": 255,
-                    "description": "Specifies a value that is used to decide the grandmaster clock. The same value is used on all leaf and spine nodes. The ftag0 root spine switch uses the configured value, minus 1.  The valid range of values is 1 to 255. The default is 255 so that the root spine of ftag0 tree can be the grandmaster in case there is no external node that can serve as the grandmaster.",
+                    "description": "Default is `255`.  Specifies a value that is used to decide the grandmaster clock. The same value is used on all leaf and spine nodes. The ftag0 root spine switch uses the configured value, minus 1.  The valid range of values is 1 to 255. The default is 255 so that the root spine of ftag0 tree can be the grandmaster in case there is no external node that can serve as the grandmaster.",
                     "minimum": 1,
                     "maximum": 255,
-                    "title": "global_priority_2 - "
+                    "title": "global_priority_2 - prio2"
                 },
                 "precision_time_protocol": {
                     "type": "string",
-                    "apicApi": "monitorServer",
+                    "apicApi": "state",
                     "default": "enabled",
                     "description": "Specifies the protocol administrative state. The state can be:\n  * disabled - PTP is disabled on all leaf and spine nodes.\n  * enabled: (default) - PTP is enabled on all fabric links that belong to the ftag tree with ID 0 (ftag0 tree), which is one of the internal tree topologies that is automatically built based on Cisco ACI infra ISIS for loop free connectivity between all leaf and spine nodes in each pod.",
                     "enum": [
                         "disabled",
                         "enabled"
                     ],
-                    "title": "precision_time_protocol - "
+                    "title": "precision_time_protocol - state"
                 },
                 "ptp_profile": {
                     "type": "string",
-                    "apicApi": "monitorServer",
+                    "apicApi": "fabProfileTemplate",
                     "default": "AES67-2015",
                     "description": "Specifies the PTP profile, which defines the range and default value of various PTP parameters, such as intervals. The values are:\n  * AES67-2015: (default) - AES67-2015, which is the standard for audio over Ethernet and audio over IP interoperability.\n  * Default - IEEE 1588-2008, which is the default PTP profile for clock synchronization.\n  * SMPTE-2059-2 - SMTPE ST2059-2015, which is the standard for video over IP.\nThe profile is applied to all PTP-enabled fabric links.",
                     "enum": [
@@ -6794,19 +6845,19 @@
                         "Default",
                         "SMPTE-2059-2"
                     ],
-                    "title": "ptp_profile - "
+                    "title": "ptp_profile - fabProfileTemplate"
                 },
                 "sync_interval": {
                     "type": "integer",
-                    "apicApi": "monitorServer",
+                    "apicApi": "fabSyncIntvl",
                     "default": -3,
-                    "description": "Specifies the logarithm of the mean interval in seconds with base 2 for a master port to send synchronization messages. The range and the default depend on the chosen PTP profile:\n  * AES67-2015: -4 to 1. These values result in a range of 0.0625 to 16 seconds.\n  * Default: -1 to 1. These values result in a range of 0.5 to 2 seconds.\n  * SMPTE-2059-2: -4 to -1. These values result in a range of 0.0625 to 0.5 seconds. SMPTE defines this as -7 to -1. However, Cisco ACI allows only -4 to -1 for hardware and software stability.\nThe value is applied to all PTP-enabled fabric links.",
+                    "description": "Default is `-3`.  Specifies the logarithm of the mean interval in seconds with base 2 for a master port to send synchronization messages. The range and the default depend on the chosen PTP profile:\n  * AES67-2015: -4 to 1. These values result in a range of 0.0625 to 16 seconds.\n  * Default: -1 to 1. These values result in a range of 0.5 to 2 seconds.\n  * SMPTE-2059-2: -4 to -1. These values result in a range of 0.0625 to 0.5 seconds. SMPTE defines this as -7 to -1. However, Cisco ACI allows only -4 to -1 for hardware and software stability.\nThe value is applied to all PTP-enabled fabric links.",
                     "minimum": 0,
                     "maximum": 0,
-                    "title": "sync_interval - "
+                    "title": "sync_interval - fabSyncIntvl"
                 }
             },
-            "title": "ptp_and_latency_measurementity_preference - PTP and Latency Measurement."
+            "title": "ptp_and_latency_measurementity_preference - latencyPtpMode"
         },
         "SystemSettings:RecommendedSettings": {
             "type": "object",
@@ -6901,28 +6952,22 @@
                     "$ref": "#/definitions/AbstractSettings/properties/alias"
                 },
                 "annotations": {
-                    "type": "array",
-                    "additionalProperties": false,
-                    "description": "(APIC Only) You can add arbitrary key:value pairs of metadata to an object as annotations (tagAnnotation). Annotations are provided for the user's custom purposes, such as descriptions, markers for personal scripting or API calls, or flags for monitoring tools or orchestration applications such as Cisco Multi-Site Orchestrator (MSO).\nRequired:\n  * key\n  * pair",
-                    "items": {
-                        "$ref": "#/definitions/Tenants:SharedSettings/properties/annotations"
-                    },
-                    "title": "annotations - tagAnnotation"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/annotations"
                 },
                 "application_profiles": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Application Profiles.  Required:\n  * name\nOptional:\n  * alias\n  * annotations\n  * application_epgs\n  * create\n  * description\n  * global_alias\n  * monitoring_policy\n  * qos_class\n\nIf this is for Nexus Dashboard Orchestrator it requires:\n  * ndo\n=================================================\nAPI Information:\n  * Class: fvAp\n  * DN: Distinguished Name: `uni/tn-{tenant}/ap-{application_profile}`\nGUI Location:\n  * Tenants > Application Profiles.",
+                    "description": "List of Application Profiles.  Required:\n  * name\n\nIf this is for Nexus Dashboard Orchestrator it requires:\n  * ndo\nOptional:\n  * alias\n  * annotations\n  * application_epgs\n  * create\n  * description\n  * global_alias\n  * monitoring_policy\n  * qos_class\n=================================================\nAPI Information:\n  * Class: fvAp\n  * DN: Distinguished Name: `uni/tn-{tenant}/ap-{application_profile}`\nGUI Location:\n  * Tenants > Application Profiles.",
                     "items": {
                         "$ref": "#/definitions/Tenants:ApplicationProfiles"
                     },
-                    "title": "application_profiles - fvAp\nGUI Location: Tenants > Application Profiles."
+                    "title": "application_profiles - fvAp"
                 },
                 "contracts": {
                     "$ref": "#/definitions/Tenants:Contracts"
                 },
                 "create": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/create"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/create"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
@@ -6931,7 +6976,7 @@
                     "$ref": "#/definitions/AbstractSettings/properties/global_alias"
                 },
                 "monitoring_policy": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/monitoring_policy"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/monitoring_policy"
                 },
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
@@ -6964,6 +7009,313 @@
             ],
             "title": "tenants - fvTenant"
         },
+        "Tenants:AbstractSettings": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "not_applicable",
+            "description": "Shared Settings between the policies",
+            "properties": {
+                "af_mcast": {
+                    "type": "boolean",
+                    "apicApi": "af-mcast",
+                    "default": false,
+                    "description": "Default is `false`.  Select `true` to enable the Multicast Address Family.",
+                    "title": "af_mcast - af-mcast"
+                },
+                "af_ucast": {
+                    "type": "boolean",
+                    "apicApi": "af-ucast",
+                    "default": true,
+                    "description": "Default is `true`.  Select `true` to enable the Unicast Address Family.",
+                    "title": "af_ucast - af-ucast"
+                },
+                "annotations": {
+                    "type": "array",
+                    "additionalProperties": false,
+                    "class": "tagAnnotation",
+                    "description": "(APIC Only) You can add arbitrary key:value pairs of metadata to an object as annotations (tagAnnotation). Annotations are provided for the user's custom purposes, such as descriptions, markers for personal scripting or API calls, or flags for monitoring tools or orchestration applications such as Cisco Multi-Site Orchestrator (MSO).",
+                    "rn": "annotationKey-[$key]",
+                    "items": {
+                        "$ref": "#/definitions/Tenants:AbstractSettings:Annotations"
+                    },
+                    "title": "annotations - tagAnnotation"
+                },
+                "create": {
+                    "type": "boolean",
+                    "apicApi": "not_applicable",
+                    "default": true,
+                    "description": "Flag to determine if the Object should be created or just read as a data source.",
+                    "title": "create"
+                },
+                "color_tag": {
+                    "type": "string",
+                    "apicApi": "tag",
+                    "default": "yellow-green",
+                    "description": "Specifies the color of a policy label.\n  * alice-blue\n  * antique-white\n  * aqua\n  * aquamarine\n  * azure\n  * beige\n  * bisque\n  * black\n  * blanched-almond\n  * blue\n  * blue-violet\n  * brown\n  * burlywood\n  * cadet-blue\n  * chartreuse\n  * chocolate\n  * coral\n  * cornflower-blue\n  * cornsilk\n  * crimson\n  * cyan\n  * dark-blue\n  * dark-cyan\n  * dark-goldenrod\n  * dark-gray\n  * dark-green\n  * dark-khaki\n  * dark-magenta\n  * dark-olive-green\n  * dark-orange\n  * dark-orchid\n  * dark-red\n  * dark-salmon\n  * dark-sea-green\n  * dark-slate-blue\n  * dark-slate-gray\n  * dark-turquoise\n  * dark-violet\n  * deep-pink\n  * deep-sky-blue\n  * dim-gray\n  * dodger-blue\n  * fire-brick\n  * floral-white\n  * forest-green\n  * fuchsia\n  * gainsboro\n  * ghost-white\n  * gold\n  * goldenrod\n  * gray\n  * green\n  * green-yellow\n  * honeydew\n  * hot-pink\n  * indian-red\n  * indigo\n  * ivory\n  * khaki\n  * lavender\n  * lavender-blush\n  * lawn-green\n  * lemon-chiffon\n  * light-blue\n  * light-coral\n  * light-cyan\n  * light-goldenrod-yellow\n  * light-gray\n  * light-green\n  * light-pink\n  * light-salmon\n  * light-sea-green\n  * light-sky-blue\n  * light-slate-gray\n  * light-steel-blue\n  * light-yellow\n  * lime\n  * lime-green\n  * linen\n  * magenta\n  * maroon\n  * medium-aquamarine\n  * medium-blue\n  * medium-orchid\n  * medium-purple\n  * medium-sea-green\n  * medium-slate-blue\n  * medium-spring-green\n  * medium-turquoise\n  * medium-violet-red\n  * midnight-blue\n  * mint-cream\n  * misty-rose\n  * moccasin\n  * navajo-white\n  * navy\n  * old-lace\n  * olive\n  * olive-drab\n  * orange\n  * orange-red\n  * orchid\n  * pale-goldenrod\n  * pale-green\n  * pale-turquoise\n  * pale-violet-red\n  * papaya-whip\n  * peachpuff\n  * peru\n  * pink\n  * plum\n  * powder-blue\n  * purple\n  * red\n  * rosy-brown\n  * royal-blue\n  * saddle-brown\n  * salmon\n  * sandy-brown\n  * sea-green\n  * seashell\n  * sienna\n  * silver\n  * sky-blue\n  * slate-blue\n  * slate-gray\n  * snow\n  * spring-green\n  * steel-blue\n  * tan\n  * teal\n  * thistle\n  * tomato\n  * turquoise\n  * violet\n  * wheat\n  * white\n  * white-smoke\n  * yellow\n  * yellow-green: (default).",
+                    "enum": [
+                        "alice-blue",
+                        "antique-white",
+                        "aqua",
+                        "aquamarine",
+                        "azure",
+                        "beige",
+                        "bisque",
+                        "black",
+                        "blanched-almond",
+                        "blue",
+                        "blue-violet",
+                        "brown",
+                        "burlywood",
+                        "cadet-blue",
+                        "chartreuse",
+                        "chocolate",
+                        "coral",
+                        "cornflower-blue",
+                        "cornsilk",
+                        "crimson",
+                        "cyan",
+                        "dark-blue",
+                        "dark-cyan",
+                        "dark-goldenrod",
+                        "dark-gray",
+                        "dark-green",
+                        "dark-khaki",
+                        "dark-magenta",
+                        "dark-olive-green",
+                        "dark-orange",
+                        "dark-orchid",
+                        "dark-red",
+                        "dark-salmon",
+                        "dark-sea-green",
+                        "dark-slate-blue",
+                        "dark-slate-gray",
+                        "dark-turquoise",
+                        "dark-violet",
+                        "deep-pink",
+                        "deep-sky-blue",
+                        "dim-gray",
+                        "dodger-blue",
+                        "fire-brick",
+                        "floral-white",
+                        "forest-green",
+                        "fuchsia",
+                        "gainsboro",
+                        "ghost-white",
+                        "gold",
+                        "goldenrod",
+                        "gray",
+                        "green",
+                        "green-yellow",
+                        "honeydew",
+                        "hot-pink",
+                        "indian-red",
+                        "indigo",
+                        "ivory",
+                        "khaki",
+                        "lavender",
+                        "lavender-blush",
+                        "lawn-green",
+                        "lemon-chiffon",
+                        "light-blue",
+                        "light-coral",
+                        "light-cyan",
+                        "light-goldenrod-yellow",
+                        "light-gray",
+                        "light-green",
+                        "light-pink",
+                        "light-salmon",
+                        "light-sea-green",
+                        "light-sky-blue",
+                        "light-slate-gray",
+                        "light-steel-blue",
+                        "light-yellow",
+                        "lime",
+                        "lime-green",
+                        "linen",
+                        "magenta",
+                        "maroon",
+                        "medium-aquamarine",
+                        "medium-blue",
+                        "medium-orchid",
+                        "medium-purple",
+                        "medium-sea-green",
+                        "medium-slate-blue",
+                        "medium-spring-green",
+                        "medium-turquoise",
+                        "medium-violet-red",
+                        "midnight-blue",
+                        "mint-cream",
+                        "misty-rose",
+                        "moccasin",
+                        "navajo-white",
+                        "navy",
+                        "old-lace",
+                        "olive",
+                        "olive-drab",
+                        "orange",
+                        "orange-red",
+                        "orchid",
+                        "pale-goldenrod",
+                        "pale-green",
+                        "pale-turquoise",
+                        "pale-violet-red",
+                        "papaya-whip",
+                        "peachpuff",
+                        "peru",
+                        "pink",
+                        "plum",
+                        "powder-blue",
+                        "purple",
+                        "red",
+                        "rosy-brown",
+                        "royal-blue",
+                        "saddle-brown",
+                        "salmon",
+                        "sandy-brown",
+                        "sea-green",
+                        "seashell",
+                        "sienna",
+                        "silver",
+                        "sky-blue",
+                        "slate-blue",
+                        "slate-gray",
+                        "snow",
+                        "spring-green",
+                        "steel-blue",
+                        "tan",
+                        "teal",
+                        "thistle",
+                        "tomato",
+                        "turquoise",
+                        "violet",
+                        "wheat",
+                        "white",
+                        "white-smoke",
+                        "yellow",
+                        "yellow-green"
+                    ],
+                    "title": "color_tag - tag"
+                },
+                "label_match_criteria": {
+                    "type": "string",
+                    "apicApi": "",
+                    "default": "AtLeastOne",
+                    "description": "Label matching is used to determine which consumer and provider EPGs can communicate. Contract subjects of a given producer or consumer of that contract determine that consumers and providers can communicate.  The match type algorithm is determined by the matchT attribute that can have one of the following values:\n  * All\n  * AtleastOne (default)\n  * AtmostOne\n  * None",
+                    "enum": [
+                        "All",
+                        "AtleastOne",
+                        "None",
+                        "AtmostOne"
+                    ],
+                    "title": "label_match_criteria"
+                },
+                "monitoring_policy": {
+                    "type": "string",
+                    "apicApi": "monPolDn",
+                    "class": "monEPGPol",
+                    "default": "default",
+                    "dn": "uni/tn-{tenant}/monepg-{monitoring_policy}",
+                    "description": "Name of a Monitoring Policy to assign to the EPG.",
+                    "minLength": 1,
+                    "maxLength": 64,
+                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "rn": "monepg-{monitoring_policy}",
+                    "title": "monitoring_policy - monEPGPol"
+                },
+                "qos_class": {
+                    "type": "string",
+                    "apicApi": "prio",
+                    "default": "unspecified",
+                    "description": "The priority class identifier. Allowed values are:\n  * level1\n  * level2\n  * level3\n  * level4\n  * level5\n  * level6\n  * unspecified: (default)",
+                    "enum": [
+                        "level1",
+                        "level2",
+                        "level3",
+                        "level4",
+                        "level5",
+                        "level6",
+                        "unspecified"
+                    ],
+                    "title": "qos_class - prio"
+                },
+                "target_dscp": {
+                    "type": "string",
+                    "apicApi": "targetDscp",
+                    "default": "unspecified",
+                    "description": "The target differentiated services code point (DSCP). The options are as follows:\n  * AF11 - low drop Priority\n  * AF12 - medium drop Priority\n  * AF13 - high drop Priority\n  * AF21 - low drop Immediate\n  * AF22 - medium drop Immediate\n  * AF23 - high drop Immediate\n  * AF31 - low drop Flash\n  * AF32 - medium drop Flash\n  * AF33 - high drop Flash\n  * AF41 - low drop-Flash Override\n  * AF42 - medium drop Flash Override\n  * AF43 - high drop Flash Override\n  * CS0 - class of service level 0\n  * CS1 - class of service level 1\n  * CS2 - class of service level 2\n  * CS3 - class of service level 3\n  * CS4 - class of service level 4\n  * CS5 - class of service level 5\n  * CS6 - class of service level 6\n  * CS7 - class of service level 7\n  * EF - Expedited Forwarding Critical\n  * VA - Voice Admit\n  * unspecified: (default)",
+                    "enum": [
+                        "AF11",
+                        "AF12",
+                        "AF13",
+                        "AF21",
+                        "AF22",
+                        "AF23",
+                        "AF31",
+                        "AF32",
+                        "AF33",
+                        "AF41",
+                        "AF42",
+                        "AF43",
+                        "CS0",
+                        "CS1",
+                        "CS2",
+                        "CS3",
+                        "CS4",
+                        "CS5",
+                        "CS6",
+                        "CS7",
+                        "EF",
+                        "VA",
+                        "unspecified"
+                    ],
+                    "title": "target_dscp - targetDscp"
+                },
+                "template": {
+                    "type": "string",
+                    "apicApi": "name",
+                    "default": "",
+                    "description": "Name of the Template, [Bridge Domain|Application EPG|Subnet], to Associate to the Object.",
+                    "minLength": 1,
+                    "maxLength": 64,
+                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "template"
+                }
+            },
+            "title": "shared_settings"
+        },
+        "Tenants:AbstractSettings:Annotations": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "not_applicable",
+            "description": "Abstract/Shared Settings for the Objects or Policies.",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "apicApi": "key",
+                    "default": "key_name",
+                    "description": "Annotation Key Name.",
+                    "minLength": 1,
+                    "maxLength": 64,
+                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "key"
+                },
+                "value": {
+                    "type": "string",
+                    "apicApi": "value",
+                    "default": "key_value",
+                    "description": "Annotation Key Value.",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "value"
+                }
+            },
+            "required": [
+                "key",
+                "value"
+            ],
+            "title": "attributes - tagAnnotation"
+        },
         "Tenants:ApplicationProfiles": {
             "type": "object",
             "additionalProperties": false,
@@ -6975,25 +7327,19 @@
                     "$ref": "#/definitions/AbstractSettings/properties/alias"
                 },
                 "annotations": {
-                    "type": "array",
-                    "additionalProperties": false,
-                    "description": "(APIC Only) You can add arbitrary key:value pairs of metadata to an object as annotations (tagAnnotation). Annotations are provided for the user's custom purposes, such as descriptions, markers for personal scripting or API calls, or flags for monitoring tools or orchestration applications such as Cisco Multi-Site Orchestrator (MSO).\nRequired:\n  * key\n  * pair",
-                    "items": {
-                        "$ref": "#/definitions/Tenants:SharedSettings/properties/annotations"
-                    },
-                    "title": "annotations - tagAnnotation"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/annotations"
                 },
                 "application_epgs": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Application Endpoint Groups.  Required:\n  * name\nOptional Attributes are:\n  * alias\n  * annotations\n  * bridge_domain\n  * combine_description\n  * contract_exception_tag\n  * contracts\n  * custom_qos_policy\n  * data_plane_policer\n  * description\n  * domains\n  * epg_admin_state\n  * epg_contract_masters\n  * epg_template\n  * epg_type\n  * fhs_trust_control_policy\n  * flood_in_encapsulation\n  * global_alias\n  * has_multicast_source\n  * label_match_criteria\n  * intra_epg_isolation\n  * monitoring_policy\n  * preferred_group_member\n  * qos_class\n  * template\n  * useg_epg\n  * vlans\n=================================================\nAPI Information:\n  * Class: fvAEPg\n  * DN: Distinguished Name: `/uni/tn-{Tenant}/ap-{App_Profile}/epg-{EPG}`\nGUI Location:\n  * Tenants > Application Profiles > Application EPGs.",
+                    "description": "List of Application Endpoint Groups.  Required:\n  * name\nOptional Attributes are:\n  * alias\n  * annotations\n  * bridge_domain\n  * combine_description\n  * contract_exception_tag\n  * contracts\n  * custom_qos_policy\n  * data_plane_policer\n  * description\n  * domains\n  * epg_admin_state\n  * epg_contract_masters\n  * epg_template\n  * epg_type\n  * fhs_trust_control_policy\n  * flood_in_encapsulation\n  * global_alias\n  * has_multicast_source\n  * label_match_criteria\n  * intra_epg_isolation\n  * monitoring_policy\n  * preferred_group_member\n  * qos_class\n  * template\n  * useg_epg\n  * vlans\n=================================================\nAPI Information:\n  * Class: fvAEPg\n  * DN: Distinguished Name: `/uni/tn-{Tenant}/ap-{App_Profile}/epg-{EPG}`\nGUI Location:\n  * Tenants > Application Profiles > Application EPGs.\n=================================================\n* Inband\nAPI Information:\n - Class: `mgmtInB`\n - Distinguished Name: `uni/tn-mgmt/mgmtp-default/inb-{epg}`\nGUI Location:\n - Tenants > mgmt > Node Management EPGs > In-Band EPG - {epg}\n\n=================================================\n* Out-of-Band\nAPI Information:\n - Class: `mgmtOoB`\n - Distinguished Name: `uni/tn-mgmt/mgmtp-default/oob-{epg}`\nGUI Location:\n - Tenants > mgmt > Node Management EPGs > Out-of-Band EPG - {epg}",
                     "items": {
                         "$ref": "#/definitions/Tenants:ApplicationProfiles:ApplicationEpgs"
                     },
                     "title": "application_epgs - fvAEPg"
                 },
                 "create": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/create"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/create"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
@@ -7002,7 +7348,7 @@
                     "$ref": "#/definitions/AbstractSettings/properties/global_alias"
                 },
                 "monitoring_policy": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/monitoring_policy"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/monitoring_policy"
                 },
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
@@ -7011,13 +7357,13 @@
                     "$ref": "#/definitions/Tenants:NdoSettings"
                 },
                 "qos_class": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/qos_class"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/qos_class"
                 }
             },
             "required": [
                 "name"
             ],
-            "title": "application_profiles - fvAp\nGUI Location: Tenants > Application Profiles."
+            "title": "application_profiles - fvAp"
         },
         "Tenants:ApplicationProfiles:ApplicationEpgs": {
             "type": "object",
@@ -7030,13 +7376,7 @@
                     "$ref": "#/definitions/AbstractSettings/properties/alias"
                 },
                 "annotations": {
-                    "type": "array",
-                    "additionalProperties": false,
-                    "description": "(APIC Only) You can add arbitrary key:value pairs of metadata to an object as annotations (tagAnnotation). Annotations are provided for the user's custom purposes, such as descriptions, markers for personal scripting or API calls, or flags for monitoring tools or orchestration applications such as Cisco Multi-Site Orchestrator (MSO).\nRequired:\n  * key\n  * pair",
-                    "items": {
-                        "$ref": "#/definitions/Tenants:SharedSettings/properties/annotations"
-                    },
-                    "title": "annotations - tagAnnotation"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/annotations"
                 },
                 "bridge_domain": {
                     "type": "string",
@@ -7054,7 +7394,7 @@
                     "type": "boolean",
                     "apicApi": "not_applicable",
                     "default": false,
-                    "description": "Flag to Combine the EPG Name and the Description into the Display Name in Nexus Dashboard Orchestrator.",
+                    "description": "Default is `false`.  Flag to Combine the EPG Name and the Description into the Display Name in Nexus Dashboard Orchestrator.",
                     "title": "combine_description"
                 },
                 "contract_exception_tag": {
@@ -7068,7 +7408,7 @@
                 "contracts": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Contracts and their attributes to assign to the EPG.  Required:\n  * contract_type\n  * name\nOptional:\n  * qos_class\n  * ndo\n  * tenant",
+                    "description": "List of Contracts and their attributes to assign to the EPG.  Required:\n  * contract_type\n  * name\nOptional:\n  * qos_class\n  * ndo\n  * tenant\n=================================================\nAPI Information:\n* Consumer Contract\n - Class: `fvRsCons`\n - Distinguished Name: `uni/tn-{tenant}/ap-{application_profile}/epg-{epg}/rscons-{contract}`\n* Provider Contract\n - Class: `fvRsProv`\n - Distinguished Name: `uni/tn-{tenant}/ap-{application_profile}/epg-{epg}/rsprov-{contract}`\nGUI Location:\n - Tenants > {tenant} > Application Profiles > {application_profile} > Application EPGs > {epg} > Contracts",
                     "items": {
                         "$ref": "#/definitions/Tenants:Contracts:ContractApply"
                     },
@@ -7078,23 +7418,17 @@
                     "type": "string",
                     "apicApi": "tDn",
                     "class": "fvRsCustQosPol",
-                    "description": "Name of a Custom QoS Policy to assign to the object or policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/qoscustom-{custom_qos_policy}",
                     "title": "custom_qos_policy - fvRsCustQosPol"
                 },
                 "data_plane_policer": {
                     "type": "string",
                     "apicApi": "tDn",
-                    "class": "fvRsBd",
-                    "description": "Name of a Data Plane Policer Policy to assign to the EPG.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "tDn": "uni/tn-{tenant}/BD-{bridge_domain}",
-                    "title": "data_plane_policer - "
+                    "class": "fvRsDppPol",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "tDn": "uni/tn-{tenant}/qosdpppol-{data_plane_policer}",
+                    "title": "data_plane_policer - fvRsDppPol"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
@@ -7102,11 +7436,11 @@
                 "domains": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "Required: \n  * name\nOptional:\n  * allow_micro_segmentation\n  * custom_epg_name\n  * delimiter\n  * deploy_immediacy\n  * domain_type\n  * enhanced_lag_policy\n  * number_of_ports\n  * port_allocation\n  * port_binding\n  * resolution_immediacy\n  * security\n  * sites\n  * switch_provider\n  * vlan_mode\n  * vlans",
+                    "description": "Required: \n  * name\nOptional:\n  * allow_micro_segmentation\n  * custom_epg_name\n  * delimiter\n  * deploy_immediacy\n  * domain_type\n  * enhanced_lag_policy\n  * number_of_ports\n  * port_allocation\n  * port_binding\n  * resolution_immediacy\n  * security\n  * sites\n  * switch_provider\n  * vlan_mode\n  * vlans\n=================================================\nAPI Information:\n - Class: `fvRsDomAtt`\n - Distinguished Name: uni/tn-{tenant}/ap-{application_profile}/epg-{application_epg}/rsdomAtt-[uni/{domain}]\nGUI Location:\nTenants > {tenant} > Application Profiles > {application_profile} > Application EPGs > {application_epg} > Domains (VMs and Bare-Metals)",
                     "items": {
                         "$ref": "#/definitions/Tenants:ApplicationProfiles:ApplicationEpgs:Domains"
                     },
-                    "title": "Physical and VMM Domains"
+                    "title": "Physical and VMM Domains - fvRsDomAtt"
                 },
                 "epg_admin_state": {
                     "type": "string",
@@ -7120,7 +7454,13 @@
                     "title": "epg_admin_state - shutdown"
                 },
                 "epg_contract_masters": {
-                    "$ref": "#/definitions/Tenants:ApplicationProfiles:ApplicationEpgs:EpgContractMasters"
+                    "type": "array",
+                    "additionalProperties": false,
+                    "description": "List of Application Profiles/Application EPGs to inherit Security Configuration from.",
+                    "items": {
+                        "$ref": "#/definitions/Tenants:ApplicationProfiles:ApplicationEpgs:EpgContractMasters"
+                    },
+                    "title": "epg_contract_masters - fvRsSecInherited"
                 },
                 "epg_template": {
                     "type": "string",
@@ -7149,9 +7489,7 @@
                     "class": "fvRsTrustCtrl",
                     "default": "",
                     "description": "Name of a First Hop Security Control Policy to assign to the EPG.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/trustctrlpol-{fhs_trust_control_policy}",
                     "title": "fhs_trust_control_policy - fvRsTrustCtrl"
                 },
@@ -7173,17 +7511,17 @@
                     "type": "boolean",
                     "apicApi": "hasMcastSource",
                     "default": false,
-                    "description": "",
+                    "description": "Default is `false`.",
                     "title": "has_multicast_source - hasMcastSource"
                 },
                 "label_match_criteria": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/label_match_criteria"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/label_match_criteria"
                 },
                 "intra_epg_isolation": {
                     "type": "string",
                     "apicApi": "pcEnfPref",
-                    "default": false,
-                    "description": "Intra-EPG endpoint isolation policies provide full isolation for virtual or physical endpoints; no communication is allowed between endpoints in an EPG that is operating with isolation enforced. Isolation enforced EPGs reduce the number of EPG encapsulations required when many clients access a common service but are not allowed to communicate with each other.  An EPG is isolation enforced for all Cisco Application Centric Infrastructure (ACI) network domains or none. While the Cisco ACI fabric implements isolation directly to connected endpoints, switches connected to the fabric are made aware of isolation rules according to a primary VLAN (PVLAN) tag.",
+                    "default": "unenforced",
+                    "description": "Default is `unenforced`.  Intra-EPG endpoint isolation policies provide full isolation for virtual or physical endpoints; no communication is allowed between endpoints in an EPG that is operating with isolation enforced. Isolation enforced EPGs reduce the number of EPG encapsulations required when many clients access a common service but are not allowed to communicate with each other.  An EPG is isolation enforced for all Cisco Application Centric Infrastructure (ACI) network domains or none. While the Cisco ACI fabric implements isolation directly to connected endpoints, switches connected to the fabric are made aware of isolation rules according to a primary VLAN (PVLAN) tag.",
                     "enum": [
                         "enforced",
                         "unenforced"
@@ -7191,7 +7529,7 @@
                     "title": "intra_epg_isolation - pcEnfPref"
                 },
                 "monitoring_policy": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/monitoring_policy"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/monitoring_policy"
                 },
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
@@ -7199,15 +7537,15 @@
                 "preferred_group_member": {
                     "type": "boolean",
                     "apicApi": "prefGrMemb",
-                    "default": true,
-                    "description": "If an EPG or External EPG is marked as a Preferred Group Member, it is put into an internally created contract group where all members of the group can communicate with each other without requiring a contract between them.  The options are:\n  * false: (default) - The External EPG is not included in the subgroup.\n  * true - The External EPG is included in the subgroup.",
+                    "default": false,
+                    "description": "Default is `false`.  If an EPG or External EPG is marked as a Preferred Group Member, it is put into an internally created contract group where all members of the group can communicate with each other without requiring a contract between them.  The options are:\n  * false: (default) - The External EPG is not included in the subgroup.\n  * true - The External EPG is included in the subgroup.",
                     "title": "preferred_group_member - prefGrMemb"
                 },
                 "qos_class": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/qos_class"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/qos_class"
                 },
                 "template": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/template"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/template"
                 },
                 "useg_epg": {
                     "type": "boolean",
@@ -7218,7 +7556,7 @@
                 },
                 "vlans": {
                     "type": "array",
-                    "description": "For VLAN and VXLAN this is a list of One.  For micro_seg and qinq this is a list of Two.  VLAN to utilize for Port assignments to the Application EPG.",
+                    "description": "This is just used for the Inband Management EPG.",
                     "items": {
                         "type": "integer",
                         "default": 1,
@@ -7400,7 +7738,7 @@
             "required": [
                 "name"
             ],
-            "title": "domains - Application Epgs > Domains."
+            "title": "domains"
         },
         "Tenants:ApplicationProfiles:ApplicationEpgs:Domains:Security": {
             "type": "object",
@@ -7456,7 +7794,7 @@
                     "type": "string",
                     "apicApi": "tDn",
                     "default": "default",
-                    "description": "Name of the Application Profile where the EPG Contract Master resides.",
+                    "description": "Name of the Application Profile to inherit Security Configuration from.",
                     "minLength": 1,
                     "maxLength": 64,
                     "pattern": "^[a-zA-Z0-9_\\.:-]+$",
@@ -7477,12 +7815,12 @@
                 "application_profile",
                 "application_epg"
             ],
-            "title": "Apply Contracts to: EPG's, External EPG's, VRF's."
+            "title": "contract_masters"
         },
         "Tenants:Contracts": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Attributes are:\n  * contracts\n  * filters",
+            "description": "GUI Location:\n - Tenants: {name} > Contracts\n\nAttributes are:\n  * contracts\n  * filters",
             "dns": [
                 "uni/tn-{tenant}/brc-{name}",
                 "uni/tn-{tenant}/oobbrc-{name}",
@@ -7492,7 +7830,7 @@
                 "contracts": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Contracts and their attributes to assign to the EPG.\nRequired:\n  * name\n  * subjects\nOptional:\n  * alias\n  * annotations\n  * contract_type\n  * description\n  * global_alias\n  * log\n  * qos_class\n  * scope\n  * target_dscp",
+                    "description": "List of Contracts and their attributes to assign to the EPG.\nRequired:\n  * name\n  * subjects\nOptional:\n  * alias\n  * annotations\n  * contract_type\n  * description\n  * global_alias\n  * log\n  * qos_class\n  * scope\n  * target_dscp\n=================================================\n##### Standard Contract #####\nAPI Information:\n - Class: `vzBrCP`\n - Distinguished Name: `uni/tn-{tenant}/brc-{contract}`\nGUI Location:\n - Tenants > {tenant} > Contracts > Standard: {contract}\n\n=================================================\n##### OOBand Contract #####\nAPI Information:\n - Class: `vzOOBBrCP`\n - Distinguished Name: `uni/tn-{tenant}/oobbrc-{contract}`\nGUI Location:\n - Tenants > {tenant} > Contracts > Out-Of-Band Contracts: {contract}\n\n=================================================\n##### Taboo Contract #####\nAPI Information:\n - Class: `vzTaboo`\n - Distinguished Name: `uni/tn-{tenant}/taboo-{contract}`\nGUI Location:\n - Tenants > {tenant} > Contracts > Taboos: {contract}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Contracts:Contracts"
                     },
@@ -7501,7 +7839,7 @@
                 "filters": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Filters to add to the Subject.\nRequired:\n  * name\nOptional:",
+                    "description": "List of Filters to add to the Subject.\nRequired:\n  * filter_entries\n  * name\nOptional:\n  * alias\n  * annotations\n  * global_alias\n=================================================\nAPI Information:\n - Class: `vzFilter`\n - Distinguished Name: `uni/tn-{Tenant}/flt{filter}`\nGUI Location:\n - Tenants > {tenant} > Contracts > Filters: {filter}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Contracts:Filters"
                     },
@@ -7512,7 +7850,7 @@
                 "contracts",
                 "filters"
             ],
-            "title": "contracts - Tenants > Contracts."
+            "title": "contracts"
         },
         "Tenants:Contracts:ContractApply": {
             "type": "object",
@@ -7554,7 +7892,7 @@
                     "$ref": "#/definitions/Tenants:NdoSettings"
                 },
                 "qos_class": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/qos_class"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/qos_class"
                 },
                 "tenant": {
                     "type": "string",
@@ -7591,13 +7929,7 @@
                     "$ref": "#/definitions/AbstractSettings/properties/alias"
                 },
                 "annotations": {
-                    "type": "array",
-                    "additionalProperties": false,
-                    "description": "(APIC Only) You can add arbitrary key:value pairs of metadata to an object as annotations (tagAnnotation). Annotations are provided for the user's custom purposes, such as descriptions, markers for personal scripting or API calls, or flags for monitoring tools or orchestration applications such as Cisco Multi-Site Orchestrator (MSO).\nRequired:\n  * key\n  * pair",
-                    "items": {
-                        "$ref": "#/definitions/Tenants:SharedSettings/properties/annotations"
-                    },
-                    "title": "annotations - tagAnnotation"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/annotations"
                 },
                 "contract_type": {
                     "type": "string",
@@ -7620,7 +7952,7 @@
                 "log": {
                     "type": "boolean",
                     "apicApi": "",
-                    "default": true,
+                    "default": false,
                     "description": "Default is `false`.  Enables contract permit and deny logging.",
                     "title": "log"
                 },
@@ -7628,13 +7960,13 @@
                     "$ref": "#/definitions/AbstractSettings/properties/name"
                 },
                 "qos_class": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/qos_class"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/qos_class"
                 },
                 "scope": {
                     "type": "string",
                     "apicApi": "",
                     "default": "context",
-                    "description": "Default is `context`.  The Scope of the contract, if the contract is of Type Standard or Out-of-Band.  Options are:\n  * application-profile\n  * context: (default)\n  * global\n  * tenant\n  * Note:  Ignored for Taboo Contracts.",
+                    "description": "The Scope of the contract, if the contract is of Type Standard or Out-of-Band.  Options are:\n  * application-profile\n  * context: (default)\n  * global\n  * tenant\n  * Note:  Ignored for Taboo Contracts.",
                     "enum": [
                         "application-profile",
                         "context",
@@ -7646,14 +7978,14 @@
                 "subjects": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "A group of filters for a specific application or service. Filters-Used to classify traffic based upon layer 2 to layer 4 attributes (such as Ethernet type, protocol type, TCP flags and ports). Actions-Action to be taken on the filtered traffic.\nRequired:\n  * filters\n  * name\nOptional:\n  * action\n  * apply_both_directions\n  * description\n  * directives\n  * label_match_criteria\n  * qos_class\n  * target_dscp",
+                    "description": "A group of filters for a specific application or service. Filters-Used to classify traffic based upon layer 2 to layer 4 attributes (such as Ethernet type, protocol type, TCP flags and ports). Actions-Action to be taken on the filtered traffic.\nRequired:\n  * filters\n  * name\nOptional:\n  * action\n  * apply_both_directions\n  * description\n  * directives\n  * label_match_criteria\n  * qos_class\n  * target_dscp\n=================================================\n##### Contract Subject #####\nAPI Information:\n - Class: `vzSubj`\n - Distinguished Name: `uni/tn-{tenant}/brc-{contract}/subj-{subject}`\nGUI Locations:\n - Tenants > mgmt > Contracts > Standard: {contract} > {subject}\n\n=================================================\n##### OOBand Subject #####\nAPI Information:\n - Class: `vzSubj`\n - Distinguished Name: `uni/tn-{tenant}/oobbrc-{name}/subj-{subject}`\nGUI Location:\n - Tenants > {tenant} > Contracts > Out-Of-Band Contracts: {name}: Subjects\n\n=================================================\n##### Taboo Subject #####\nAPI Information:\n - Class: `vzTSubj`\n - Distinguished Name: `uni/tn-{tenant}/taboo-{name}/subj-{subject}`\nGUI Location:\n - Tenants > {tenant} > Contracts > Taboo Contracts: {name}: Subjects",
                     "items": {
                         "$ref": "#/definitions/Tenants:Contracts:Contracts:Subjects"
                     },
                     "title": "subjects - vzSubj"
                 },
                 "target_dscp": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/target_dscp"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/target_dscp"
                 }
             },
             "required": [
@@ -7696,7 +8028,7 @@
                 "filters": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Filters to add to the Subject.",
+                    "description": "List of Filters to add to the Subject.\n=================================================\n##### Standard Subject Filter #####\nAPI Information:\n - Class: `vzRsSubjFiltAtt`\n - Distinguished Name: `uni/tn-{tenant}/brc-{name}/subj-{subject}/rssubjFiltAtt-{filter}`\nGUI Location:\n - Tenants > {tenant} > Contracts > Standard: {contract}: Subjects\n\n=================================================\n##### OOBand Subject Filter #####\nAPI Information:\n - Class: `vzRsSubjFiltAtt`\n - Distinguished Name: `uni/tn-mgmt/oobbrc-{name}/subj-{subject}/rssubjFiltAtt-{filter}`\nGUI Location:\n - Tenants > mgmt > Contracts > Out-Of-Band Contracts: {contract}: Subjects\n\n=================================================\n##### Taboo Deny Rule #####\nAPI Information:\n - Class: `vzRsDenyRule`\n - Distinguished Name: `uni/tn-{tenant}/taboo-{name}/subj-{subject}/rsdenyRule-{filter}`\nGUI Location:\n - Tenants > {tenant} > Contracts > Out-Of-Band Contracts: {contract}: Subjects",
                     "items": {
                         "type": "string",
                         "apicApi": "tDn",
@@ -7712,16 +8044,16 @@
                     "title": "filters - vzFilter"
                 },
                 "label_match_criteria": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/label_match_criteria"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/label_match_criteria"
                 },
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
                 },
                 "qos_class": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/qos_class"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/qos_class"
                 },
                 "target_dscp": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/target_dscp"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/target_dscp"
                 }
             },
             "required": [
@@ -7764,13 +8096,7 @@
                     "$ref": "#/definitions/AbstractSettings/properties/alias"
                 },
                 "annotations": {
-                    "type": "array",
-                    "additionalProperties": false,
-                    "description": "(APIC Only) You can add arbitrary key:value pairs of metadata to an object as annotations (tagAnnotation). Annotations are provided for the user's custom purposes, such as descriptions, markers for personal scripting or API calls, or flags for monitoring tools or orchestration applications such as Cisco Multi-Site Orchestrator (MSO).\nRequired:\n  * key\n  * pair",
-                    "items": {
-                        "$ref": "#/definitions/Tenants:SharedSettings/properties/annotations"
-                    },
-                    "title": "annotations - tagAnnotation"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/annotations"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
@@ -7778,7 +8104,7 @@
                 "filter_entries": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Filter Entries to assign to the Filter.\nRequired:\n  * name\nOptional:\n  * alias\n  * annotations\n  * arp_flag\n  * description\n  * destination_port_from\n  * destination_port_to\n  * ethertype\n  * icmpv4_type\n  * icmpv6_type\n  * ip_protocol\n  * global_alias\n  * match_dscp\n  * match_only_fragments\n  * source_port_from\n  * source_port_to\n  * stateful\n  * tcp_session_rules",
+                    "description": "List of Filter Entries to assign to the Filter.\nRequired:\n  * name\nOptional:\n  * alias\n  * annotations\n  * arp_flag\n  * description\n  * destination_port_from\n  * destination_port_to\n  * ethertype\n  * icmpv4_type\n  * icmpv6_type\n  * ip_protocol\n  * global_alias\n  * match_dscp\n  * match_only_fragments\n  * source_port_from\n  * source_port_to\n  * stateful\n  * tcp_session_rules\n=================================================\nAPI Information:\n - Class: `vzEntry`\n - Distinguished Name: `uni/tn-{tenant}/flt{filter}/e-{filter_entry}`\nGUI Location:\n - Tenants > {tenant} > Contracts > Filters: {filter} > Filter Entry: {filter_entry}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Contracts:Filters:FilterEntries"
                     },
@@ -7808,13 +8134,7 @@
                     "$ref": "#/definitions/AbstractSettings/properties/alias"
                 },
                 "annotations": {
-                    "type": "array",
-                    "additionalProperties": false,
-                    "description": "(APIC Only) You can add arbitrary key:value pairs of metadata to an object as annotations (tagAnnotation). Annotations are provided for the user's custom purposes, such as descriptions, markers for personal scripting or API calls, or flags for monitoring tools or orchestration applications such as Cisco Multi-Site Orchestrator (MSO).\nRequired:\n  * key\n  * pair",
-                    "items": {
-                        "$ref": "#/definitions/Tenants:SharedSettings/properties/annotations"
-                    },
-                    "title": "annotations - tagAnnotation"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/annotations"
                 },
                 "arp_flag": {
                     "type": "string",
@@ -8014,71 +8334,71 @@
                     "type": "boolean",
                     "apicApi": "ack",
                     "default": false,
-                    "description": "Ack flag",
+                    "description": "Default is `false`.  Ack flag",
                     "title": "acknowledgement - ack"
                 },
                 "established": {
                     "type": "boolean",
                     "apicApi": "est",
                     "default": false,
-                    "description": "Establilshed - Combination of Ack and Reset",
+                    "description": "Default is `false`.  Establilshed - Combination of Ack and Reset",
                     "title": "established - est"
                 },
                 "finish": {
                     "type": "boolean",
                     "apicApi": "fin",
                     "default": false,
-                    "description": "Fin Flag",
+                    "description": "Default is `false`.  Fin Flag",
                     "title": "finish - fin"
                 },
                 "reset": {
                     "type": "boolean",
                     "apicApi": "rst",
                     "default": false,
-                    "description": "Reset Flag",
+                    "description": "Default is `false`.  Reset Flag",
                     "title": "reset - rst"
                 },
                 "synchronize": {
                     "type": "boolean",
                     "apicApi": "syn",
                     "default": true,
-                    "description": "Syn Flag",
+                    "description": "Default is `true`.  Syn Flag",
                     "title": "synchronize - syn"
                 }
             },
-            "title": "TCPSessionRules"
+            "title": "tcp_session_rules"
         },
         "Tenants:Networking": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Tenant Networking Properties.\nGUI Location: Tenants > Networking.",
+            "description": "\nGUI Location: Tenants > Networking\n\nTenant Networking Properties.\nAttributes are:\n  * bridge_domains\n  * l3outs\n  * vrfs",
             "properties": {
                 "bridge_domains": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "A bridge domain (fvBD) represents a Layer 2 forwarding construct within the fabric.\nList of Tenant Bridge Domains.\nRequired:\n  * name\nOptional:\n  * advanced_troubleshooting\n  * application_epg\n  * application_profile\n  * combine_description\n  * description\n  * dhcp_relay_labels\n  * general\n  * l3_configurations\n  *  ndo\n  * subnets\n  * template",
+                    "description": "A bridge domain (fvBD) represents a Layer 2 forwarding construct within the fabric.\nList of Tenant Bridge Domains.\nRequired:\n  * name\nOptional:\n  * advanced_troubleshooting\n  * application_epg\n  * application_profile\n  * combine_description\n  * description\n  * dhcp_relay_labels\n  * general\n  * l3_configurations\n  *  ndo\n  * subnets\n  * template\n=================================================\nAPI Information:\n - Class: `fvBD`\n - Distinguised Name: `uni/tn-{Tenant}/BD-{bridge_domain}`\nGUI Location:\n - Tenants > {tenant} > Networking > Bridge Domains > {bridge_domain}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:BridgeDomains"
                     },
-                    "title": "bridge_domains - fvBd\nGUI Location: Tenants > Networking > Bridge Domains"
+                    "title": "bridge_domains - fvBd"
                 },
                 "l3outs": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "A Layer 3 outside network configuration (L3Out) defines how traffic is forwarded outside of the fabric. Layer 3 is used to discover the addresses of other nodes, select routes, select quality of service, and forward the traffic that is entering, exiting, and transiting the fabric.\nList of Tenant L3Outs.\nRequired:\n  * name\nOptional:\n * alias\n * annotations\n * consumer_label\n * description\n * enable_bgp\n * external_epgs\n * global_alias\n * l3_domain\n * logical_node_profiles\n * ndo\n * pim\n * pimv6\n * provider_label\n * ospf_external_profile\n * route_control_enforcement\n * route_control_for_dampening\n * route_profile_for_interleak\n * route_profiles_for_redistribution\n * target_dscp\n * vrf\n  * vrf_template",
+                    "description": "A Layer 3 outside network configuration (L3Out) defines how traffic is forwarded outside of the fabric. Layer 3 is used to discover the addresses of other nodes, select routes, select quality of service, and forward the traffic that is entering, exiting, and transiting the fabric.\nList of Tenant L3Outs.\nRequired:\n  * name\nOptional:\n * alias\n * annotations\n * consumer_label\n * description\n * enable_bgp\n * external_epgs\n * global_alias\n * l3_domain\n * logical_node_profiles\n * ndo\n * pim\n * pimv6\n * provider_label\n * ospf_external_profile\n * route_control_enforcement\n * route_control_for_dampening\n * route_profile_for_interleak\n * route_profiles_for_redistribution\n * target_dscp\n * vrf\n  * vrf_template\n=================================================\nAPI Information:\n - Class: `l3extOut`\n - Distinguished Name: `uni/tn-{tenant}/out-{l3out}`\nGUI Location:\n - tenants > {tenant} > Networking > L3Outs > {l3out}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:L3Outs"
                     },
-                    "title": "l3outs - l3extOut\nGUI Location: Tenants > Networking > L3Outs"
+                    "title": "l3outs - l3extOut"
                 },
                 "vrfs": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Tenant Virtual Route Forwarding Instances (Vrfs).\nRequired:\n  * name\nOptional:\n  * alias\n  * annotations\n  * bd_enforcement_status\n  * bgp_timers\n  * bgp_timers_per_address_family\n  * communities\n  * controller_type\n  * create\n  * description\n  * eigrp_timers_per_address_family\n  * endpoint_retention_policy\n  * epg_esg_collection_for_vrfs\n  * global_alias\n  * ip_data_plane_learning\n  * layer3_multicast\n  * monitoring_policy\n  * ndo\n  * ospf_timers\n  * ospf_timers_per_address_family\n  * policy_control_enforcement_direction\n  * policy_control_enforcement_preference\n  * preferred_group\n  * transit_route_tag_policy",
+                    "description": "List of Tenant Virtual Route Forwarding Instances (Vrfs).\nRequired:\n  * name\nOptional:\n  * alias\n  * annotations\n  * bd_enforcement_status\n  * bgp_timers\n  * bgp_timers_per_address_family\n  * communities\n  * controller_type\n  * create\n  * description\n  * eigrp_timers_per_address_family\n  * endpoint_retention_policy\n  * epg_esg_collection_for_vrfs\n  * global_alias\n  * ip_data_plane_learning\n  * layer3_multicast\n  * monitoring_policy\n  * ndo\n  * ospf_timers\n  * ospf_timers_per_address_family\n  * policy_control_enforcement_direction\n  * policy_control_enforcement_preference\n  * preferred_group\n  * transit_route_tag_policy\n=================================================\nAPI Information:\n - Class: `fvCtx`\n - Distinguished Name: `uni/tn-{tenant}/ctx-{vrf}`\nGUI Location:\n - Tenants > {tenant} > Networking > VRFs > {vrf}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:Vrfs"
                     },
-                    "title": "vrfs - fvCtx\nGUI Location: Tenants > Networking > VRFs"
+                    "title": "vrfs - fvCtx"
                 }
             },
             "title": "networking"
@@ -8109,7 +8429,7 @@
                 "dhcp_relay_labels": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "DHCP Relay/DHCP Relay Option Policies to assign to the bridge domain.\nRequired:\n  * dhcp_servers\nOptional:\n  * dhcp_option_policy\n  * dhcp_option_policy_version\n  * scope\n  * version",
+                    "description": "DHCP Relay/DHCP Relay Option Policies to assign to the bridge domain.\nRequired:\n  * dhcp_servers\nOptional:\n  * dhcp_option_policy\n  * dhcp_option_policy_version\n  * scope\n  * version\n=================================================\nAPI Information:\n - Class: `dhcpLbl`\n - Distinguished Name: `uni/tn-{tenant}/BD-{bridge_domain}/dhcplbl-{name}`\nGUI Location:\n - Tenants > {tenant} > Networking > Bridge Domains > {bridge_domain} > DHCP Relay > {name}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:BridgeDomains:DHCPRelayLabels"
                     },
@@ -8130,14 +8450,14 @@
                 "subnets": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Subnets and their Settings to Assign to the Bridge Domain.\nRequired:\n  * gateway_ip\nOptional:\n\n  * description\n  * ip_data_plane_learning\n  * make_this_ip_address_primary\n  * scope\n  * subnet_control\n  * template\n  * treat_as_virtual_ip_address",
+                    "description": "List of Subnets and their Settings to Assign to the Bridge Domain.\nRequired:\n  * gateway_ip\nOptional:\n\n  * description\n  * ip_data_plane_learning\n  * make_this_ip_address_primary\n  * scope\n  * subnet_control\n  * template\n  * treat_as_virtual_ip_address\n=================================================\nAPI Information:\n - Class: `fvSubnet`\n - Distinguished Name: `uni/tn-{tenant}/BD-{bridge_domain}/subnet-[{subnet}]`\nGUI Location:\n - Tenants > {tenant} > Networking > Bridge Domains > {bridge_domain} > Subnets",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:BridgeDomains:L3Configurations:Subnets"
                     },
                     "title": "subnets - fvSubnet"
                 },
                 "template": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/template"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/template"
                 }
             },
             "required": [
@@ -8172,9 +8492,7 @@
                     "class": "fvRsBDToFhs",
                     "default": "default",
                     "description": "The name of a First Hop Security Policy to Associate.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/bdpol-{endpoint_retention_policy}",
                     "title": "first_hop_security_policy - "
                 },
@@ -8193,7 +8511,7 @@
                     "title": "intersite_l2_stretch - intersiteL2Stretch"
                 },
                 "monitoring_policy": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/monitoring_policy"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/monitoring_policy"
                 },
                 "netflow_monitor_policies": {
                     "type": "array",
@@ -8206,8 +8524,8 @@
                 "optimize_wan_bandwidth": {
                     "type": "boolean",
                     "apicApi": "OptimizeWanBandwidth",
-                    "default": true,
-                    "description": "Any defined bridge domain is associated with a multicast group address (or a set of multicast addresses), usually referred to as the GIPo address. Depending on the number of configured bridge domains, the same GIPo address may be associated with different bridge domains. Thus, when flooding for one of those bridge domains is enabled across sites, BUM traffic for the other bridge domains using the same GIPo address is also sent across the sites and will then be dropped on the received spine nodes. This behavior can increase the bandwidth utilization in the intersite network.  Because of this behavior, when a bridge domain is configured as stretched with BUM flooding enabled from the Cisco Multi-Site Orchestrator GUI, by default a GIPo address is assigned from a separate range of multicast addresses. This is reflected in the GUI by the \"OPTIMIZE WAN BANDWIDTH\".",
+                    "default": false,
+                    "description": "Default is `false`.  Any defined bridge domain is associated with a multicast group address (or a set of multicast addresses), usually referred to as the GIPo address. Depending on the number of configured bridge domains, the same GIPo address may be associated with different bridge domains. Thus, when flooding for one of those bridge domains is enabled across sites, BUM traffic for the other bridge domains using the same GIPo address is also sent across the sites and will then be dropped on the received spine nodes. This behavior can increase the bandwidth utilization in the intersite network.  Because of this behavior, when a bridge domain is configured as stretched with BUM flooding enabled from the Cisco Multi-Site Orchestrator GUI, by default a GIPo address is assigned from a separate range of multicast addresses. This is reflected in the GUI by the \"OPTIMIZE WAN BANDWIDTH\".",
                     "title": "optimize_wan_bandwidth - OptimizeWanBandwidth"
                 },
                 "rogue_coop_exception_list": {
@@ -8239,15 +8557,12 @@
                 "application_profile": {
                     "type": "string",
                     "apicApi": "fvEpg",
-                    "default": "",
                     "description": "The Name of the Application Profile to Assign to the EPG.  This is only used when using EPG Templates.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "title": "application_profile - fvAp"
                 },
                 "template": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/template"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/template"
                 },
                 "vlans": {
                     "$ref": "#/definitions/Tenants:ApplicationProfiles:ApplicationEpgs/properties/vlans"
@@ -8273,23 +8588,12 @@
                     "class": "dhcpRsDhcpOptionPol",
                     "default": "default",
                     "description": "Name of the DHCP option policy to assign to the relay labels.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/dhcpoptpol-{dhcp_option_policy}",
                     "title": "dhcp_option_policy - dhcpRsDhcpOptionPol"
                 },
-                "dhcp_option_policy_version": {
-                    "type": "integer",
-                    "apicApi": "not_applicable",
-                    "default": 1,
-                    "description": "Version Attribute is for Nexus Dasbhoard Orchestrator, and refers to the Tenant Policies Template Version.",
-                    "minimum": 1,
-                    "maximum": 64,
-                    "title": "dhcp_option_policy_version"
-                },
                 "dhcp_servers": {
-                    "description": "An Array of Addresses for DHCP Relay Servers.",
+                    "description": "An Array of Addresses for DHCP Relay Servers.  This is assuming the dhcp_server names is the name of the dhcp relay policy.",
                     "items": {
                         "type": "string",
                         "default": "198.18.1.69",
@@ -8305,21 +8609,12 @@
                     "type": "string",
                     "apicApi": "not_applicable",
                     "default": "tenant",
-                    "description": "(default: infra) -  The owner of the target relay. The DHCP relay is any host that forwards DHCP packets between clients and servers. The relays are used to forward requests and replies between clients and servers when they are not on the same physical subnet. The relay owner can be:\n  * infra - The owner is the infrastructure\n  * tenant - The owner is the tenant",
+                    "description": "The owner of the target relay. The DHCP relay is any host that forwards DHCP packets between clients and servers. The relays are used to forward requests and replies between clients and servers when they are not on the same physical subnet. The relay owner can be:\n  * infra - The owner is the infrastructure\n  * tenant: (default) - The owner is the tenant",
                     "enum": [
                         "infra",
                         "tenant"
                     ],
                     "title": "scope"
-                },
-                "version": {
-                    "type": "integer",
-                    "apicApi": "not_applicable",
-                    "default": 1,
-                    "description": "Version Attribute is for Nexus Dasbhoard Orchestrator, and refers to the Tenant Policies Template Version.",
-                    "minimum": 1,
-                    "maximum": 64,
-                    "title": "version"
                 }
             },
             "required": [
@@ -8345,19 +8640,13 @@
                     "$ref": "#/definitions/AbstractSettings/properties/alias"
                 },
                 "annotations": {
-                    "type": "array",
-                    "additionalProperties": false,
-                    "description": "(APIC Only) You can add arbitrary key:value pairs of metadata to an object as annotations (tagAnnotation). Annotations are provided for the user's custom purposes, such as descriptions, markers for personal scripting or API calls, or flags for monitoring tools or orchestration applications such as Cisco Multi-Site Orchestrator (MSO).\nRequired:\n  * key\n  * pair",
-                    "items": {
-                        "$ref": "#/definitions/Tenants:SharedSettings/properties/annotations"
-                    },
-                    "title": "annotations - tagAnnotation"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/annotations"
                 },
                 "arp_flooding": {
                     "type": "boolean",
                     "apicApi": "arpFlood",
                     "default": false,
-                    "description": "\nDefault is `false`.  Enables ARP flooding, so that the Layer 2 broadcast domain maps IP addresses to the MAC addresses. If flooding is disabled, unicast routing will be performed on the target IP address.\nNote: If the BD extends outside of ACI, always set to `true`.",
+                    "description": "Default is `false`.  Enables ARP flooding, so that the Layer 2 broadcast domain maps IP addresses to the MAC addresses. If flooding is disabled, unicast routing will be performed on the target IP address.\nNote: If the BD extends outside of ACI, always set to `true`.",
                     "title": "arp_flooding - arpFlood"
                 },
                 "description": {
@@ -8367,11 +8656,8 @@
                     "type": "string",
                     "apicApi": "tDn",
                     "class": "fvRsBdToEpRet",
-                    "default": "default",
                     "description": "(APIC Only) Provides the parameters for the lifecycle of the endpoint group in the bridge domain.  This will assign the policy to the BD.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/epRPol-{endpoint_retention_policy}",
                     "title": "endpoint_retention_policy - fvRsBdToEpRet"
                 },
@@ -8382,11 +8668,8 @@
                     "type": "string",
                     "apicApi": "igmpIfP",
                     "class": "igmpIfP",
-                    "default": "default",
                     "description": "(APIC Only) Name of the IGMP Interface Policy to assign to the Bridge Domain.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/igmpIfP",
                     "title": "igmp_interface_policy - igmpIfP"
                 },
@@ -8394,11 +8677,8 @@
                     "type": "string",
                     "apicApi": "tDn",
                     "class": "fvRsIgmpsn",
-                    "default": "default",
                     "description": "(APIC Only) Name of the IGMP Snooping Policy to assign to the Bridge Domain.  IGMP snooping is the process of listening to Internet Group Management Protocol (IGMP) network traffic. The feature allows a network switch to listen in on the IGMP conversation between hosts and routers and filter multicasts links that do not need them, thus controlling which ports receive specific multicast traffic.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/snPol-{endpoint_retention_policy}",
                     "title": "igmp_snooping_policy - fvRsIgmpsn"
                 },
@@ -8448,9 +8728,7 @@
                     "class": "fvRsMldsn",
                     "default": "default",
                     "description": "(APIC Only) Name of the MLD Snooping Policy to assign to the Bridge Domain.  The Multicast Listener Discovery (MLD) Snooping policy enables the efficient distribution of IPv6 multicast traffic between hosts and routers. It is a Layer 2 feature that restricts IPv6 multicast traffic within a bridge domain to a subset of ports that have transmitted or received MLD queries or reports.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/mldsnoopPol-{endpoint_retention_policy}",
                     "title": "mld_snoop_policy - fvRsMldsn"
                 },
@@ -8519,9 +8797,7 @@
                     "apicApi": "fvTenant",
                     "default": "common",
                     "description": "The Name of the Tenant the VRF exists in.  Only required if it is different than the Bridge Domain.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings/properties/name",
                     "title": "tenant - fvTenant"
                 }
             },
@@ -8576,7 +8852,7 @@
                 "subnets": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of Subnets and their Settings to Assign to the Bridge Domain.\nRequired:\n  * gateway_ip\nOptional:\n\n  * description\n  * ip_data_plane_learning\n  * make_this_ip_address_primary\n  * scope\n  * subnet_control\n  * template\n  * treat_as_virtual_ip_address",
+                    "description": "List of Subnets and their Settings to Assign to the Bridge Domain.\nRequired:\n  * gateway_ip\nOptional:\n\n  * description\n  * ip_data_plane_learning\n  * make_this_ip_address_primary\n  * scope\n  * subnet_control\n  * template\n  * treat_as_virtual_ip_address\n=================================================\nAPI Information:\n - Class: `fvSubnet`\n - Distinguished Name: `uni/tn-{tenant}/BD-{bridge_domain}/subnet-[{subnet}]`\nGUI Location:\n - Tenants > {tenant} > Networking > Bridge Domains > {bridge_domain} > Subnets",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:BridgeDomains:L3Configurations:Subnets"
                     },
@@ -8619,11 +8895,8 @@
                         "type": "string",
                         "apicApi": "tDn",
                         "class": "fvRsBDToOut",
-                        "default": "",
                         "description": "Name of a Route Profile to associate to the L3Out.\n**Note: Only one L3out can have a route_profile associated to it for the BD",
-                        "minLength": 1,
-                        "maxLength": 64,
-                        "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                        "$ref": "#/definitions/AbstractSettings/properties/name",
                         "tDn": "uni/tn-{tenant}/out-{l3out}",
                         "title": "l3out - fvRsBDToOut"
                     },
@@ -8636,9 +8909,7 @@
                     "default": "",
                     "description": "Name of a Route Profile to associate to the L3Out.\n**Note: Only one L3out can have a route_profile associated to it for the BD",
                     "dn": "uni/tn-{tenant}/BD-{bridge_domain}/rsBDToProfile",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tRn": "prof-{name}",
                     "title": "route_profile - fvRsBDToProfile"
                 },
@@ -8647,9 +8918,7 @@
                     "apicApi": "tnL3extOutName",
                     "default": "",
                     "description": "The Name of the Tenant the Contract exists in.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings/properties/name",
                     "title": "tenant - tnL3extOutName"
                 }
             },
@@ -8703,7 +8972,7 @@
                     "$ref": "#/definitions/Tenants:Networking:BridgeDomains:L3Configurations:Subnets:SubnetControl"
                 },
                 "template": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/template"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/template"
                 },
                 "treat_as_virtual_ip_address": {
                     "type": "boolean",
@@ -8753,7 +9022,7 @@
                     "type": "boolean",
                     "apicApi": "",
                     "default": true,
-                    "description": "Default is `false`.  (APIC Only) Address will be used as a ND RA Prefix.",
+                    "description": "Default is `true`.  (APIC Only) Address will be used as a ND RA Prefix.",
                     "title": "neighbor_discovery - "
                 },
                 "no_default_svi_gateway": {
@@ -8785,13 +9054,7 @@
                     "$ref": "#/definitions/AbstractSettings/properties/alias"
                 },
                 "annotations": {
-                    "type": "array",
-                    "additionalProperties": false,
-                    "description": "(APIC Only) You can add arbitrary key:value pairs of metadata to an object as annotations (tagAnnotation). Annotations are provided for the user's custom purposes, such as descriptions, markers for personal scripting or API calls, or flags for monitoring tools or orchestration applications such as Cisco Multi-Site Orchestrator (MSO).\nRequired:\n  * key\n  * pair",
-                    "items": {
-                        "$ref": "#/definitions/Tenants:SharedSettings/properties/annotations"
-                    },
-                    "title": "annotations - tagAnnotation"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/annotations"
                 },
                 "consumer_label": {
                     "type": "string",
@@ -8823,7 +9086,7 @@
                 "external_epgs": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "List of External EPG(s) with their attributes for the L3Out.\nRequired:\n  * name\n  * subnets\nOptional:\n  * alias\n  * contract_exception_tag\n  * contracts\n  * description\n  * flood_on_encapsulation\n  * label_match_criteria\n  * preferred_group_member\n  * qos_class\n  * route_control_profiles\n  * target_dscp",
+                    "description": "List of External EPG(s) with their attributes for the L3Out.\nRequired:\n  * name\n  * subnets\nOptional:\n  * alias\n  * contract_exception_tag\n  * contracts\n  * description\n  * flood_on_encapsulation\n  * label_match_criteria\n  * preferred_group_member\n  * qos_class\n  * route_control_profiles\n  * target_dscp\n=================================================\nAPI Information:\n - Class: `l3extInstP`\n - Distinguised Name: `uni/tn-{tenant}/out-{l3out}/instP-{external_epg}`\nGUI Location:\n - tenants > {tenant} > Networking > L3Outs > {l3out} > External EPGs > {external_epg}",
                     "items": {
                         "$ref": "#/definitions/Tenants:Networking:L3Outs:ExternalEpgs"
                     },
@@ -8838,9 +9101,7 @@
                     "class": "l3extRsL3DomAtt",
                     "default": "default",
                     "description": "Name of the L3 Domain Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "rn": "rsl3DomAtt",
                     "tDn": "uni/l3dom-{name}",
                     "title": "l3_domain - l3extRsL3DomAtt"
@@ -8912,9 +9173,7 @@
                     "default": "",
                     "dn": "uni/tn-{tenant}/out-{l3out}/rsinterleakPol",
                     "description": "The Name of the Route Map for Interleak.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-{tenant}/prof-{route_map}",
                     "title": "route_profile_for_interleak - l3extRsInterleakPol"
                 },
@@ -8928,17 +9187,14 @@
                     "title": "route_profiles_for_redistribution - l3extRsRedistributePol"
                 },
                 "target_dscp": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/target_dscp"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/target_dscp"
                 },
                 "vrf": {
                     "type": "string",
                     "apicApi": "class",
                     "class": "l3extRsEctx",
-                    "default": "default",
                     "description": "Default is `default`.  Name of the VRF to Assign to the L3Out.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "rn": "uni/tn-{tenant}/ctx-{vrf}",
                     "title": "vrf"
                 },
@@ -8947,10 +9203,8 @@
                     "apicApi": "not_applicable",
                     "default": "",
                     "description": "Name of the NDO Template for the VRF.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "vrf"
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
+                    "title": "vrf_template"
                 }
             },
             "required": [
@@ -9073,7 +9327,7 @@
                     "title": "intra_ext_epg_isolation - pcEnfPref"
                 },
                 "label_match_criteria": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/label_match_criteria"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/label_match_criteria"
                 },
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
@@ -9086,7 +9340,7 @@
                     "title": "preferred_group_member - prefGrMemb"
                 },
                 "qos_class": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/qos_class"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/qos_class"
                 },
                 "subnets": {
                     "type": "array",
@@ -9107,7 +9361,7 @@
                     "title": "route_control_profiles - rtctrlProfile"
                 },
                 "target_dscp": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/target_dscp"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/target_dscp"
                 }
             },
             "required": [
@@ -9279,16 +9533,10 @@
                     "$ref": "#/definitions/AbstractSettings/properties/alias"
                 },
                 "annotations": {
-                    "type": "array",
-                    "additionalProperties": false,
-                    "description": "(APIC Only) You can add arbitrary key:value pairs of metadata to an object as annotations (tagAnnotation). Annotations are provided for the user's custom purposes, such as descriptions, markers for personal scripting or API calls, or flags for monitoring tools or orchestration applications such as Cisco Multi-Site Orchestrator (MSO).\nRequired:\n  * key\n  * pair",
-                    "items": {
-                        "$ref": "#/definitions/Tenants:SharedSettings/properties/annotations"
-                    },
-                    "title": "annotations - tagAnnotation"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/annotations"
                 },
                 "color_tag": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/color_tag"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/color_tag"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
@@ -9333,7 +9581,7 @@
                     "title": "pod_id - pod-{pod_id}"
                 },
                 "target_dscp": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/target_dscp"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/target_dscp"
                 }
             },
             "required": [
@@ -9384,7 +9632,7 @@
                     "title": "bgp_peers - bgpPeerP"
                 },
                 "color_tag": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/color_tag"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/color_tag"
                 },
                 "custom_qos_policy": {
                     "type": "string",
@@ -9576,7 +9824,7 @@
                     "title": "primary_preferred_address  - l3extRsPathL3OutAtt:addr"
                 },
                 "qos_class": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/qos_class"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/qos_class"
                 },
                 "secondary_addresses": {
                     "type": "array",
@@ -9598,7 +9846,7 @@
                     "$ref": "#/definitions/Tenants:Networking:L3Outs:LogicalNodeProfiles:LogicalInterfaceProfiles:SviAddresses"
                 },
                 "target_dscp": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/target_dscp"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/target_dscp"
                 }
             },
             "required": [
@@ -9766,10 +10014,10 @@
             "description": "Ucast/Mcast Addr Type AF Control.\nAttributes are:\n  * af_mcast\n  * af_ucast",
             "properties": {
                 "af_mcast": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/af_mcast"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/af_mcast"
                 },
                 "af_ucast": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/af_ucast"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/af_ucast"
                 }
             },
             "title": "address_type_controls - "
@@ -10423,9 +10671,7 @@
                     "type": "string",
                     "apicApi": "netflowMonitorPol",
                     "description": "The Name of the Netflow Monitor Policy.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
+                    "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "title": "netflow_monitor_policy - netflowMonitorPol"
                 }
             },
@@ -10659,13 +10905,7 @@
                     "$ref": "#/definitions/AbstractSettings/properties/alias"
                 },
                 "annotations": {
-                    "type": "array",
-                    "additionalProperties": false,
-                    "description": "(APIC Only) You can add arbitrary key:value pairs of metadata to an object as annotations (tagAnnotation). Annotations are provided for the user's custom purposes, such as descriptions, markers for personal scripting or API calls, or flags for monitoring tools or orchestration applications such as Cisco Multi-Site Orchestrator (MSO).\nRequired:\n  * key\n  * pair",
-                    "items": {
-                        "$ref": "#/definitions/Tenants:SharedSettings/properties/annotations"
-                    },
-                    "title": "annotations - tagAnnotation"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/annotations"
                 },
                 "bd_enforcement_status": {
                     "type": "boolean",
@@ -10705,7 +10945,7 @@
                     "title": "communities - snmpCtxP"
                 },
                 "create": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/create"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/create"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
@@ -10756,7 +10996,7 @@
                     "title": "layer3_multicast - knwMcastAct"
                 },
                 "monitoring_policy": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/monitoring_policy"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/monitoring_policy"
                 },
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
@@ -10874,7 +11114,7 @@
                     "title": "contracts - [fvRsCons|fvRsConsIf|fvRsIntraEpg|fvRsProv|fvRsProtBy]"
                 },
                 "label_match_criteria": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/label_match_criteria"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/label_match_criteria"
                 }
             },
             "required": [
@@ -10987,7 +11227,7 @@
             "description": "",
             "properties": {
                 "create": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/create"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/create"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
@@ -11822,10 +12062,10 @@
             "description": "Ucast/Mcast Addr Type AF Control.  Options are:\n  * af_mcast\n  * af_ucast",
             "properties": {
                 "af_mcast": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/af_mcast"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/af_mcast"
                 },
                 "af_ucast": {
-                    "$ref": "#/definitions/Tenants:SharedSettings/properties/af_ucast"
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/af_ucast"
                 }
             },
             "title": "address_type_controls - addrTCtrl"
@@ -13740,303 +13980,6 @@
                 "name"
             ],
             "title": "Contexts"
-        },
-        "Tenants:SharedSettings": {
-            "type": "object",
-            "additionalProperties": false,
-            "class": "not_applicable",
-            "description": "Shared Settings between the policies",
-            "properties": {
-                "af_mcast": {
-                    "type": "boolean",
-                    "apicApi": "af-mcast",
-                    "default": false,
-                    "description": "Default is `false`.  Select `true` to enable the Multicast Address Family.",
-                    "title": "af_mcast - af-mcast"
-                },
-                "af_ucast": {
-                    "type": "boolean",
-                    "apicApi": "af-ucast",
-                    "default": true,
-                    "description": "Default is `true`.  Select `true` to enable the Unicast Address Family.",
-                    "title": "af_ucast - af-ucast"
-                },
-                "annotations": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "class": "tagAnnotation",
-                    "description": "(APIC Only) You can add arbitrary key:value pairs of metadata to an object as annotations (tagAnnotation). Annotations are provided for the user's custom purposes, such as descriptions, markers for personal scripting or API calls, or flags for monitoring tools or orchestration applications such as Cisco Multi-Site Orchestrator (MSO).",
-                    "rn": "annotationKey-[$key]",
-                    "properties": {
-                        "key": {
-                            "type": "string",
-                            "apicApi": "key",
-                            "default": "key_name",
-                            "description": "Annotation Key Name.",
-                            "minLength": 1,
-                            "maxLength": 64,
-                            "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                            "title": "key"
-                        },
-                        "value": {
-                            "type": "string",
-                            "apicApi": "value",
-                            "default": "key_value",
-                            "description": "Annotation Key Value.",
-                            "minLength": 1,
-                            "maxLength": 128,
-                            "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                            "title": "value"
-                        }
-                    },
-                    "required": [
-                        "key",
-                        "value"
-                    ],
-                    "title": "annotations - tagAnnotation"
-                },
-                "create": {
-                    "type": "boolean",
-                    "apicApi": "not_applicable",
-                    "default": true,
-                    "description": "Flag to determine if the Object should be created or just read as a data source.",
-                    "title": "create"
-                },
-                "color_tag": {
-                    "type": "string",
-                    "apicApi": "tag",
-                    "default": "yellow-green",
-                    "description": "Specifies the color of a policy label.\n  * alice-blue\n  * antique-white\n  * aqua\n  * aquamarine\n  * azure\n  * beige\n  * bisque\n  * black\n  * blanched-almond\n  * blue\n  * blue-violet\n  * brown\n  * burlywood\n  * cadet-blue\n  * chartreuse\n  * chocolate\n  * coral\n  * cornflower-blue\n  * cornsilk\n  * crimson\n  * cyan\n  * dark-blue\n  * dark-cyan\n  * dark-goldenrod\n  * dark-gray\n  * dark-green\n  * dark-khaki\n  * dark-magenta\n  * dark-olive-green\n  * dark-orange\n  * dark-orchid\n  * dark-red\n  * dark-salmon\n  * dark-sea-green\n  * dark-slate-blue\n  * dark-slate-gray\n  * dark-turquoise\n  * dark-violet\n  * deep-pink\n  * deep-sky-blue\n  * dim-gray\n  * dodger-blue\n  * fire-brick\n  * floral-white\n  * forest-green\n  * fuchsia\n  * gainsboro\n  * ghost-white\n  * gold\n  * goldenrod\n  * gray\n  * green\n  * green-yellow\n  * honeydew\n  * hot-pink\n  * indian-red\n  * indigo\n  * ivory\n  * khaki\n  * lavender\n  * lavender-blush\n  * lawn-green\n  * lemon-chiffon\n  * light-blue\n  * light-coral\n  * light-cyan\n  * light-goldenrod-yellow\n  * light-gray\n  * light-green\n  * light-pink\n  * light-salmon\n  * light-sea-green\n  * light-sky-blue\n  * light-slate-gray\n  * light-steel-blue\n  * light-yellow\n  * lime\n  * lime-green\n  * linen\n  * magenta\n  * maroon\n  * medium-aquamarine\n  * medium-blue\n  * medium-orchid\n  * medium-purple\n  * medium-sea-green\n  * medium-slate-blue\n  * medium-spring-green\n  * medium-turquoise\n  * medium-violet-red\n  * midnight-blue\n  * mint-cream\n  * misty-rose\n  * moccasin\n  * navajo-white\n  * navy\n  * old-lace\n  * olive\n  * olive-drab\n  * orange\n  * orange-red\n  * orchid\n  * pale-goldenrod\n  * pale-green\n  * pale-turquoise\n  * pale-violet-red\n  * papaya-whip\n  * peachpuff\n  * peru\n  * pink\n  * plum\n  * powder-blue\n  * purple\n  * red\n  * rosy-brown\n  * royal-blue\n  * saddle-brown\n  * salmon\n  * sandy-brown\n  * sea-green\n  * seashell\n  * sienna\n  * silver\n  * sky-blue\n  * slate-blue\n  * slate-gray\n  * snow\n  * spring-green\n  * steel-blue\n  * tan\n  * teal\n  * thistle\n  * tomato\n  * turquoise\n  * violet\n  * wheat\n  * white\n  * white-smoke\n  * yellow\n  * yellow-green: (default).",
-                    "enum": [
-                        "alice-blue",
-                        "antique-white",
-                        "aqua",
-                        "aquamarine",
-                        "azure",
-                        "beige",
-                        "bisque",
-                        "black",
-                        "blanched-almond",
-                        "blue",
-                        "blue-violet",
-                        "brown",
-                        "burlywood",
-                        "cadet-blue",
-                        "chartreuse",
-                        "chocolate",
-                        "coral",
-                        "cornflower-blue",
-                        "cornsilk",
-                        "crimson",
-                        "cyan",
-                        "dark-blue",
-                        "dark-cyan",
-                        "dark-goldenrod",
-                        "dark-gray",
-                        "dark-green",
-                        "dark-khaki",
-                        "dark-magenta",
-                        "dark-olive-green",
-                        "dark-orange",
-                        "dark-orchid",
-                        "dark-red",
-                        "dark-salmon",
-                        "dark-sea-green",
-                        "dark-slate-blue",
-                        "dark-slate-gray",
-                        "dark-turquoise",
-                        "dark-violet",
-                        "deep-pink",
-                        "deep-sky-blue",
-                        "dim-gray",
-                        "dodger-blue",
-                        "fire-brick",
-                        "floral-white",
-                        "forest-green",
-                        "fuchsia",
-                        "gainsboro",
-                        "ghost-white",
-                        "gold",
-                        "goldenrod",
-                        "gray",
-                        "green",
-                        "green-yellow",
-                        "honeydew",
-                        "hot-pink",
-                        "indian-red",
-                        "indigo",
-                        "ivory",
-                        "khaki",
-                        "lavender",
-                        "lavender-blush",
-                        "lawn-green",
-                        "lemon-chiffon",
-                        "light-blue",
-                        "light-coral",
-                        "light-cyan",
-                        "light-goldenrod-yellow",
-                        "light-gray",
-                        "light-green",
-                        "light-pink",
-                        "light-salmon",
-                        "light-sea-green",
-                        "light-sky-blue",
-                        "light-slate-gray",
-                        "light-steel-blue",
-                        "light-yellow",
-                        "lime",
-                        "lime-green",
-                        "linen",
-                        "magenta",
-                        "maroon",
-                        "medium-aquamarine",
-                        "medium-blue",
-                        "medium-orchid",
-                        "medium-purple",
-                        "medium-sea-green",
-                        "medium-slate-blue",
-                        "medium-spring-green",
-                        "medium-turquoise",
-                        "medium-violet-red",
-                        "midnight-blue",
-                        "mint-cream",
-                        "misty-rose",
-                        "moccasin",
-                        "navajo-white",
-                        "navy",
-                        "old-lace",
-                        "olive",
-                        "olive-drab",
-                        "orange",
-                        "orange-red",
-                        "orchid",
-                        "pale-goldenrod",
-                        "pale-green",
-                        "pale-turquoise",
-                        "pale-violet-red",
-                        "papaya-whip",
-                        "peachpuff",
-                        "peru",
-                        "pink",
-                        "plum",
-                        "powder-blue",
-                        "purple",
-                        "red",
-                        "rosy-brown",
-                        "royal-blue",
-                        "saddle-brown",
-                        "salmon",
-                        "sandy-brown",
-                        "sea-green",
-                        "seashell",
-                        "sienna",
-                        "silver",
-                        "sky-blue",
-                        "slate-blue",
-                        "slate-gray",
-                        "snow",
-                        "spring-green",
-                        "steel-blue",
-                        "tan",
-                        "teal",
-                        "thistle",
-                        "tomato",
-                        "turquoise",
-                        "violet",
-                        "wheat",
-                        "white",
-                        "white-smoke",
-                        "yellow",
-                        "yellow-green"
-                    ],
-                    "title": "color_tag - tag"
-                },
-                "label_match_criteria": {
-                    "type": "string",
-                    "apicApi": "",
-                    "default": "AtLeastOne",
-                    "description": "Label matching is used to determine which consumer and provider EPGs can communicate. Contract subjects of a given producer or consumer of that contract determine that consumers and providers can communicate.  The match type algorithm is determined by the matchT attribute that can have one of the following values:\n  * All\n  * AtleastOne (default)\n  * AtmostOne\n  * None",
-                    "enum": [
-                        "All",
-                        "AtleastOne",
-                        "None",
-                        "AtmostOne"
-                    ],
-                    "title": "label_match_criteria"
-                },
-                "monitoring_policy": {
-                    "type": "string",
-                    "apicApi": "monPolDn",
-                    "class": "monEPGPol",
-                    "default": "default",
-                    "dn": "uni/tn-{tenant}/monepg-{monitoring_policy}",
-                    "description": "Name of a Monitoring Policy to assign to the EPG.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "rn": "monepg-{monitoring_policy}",
-                    "title": "monitoring_policy - monEPGPol"
-                },
-                "qos_class": {
-                    "type": "string",
-                    "apicApi": "prio",
-                    "default": "unspecified",
-                    "description": "The priority class identifier. Allowed values are:\n  * level1\n  * level2\n  * level3\n  * level4\n  * level5\n  * level6\n  * unspecified: (default)",
-                    "enum": [
-                        "level1",
-                        "level2",
-                        "level3",
-                        "level4",
-                        "level5",
-                        "level6",
-                        "unspecified"
-                    ],
-                    "title": "qos_class - prio"
-                },
-                "target_dscp": {
-                    "type": "string",
-                    "apicApi": "targetDscp",
-                    "default": "unspecified",
-                    "description": "The target differentiated services code point (DSCP). The options are as follows:\n  * AF11 - low drop Priority\n  * AF12 - medium drop Priority\n  * AF13 - high drop Priority\n  * AF21 - low drop Immediate\n  * AF22 - medium drop Immediate\n  * AF23 - high drop Immediate\n  * AF31 - low drop Flash\n  * AF32 - medium drop Flash\n  * AF33 - high drop Flash\n  * AF41 - low drop-Flash Override\n  * AF42 - medium drop Flash Override\n  * AF43 - high drop Flash Override\n  * CS0 - class of service level 0\n  * CS1 - class of service level 1\n  * CS2 - class of service level 2\n  * CS3 - class of service level 3\n  * CS4 - class of service level 4\n  * CS5 - class of service level 5\n  * CS6 - class of service level 6\n  * CS7 - class of service level 7\n  * EF - Expedited Forwarding Critical\n  * VA - Voice Admit\n  * unspecified: (default)",
-                    "enum": [
-                        "AF11",
-                        "AF12",
-                        "AF13",
-                        "AF21",
-                        "AF22",
-                        "AF23",
-                        "AF31",
-                        "AF32",
-                        "AF33",
-                        "AF41",
-                        "AF42",
-                        "AF43",
-                        "CS0",
-                        "CS1",
-                        "CS2",
-                        "CS3",
-                        "CS4",
-                        "CS5",
-                        "CS6",
-                        "CS7",
-                        "EF",
-                        "VA",
-                        "unspecified"
-                    ],
-                    "title": "target_dscp - targetDscp"
-                },
-                "template": {
-                    "type": "string",
-                    "apicApi": "name",
-                    "default": "",
-                    "description": "Name of the Template, [Bridge Domain|Application EPG|Subnet], to Associate to the Object.",
-                    "minLength": 1,
-                    "maxLength": 64,
-                    "pattern": "^[a-zA-Z0-9_\\.:-]+$",
-                    "title": "template"
-                }
-            },
-            "title": "shared_settings"
         },
         "Tenants:Templates": {
             "type": "object",
