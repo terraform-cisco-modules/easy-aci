@@ -6250,28 +6250,22 @@
                     "title": "autonomous_system_number - asn"
                 },
                 "route_reflector_nodes": {
-                    "type": "array",
-                    "additionalProperties": false,
-                    "description": "Attribute is:\n  * pods\n=================================================\nAPI Information:\n - Class: `bgpRRNodePEp`\n - Distinguished Name: `uni/fabric/bgpInstP-default/rr/node-{node_id}`\nGUI Location:\n - System > System Settings > BGP Route Reflector: Route Reflector Nodes",
-                    "items": {
-                        "$ref": "#/definitions/SystemSettings:BgpRouteReflector:RouteReflectorNodes"
-                    },
-                    "title": "route_reflector_nodes - bgpRRNodePEp"
+                    "$ref": "#/definitions/SystemSettings:BgpRouteReflector:RouteReflectorNodes"
                 }
             },
             "required": [
                 "autonomous_system_number"
             ],
-            "title": "bgp - bgpAsP"
+            "title": "bgp_route_reflector - bgpAsP"
         },
         "SystemSettings:BgpRouteReflector:RouteReflectorNodes": {
             "type": "object",
             "additionalProperties": false,
-            "description": "",
+            "description": "List of Pod Spine Route Reflectors.\nRequired:\n  * pods\n=================================================\nAPI Information:\n - Class: `bgpRRNodePEp`\n - Distinguished Name: `uni/fabric/bgpInstP-default/rr/node-{node_id}`\nGUI Location:\n - System > System Settings > BGP Route Reflector: Route Reflector Nodes",
             "properties": {
                 "pods": {
                     "type": "array",
-                    "description": "Required:\n  * pod_id\n  * route_reflector_nodes",
+                    "description": "Required:\n  * pod_id\n  * nodes",
                     "items": {
                         "$ref": "#/definitions/SystemSettings:BgpRouteReflector:RouteReflectorNodes:Pods"
                     },
@@ -6281,13 +6275,13 @@
             "required": [
                 "pods"
             ],
-            "title": "route_reflector_nodes"
+            "title": "route_reflector_nodes - bgpRRNodePEp"
         },
         "SystemSettings:BgpRouteReflector:RouteReflectorNodes:Pods": {
             "type": "object",
             "additionalProperties": false,
             "class": "bgpRRNodePEp",
-            "description": "",
+            "description": "Required:\n  * pod_id\n  * route_reflector_nodes",
             "dn": "uni/fabric/bgpInstP-default/rr/node-{node_id}",
             "properties": {
                 "pod_id": {
@@ -6299,7 +6293,7 @@
                     "maximum": 12,
                     "title": "pod_id - podId"
                 },
-                "route_reflector_nodes": {
+                "nodes": {
                     "type": "array",
                     "description": "List of BGP Route Reflector Nodes.",
                     "items": {
@@ -6311,12 +6305,12 @@
                         "maximum": 4000,
                         "title": "node_id - id"
                     },
-                    "title": "route_reflector_nodes"
+                    "title": "nodes"
                 }
             },
             "required": [
                 "pod_id",
-                "route_reflector_nodes"
+                "nodes"
             ],
             "title": "pods"
         },

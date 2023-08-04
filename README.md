@@ -397,7 +397,7 @@ export vrf_snmp_community_5='<vrf_snmp_community_5>'
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_aci"></a> [aci](#requirement\_aci) | 2.9.0 |
-| <a name="requirement_mso"></a> [mso](#requirement\_mso) | 0.11.0 |
+| <a name="requirement_mso"></a> [mso](#requirement\_mso) | 0.11.1 |
 | <a name="requirement_utils"></a> [utils](#requirement\_utils) | 0.2.5 |
 ## Providers
 
@@ -408,13 +408,13 @@ export vrf_snmp_community_5='<vrf_snmp_community_5>'
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_access"></a> [access](#module\_access) | terraform-cisco-modules/access/aci | 2.2.5 |
-| <a name="module_admin"></a> [admin](#module\_admin) | terraform-cisco-modules/admin/aci | 2.1.7 |
-| <a name="module_built_in_tenants"></a> [built\_in\_tenants](#module\_built\_in\_tenants) | terraform-cisco-modules/tenants/aci | 2.2.5 |
-| <a name="module_fabric"></a> [fabric](#module\_fabric) | terraform-cisco-modules/fabric/aci | 2.1.7 |
-| <a name="module_switch"></a> [switch](#module\_switch) | terraform-cisco-modules/switch/aci | 2.2.5 |
-| <a name="module_system_settings"></a> [system\_settings](#module\_system\_settings) | terraform-cisco-modules/system-settings/aci | 2.2.5 |
-| <a name="module_tenants"></a> [tenants](#module\_tenants) | terraform-cisco-modules/tenants/aci | 2.2.5 |
+| <a name="module_access"></a> [access](#module\_access) | terraform-cisco-modules/access/aci | 2.5.1 |
+| <a name="module_admin"></a> [admin](#module\_admin) | terraform-cisco-modules/admin/aci | 2.5.1 |
+| <a name="module_built_in_tenants"></a> [built\_in\_tenants](#module\_built\_in\_tenants) | terraform-cisco-modules/tenants/aci | 2.5.1 |
+| <a name="module_fabric"></a> [fabric](#module\_fabric) | terraform-cisco-modules/fabric/aci | 2.5.1 |
+| <a name="module_switch"></a> [switch](#module\_switch) | terraform-cisco-modules/switch/aci | 2.5.1 |
+| <a name="module_system_settings"></a> [system\_settings](#module\_system\_settings) | terraform-cisco-modules/system-settings/aci | 2.5.2 |
+| <a name="module_tenants"></a> [tenants](#module\_tenants) | terraform-cisco-modules/tenants/aci | 2.5.1 |
 
 ## NOTE:
 **When the Data is merged from the YAML files, it will run through the modules using for_each loop(s).  Sensitive Variables cannot be added to a for_each loop, instead use the variables below to add sensitive values for policies.**
@@ -443,16 +443,16 @@ export vrf_snmp_community_5='<vrf_snmp_community_5>'
 | <a name="input_radius_monitoring_password"></a> [radius\_monitoring\_password](#input\_radius\_monitoring\_password) | RADIUS Monitoring Password. | `string` | `""` | no |
 | <a name="input_tacacs_key"></a> [tacacs\_key](#input\_tacacs\_key) | TACACS Key. | `string` | `""` | no |
 | <a name="input_tacacs_monitoring_password"></a> [tacacs\_monitoring\_password](#input\_tacacs\_monitoring\_password) | TACACS Monitoring Password. | `string` | `""` | no |
+| <a name="input_apic_ca_certificate_chain_1"></a> [apic\_ca\_certificate\_chain\_1](#input\_apic\_ca\_certificate\_chain\_1) | Certificate Authority Certificate Chain.  i.e. Intermediate and Root CA Certificate. | `string` | `""` | no |
+| <a name="input_apic_ca_certificate_chain_2"></a> [apic\_ca\_certificate\_chain\_2](#input\_apic\_ca\_certificate\_chain\_2) | Certificate Authority Certificate Chain.  i.e. Intermediate and Root CA Certificate. | `string` | `""` | no |
+| <a name="input_apic_certificate_1"></a> [apic\_certificate\_1](#input\_apic\_certificate\_1) | APIC Certificate 1. | `string` | `""` | no |
+| <a name="input_apic_certificate_2"></a> [apic\_certificate\_2](#input\_apic\_certificate\_2) | APIC Certificate 2. | `string` | `""` | no |
+| <a name="input_apic_private_key_1"></a> [apic\_private\_key\_1](#input\_apic\_private\_key\_1) | APIC Certificate Private Key 1. | `string` | `""` | no |
+| <a name="input_apic_private_key_2"></a> [apic\_private\_key\_2](#input\_apic\_private\_key\_2) | APIC Certificate Private Key 2. | `string` | `""` | no |
 | <a name="input_smtp_password"></a> [smtp\_password](#input\_smtp\_password) | Password to use if Secure SMTP is enabled for the Smart CallHome Destination Group Mail Server. | `string` | `""` | no |
 | <a name="input_remote_password"></a> [remote\_password](#input\_remote\_password) | Remote Host Password. | `string` | `""` | no |
 | <a name="input_ssh_key_contents"></a> [ssh\_key\_contents](#input\_ssh\_key\_contents) | SSH Private Key Based Authentication Contents. | `string` | `""` | no |
 | <a name="input_ssh_key_passphrase"></a> [ssh\_key\_passphrase](#input\_ssh\_key\_passphrase) | SSH Private Key Based Authentication Passphrase. | `string` | `""` | no |
-| <a name="input_apic_certificate_1"></a> [apic\_certificate\_1](#input\_apic\_certificate\_1) | APIC Certificate 1. | `string` | `"blah.txt"` | no |
-| <a name="input_apic_certificate_2"></a> [apic\_certificate\_2](#input\_apic\_certificate\_2) | APIC Certificate 2. | `string` | `"blah.txt"` | no |
-| <a name="input_apic_intermediate_plus_root_ca_1"></a> [apic\_intermediate\_plus\_root\_ca\_1](#input\_apic\_intermediate\_plus\_root\_ca\_1) | Intermediate and Root CA Certificate 1. | `string` | `"blah.txt"` | no |
-| <a name="input_apic_intermediate_plus_root_ca_2"></a> [apic\_intermediate\_plus\_root\_ca\_2](#input\_apic\_intermediate\_plus\_root\_ca\_2) | Intermediate and Root CA Certificate 2. | `string` | `"blah.txt"` | no |
-| <a name="input_apic_private_key_1"></a> [apic\_private\_key\_1](#input\_apic\_private\_key\_1) | APIC Private Key 1. | `string` | `"blah.txt"` | no |
-| <a name="input_apic_private_key_2"></a> [apic\_private\_key\_2](#input\_apic\_private\_key\_2) | APIC Private Key 2. | `string` | `"blah.txt"` | no |
 | <a name="input_ntp_key_1"></a> [ntp\_key\_1](#input\_ntp\_key\_1) | Key Assigned to NTP id 1. | `string` | `""` | no |
 | <a name="input_ntp_key_2"></a> [ntp\_key\_2](#input\_ntp\_key\_2) | Key Assigned to NTP id 2. | `string` | `""` | no |
 | <a name="input_ntp_key_3"></a> [ntp\_key\_3](#input\_ntp\_key\_3) | Key Assigned to NTP id 3. | `string` | `""` | no |

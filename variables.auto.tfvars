@@ -7,7 +7,7 @@
 annotations = [
   {
     key   = "orchestrator"
-    value = "terraform:easy-aci:v2.1.9"
+    value = "terraform:easy-aci:v2.5.1"
   }
 ]
 apic_hostname   = "asgard-apic01.rich.ciscolabs.com"
