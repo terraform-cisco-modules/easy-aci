@@ -24,7 +24,7 @@ module "access" {
   for_each = { for v in ["default"] : v => v if length(
     lookup(local.model, "access", {})) > 0 || length(lookup(local.model, "virtual_networking", {})) > 0
   }
-  access = merge(lookup(local.model, "access", {}), local.global_settings, lookup(local.model, "virtual_networking", {}))
+  access           = merge(lookup(local.model, "access", {}), local.global_settings, lookup(local.model, "virtual_networking", {}))
   access_sensitive = local.access_sensitive
 }
 
@@ -57,8 +57,8 @@ module "built_in_tenants" {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) > 0
   }
   model = merge(each.value, local.global_settings, lookup(local.model, "templates", {}), {
-    aaep_to_epgs    = {}
-    switch          = {}
+    aaep_to_epgs = {}
+    switch       = {}
   })
   tenant           = each.key
   tenant_sensitive = local.tenant_sensitive
@@ -125,8 +125,8 @@ module "tenants" {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) == 0
   }
   model = merge(each.value, local.global_settings, lookup(local.model, "templates", {}), {
-    aaep_to_epgs    = {}
-    switch          = {}
+    aaep_to_epgs = {}
+    switch       = {}
   })
   tenant           = each.key
   tenant_sensitive = local.tenant_sensitive

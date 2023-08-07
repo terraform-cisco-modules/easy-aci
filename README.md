@@ -26,7 +26,7 @@ There are two examples in this Repository.  The first example is shown in the pr
 
 Notice the `eza.yaml` extension on the files.  This is how the  `data.utils_yaml_merge.model` is configured to recognize the files that should be imported with the module.
 
-The more complex example is shown in the `./RICH/` Folder Structure.  This is what is being used for our lab in Richfield, Ohio.  In these examples there are four sub-folders.
+The other examples are shown in the `./RICH/` Folder Structure.  This is what is being used for our lab in Richfield, Ohio.  In these examples there are four sub-folders.
 
 * `RICH/Asgard` - The First ACI Fabric
 * `RICH/Wakanda` - The Second ACI Fabric
@@ -37,34 +37,19 @@ The Structure of the YAML Files is very flexible.  You can have all the YAML Dat
 
 Additionally because the `./RICH/Odin/` Nexus Dashboard Fabric Only supports pushing configuration with the tenants module, currently, only the `built_in_tenants` and `tenants` modules are defined.  The additional function for `Odin` is that it is pulling in the switch_profiles, from both `Asgard` and `Wakanda`, to build `EPG -> Static Path Bindings` in NDO.
 
-### Modify `variables.auto.tfvars` to match environment
+### Modify `global_settings.eza.yaml` to match environment
 
-`variables.auto.tfvars` contains Terraform variables that I felt fit better outside of the YAML Data Model.  These variables should be configured to be unique to the deployment environment, but examples are shown for the Richfield environemnt in the module.
+`global_settings.eza.yamls` contains variables related to authentication to the controller and an optional global annotations for tagging objects.
 
-#### Notes for the `variables.auto.tfvars`
+#### Notes for the `global_settings.eza.yamls`
 
-* APIC Attributes: used if the controller_type is `apic`.
-* NDO Attributes: used if the controller_type is `ndo`.
+* Controller: Defines all the settings for Authentication to an APIC or Nexus Dashboard Orchestrator Controller.
 * management_epgs: necessary if you are using inband EPG's, and or the ooband EPG is not default.  Both true for our use case.
 * annotations: helpful, but not required.  This is used on Tenant Objects that support the annotations attribute.  You can customize this according to anything desired to add, but by default the use case is the version of the easy_aci module is being added.
 
 #### Note 1: Modules can be added or removed dependent on the use case.  The primary example shown is consuming/showing a full environment deployment.  But in the `./RICH/Odin/` example, it is just using the tenant modules.
 
 #### Note 2: The reason for the seperation of `built_in_tenants` vs `tenants` is to make sure objects are always created in common/mgmt first.  So they can be consumed by user tenants or Admin/Fabric etc (management EPGs for example).  If nothing is being configured in common/mgmt/infra the `built_in_tenant` is not necessary.
-
-## Environment Variables
-
-### Terraform Cloud/Enterprise - Workspace Variables
-
-#### At a Minimum for APIC
-
-- Add variable `apic_password` with the value of `<your-apic-password>` and sensitive set to true
-
-#### At a Minimum for NDO
-
-- Add variable `ndo_password` with the value of `<your-ndo-password>` and sensitive set to true
-
-#### Add Other Variables as discussed below based on use cases
 
 ## [Cloud Posse `tfenv`](https://github.com/cloudposse/tfenv)
 
@@ -88,6 +73,36 @@ alias tfp='tfenv terraform plan -out=main.plan'
 alias tfu='terraform init -upgrade'
 alias tfv='terraform validate'
 ```
+
+## Environment Variables
+
+Note that all the variables in `variables.tf` are marked as sensitive.  Meaning these are variables that shouldn't be exposed due to the sensitive nature of them.
+
+The first three variables are for authentication to either APIC or NDO controllers.  The rest are for configuration parameters in the Fabric.  These sensitive variables are all combined together in `locals.tf` into five objects:
+
+* `access_sensitive`
+* `admin_sensitive`
+* `fabric_sensitive`
+* `system_sensitive`
+* `tenant_sensitive`
+
+Using this object structure like this allows for the amount of a single variable to be flexible enough for any environment.  In previous iterations of this repository many of the variables were added with five iterations to cover most use cases, but if more were needed it wasn't possible to add more.  By combining the variables into the object model, you can add or remove variables as needed.
+
+Compare the files `./locals.tf`, `RICH/Asgard/locals.tf`, and `RICH/Odin/locals.tf`.  Notice in the Asgard example most of the variables are taken down to a single iteration, as additional instances are not being consumed.  And with the Odin example, where only the tenant module is utilized, the other iterations of sensitive variables have been removed.
+
+The sensitive variables are still exported as individual variables as I am unsure of a good method of loading the variables into the environment in a better method, but would always appreciate feedback if there is an easy way to build an object model in an export command.
+
+### Terraform Cloud/Enterprise - Workspace Variables
+
+#### At a Minimum for APIC
+
+- Add variable `apic_password` with the value of `<your-apic-password>` and sensitive set to true
+
+#### At a Minimum for Nexus Dashboard Orchestrator
+
+- Add variable `ndo_password` with the value of `<your-ndo-password>` and sensitive set to true
+
+#### Add Other Variables as discussed below based on use cases
 
 ## IMPORTANT: ALL EXAMPLES BELOW ASSUME USING `tfenv` in LINUX
 
@@ -114,7 +129,7 @@ export private_key='<your-private_key>'
 $env:TF_VAR_apic_password='<your-apic-password>'
 ```
 
-## Minimum Sensitive Variables for NDO
+## Minimum Sensitive Variables for Nexus Dashboard Orchestrator
 
 #### Linux
 
@@ -130,7 +145,7 @@ $env:TF_VAR_ndo_password='<your-ndo-password>'
 
 ### Sensitive Variables for the Access Module:
 
-* MCP Instance Key: If Desire is to Password Protect MCP traffic.
+* MCP Instance Key: Key to Protect MCP traffic.
 * VMM Password: vCenter Password for VMM Integration.
 
 #### Linux
@@ -156,7 +171,7 @@ $env:TF_VAR_vmm_password='<vmm_password>'
 #### Configuration Backup Sensitive Variables
 
 * remote_password: For Password based Authentication.
-* ssh_key_contents and ssh_key_passphrase: for SSH Key Based Authentication.
+* private_key and private_key_passphrase: for SSH Key Based Authentication.
 
 #### Linux
 
@@ -164,8 +179,8 @@ $env:TF_VAR_vmm_password='<vmm_password>'
 export remote_password='<remote_password>'
 ```
 ```bash
-export ssh_key_contents='<ssh_key_contents>'
-export ssh_key_passphrase='<ssh_key_passphrase>'
+export private_key='<ssh_key_contents>'
+export private_key_passphrase='<ssh_key_passphrase>'
 ```
 
 #### Windows
@@ -174,8 +189,8 @@ export ssh_key_passphrase='<ssh_key_passphrase>'
 $env:TF_VAR_remote_password='<remote_password>'
 ```
 ```powershell
-$env:TF_VAR_ssh_key_contents='<ssh_key_contents>'
-$env:TF_VAR_ssh_key_passphrase='<ssh_key_passphrase>'
+$env:TF_VAR_private_key='<ssh_key_contents>'
+$env:TF_VAR_private_key_passphrase='<ssh_key_passphrase>'
 ```
 
 #### RADIUS Sensitive Variables
@@ -346,13 +361,13 @@ terraform.exe apply "main.plan"
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_access"></a> [access](#module\_access) | ../terraform-aci-access | n/a |
-| <a name="module_admin"></a> [admin](#module\_admin) | ../terraform-aci-admin | n/a |
-| <a name="module_built_in_tenants"></a> [built\_in\_tenants](#module\_built\_in\_tenants) | ../terraform-aci-tenants | n/a |
-| <a name="module_fabric"></a> [fabric](#module\_fabric) | ../terraform-aci-fabric | n/a |
-| <a name="module_switch"></a> [switch](#module\_switch) | terraform-cisco-modules/switch/aci | 2.5.1 |
-| <a name="module_system_settings"></a> [system\_settings](#module\_system\_settings) | ../terraform-aci-system-settings | n/a |
-| <a name="module_tenants"></a> [tenants](#module\_tenants) | ../terraform-aci-tenants | n/a |
+| <a name="module_access"></a> [access](#module\_access) | terraform-cisco-modules/access/aci | 3.0.1 |
+| <a name="module_admin"></a> [admin](#module\_admin) | terraform-cisco-modules/admin/aci | 3.0.1 |
+| <a name="module_built_in_tenants"></a> [built\_in\_tenants](#module\_built\_in\_tenants) | terraform-cisco-modules/tenants/aci | 3.0.1 |
+| <a name="module_fabric"></a> [fabric](#module\_fabric) | terraform-cisco-modules/fabric/aci | 3.0.1 |
+| <a name="module_switch"></a> [switch](#module\_switch) | terraform-cisco-modules/switch/aci | 3.0.1 |
+| <a name="module_system_settings"></a> [system\_settings](#module\_system\_settings) | terraform-cisco-modules/system-settings/aci | 3.0.1 |
+| <a name="module_tenants"></a> [tenants](#module\_tenants) | terraform-cisco-modules/tenants/aci | 3.0.1 |
 
 ## NOTE:
 **When the Data is merged from the YAML files, it will run through the modules using for_each loop(s).  Sensitive Variables cannot be added to a for_each loop, instead use the variables below to add sensitive values for policies.**

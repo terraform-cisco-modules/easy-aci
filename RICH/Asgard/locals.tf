@@ -93,6 +93,35 @@ locals {
 
   #__________________________________________________________________
   #
+  # Fabric Sensitive Variables
+  #__________________________________________________________________
+  fabric_sensitive = {
+    ntp = {
+      key_id = {
+        1 = var.ntp_key_1
+      }
+    }
+    snmp = {
+      authorization_key = {
+        1 = var.snmp_authorization_key_1
+      }
+      community = {
+        1 = var.snmp_community_1
+        2 = var.snmp_community_2
+      }
+      privacy_key = {
+        1 = var.snmp_privacy_key_1
+      }
+    }
+    vrf = {
+      snmp_community = {
+        1 = var.vrf_snmp_community_1
+      }
+    }
+  }
+
+  #__________________________________________________________________
+  #
   # System Settings Sensitive Variables
   #__________________________________________________________________
   system_sensitive = {
@@ -105,64 +134,12 @@ locals {
 
   #__________________________________________________________________
   #
-  # Fabric Sensitive Variables
-  #__________________________________________________________________
-  fabric_sensitive = {
-    ntp = {
-      key_id = {
-        1 = var.ntp_key_1
-        2 = var.ntp_key_2
-        3 = var.ntp_key_3
-        4 = var.ntp_key_4
-        5 = var.ntp_key_5
-      }
-    }
-    snmp = {
-      authorization_key = {
-        1 = var.snmp_authorization_key_1
-        2 = var.snmp_authorization_key_2
-        3 = var.snmp_authorization_key_3
-        4 = var.snmp_authorization_key_4
-        5 = var.snmp_authorization_key_5
-      }
-      community = {
-        1 = var.snmp_community_1
-        2 = var.snmp_community_2
-        3 = var.snmp_community_3
-        4 = var.snmp_community_4
-        5 = var.snmp_community_5
-      }
-      privacy_key = {
-        1 = var.snmp_privacy_key_1
-        2 = var.snmp_privacy_key_2
-        3 = var.snmp_privacy_key_3
-        4 = var.snmp_privacy_key_4
-        5 = var.snmp_privacy_key_5
-      }
-    }
-    vrf = {
-      snmp_community = {
-        1 = var.vrf_snmp_community_1
-        2 = var.vrf_snmp_community_2
-        3 = var.vrf_snmp_community_3
-        4 = var.vrf_snmp_community_4
-        5 = var.vrf_snmp_community_5
-      }
-    }
-  }
-
-  #__________________________________________________________________
-  #
   # Tenant Settings Sensitive Variables
   #__________________________________________________________________
   tenant_sensitive = {
     bgp = {
       password = {
         1 = var.bgp_password_1
-        2 = var.bgp_password_2
-        3 = var.bgp_password_3
-        4 = var.bgp_password_4
-        5 = var.bgp_password_5
       }
     }
     nexus_dashboard = {
@@ -176,21 +153,12 @@ locals {
     ospf = {
       authentication_key = {
         1 = var.ospf_key_1
-        2 = var.ospf_key_2
-        3 = var.ospf_key_3
-        4 = var.ospf_key_4
-        5 = var.ospf_key_5
       }
     }
     vrf = {
       snmp_community = {
         1 = var.vrf_snmp_community_1
-        2 = var.vrf_snmp_community_2
-        3 = var.vrf_snmp_community_3
-        4 = var.vrf_snmp_community_4
-        5 = var.vrf_snmp_community_5
       }
     }
   }
-
 }

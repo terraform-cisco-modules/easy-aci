@@ -93,18 +93,6 @@ locals {
 
   #__________________________________________________________________
   #
-  # System Settings Sensitive Variables
-  #__________________________________________________________________
-  system_sensitive = {
-    global_aes_encryption_settings = {
-      passphrase = {
-        1 = var.aes_passphrase
-      }
-    }
-  }
-
-  #__________________________________________________________________
-  #
   # Fabric Sensitive Variables
   #__________________________________________________________________
   fabric_sensitive = {
@@ -138,6 +126,18 @@ locals {
         3 = var.snmp_privacy_key_3
         4 = var.snmp_privacy_key_4
         5 = var.snmp_privacy_key_5
+      }
+    }
+  }
+
+  #__________________________________________________________________
+  #
+  # System Settings Sensitive Variables
+  #__________________________________________________________________
+  system_sensitive = {
+    global_aes_encryption_settings = {
+      passphrase = {
+        1 = var.aes_passphrase
       }
     }
   }

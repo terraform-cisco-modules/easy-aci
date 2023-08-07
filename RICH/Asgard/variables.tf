@@ -176,34 +176,6 @@ variable "ntp_key_1" {
   type        = string
 }
 
-variable "ntp_key_2" {
-  default     = ""
-  description = "Key Assigned to NTP id 2."
-  sensitive   = true
-  type        = string
-}
-
-variable "ntp_key_3" {
-  default     = ""
-  description = "Key Assigned to NTP id 3."
-  sensitive   = true
-  type        = string
-}
-
-variable "ntp_key_4" {
-  default     = ""
-  description = "Key Assigned to NTP id 4."
-  sensitive   = true
-  type        = string
-}
-
-variable "ntp_key_5" {
-  default     = ""
-  description = "Key Assigned to NTP id 5."
-  sensitive   = true
-  type        = string
-}
-
 
 /*_____________________________________________________________________________________________________________________
 
@@ -213,34 +185,6 @@ ________________________________________________________________________________
 variable "snmp_authorization_key_1" {
   default     = ""
   description = "SNMP Authorization Key 1."
-  sensitive   = true
-  type        = string
-}
-
-variable "snmp_authorization_key_2" {
-  default     = ""
-  description = "SNMP Authorization Key 2."
-  sensitive   = true
-  type        = string
-}
-
-variable "snmp_authorization_key_3" {
-  default     = ""
-  description = "SNMP Authorization Key 3."
-  sensitive   = true
-  type        = string
-}
-
-variable "snmp_authorization_key_4" {
-  default     = ""
-  description = "SNMP Authorization Key 4."
-  sensitive   = true
-  type        = string
-}
-
-variable "snmp_authorization_key_5" {
-  default     = ""
-  description = "SNMP Authorization Key 5."
   sensitive   = true
   type        = string
 }
@@ -259,58 +203,9 @@ variable "snmp_community_2" {
   type        = string
 }
 
-variable "snmp_community_3" {
-  default     = ""
-  description = "SNMP Community 3."
-  sensitive   = true
-  type        = string
-}
-
-variable "snmp_community_4" {
-  default     = ""
-  description = "SNMP Community 4."
-  sensitive   = true
-  type        = string
-}
-
-variable "snmp_community_5" {
-  default     = ""
-  description = "SNMP Community 5."
-  sensitive   = true
-  type        = string
-}
-
 variable "snmp_privacy_key_1" {
   default     = ""
   description = "SNMP Privacy Key 1."
-  sensitive   = true
-  type        = string
-}
-
-variable "snmp_privacy_key_2" {
-  default     = ""
-  description = "SNMP Privacy Key 2."
-  sensitive   = true
-  type        = string
-}
-
-variable "snmp_privacy_key_3" {
-  default     = ""
-  description = "SNMP Privacy Key 3."
-  sensitive   = true
-  type        = string
-}
-
-variable "snmp_privacy_key_4" {
-  default     = ""
-  description = "SNMP Privacy Key 4."
-  sensitive   = true
-  type        = string
-}
-
-variable "snmp_privacy_key_5" {
-  default     = ""
-  description = "SNMP Privacy Key 5."
   sensitive   = true
   type        = string
 }
@@ -362,34 +257,6 @@ variable "bgp_password_1" {
   type        = string
 }
 
-variable "bgp_password_2" {
-  default     = ""
-  description = "BGP Password 2."
-  sensitive   = true
-  type        = string
-}
-
-variable "bgp_password_3" {
-  default     = ""
-  description = "BGP Password 3."
-  sensitive   = true
-  type        = string
-}
-
-variable "bgp_password_4" {
-  default     = ""
-  description = "BGP Password 4."
-  sensitive   = true
-  type        = string
-}
-
-variable "bgp_password_5" {
-  default     = ""
-  description = "BGP Password 5."
-  sensitive   = true
-  type        = string
-}
-
 variable "ospf_key_1" {
   default     = ""
   description = "OSPF Key 1."
@@ -397,33 +264,6 @@ variable "ospf_key_1" {
   type        = string
 }
 
-variable "ospf_key_2" {
-  default     = ""
-  description = "OSPF Key 2."
-  sensitive   = true
-  type        = string
-}
-
-variable "ospf_key_3" {
-  default     = ""
-  description = "OSPF Key 3."
-  sensitive   = true
-  type        = string
-}
-
-variable "ospf_key_4" {
-  default     = ""
-  description = "OSPF Key 4."
-  sensitive   = true
-  type        = string
-}
-
-variable "ospf_key_5" {
-  default     = ""
-  description = "OSPF Key 5."
-  sensitive   = true
-  type        = string
-}
 
 /*_____________________________________________________________________________________________________________________
 
@@ -433,34 +273,6 @@ ________________________________________________________________________________
 variable "vrf_snmp_community_1" {
   default     = ""
   description = "SNMP Community 1."
-  sensitive   = true
-  type        = string
-}
-
-variable "vrf_snmp_community_2" {
-  default     = ""
-  description = "SNMP Community 2."
-  sensitive   = true
-  type        = string
-}
-
-variable "vrf_snmp_community_3" {
-  default     = ""
-  description = "SNMP Community 3."
-  sensitive   = true
-  type        = string
-}
-
-variable "vrf_snmp_community_4" {
-  default     = ""
-  description = "SNMP Community 4."
-  sensitive   = true
-  type        = string
-}
-
-variable "vrf_snmp_community_5" {
-  default     = ""
-  description = "SNMP Community 5."
   sensitive   = true
   type        = string
 }
