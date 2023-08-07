@@ -253,35 +253,11 @@ content: |-
   ```bash
   export ntp_key_1='<ntp_key_1>'
   ```
-  ```bash
-  export ntp_key_2='<ntp_key_2>'
-  ```
-  ```bash
-  export ntp_key_3='<ntp_key_3>'
-  ```
-  ```bash
-  export ntp_key_4='<ntp_key_4>'
-  ```
-  ```bash
-  export ntp_key_5='<ntp_key_5>'
-  ```
 
     * SNMP Communities
 
   ```bash
   export snmp_community_1='<snmp_community_1>'
-  ```
-  ```bash
-  export snmp_community_2='<snmp_community_2>'
-  ```
-  ```bash
-  export snmp_community_3='<snmp_community_3>'
-  ```
-  ```bash
-  export snmp_community_4='<snmp_community_4>'
-  ```
-  ```bash
-  export snmp_community_5='<snmp_community_5>'
   ```
 
     * SNMP Authorization Keys and Privacy Keys for SNMP Users
@@ -290,31 +266,7 @@ content: |-
   export snmp_authorization_key_1='<snmp_authorization_key_1>'
   ```
   ```bash
-  export snmp_authorization_key_2='<snmp_authorization_key_2>'
-  ```
-  ```bash
-  export snmp_authorization_key_3='<snmp_authorization_key_3>'
-  ```
-  ```bash
-  export snmp_authorization_key_4='<snmp_authorization_key_4>'
-  ```
-  ```bash
-  export snmp_authorization_key_5='<snmp_authorization_key_5>'
-  ```
-  ```bash
   export snmp_privacy_key_1='<snmp_privacy_key_1>'
-  ```
-  ```bash
-  export snmp_privacy_key_2='<snmp_privacy_key_2>'
-  ```
-  ```bash
-  export snmp_privacy_key_3='<snmp_privacy_key_3>'
-  ```
-  ```bash
-  export snmp_privacy_key_4='<snmp_privacy_key_4>'
-  ```
-  ```bash
-  export snmp_privacy_key_5='<snmp_privacy_key_5>'
   ```
 
   ### Sensitive Variables for the System Settings Module:
@@ -333,7 +285,6 @@ content: |-
   ```bash
   export aws_secret_key='<aws_secret_key>'
   ```
-
   ```bash
   export azure_client_secret='<azure_client_secret>'
   ```
@@ -347,52 +298,39 @@ content: |-
   export bgp_password_1='<bgp_password_1>'
   ```
   ```bash
-  export bgp_password_2='<bgp_password_2>'
-  ```
-  ```bash
-  export bgp_password_3='<bgp_password_3>'
-  ```
-  ```bash
-  export bgp_password_4='<bgp_password_4>'
-  ```
-  ```bash
-  export bgp_password_5='<bgp_password_5>'
-  ```
-
-
-  ```bash
   export ospf_key_1='<ospf_key_1>'
   ```
-  ```bash
-  export ospf_key_2='<ospf_key_2>'
-  ```
-  ```bash
-  export ospf_key_3='<ospf_key_3>'
-  ```
-  ```bash
-  export ospf_key_4='<ospf_key_4>'
-  ```
-  ```bash
-  export ospf_key_5='<ospf_key_5>'
-  ```
-
 
     * vrf_snmp_community: Only required if the VRF Should use different Communities than the Global SNMP Values.  These Communities, that need to be added to the SNMP client_groups, will only be usable by the VRF when configured.
 
   ```bash
   export vrf_snmp_community_1='<vrf_snmp_community_1>'
   ```
+
+  ## Execute the Terraform Plan
+
+  ### Terraform Cloud
+
+  When running in Terraform Cloud with VCS Integration the first Plan will need to be run from the UI but subsiqent runs should trigger automatically
+
+  ### Terraform CLI
+
+  * Execute the Plan - Linux
+
   ```bash
-  export vrf_snmp_community_2='<vrf_snmp_community_2>'
+  # First time execution requires initialization.  Not needed on subsequent runs.
+  terraform init
+  terraform plan -out="main.plan"
+  terraform apply "main.plan"
   ```
-  ```bash
-  export vrf_snmp_community_3='<vrf_snmp_community_3>'
-  ```
-  ```bash
-  export vrf_snmp_community_4='<vrf_snmp_community_4>'
-  ```
-  ```bash
-  export vrf_snmp_community_5='<vrf_snmp_community_5>'
+
+  * Execute the Plan - Windows
+
+  ```powershell
+  # First time execution requires initialization.  Not needed on subsequent runs.
+  terraform.exe init
+  terraform.exe plan -out="main.plan"
+  terraform.exe apply "main.plan"
   ```
 
   {{ .Requirements }}

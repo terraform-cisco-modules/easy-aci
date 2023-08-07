@@ -87,13 +87,14 @@ admin:
         snapshot: false
         start_now: false
       management_epg: ooband
+      password: 1
+      path: /tmp
+      port: 22
       protocol: sftp
       remote_locations:
         - host: lnx2.rich.ciscolabs.com
-      remote_path: /tmp
-      remote_port: 22
-      remote_username: tyscott
       scheduler_name: Every24Hours
+      username: tyscott
     schedulers:
       - description: Backup Configuration every 24 Hours
         name: Every24Hours

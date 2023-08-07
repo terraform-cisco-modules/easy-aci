@@ -65,7 +65,6 @@ admin:
         rfc_compliant: true
       smtp_server:
         management_epg: ooband
-        port_number: 25
         host: smtp-ext.cisco.com
       street_address: 4125 Highlander Parkway Richfield, OH 44286
     syslog:
@@ -123,14 +122,14 @@ admin:
         snapshot: false
         start_now: false
       management_epg: ooband
+      path: /tmp
+      port: 22
       protocol: sftp
       remote_locations:
         - host: lnx1.rich.ciscolabs.com
         - host: lnx2.rich.ciscolabs.com
-      remote_path: /tmp
-      remote_port: 22
-      remote_username: tyscott
       scheduler_name: Every24Hours
+      username: tyscott
     schedulers:
       - description: Backup Configuration every 24 Hours
         name: Every24Hours

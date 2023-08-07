@@ -249,35 +249,11 @@ Note that ntp_key, snmp_authorization, snmp_community, snmp_privacy_key have mul
 ```bash
 export ntp_key_1='<ntp_key_1>'
 ```
-```bash
-export ntp_key_2='<ntp_key_2>'
-```
-```bash
-export ntp_key_3='<ntp_key_3>'
-```
-```bash
-export ntp_key_4='<ntp_key_4>'
-```
-```bash
-export ntp_key_5='<ntp_key_5>'
-```
 
 * SNMP Communities
 
 ```bash
 export snmp_community_1='<snmp_community_1>'
-```
-```bash
-export snmp_community_2='<snmp_community_2>'
-```
-```bash
-export snmp_community_3='<snmp_community_3>'
-```
-```bash
-export snmp_community_4='<snmp_community_4>'
-```
-```bash
-export snmp_community_5='<snmp_community_5>'
 ```
 
 * SNMP Authorization Keys and Privacy Keys for SNMP Users
@@ -286,31 +262,7 @@ export snmp_community_5='<snmp_community_5>'
 export snmp_authorization_key_1='<snmp_authorization_key_1>'
 ```
 ```bash
-export snmp_authorization_key_2='<snmp_authorization_key_2>'
-```
-```bash
-export snmp_authorization_key_3='<snmp_authorization_key_3>'
-```
-```bash
-export snmp_authorization_key_4='<snmp_authorization_key_4>'
-```
-```bash
-export snmp_authorization_key_5='<snmp_authorization_key_5>'
-```
-```bash
 export snmp_privacy_key_1='<snmp_privacy_key_1>'
-```
-```bash
-export snmp_privacy_key_2='<snmp_privacy_key_2>'
-```
-```bash
-export snmp_privacy_key_3='<snmp_privacy_key_3>'
-```
-```bash
-export snmp_privacy_key_4='<snmp_privacy_key_4>'
-```
-```bash
-export snmp_privacy_key_5='<snmp_privacy_key_5>'
 ```
 
 ### Sensitive Variables for the System Settings Module:
@@ -329,7 +281,6 @@ export aes_passphrase='<aes_passphrase>'
 ```bash
 export aws_secret_key='<aws_secret_key>'
 ```
-
 ```bash
 export azure_client_secret='<azure_client_secret>'
 ```
@@ -343,52 +294,39 @@ export azure_client_secret='<azure_client_secret>'
 export bgp_password_1='<bgp_password_1>'
 ```
 ```bash
-export bgp_password_2='<bgp_password_2>'
-```
-```bash
-export bgp_password_3='<bgp_password_3>'
-```
-```bash
-export bgp_password_4='<bgp_password_4>'
-```
-```bash
-export bgp_password_5='<bgp_password_5>'
-```
-
-
-```bash
 export ospf_key_1='<ospf_key_1>'
 ```
-```bash
-export ospf_key_2='<ospf_key_2>'
-```
-```bash
-export ospf_key_3='<ospf_key_3>'
-```
-```bash
-export ospf_key_4='<ospf_key_4>'
-```
-```bash
-export ospf_key_5='<ospf_key_5>'
-```
-
 
 * vrf_snmp_community: Only required if the VRF Should use different Communities than the Global SNMP Values.  These Communities, that need to be added to the SNMP client_groups, will only be usable by the VRF when configured.
 
 ```bash
 export vrf_snmp_community_1='<vrf_snmp_community_1>'
 ```
+
+## Execute the Terraform Plan
+
+### Terraform Cloud
+
+When running in Terraform Cloud with VCS Integration the first Plan will need to be run from the UI but subsiqent runs should trigger automatically
+
+### Terraform CLI
+
+* Execute the Plan - Linux
+
 ```bash
-export vrf_snmp_community_2='<vrf_snmp_community_2>'
+# First time execution requires initialization.  Not needed on subsequent runs.
+terraform init
+terraform plan -out="main.plan"
+terraform apply "main.plan"
 ```
-```bash
-export vrf_snmp_community_3='<vrf_snmp_community_3>'
-```
-```bash
-export vrf_snmp_community_4='<vrf_snmp_community_4>'
-```
-```bash
-export vrf_snmp_community_5='<vrf_snmp_community_5>'
+
+* Execute the Plan - Windows
+
+```powershell
+# First time execution requires initialization.  Not needed on subsequent runs.
+terraform.exe init
+terraform.exe plan -out="main.plan"
+terraform.exe apply "main.plan"
 ```
 
 ## Requirements
@@ -408,13 +346,13 @@ export vrf_snmp_community_5='<vrf_snmp_community_5>'
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_access"></a> [access](#module\_access) | terraform-cisco-modules/access/aci | 2.5.1 |
-| <a name="module_admin"></a> [admin](#module\_admin) | terraform-cisco-modules/admin/aci | 2.5.1 |
-| <a name="module_built_in_tenants"></a> [built\_in\_tenants](#module\_built\_in\_tenants) | terraform-cisco-modules/tenants/aci | 2.5.1 |
-| <a name="module_fabric"></a> [fabric](#module\_fabric) | terraform-cisco-modules/fabric/aci | 2.5.1 |
+| <a name="module_access"></a> [access](#module\_access) | ../terraform-aci-access | n/a |
+| <a name="module_admin"></a> [admin](#module\_admin) | ../terraform-aci-admin | n/a |
+| <a name="module_built_in_tenants"></a> [built\_in\_tenants](#module\_built\_in\_tenants) | ../terraform-aci-tenants | n/a |
+| <a name="module_fabric"></a> [fabric](#module\_fabric) | ../terraform-aci-fabric | n/a |
 | <a name="module_switch"></a> [switch](#module\_switch) | terraform-cisco-modules/switch/aci | 2.5.1 |
-| <a name="module_system_settings"></a> [system\_settings](#module\_system\_settings) | terraform-cisco-modules/system-settings/aci | 2.5.2 |
-| <a name="module_tenants"></a> [tenants](#module\_tenants) | terraform-cisco-modules/tenants/aci | 2.5.1 |
+| <a name="module_system_settings"></a> [system\_settings](#module\_system\_settings) | ../terraform-aci-system-settings | n/a |
+| <a name="module_tenants"></a> [tenants](#module\_tenants) | ../terraform-aci-tenants | n/a |
 
 ## NOTE:
 **When the Data is merged from the YAML files, it will run through the modules using for_each loop(s).  Sensitive Variables cannot be added to a for_each loop, instead use the variables below to add sensitive values for policies.**
@@ -423,36 +361,24 @@ export vrf_snmp_community_5='<vrf_snmp_community_5>'
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_apic_hostname"></a> [apic\_hostname](#input\_apic\_hostname) | Cisco APIC Hostname | `string` | `"apic.example.com"` | no |
 | <a name="input_apic_password"></a> [apic\_password](#input\_apic\_password) | Password for User based Authentication. | `string` | `"dummydummy"` | no |
-| <a name="input_apic_user"></a> [apic\_user](#input\_apic\_user) | Username for User based Authentication. | `string` | `"admin"` | no |
-| <a name="input_certificate_name"></a> [certificate\_name](#input\_certificate\_name) | Cisco ACI Certificate Name for SSL Based Authentication | `string` | `""` | no |
-| <a name="input_private_key"></a> [private\_key](#input\_private\_key) | Cisco ACI Private Key for SSL Based Authentication. | `string` | `""` | no |
-| <a name="input_apic_version"></a> [apic\_version](#input\_apic\_version) | The Version of ACI Running in the Environment. | `string` | `"5.2(4e)"` | no |
-| <a name="input_ndo_domain"></a> [ndo\_domain](#input\_ndo\_domain) | Default is `local`.  Authentication Domain for Nexus Dashboard Orchestrator Authentication.  Only required if the Auhthenciation domain is not local. | `string` | `"local"` | no |
-| <a name="input_ndo_hostname"></a> [ndo\_hostname](#input\_ndo\_hostname) | Cisco Nexus Dashboard Orchestrator Hostname | `string` | `"ndo.example.com"` | no |
+| <a name="input_apic_private_key"></a> [apic\_private\_key](#input\_apic\_private\_key) | Cisco ACI Private Key for SSL Based Authentication. | `string` | `"blah.txt"` | no |
 | <a name="input_ndo_password"></a> [ndo\_password](#input\_ndo\_password) | Password for Nexus Dashboard Orchestrator Authentication. | `string` | `"dummydummy"` | no |
-| <a name="input_ndo_user"></a> [ndo\_user](#input\_ndo\_user) | Username for Nexus Dashboard Orchestrator Authentication. | `string` | `"admin"` | no |
-| <a name="input_ndo_version"></a> [ndo\_version](#input\_ndo\_version) | The Version of Nexus Dashboard Orchestrator Running in the Environment. | `string` | `"5.2(1g)"` | no |
-| <a name="input_annotation"></a> [annotation](#input\_annotation) | Depricated.  Removing from Module. | `string` | `"orchestrator:terraform"` | no |
-| <a name="input_annotations"></a> [annotations](#input\_annotations) | The Version of this Script. | <pre>list(object(<br>    {<br>      key   = string<br>      value = string<br>    }<br>  ))</pre> | <pre>[<br>  {<br>    "key": "orchestrator",<br>    "value": "terraform:easy-aci:v2.1.8"<br>  }<br>]</pre> | no |
-| <a name="input_controller_type"></a> [controller\_type](#input\_controller\_type) | The Type of Controller for this Site.<br>- apic<br>- ndo | `string` | `"apic"` | no |
-| <a name="input_management_epgs"></a> [management\_epgs](#input\_management\_epgs) | The Management EPG's that will be used by the script.<br>- name: Name of the EPG<br>- type: Type of EPG<br>  * inb<br>  * oob | <pre>list(object(<br>    {<br>      name = string<br>      type = string<br>    }<br>  ))</pre> | <pre>[<br>  {<br>    "name": "default",<br>    "type": "oob"<br>  }<br>]</pre> | no |
 | <a name="input_mcp_instance_key"></a> [mcp\_instance\_key](#input\_mcp\_instance\_key) | The key or password to uniquely identify the MCP packets within this fabric. | `string` | `""` | no |
 | <a name="input_radius_key"></a> [radius\_key](#input\_radius\_key) | RADIUS Key. | `string` | `""` | no |
 | <a name="input_radius_monitoring_password"></a> [radius\_monitoring\_password](#input\_radius\_monitoring\_password) | RADIUS Monitoring Password. | `string` | `""` | no |
 | <a name="input_tacacs_key"></a> [tacacs\_key](#input\_tacacs\_key) | TACACS Key. | `string` | `""` | no |
 | <a name="input_tacacs_monitoring_password"></a> [tacacs\_monitoring\_password](#input\_tacacs\_monitoring\_password) | TACACS Monitoring Password. | `string` | `""` | no |
-| <a name="input_apic_ca_certificate_chain_1"></a> [apic\_ca\_certificate\_chain\_1](#input\_apic\_ca\_certificate\_chain\_1) | Certificate Authority Certificate Chain.  i.e. Intermediate and Root CA Certificate. | `string` | `""` | no |
-| <a name="input_apic_ca_certificate_chain_2"></a> [apic\_ca\_certificate\_chain\_2](#input\_apic\_ca\_certificate\_chain\_2) | Certificate Authority Certificate Chain.  i.e. Intermediate and Root CA Certificate. | `string` | `""` | no |
-| <a name="input_apic_certificate_1"></a> [apic\_certificate\_1](#input\_apic\_certificate\_1) | APIC Certificate 1. | `string` | `""` | no |
-| <a name="input_apic_certificate_2"></a> [apic\_certificate\_2](#input\_apic\_certificate\_2) | APIC Certificate 2. | `string` | `""` | no |
-| <a name="input_apic_private_key_1"></a> [apic\_private\_key\_1](#input\_apic\_private\_key\_1) | APIC Certificate Private Key 1. | `string` | `""` | no |
-| <a name="input_apic_private_key_2"></a> [apic\_private\_key\_2](#input\_apic\_private\_key\_2) | APIC Certificate Private Key 2. | `string` | `""` | no |
+| <a name="input_apic_ca_certificate_chain_1"></a> [apic\_ca\_certificate\_chain\_1](#input\_apic\_ca\_certificate\_chain\_1) | Certificate Authority Certificate Chain.  i.e. Intermediate and Root CA Certificate. | `string` | `"blah.txt"` | no |
+| <a name="input_apic_ca_certificate_chain_2"></a> [apic\_ca\_certificate\_chain\_2](#input\_apic\_ca\_certificate\_chain\_2) | Certificate Authority Certificate Chain.  i.e. Intermediate and Root CA Certificate. | `string` | `"blah.txt"` | no |
+| <a name="input_apic_certificate_1"></a> [apic\_certificate\_1](#input\_apic\_certificate\_1) | APIC Certificate 1. | `string` | `"blah.txt"` | no |
+| <a name="input_apic_certificate_2"></a> [apic\_certificate\_2](#input\_apic\_certificate\_2) | APIC Certificate 2. | `string` | `"blah.txt"` | no |
+| <a name="input_apic_private_key_1"></a> [apic\_private\_key\_1](#input\_apic\_private\_key\_1) | APIC Certificate Private Key 1. | `string` | `"blah.txt"` | no |
+| <a name="input_apic_private_key_2"></a> [apic\_private\_key\_2](#input\_apic\_private\_key\_2) | APIC Certificate Private Key 2. | `string` | `"blah.txt"` | no |
 | <a name="input_smtp_password"></a> [smtp\_password](#input\_smtp\_password) | Password to use if Secure SMTP is enabled for the Smart CallHome Destination Group Mail Server. | `string` | `""` | no |
 | <a name="input_remote_password"></a> [remote\_password](#input\_remote\_password) | Remote Host Password. | `string` | `""` | no |
-| <a name="input_ssh_key_contents"></a> [ssh\_key\_contents](#input\_ssh\_key\_contents) | SSH Private Key Based Authentication Contents. | `string` | `""` | no |
-| <a name="input_ssh_key_passphrase"></a> [ssh\_key\_passphrase](#input\_ssh\_key\_passphrase) | SSH Private Key Based Authentication Passphrase. | `string` | `""` | no |
+| <a name="input_remote_private_key"></a> [remote\_private\_key](#input\_remote\_private\_key) | SSH Private Key File Location. | `string` | `"blah.txt"` | no |
+| <a name="input_remote_private_key_passphrase"></a> [remote\_private\_key\_passphrase](#input\_remote\_private\_key\_passphrase) | SSH Private Key Based Authentication Passphrase. | `string` | `""` | no |
 | <a name="input_ntp_key_1"></a> [ntp\_key\_1](#input\_ntp\_key\_1) | Key Assigned to NTP id 1. | `string` | `""` | no |
 | <a name="input_ntp_key_2"></a> [ntp\_key\_2](#input\_ntp\_key\_2) | Key Assigned to NTP id 2. | `string` | `""` | no |
 | <a name="input_ntp_key_3"></a> [ntp\_key\_3](#input\_ntp\_key\_3) | Key Assigned to NTP id 3. | `string` | `""` | no |
@@ -474,7 +400,6 @@ export vrf_snmp_community_5='<vrf_snmp_community_5>'
 | <a name="input_snmp_privacy_key_4"></a> [snmp\_privacy\_key\_4](#input\_snmp\_privacy\_key\_4) | SNMP Privacy Key 4. | `string` | `""` | no |
 | <a name="input_snmp_privacy_key_5"></a> [snmp\_privacy\_key\_5](#input\_snmp\_privacy\_key\_5) | SNMP Privacy Key 5. | `string` | `""` | no |
 | <a name="input_aes_passphrase"></a> [aes\_passphrase](#input\_aes\_passphrase) | Global AES Passphrase. | `string` | `""` | no |
-| <a name="input_vmm_password"></a> [vmm\_password](#input\_vmm\_password) | Password for VMM Credentials Policy. | `string` | `""` | no |
 | <a name="input_aws_secret_key"></a> [aws\_secret\_key](#input\_aws\_secret\_key) | AWS Secret Key Id. It must be provided if the AWS account is not trusted. This parameter will only have effect with vendor = aws. | `string` | `""` | no |
 | <a name="input_azure_client_secret"></a> [azure\_client\_secret](#input\_azure\_client\_secret) | Azure Client Secret. It must be provided when azure\_access\_type to credentials. This parameter will only have effect with vendor = azure. | `string` | `"1"` | no |
 | <a name="input_bgp_password_1"></a> [bgp\_password\_1](#input\_bgp\_password\_1) | BGP Password 1. | `string` | `""` | no |
@@ -492,6 +417,7 @@ export vrf_snmp_community_5='<vrf_snmp_community_5>'
 | <a name="input_vrf_snmp_community_3"></a> [vrf\_snmp\_community\_3](#input\_vrf\_snmp\_community\_3) | SNMP Community 3. | `string` | `""` | no |
 | <a name="input_vrf_snmp_community_4"></a> [vrf\_snmp\_community\_4](#input\_vrf\_snmp\_community\_4) | SNMP Community 4. | `string` | `""` | no |
 | <a name="input_vrf_snmp_community_5"></a> [vrf\_snmp\_community\_5](#input\_vrf\_snmp\_community\_5) | SNMP Community 5. | `string` | `""` | no |
+| <a name="input_vmm_password"></a> [vmm\_password](#input\_vmm\_password) | Password for VMM Credentials Policy. | `string` | `""` | no |
 ## Outputs
 
 | Name | Description |

@@ -1,0 +1,16 @@
+---
+#========================================
+#   Global Settings
+#========================================
+global_settings:
+  controller:
+    domain: RICH
+    hostname: odin-nd01.rich.ciscolabs.com
+    type: ndo
+    username: tyscott
+    version: 4.1(2h)
+  management_epgs:
+    - name: inband
+      type: inb
+    - name: ooband
+      type: oob

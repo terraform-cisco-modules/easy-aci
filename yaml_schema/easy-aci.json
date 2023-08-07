@@ -1151,7 +1151,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "mcpInstPol",
-            "description": "MisCabling Protocol Instance Settings.\nOptional:\n  * admin_state\n  * description\n  * enable_mcp_pdu_per_vlan\n  * loop_detect_multiplication_factor\n  * loop_protect_action\n  * transmission_frequency\n=================================================\nAPI Information:\n - Class: `mcpInstPol`\n - Distinguished Named `uni/infra/mcpInstP-default`\nGUI Location:\n - Fabric > Access Policies > Policies > Global > MCP Instance Policy default",
+            "description": "MisCabling Protocol Instance Settings.\nRequired:\n  * key\nOptional:\n  * admin_state\n  * description\n  * enable_mcp_pdu_per_vlan\n  * loop_detect_multiplication_factor\n  * loop_protect_action\n  * transmission_frequency\n=================================================\nAPI Information:\n - Class: `mcpInstPol`\n - Distinguished Named `uni/infra/mcpInstP-default`\nGUI Location:\n - Fabric > Access Policies > Policies > Global > MCP Instance Policy default",
             "dn": "uni/infra/mcpInstP-default",
             "properties": {
                 "admin_state": {
@@ -1175,6 +1175,15 @@
                     "minimum": 1,
                     "maximum": 1800,
                     "title": "initial_delay - initDelayTime"
+                },
+                "key": {
+                    "type": "integer",
+                    "apicApi": "not_applicable",
+                    "default": 1,
+                    "description": "Default is `1`.  The key for the ACI Fabric MCP Instance.  See `local.tf` for reference to the sensitive variables.\nThis references the variable `var.mcp_instance_key` by default.  See `access_sensitive` in `locals.tf` for reference.",
+                    "minimum": 1,
+                    "maximum": 64,
+                    "title": "key"
                 },
                 "loop_detect_multiplication_factor": {
                     "type": "integer",
@@ -2542,14 +2551,14 @@
                     "$ref": "#/definitions/Admin:AAA:Authentication:AuthenticationDefaultSettings"
                 },
                 "radius": {
-                    "description": "An Array of RADIUS Providers to Configure for Remote Authentication.\n\nRequired:\n  * hosts\n  * login_domain\nOptional:\n  * authorization_protocol\n  * description\n  * management_epg\n  * port\n  * retries\n  * server_monitoring\n  * timeout\n  * type\n=================================================\n##### RADIUS PROVIDER #####\nAPI Information:\n - Class: `aaaRadiusProvider`\n - Distinguished Name: `uni/userext/radiusext/radiusprovider-{host}`\nGUI Location:\n - Admin > AAA > Authentication:RADIUS > Create RADIUS Provider\n\n=================================================\n##### RADIUS LOGIN DOMAIN #####\nAPI Information:\n - Class: `aaaProviderRef`\n - Distinguished Name: `uni/userext/radiusext/radiusprovidergroup-{login_domain}/providerref-{host}`\nGUI Location:\n - Admin > AAA > Authentication:AAA > Login Domain/Providers",
+                    "description": "An Array of RADIUS Providers to Configure for Remote Authentication.\n\nRequired:\n  * hosts\n  * key\n  * login_domain\nOptional:\n  * authorization_protocol\n  * description\n  * management_epg\n  * port\n  * retries\n  * server_monitoring\n  * timeout\n  * type\n=================================================\n##### RADIUS PROVIDER #####\nAPI Information:\n - Class: `aaaRadiusProvider`\n - Distinguished Name: `uni/userext/radiusext/radiusprovider-{host}`\nGUI Location:\n - Admin > AAA > Authentication:RADIUS > Create RADIUS Provider\n\n=================================================\n##### RADIUS LOGIN DOMAIN #####\nAPI Information:\n - Class: `aaaProviderRef`\n - Distinguished Name: `uni/userext/radiusext/radiusprovidergroup-{login_domain}/providerref-{host}`\nGUI Location:\n - Admin > AAA > Authentication:AAA > Login Domain/Providers",
                     "items": {
                         "$ref": "#/definitions/Admin:AAA:Authentication:Radius"
                     },
                     "title": "radius - aaaRadiusProvider"
                 },
                 "tacacs": {
-                    "description": "An Array of TACACS+ Providers to Configure for Remote Authentication.\n\nRequired:\n  * hosts\n  * login_domain\nOptional:\n  * accounting_include\n  * authorization_protocol\n  * description\n  * management_epg\n  * port\n  * retries\n  * server_monitoring\n  * timeout\n=================================================\n##### TACACS PROVIDER #####\nAPI Information:\n - Class: `aaaTacacsPlusProvider`\n - Distinguished Name: `userext/tacacsext/tacacsplusprovider-{host}`\nGUI Location:\n - Admin > AAA > Authentication:TACACS > Create TACACS Provider\n\n=================================================\n##### TACACS LOGIN DOMAIN #####\nAPI Information:\n - Class: `aaaProviderRef`\n - Distinguished Name: `uni/userext/tacacsext/tacacsplusprovidergroup-{login_domain}/providerref-{host}`\nGUI Location:\n - Admin > AAA > Authentication:AAA > Login Domain\n\n=================================================\n##### TACACS ACCOUNTING #####\nAPI Information:\n - Class: `tacacsGroup`\n - Distinguished Name: `uni/fabric/tacacsgroup-{accounting_destination_group}`\nGUI Location:\n - Admin > External Data Collectors > Monitoring Destinations > TACACS > {accounting_destination_group}\n=================================================\nAPI Information:\n - Class: `tacacsTacacsDest`\n - Distinguished Name: `uni/fabric/tacacsgroup-{accounting_destination_group}/tacacsdest-{host}-port-{port}`\nGUI Location:\n - Admin > External Data Collectors > Monitoring Destinations > TACACS > {accounting_destination_group} > [TACACS Destinations]",
+                    "description": "An Array of TACACS+ Providers to Configure for Remote Authentication.\n\nRequired:\n  * hosts\n  * key\n  * login_domain\nOptional:\n  * accounting_include\n  * authorization_protocol\n  * description\n  * management_epg\n  * port\n  * retries\n  * server_monitoring\n  * timeout\n=================================================\n##### TACACS PROVIDER #####\nAPI Information:\n - Class: `aaaTacacsPlusProvider`\n - Distinguished Name: `userext/tacacsext/tacacsplusprovider-{host}`\nGUI Location:\n - Admin > AAA > Authentication:TACACS > Create TACACS Provider\n\n=================================================\n##### TACACS LOGIN DOMAIN #####\nAPI Information:\n - Class: `aaaProviderRef`\n - Distinguished Name: `uni/userext/tacacsext/tacacsplusprovidergroup-{login_domain}/providerref-{host}`\nGUI Location:\n - Admin > AAA > Authentication:AAA > Login Domain\n\n=================================================\n##### TACACS ACCOUNTING #####\nAPI Information:\n - Class: `tacacsGroup`\n - Distinguished Name: `uni/fabric/tacacsgroup-{accounting_destination_group}`\nGUI Location:\n - Admin > External Data Collectors > Monitoring Destinations > TACACS > {accounting_destination_group}\n=================================================\nAPI Information:\n - Class: `tacacsTacacsDest`\n - Distinguished Name: `uni/fabric/tacacsgroup-{accounting_destination_group}/tacacsdest-{host}-port-{port}`\nGUI Location:\n - Admin > External Data Collectors > Monitoring Destinations > TACACS > {accounting_destination_group} > [TACACS Destinations]",
                     "items": {
                         "$ref": "#/definitions/Admin:AAA:Authentication:Tacacs"
                     },
@@ -2731,6 +2740,9 @@
                 "hosts": {
                     "$ref": "#/definitions/Admin:AAA:Authentication:Settings/properties/hosts"
                 },
+                "key": {
+                    "$ref": "#/definitions/Admin:AAA:Authentication:Settings/properties/key"
+                },
                 "login_domain": {
                     "$ref": "#/definitions/Admin:AAA:Authentication:Settings/properties/login_domain"
                 },
@@ -2770,7 +2782,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "not_applicable",
-            "description": "Enabling Server Monitoring allows the connectivity of the remote AAA servers to be tested.\n\nAttributes are:\n  * admin_state\n  * username",
+            "description": "Enabling Server Monitoring allows the connectivity of the remote AAA servers to be tested.\n\nAttributes are:\n  * admin_state\n  * password\n  * username",
             "dn": "",
             "properties": {
                 "admin_state": {
@@ -2779,6 +2791,15 @@
                     "default": false,
                     "description": "Default is `false`.  Administrative State of Server Monitoring.",
                     "title": "admin_state - monitorServer"
+                },
+                "password": {
+                    "type": "integer",
+                    "apicApi": "not_applicable",
+                    "default": 1,
+                    "description": "Password Variable Reference when performing Server Monitoring.  See `local.tf` for reference to the sensitive variables.\nBy Default there is only one variable `var.[radius|tacacs]_monitoring_password`.  You can add additional values to the local.tf `admin_sensitive` section if more are needed.",
+                    "minimum": 1,
+                    "maximum": 64,
+                    "title": "password"
                 },
                 "username": {
                     "type": "string",
@@ -2792,6 +2813,7 @@
                 }
             },
             "required": [
+                "password",
                 "username"
             ],
             "title": "server_monitoring"
@@ -2830,6 +2852,15 @@
                         "title": "host - name"
                     },
                     "title": "hosts"
+                },
+                "key": {
+                    "type": "integer",
+                    "apicApi": "not_applicable",
+                    "default": 1,
+                    "description": "Authentication Key.  See `local.tf` for reference to the sensitive variables.\nBy Default there is only one variable `var.[radius|tacacs]_key`.  You can add additional values to the local.tf `admin_sensitive` section if more are needed.",
+                    "minimum": 1,
+                    "maximum": 64,
+                    "title": "key"
                 },
                 "login_domain": {
                     "type": "string",
@@ -2900,6 +2931,9 @@
                 },
                 "hosts": {
                     "$ref": "#/definitions/Admin:AAA:Authentication:Settings/properties/hosts"
+                },
+                "key": {
+                    "$ref": "#/definitions/Admin:AAA:Authentication:Settings/properties/key"
                 },
                 "login_domain": {
                     "$ref": "#/definitions/Admin:AAA:Authentication:Settings/properties/login_domain"
@@ -3044,11 +3078,9 @@
                     "type": "integer",
                     "apicApi": "not_applicable",
                     "default": 1,
-                    "description": "Default is `1`.  This value tells the script to use either use\n  * apic_ca_certificate_chain_1\n  * apic_certificate_1\n  * apic_private_key_1\n\n Or\n  * apic_ca_certificate_chain_2\n  * apic_certificate_2\n  * apic_private_key_2\n ",
-                    "enum": [
-                        1,
-                        2
-                    ],
+                    "description": "Default is `1`.  Identifier for the Sensitive Variables to Assign, CA, Certificate, Private Key.  See `local.tf` for reference to the sensitive variables.\nBy Default there is only two variables of combination `var.apic_ca_certificate_chain_[1|2]`, `var.apic_certificate_[1|2]`, `var.apic_private_key_[1|2]`.  You can add additional values to the local.tf `admin_sensitive` section if more are needed.",
+                    "minimum": 1,
+                    "maximum": 64,
                     "title": "var_identity"
                 }
             },
@@ -3409,7 +3441,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "callhomeSmtpServer",
-            "description": "The SMTP Server to Use for sending Smart Callhome messages.  Required:\n  * host\n  * management_epg\nOptional:\n  * port_number\n  * username",
+            "description": "The SMTP Server to Use for sending Smart Callhome messages.  Required:\n  * host\n  * management_epg\n  * password\nOptional:\n  * port_number\n  * username",
             "dn": "uni/fabric/smartgroup-{name}/prof/smtp",
             "properties": {
                 "host": {
@@ -3429,6 +3461,15 @@
                     "$ref": "#/definitions/AbstractSettings:PolicyName/properties/policy_name",
                     "tDn": "uni/tn-mgmt/out-{management_epg_type}/instP-{management_epg}",
                     "title": "management_epg - fileRsARemoteHostToEpg"
+                },
+                "password": {
+                    "type": "integer",
+                    "apicApi": "not_applicable",
+                    "default": 1,
+                    "description": "Password Variable Reference when the SMTP Server Requires Authentication.  See `local.tf` for reference to the sensitive variables.",
+                    "minimum": 1,
+                    "maximum": 64,
+                    "title": "password"
                 },
                 "port_number": {
                     "type": "integer",
@@ -3913,7 +3954,7 @@
             "additionalProperties": false,
             "properties": {
                 "configuration_backups": {
-                    "description": "An Array of Configuration Backup Remote Locations to Configure.\nRequired:\n  * remote_locations\n  * scheduler\nOptional:\n  * authentication_type\n  * management_epg\n  * path\n  * port\n  * protocol\n  * username\n=================================================\nAPI Information:\n - Class: `fileRemotePath`\n - Distinguished Name: `uni/fabric/path-{remote_host}`\nGUI Location:\n - Admin > Import/Export > Remote Locations:{remote_host}",
+                    "description": "An Array of Configuration Backup Remote Locations to Configure.\nRequired:\n  * remote_locations\n  * scheduler\nOptional:\n  * authentication_type\n  * management_epg\n  * password\n  * path\n  * port\n  * private_key\n  * private_key_passphrase\n  * protocol\n  * username\n=================================================\nAPI Information:\n - Class: `fileRemotePath`\n - Distinguished Name: `uni/fabric/path-{remote_host}`\nGUI Location:\n - Admin > Import/Export > Remote Locations:{remote_host}",
                     "items": {
                         "$ref": "#/definitions/Admin:ImportExport:ConfigurationBackups"
                     },
@@ -3961,11 +4002,57 @@
                     "tDn": "uni/tn-mgmt/mgmtp-default/{mgmt_epg_type}-{management_epg}",
                     "title": "management_epg - fileRsARemoteHostToEpg"
                 },
+                "password": {
+                    "type": "integer",
+                    "apicApi": "not_applicable",
+                    "default": 1,
+                    "description": "Password Variable Reference when performing Password based Authentication.  See `local.tf` for reference to the sensitive variables.\nBy Default there is only one variable `var.remote_password`.  You can add additional values to the local.tf `admin_sensitive` section if more are needed.",
+                    "minimum": 1,
+                    "maximum": 64,
+                    "title": "password"
+                },
+                "path": {
+                    "type": "string",
+                    "apicApi": "remotePath",
+                    "default": "/tmp",
+                    "description": "Remote Path on the Hosts.",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[a-zA-Z0-9\\\\!#$%()*,-\\./:;@ _{|}~?&+]+$",
+                    "title": "path - remotePath"
+                },
+                "port": {
+                    "type": "integer",
+                    "apicApi": "remotePort",
+                    "default": 22,
+                    "description": "Remote Protocol Port 0-65535.  The default is 22.",
+                    "minimum": 1,
+                    "maximum": 65535,
+                    "title": "port - remotePort"
+                },
+                "private_key": {
+                    "type": "integer",
+                    "apicApi": "not_applicable",
+                    "default": 1,
+                    "description": "Private Key Variable Reference when performing `useSshKeyContents` based Authentication.  See `local.tf` for reference to the sensitive variables.\nBy Default there is only one variable `var.remote_private_key`.  You can add additional values to the local.tf `admin_sensitive` section if more are needed.",
+                    "minimum": 1,
+                    "maximum": 64,
+                    "title": "private_key"
+                },
+                "private_key_passphrase": {
+                    "type": "integer",
+                    "apicApi": "not_applicable",
+                    "default": 1,
+                    "description": "Private Key Passphrase Variable Reference when performing `useSshKeyContents` based Authentication.  See `local.tf` for reference to the sensitive variables.",
+                    "minimum": 1,
+                    "maximum": 64,
+                    "title": "password"
+                },
                 "protocol": {
                     "type": "string",
                     "apicApi": "protocol",
                     "default": "sftp",
-                    "description": "Transfer protocol to be used for data export of object File Remote Path .  Allowed values are:\n  * ftp\n  * scp\n  * sftp: (default)\nNote: Value `ftp` cannot be set if authentication_type is equal to `useSshKeyContents`",
+                    "description": "Transfer protocol to be used for data export of object File Remote Path .  Allowed values are:\n  * ftp\n  * scp\n  * sftp: (default)\nNote: Value `ftp` cannot be set if authentication_type is equal to `useSshKeyContents`.\nBy Default there is only one variable `var.remote_private_key_passphrase`.  You can add additional values to the local.tf `admin_sensitive` section if more are needed.",
                     "enum": [
                         "ftp",
                         "scp",
@@ -3982,26 +4069,7 @@
                     },
                     "title": "remote_locations"
                 },
-                "remote_path": {
-                    "type": "string",
-                    "apicApi": "remotePath",
-                    "default": "/tmp",
-                    "description": "Remote Path on the Hosts.",
-                    "minLength": 1,
-                    "maxLength": 128,
-                    "pattern": "^[a-zA-Z0-9\\\\!#$%()*,-\\./:;@ _{|}~?&+]+$",
-                    "title": "remote_path - remotePath"
-                },
-                "remote_port": {
-                    "type": "integer",
-                    "apicApi": "remotePort",
-                    "default": 22,
-                    "description": "Remote Protocol Port 0-65535.  The default is 22.",
-                    "minimum": 1,
-                    "maximum": 65535,
-                    "title": "remote_port - remotePort"
-                },
-                "remote_username": {
+                "username": {
                     "type": "string",
                     "apicApi": "userName",
                     "default": "",
@@ -4009,7 +4077,7 @@
                     "minLength": 1,
                     "maxLength": 128,
                     "pattern": "^[a-zA-Z0-9\\\\!#$%()*,-\\./:;@ _{|}~?&+]+$",
-                    "title": "remote_username - userName"
+                    "title": "username - userName"
                 },
                 "scheduler_name": {
                     "class": "configRsExportScheduler",
@@ -4286,7 +4354,7 @@
         "EasyAci": {
             "type": "object",
             "additionalProperties": false,
-            "description": "Attributes are:\n  * access\n  * admin\n  * fabric\n  * switch\n  * system_settings\n  * tenants",
+            "description": "Attributes are:\n  * access\n  * admin\n  * fabric\n  * global_settings\n  * switch\n  * system_settings\n  * tenants",
             "properties": {
                 "access": {
                     "$ref": "#/definitions/Access"
@@ -4296,6 +4364,9 @@
                 },
                 "fabric": {
                     "$ref": "#/definitions/Fabric"
+                },
+                "global_settings": {
+                    "$ref": "#/definitions/GlobalSettings"
                 },
                 "switch": {
                     "$ref": "#/definitions/Switch"
@@ -5321,9 +5392,9 @@
                     "type": "integer",
                     "apicApi": "id",
                     "default": 1,
-                    "description": "The user-configured NTP client authentication key identifier. The NTP client authentication key is for authenticating time synchronization.  This is a reference to the Sensitive Variable ntp_key_{1-5}, which should be loaded into the environment as TF_VAR_ntp_key_{1-5}.",
+                    "description": "The user-configured NTP client authentication key identifier. The NTP client authentication key is for authenticating time synchronization.  This is a reference to the Sensitive Variable `ntp_key_{1-5}`, which should be loaded into the environment as `TF_VAR_ntp_key_{1-5}` and is referenced in locals.tf in the fabric_sensitive local variable.  You can add more keys here if necessary.",
                     "minimum": 1,
-                    "maximum": 5,
+                    "maximum": 64,
                     "title": "key_id - id"
                 },
                 "trusted": {
@@ -5432,7 +5503,7 @@
                 "snmp_communities": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "Required:\n  * key_id\nOptional:\n  * authentication_type\n  * trusted\n=================================================\nAPI Information:\n - Class: `snmpCommunityP`\n - Distinguished Name: `uni/fabric/snmppol-{snmp_policy}/community-{sensitive_var}`\nGUI Location:\n - Fabric > Fabric Policies > Policies > Pod > SNMP > {snmp_policy} > Community Policies",
+                    "description": "Required:\n  * community\nOptional:\n  * description\n=================================================\nAPI Information:\n - Class: `snmpCommunityP`\n - Distinguished Name: `uni/fabric/snmppol-{snmp_policy}/community-{sensitive_var}`\nGUI Location:\n - Fabric > Fabric Policies > Policies > Pod > SNMP > {snmp_policy} > Community Policies",
                     "items": {
                         "$ref": "#/definitions/Fabric:Policies:Pod:SNMP:SnmpCommunities"
                     },
@@ -5441,7 +5512,7 @@
                 "snmp_destinations": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "Required:\n  * host\nOptional:\n  * authentication_type\n  * trusted\n=================================================\nAPI Information:\n - Class: `snmpTrapDest`\n - Distinguished Name: `uni/fabric/snmpgroup-{snmp_group}/trapdest-{host}-port-{port}`\nGUI Location:\n - Admin > External Data Collectors > Monitoring Destinations > SNMP > {snmp_monitoring_destination_group}",
+                    "description": "Required:\n  * host\nOptional:\n  * community\n  * management_epg\n  * port\n  * username\n  * v3_security_level\n  * version\n=================================================\nAPI Information:\n - Class: `snmpTrapDest`\n - Distinguished Name: `uni/fabric/snmpgroup-{snmp_group}/trapdest-{host}-port-{port}`\nGUI Location:\n - Admin > External Data Collectors > Monitoring Destinations > SNMP > {snmp_monitoring_destination_group}",
                     "items": {
                         "$ref": "#/definitions/Fabric:Policies:Pod:SNMP:SnmpDestinations"
                     },
@@ -5531,21 +5602,21 @@
             "description": "",
             "dn": "uni/fabric/snmppol-{snmp_policy}/community-{sensitive_var}",
             "properties": {
-                "community_variable": {
+                "community": {
                     "type": "integer",
                     "apicApi": "not_applicable",
                     "default": 1,
-                    "description": "A value between 1 to 5 that will point to the snmp_community_{value} variable, which should be loaded into the environment as TF_VAR_snmp_community_{1-5}.",
+                    "description": "A value between 1 to 64 that will point to the snmp_community_{1-5} variable (By default only 1-5 are supported), which should be loaded into the environment as `TF_VAR_snmp_community_{1-5}`.  This is referenced in `locals.tf` in the local variable `fabric_sensitive`.  More authorization key variables can be added there if needed.",
                     "minimum": 1,
-                    "maximum": 5,
-                    "title": "community_variable"
+                    "maximum": 64,
+                    "title": "community"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
                 }
             },
             "required": [
-                "community_variable"
+                "community"
             ],
             "title": "snmp_communities"
         },
@@ -5556,14 +5627,14 @@
             "description": "",
             "dn": "uni/fabric/snmpgroup-{snmp_group}/trapdest-{host}-port-{port}",
             "properties": {
-                "community_variable": {
+                "community": {
                     "type": "integer",
-                    "apicApi": "secName",
+                    "apicApi": "not_applicable",
                     "default": 1,
-                    "description": "A value between 1 to 5 that will point to the snmp_community_{value} variable, which should be loaded into the environment as TF_VAR_snmp_community_{1-5}.",
+                    "description": "A value between 1 to 64 that will point to the snmp_community_{1-5} variable (By default only 1-5 are supported), which should be loaded into the environment as `TF_VAR_snmp_community_{1-5}`.  This is referenced in `locals.tf` in the local variable `fabric_sensitive`.  More authorization key variables can be added there if needed.",
                     "minimum": 1,
-                    "maximum": 5,
-                    "title": "community_variable - secName"
+                    "maximum": 64,
+                    "title": "community"
                 },
                 "host": {
                     "type": "string",
@@ -5638,7 +5709,7 @@
             },
             "else": {
                 "required": [
-                    "community_variable",
+                    "community",
                     "host"
                 ]
             },
@@ -5655,9 +5726,9 @@
                     "type": "integer",
                     "apicApi": "authKey",
                     "default": 1,
-                    "description": "A value between 1 to 5 that will point to the snmp_authorization_key_{value} variable, which should be loaded into the environment as TF_VAR_snmp_authorization_key_{1-5}.",
+                    "description": "Default is `1`.  A value between 1 to 64 that will point to the snmp_authorization_key_{1-5} variable  (By default only 1-5 are supported), which should be loaded into the environment as `TF_VAR_snmp_authorization_key_{1-5}`.  This is referenced in `locals.tf` in the local variable `fabric_sensitive`.  More authorization key variables can be added there if needed.",
                     "minimum": 1,
-                    "maximum": 5,
+                    "maximum": 64,
                     "title": "authorization_key - authKey"
                 },
                 "authorization_type": {
@@ -5680,9 +5751,9 @@
                     "type": "integer",
                     "apicApi": "privKey",
                     "default": 1,
-                    "description": "A value between 1 to 5 that will point to the snmp_privacy_key_{value} variable, which should be loaded into the environment as TF_VAR_snmp_privacy_key_{1-5}.",
+                    "description": "Default is `1`.  A value between 1 to 64 that will point to the snmp_privacy_key_{1-5} variable (By default only 1-5 are supported), which should be loaded into the environment as `TF_VAR_snmp_privacy_key_{1-5}`.  This is referenced in `locals.tf` in the local variable `fabric_sensitive`.  More authorization key variables can be added there if needed.",
                     "minimum": 1,
-                    "maximum": 5,
+                    "maximum": 64,
                     "title": "privacy_key - privKey"
                 },
                 "privacy_type": {
@@ -5714,6 +5785,140 @@
             ],
             "title": "users"
         },
+        "GlobalSettings": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "not_applicable",
+            "description": "Module Global Settings.\nRequired:\n  * controller\n  * management_epgs\nOptional:\n  * annotations",
+            "dn": "not_applicable",
+            "properties": {
+                "annotations": {
+                    "$ref": "#/definitions/Tenants:AbstractSettings/properties/annotations"
+                },
+                "controller": {
+                    "$ref": "#/definitions/GlobalSettings:Controller"
+                },
+                "management_epgs": {
+                    "type": "array",
+                    "additionalProperties": false,
+                    "description": "Management EPGs\nRequired:\n  * name\n  * type",
+                    "items": {
+                        "$ref": "#/definitions/GlobalSettings:ManagementEpgs"
+                    },
+                    "title": "management_epgs"
+                }
+            },
+            "required": [
+                "controller",
+                "management_epgs"
+            ],
+            "title": "global_settings"
+        },
+        "GlobalSettings:Controller": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "not_applicable",
+            "description": "Controller Settings.\nRequired:\n  * hostname\n  * type\n  * username\n  * version\nOptional:\n  * auth_type\n  * certificate_name",
+            "dn": "not_applicable",
+            "properties": {
+                "auth_type": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "password",
+                    "description": "(Only Applicable to APIC) Type of Authentication to Perform.  Options are:\n  * certificate\n  * password: (default)",
+                    "enum": [
+                        "certificate",
+                        "password"
+                    ],
+                    "title": "type"
+                },
+                "certificate_name": {
+                    "default": "",
+                    "$ref": "#/definitions/AbstractSettings/properties/name",
+                    "title": "certificate_name"
+                },
+                "domain": {
+                    "default": "",
+                    "description": "The Login Domain for the Controller.",
+                    "$ref": "#/definitions/AbstractSettings/properties/name",
+                    "title": "domain"
+                },
+                "hostname": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "apic.example.com",
+                    "description": "Hostname/IP Address of the APIC or Nexus Dashboard Orchestrator Controller.",
+                    "minLength": 7,
+                    "maxLength": 255,
+                    "pattern": "(^(((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))|((([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([A-Za-z|[A-Za-z][A-Za-z0-9\\-]*[A-Za-z0-9])))$|(?:^|(?<=\\s))(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(?=\\s|$))",
+                    "title": "hostname"
+                },
+                "type": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "apic",
+                    "description": "Type of Fabric Controller.  Options are:\n  * apic: (default)\n  * ndo",
+                    "enum": [
+                        "apic",
+                        "ndo"
+                    ],
+                    "title": "type"
+                },
+                "username": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "admin",
+                    "description": "Username to Login to the Controller.",
+                    "$ref": "#/definitions/AbstractSettings/properties/name",
+                    "title": "hostname"
+                },
+                "version": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "6.0(2h)",
+                    "description": "Hostname/IP Address of the APIC or Nexus Dashboard Orchestrator Controller.",
+                    "minLength": 7,
+                    "maxLength": 255,
+                    "pattern": "\\d\\.\\d\\(\\d{1,2}[a-z]\\)",
+                    "title": "version"
+                }
+            },
+            "required": [
+                "hostname",
+                "type",
+                "username",
+                "version"
+            ],
+            "title": "controller"
+        },
+        "GlobalSettings:ManagementEpgs": {
+            "type": "object",
+            "additionalProperties": false,
+            "class": "not_applicable",
+            "description": "Management EPGs\nRequired:\n  * name\n  * type",
+            "dn": "not_applicable",
+            "properties": {
+                "name": {
+                    "$ref": "#/definitions/AbstractSettings/properties/name"
+                },
+                "type": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "oob",
+                    "description": "Type of Management EPG.  Options are:\n  * inb\n  * oob: (default)",
+                    "enum": [
+                        "inb",
+                        "oob"
+                    ],
+                    "title": "type"
+                }
+            },
+            "required": [
+                "name",
+                "type"
+            ],
+            "title": "management_epgs"
+        },
         "Switch": {
             "type": "object",
             "additionalProperties": false,
@@ -5732,7 +5937,7 @@
                     "items": {
                         "$ref": "#/definitions/Switch:SwitchProfiles"
                     },
-                    "title": "switch_profiles - "
+                    "title": "switch_profiles"
                 },
                 "vpc_domains": {
                     "type": "array",
@@ -5741,7 +5946,7 @@
                     "items": {
                         "$ref": "#/definitions/Switch:VpcDomains"
                     },
-                    "title": "vpc_domains - "
+                    "title": "vpc_domains - fabricExplicitGEp"
                 }
             },
             "title": "Switch"
@@ -6585,7 +6790,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "pkiExportEncryptionKey",
-            "description": "Optional Attribute are:\n  * clear_passphrase\n  * description\n  * enable_encryption\n  * passphrase_key_derivation_version\n=================================================\nAPI Information:\n - Class: `pkiExportEncryptionKey`\n - Distinguished Name: `uni/exportcryptkey`\nGUI Location:\n - System > System Settings > Global AES Passphrase Encryption Settings",
+            "description": "Optional Attribute are:\n  * clear_passphrase\n  * description\n  * passphrase\n  * passphrase_key_derivation_version\n=================================================\nAPI Information:\n - Class: `pkiExportEncryptionKey`\n - Distinguished Name: `uni/exportcryptkey`\nGUI Location:\n - System > System Settings > Global AES Passphrase Encryption Settings",
             "dn": "uni/exportcryptkey",
             "properties": {
                 "clear_passphrase": {
@@ -6598,12 +6803,14 @@
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
                 },
-                "enable_encryption": {
-                    "type": "boolean",
+                "passphrase": {
+                    "type": "integer",
                     "apicApi": "not_applicable",
-                    "default": true,
-                    "description": "Default is `true`.  Enables strong encryption on the import or export policy.",
-                    "title": "enable_encryption"
+                    "default": 1,
+                    "description": "Passphrase Variable Reference to use to encrypt configuration exports.  See `local.tf` for reference to the sensitive variables.\nBy Default the variable is `var.aes_passphrase`, which is referenced in `local.tf` `system_sensitive`.",
+                    "minimum": 1,
+                    "maximum": 64,
+                    "title": "passphrase"
                 },
                 "passphrase_key_derivation_version": {
                     "type": "string",
@@ -6616,6 +6823,9 @@
                     "title": "passphrase_key_derivation_version - passphraseKeyDerivationVersion"
                 }
             },
+            "required": [
+                "passphrase"
+            ],
             "title": "global_aes_encryption_settings - pkiExportEncryptionKey"
         },
         "SystemSettings:ISISPolicy": {
@@ -9906,10 +10116,10 @@
                 "password": {
                     "type": "integer",
                     "apicApi": "password",
-                    "default": 0,
-                    "description": "Default is `0`, unused.  A value between 1 to 5 that will point to the bgp_password_{value} variable, which should be loaded into the environment as TF_VAR_bgp_password_{1-5}.",
-                    "minimum": 0,
-                    "maximum": 5,
+                    "default": 1,
+                    "description": "Default is `1`, unused.  A value between 1 to 64 that will point to the bgp_password_{1-5} variable (only 1-5 are available by default), which should be loaded into the environment as `TF_VAR_bgp_password_{1-5}`.  This is referenced in `locals.tf` in the local variable `tenant_sensitive`.  More passwords variables can be added there if needed.",
+                    "minimum": 1,
+                    "maximum": 64,
                     "title": "password"
                 },
                 "peer_addresses": {
@@ -10287,7 +10497,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "ospfIfP",
-            "description": "The OSPF interface profile enables OSPF on the interface. Optionally, the OSPF interface profile can have a relation to an OSPF interface policy for more granular control over interface proprieties.\nRequired:\n  * ospf_interface_policy\nOptional:\n  * authentication_type\n  * description\n  * ospf_key\n=================================================\nAPI Information:\n - Class: `ospfIfP`\n - Distinguished Name: `uni/tn-{tenant}/out-{l3out}/nodep-{node_profile}/lifp-{interface_profile}/ospfIfP`\nGUI Location:\n - tenants > {tenant} > Networking > L3Outs > {l3out} > Logical Node Profile {node_profile} > Logical Interface Profile > {interface_profile} > OSPF Interface Profile",
+            "description": "The OSPF interface profile enables OSPF on the interface. Optionally, the OSPF interface profile can have a relation to an OSPF interface policy for more granular control over interface proprieties.\nRequired:\n  * ospf_interface_policy\nOptional:\n  * authentication_type\n  * description\n  * authentication_key\n=================================================\nAPI Information:\n - Class: `ospfIfP`\n - Distinguished Name: `uni/tn-{tenant}/out-{l3out}/nodep-{node_profile}/lifp-{interface_profile}/ospfIfP`\nGUI Location:\n - tenants > {tenant} > Networking > L3Outs > {l3out} > Logical Node Profile {node_profile} > Logical Interface Profile > {interface_profile} > OSPF Interface Profile",
             "dn": "uni/tn-{tenant}/out-{l3out}/lnodep-{logical_node_profile}/lifp-{name}/ospfIfP",
             "properties": {
                 "authentication_type": {
@@ -10305,14 +10515,14 @@
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
                 },
-                "ospf_key": {
+                "authentication_key": {
                     "type": "integer",
                     "apicApi": "authKeyId",
-                    "default": 0,
-                    "description": "Default is `0`, unused.  A value between 1 to 5 that will point to the ospf_key_{value} variable, which should be loaded into the environment as TF_VAR_ospf_key_{1-5}.",
-                    "minimum": 0,
-                    "maximum": 5,
-                    "title": "ospf_key - authKeyId"
+                    "default": 1,
+                    "description": "Default is `1`.  A value between 1 to 64 that will point to the ospf_key_{1-5} variable (only 1-5 are available by default), which should be loaded into the environment as `TF_VAR_ospf_key_{1-5}`.  This is referenced in `locals.tf` in the local variable `tenant_sensitive`.  More keys variables can be added there if needed.",
+                    "minimum": 1,
+                    "maximum": 64,
+                    "title": "authentication_key - authKeyId"
                 },
                 "ospf_interface_policy": {
                     "type": "string",
@@ -11025,14 +11235,14 @@
             "description": "",
             "dn": "uni/tn-{tenant}/ctx-{name}/snmpctx/community-{community_value}",
             "properties": {
-                "community_variable": {
+                "community": {
                     "type": "integer",
                     "apicApi": "snmpCommunityP",
                     "default": 1,
-                    "description": "The user-configured VRF SNMP Community key identifier.  This is a reference to the Sensitive Variable vrf_snmp_community_{1-5}, which should be loaded into the environment as TF_VAR_vrf_snmp_community_{1-5}.",
-                    "minimum": 0,
-                    "maximum": 5,
-                    "title": "community_variable - snmpCommunityP"
+                    "description": "The user-configured VRF SNMP Community key identifier.  This is a reference to the Sensitive Variable `var.vrf_snmp_community_{1-5}` (only 1-5 are available by default), which should be loaded into the environment as `TF_VAR_vrf_snmp_community_{1-5}`.  This is referenced in `locals.tf` in the local variable `tenant_sensitive`.  More passwords variables can be added there if needed.",
+                    "minimum": 1,
+                    "maximum": 64,
+                    "title": "community - snmpCommunityP"
                 },
                 "description": {
                     "$ref": "#/definitions/AbstractSettings/properties/description"
@@ -14443,6 +14653,15 @@
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
                 },
+                "password": {
+                    "type": "integer",
+                    "apicApi": "not_applicable",
+                    "default": 1,
+                    "description": "Password Variable Reference to Authenticate to the Virtual Center with.  See `local.tf` for reference to the sensitive variables.\nBy Default there is only one variable `var.vmm_password`.  You can add additional values to the local.tf `access_sensitive` section if more are needed.",
+                    "minimum": 1,
+                    "maximum": 64,
+                    "title": "password"
+                },
                 "username": {
                     "type": "string",
                     "apicApi": "usr",
@@ -14455,6 +14674,7 @@
                 }
             },
             "required": [
+                "password",
                 "username"
             ],
             "title": "credentials - vmmUsrAccP"

@@ -28,19 +28,20 @@ terraform {
 }
 
 provider "aci" {
-  cert_name   = var.certificate_name
-  password    = var.apic_password
-  private_key = var.private_key
-  url         = "https://${var.apic_hostname}"
-  username    = var.apic_user
-  insecure    = true
+  cert_name   = local.host.certificate_name
+  password    = local.host.auth_type == "password" ? var.apic_password : ""
+  private_key = local.host.auth_type == "certificate" ? file(var.apic_private_key) : ""
+  url         = "https://${local.host.hostname}"
+  username = length(compact([local.host.domain])
+  ) > 0 ? "apic#${local.host.domain}\\${local.host.username}" : local.host.username
+  insecure = true
 }
 
 provider "mso" {
-  domain   = var.ndo_domain
+  domain   = local.host.domain == "" ? "local" : local.host.domain
   insecure = true
   password = var.ndo_password
   platform = "nd"
-  url      = "https://${var.ndo_hostname}"
-  username = var.ndo_user
+  url      = "https://${local.host.hostname}"
+  username = local.host.username
 }

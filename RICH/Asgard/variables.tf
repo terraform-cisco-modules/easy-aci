@@ -1,14 +1,8 @@
 /*_____________________________________________________________________________________________________________________
 
-ACI Provider Settings
+ACI/Nexus Dashboard Orchestrator Provider Settings
 _______________________________________________________________________________________________________________________
 */
-variable "apic_hostname" {
-  default     = "apic.example.com"
-  description = "Cisco APIC Hostname"
-  type        = string
-}
-
 variable "apic_password" {
   default     = "dummydummy"
   description = "Password for User based Authentication."
@@ -16,47 +10,10 @@ variable "apic_password" {
   type        = string
 }
 
-variable "apic_user" {
-  default     = "admin"
-  description = "Username for User based Authentication."
-  type        = string
-}
-
-variable "certificate_name" {
-  default     = ""
-  description = "Cisco ACI Certificate Name for SSL Based Authentication"
-  sensitive   = true
-  type        = string
-}
-
-variable "private_key" {
-  default     = ""
+variable "apic_private_key" {
+  default     = "blah.txt"
   description = "Cisco ACI Private Key for SSL Based Authentication."
   sensitive   = true
-  type        = string
-}
-
-variable "apic_version" {
-  default     = "5.2(4e)"
-  description = "The Version of ACI Running in the Environment."
-  type        = string
-}
-
-
-/*_____________________________________________________________________________________________________________________
-
-Nexus Dashboard Orchestrator Provider Settings
-_______________________________________________________________________________________________________________________
-*/
-variable "ndo_domain" {
-  default     = "local"
-  description = "Default is `local`.  Authentication Domain for Nexus Dashboard Orchestrator Authentication.  Only required if the Auhthenciation domain is not local."
-  type        = string
-}
-
-variable "ndo_hostname" {
-  default     = "ndo.example.com"
-  description = "Cisco Nexus Dashboard Orchestrator Hostname"
   type        = string
 }
 
@@ -66,80 +23,6 @@ variable "ndo_password" {
   sensitive   = true
   type        = string
 }
-
-variable "ndo_user" {
-  default     = "admin"
-  description = "Username for Nexus Dashboard Orchestrator Authentication."
-  type        = string
-}
-
-variable "ndo_version" {
-  default     = "5.2(1g)"
-  description = "The Version of Nexus Dashboard Orchestrator Running in the Environment."
-  type        = string
-}
-
-/*_____________________________________________________________________________________________________________________
-
-Global Shared Variables
-_______________________________________________________________________________________________________________________
-*/
-
-
-variable "annotation" {
-  default     = "orchestrator:terraform"
-  description = "Depricated.  Removing from Module."
-  type        = string
-}
-
-variable "annotations" {
-  default = [
-    {
-      key   = "orchestrator"
-      value = "terraform:easy-aci:v2.1.8"
-    }
-  ]
-  description = "The Version of this Script."
-  type = list(object(
-    {
-      key   = string
-      value = string
-    }
-  ))
-}
-
-variable "controller_type" {
-  default     = "apic"
-  description = <<-EOT
-    The Type of Controller for this Site.
-    - apic
-    - ndo
-  EOT
-  type        = string
-}
-
-variable "management_epgs" {
-  default = [
-    {
-      name = "default"
-      type = "oob"
-    }
-  ]
-  description = <<-EOT
-    The Management EPG's that will be used by the script.
-    - name: Name of the EPG
-    - type: Type of EPG
-      * inb
-      * oob
-  EOT
-  type = list(object(
-    {
-      name = string
-      type = string
-    }
-  ))
-}
-
 
 /*_____________________________________________________________________________________________________________________
 
@@ -200,42 +83,42 @@ Admin > AAA > Security: Certificate Authorities/Key Rings - Sensitive Variables
 _______________________________________________________________________________________________________________________
 */
 variable "apic_ca_certificate_chain_1" {
-  default     = ""
+  default     = "blah.txt"
   description = "Certificate Authority Certificate Chain.  i.e. Intermediate and Root CA Certificate."
   sensitive   = true
   type        = string
 }
 
 variable "apic_ca_certificate_chain_2" {
-  default     = ""
+  default     = "blah.txt"
   description = "Certificate Authority Certificate Chain.  i.e. Intermediate and Root CA Certificate."
   sensitive   = true
   type        = string
 }
 
 variable "apic_certificate_1" {
-  default     = ""
+  default     = "blah.txt"
   description = "APIC Certificate 1."
   sensitive   = true
   type        = string
 }
 
 variable "apic_certificate_2" {
-  default     = ""
+  default     = "blah.txt"
   description = "APIC Certificate 2."
   sensitive   = true
   type        = string
 }
 
 variable "apic_private_key_1" {
-  default     = ""
+  default     = "blah.txt"
   description = "APIC Certificate Private Key 1."
   sensitive   = true
   type        = string
 }
 
 variable "apic_private_key_2" {
-  default     = ""
+  default     = "blah.txt"
   description = "APIC Certificate Private Key 2."
   sensitive   = true
   type        = string
@@ -266,14 +149,14 @@ variable "remote_password" {
   type        = string
 }
 
-variable "ssh_key_contents" {
-  default     = ""
-  description = "SSH Private Key Based Authentication Contents."
+variable "remote_private_key" {
+  default     = "blah.txt"
+  description = "SSH Private Key File Location."
   sensitive   = true
   type        = string
 }
 
-variable "ssh_key_passphrase" {
+variable "remote_private_key_passphrase" {
   default     = ""
   description = "SSH Private Key Based Authentication Passphrase."
   sensitive   = true
@@ -448,19 +331,6 @@ variable "aes_passphrase" {
 
 /*_____________________________________________________________________________________________________________________
 
-Virtual Networking > {switch_provider} > {domain_name} > Credentials — Sensitive Variables
-_______________________________________________________________________________________________________________________
-*/
-
-variable "vmm_password" {
-  default     = ""
-  description = "Password for VMM Credentials Policy."
-  sensitive   = true
-  type        = string
-}
-
-/*_____________________________________________________________________________________________________________________
-
 Tenants - Nexus Dashboard Orchestrator - Cloud Connector - Sensitive Variables
 _______________________________________________________________________________________________________________________
 */
@@ -591,6 +461,20 @@ variable "vrf_snmp_community_4" {
 variable "vrf_snmp_community_5" {
   default     = ""
   description = "SNMP Community 5."
+  sensitive   = true
+  type        = string
+}
+
+
+/*_____________________________________________________________________________________________________________________
+
+Virtual Networking > {switch_provider} > {domain_name} > Credentials — Sensitive Variables
+_______________________________________________________________________________________________________________________
+*/
+
+variable "vmm_password" {
+  default     = ""
+  description = "Password for VMM Credentials Policy."
   sensitive   = true
   type        = string
 }

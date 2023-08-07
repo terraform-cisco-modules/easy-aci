@@ -14,6 +14,7 @@ virtual_networking:
       stats_collection: enabled
       trigger_inventory_sync: untriggered
       credentials:
+        password: 1
         username: administrator@rich.local
     delimiter: '|'
     name: Asgard

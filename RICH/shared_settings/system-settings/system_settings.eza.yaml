@@ -38,7 +38,7 @@ system_settings:
   global_aes_encryption_settings:
     clear_passphrase: true
     description: default
-    enable_encryption: true
+    passphrase: 1
     passphrase_key_derivation_version: v1
   recommended_settings: # If you want to make changes to this modify the defaults
     coop_group: true

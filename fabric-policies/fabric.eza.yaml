@@ -1,18 +1,18 @@
 ---
 fabric:
   pods:
-    policy_group:
-      bgp_route_reflector_policy: default
-      coop_group_policy: default
-      isis_policy: default
-      macsec_policy: default
-      management_access_policy: default
-      name: default
-      snmp_policy: default
-    profile:
-      name: default
-      policy_group: default
-      pod_selector_type: ALL
+    policy_groups:
+      - bgp_route_reflector_policy: default
+        coop_group_policy: default
+        isis_policy: default
+        macsec_policy: default
+        management_access_policy: default
+        name: default
+        snmp_policy: default
+    profiles:
+      - name: default
+        policy_group: default
+        pod_selector_type: ALL
   policies:
     global:
       dns_profiles:
@@ -28,6 +28,15 @@ fabric:
           ip_version_preference: IPv4 # IPv4 or IPv6
           management_epg: ooband
           name: default
+    interface:
+      l3_interface:
+        bfd_isis_policy_configuration: enabled
+        description: default policy
+    monitoring:
+      fabric_node_controls:
+        description: default policy
+        enable_dom: true
+        feature_selections: telemetry
     pod:
       date_and_time:
         - management_epg: ooband
@@ -56,9 +65,9 @@ fabric:
               description: 'Out-of-Band Client Group'
               management_epg: ooband
           snmp_communities:
-            - community_variable: 1
+            - community: 1
               description: 'Community String 1'
-            - community_variable: 2
+            - community: 2
               description: 'Community String 2'
           snmp_destinations:
             - host: 10.101.128.24
@@ -67,7 +76,7 @@ fabric:
               v3_security_level: priv
               version: v3
             - host: 10.101.128.25
-              community_variable: 1
+              community: 1
               management_epg: ooband
               version: v2c
           users:
@@ -76,7 +85,3 @@ fabric:
               authorization_type: hmac-sha1-96
               privacy_key: 1
               privacy_type: aes-128
-  recommended_settings:
-    fabric_node_controls: true
-    l3_interface: true
-    pods: true
