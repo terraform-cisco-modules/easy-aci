@@ -8,7 +8,13 @@
 
 If you would like to utilize Autocompletion, Help Context, and Error Validation, `(HIGHLY RECOMMENDED)`, make sure the files all utilize the `.eza.yaml` file extension.
 
-The Schema for these YAML Files have been registered with [*SchemaStore*](https://github.com/SchemaStore/schemastore/blob/master/src/api/json/catalog.json) via utilizing this `.eza.yaml` file extension.
+And Add the Following to YAML: Schemas in Visual Studio Code: Settings > Search for YAML: Schema: Click edit in `settings.json`.  In the `yaml.schemas` section:
+
+```bash
+"https://raw.githubusercontent.com/terraform-cisco-modules/easy-imm/main/yaml_schema/easy-imm.json": "*.ezi.yaml"
+```
+
+Soon the Schema for these YAML Files have been registered with [*SchemaStore*](https://github.com/SchemaStore/schemastore/blob/master/src/api/json/catalog.json) via utilizing this `.eza.yaml` file extension.  But until that is complete, need to still add to settings.
 
 ## Use Cases
 

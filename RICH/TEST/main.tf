@@ -5,7 +5,6 @@
 
 data "utils_yaml_merge" "model" {
   input = concat(
-    [for file in fileset(path.module, "../shared_settings/*/*.eza.yaml") : file(file)],
     [for file in fileset(path.module, "*eza.yaml") : file(file)],
     [for file in fileset(path.module, "*/*eza.yaml") : file(file)]
   )

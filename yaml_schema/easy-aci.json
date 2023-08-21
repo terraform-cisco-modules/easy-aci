@@ -10853,7 +10853,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "ospfExtP",
-            "description": "The OSPF external profile information.\nRequired:\n  * ospf_area_id\nOptional:\n  * ospf_area_cost\n  * ospf_area_control\n=================================================\nAPI Information:\n - Class: `ospfExtP`\n - Distinguished Name: `uni/tn-{tenant}/out-{l3out}/ospfExtP`\nGUI Location:\n - tenants > {tenant} > Networking > L3Outs > {l3out}: OSPF",
+            "description": "The OSPF external profile information.\nRequired:\n  * ospf_area_id\nOptional:\n  * ospf_area_control\n  * ospf_area_cost\n  * ospf_area_type\n=================================================\nAPI Information:\n - Class: `ospfExtP`\n - Distinguished Name: `uni/tn-{tenant}/out-{l3out}/ospfExtP`\nGUI Location:\n - tenants > {tenant} > Networking > L3Outs > {l3out}: OSPF",
             "dn": "uni/tn-{tenant}/ospfExtP",
             "properties": {
                 "ospf_area_cost": {
