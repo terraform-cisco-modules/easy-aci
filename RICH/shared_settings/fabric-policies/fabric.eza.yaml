@@ -60,6 +60,8 @@ fabric:
                 - address: 10.101.128.24
                   name: LNX1
                 - address: 10.101.128.25
+                - address: 10.101.128.0/24
+                  name: LabServers
               description: 'Out-of-Band Client Group'
               management_epg: ooband
           snmp_communities:

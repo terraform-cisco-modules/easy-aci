@@ -32,6 +32,9 @@ switch:
         - interface: 1/23
         - interface: 1/24
         - interface: 1/25
+          access_or_native_vlan: 1
+          allowed_vlans: 1-100
+          instrumentation_immediacy: on-demand
           interface_description: odin-ucs-a-Eth1/54
           policy_group: vpc025
           policy_group_type: bundle

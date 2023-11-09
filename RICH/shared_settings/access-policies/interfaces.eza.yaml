@@ -7,6 +7,14 @@ access:
     leaf:
       policy_groups:
         access:
+        - attachable_entity_profile: accessAep
+          cdp_interface_policy: cdpEnabled
+          description: Basic Static Path Trunk Port
+          link_level_policy: inheritAuto
+          lldp_interface_policy: lldpEnabled
+          mcp_interface_policy: mcpEnabled
+          name: staticTrunkPort
+          spanning_tree_interface_policy: bpduFG
         - attachable_entity_profile: trunkAep
           cdp_interface_policy: cdpEnabled
           description: Basic Trunk Port
@@ -39,6 +47,18 @@ access:
           description: Breakup Map for 4 x 25G
           name: 25g4x
         bundle:
+        - attachable_entity_profile: accessAep
+          cdp_interface_policy: cdpEnabled
+          description: Inband
+          link_aggregation_type: vpc
+          link_level_policy: inheritAuto
+          lldp_interface_policy: lldpEnabled
+          mcp_interface_policy: mcpEnabled
+          names:
+          - vpc25
+          - vpc26
+          port_channel_policy: lacpActive
+          spanning_tree_interface_policy: default
         - attachable_entity_profile: trunkAep
           cdp_interface_policy: cdpEnabled
           description: trunkAep

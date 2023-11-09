@@ -40,6 +40,7 @@ tenants:
         - description: Allow Any
           name: any
         name: any
+    create: false
     description: Built-In Common tenant
     monitoring_policy: default
     name: common

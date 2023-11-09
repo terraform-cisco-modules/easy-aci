@@ -50,7 +50,13 @@ switch:
           policy_group: trunkPort
           policy_group_type: access
         - interface: 1/25
+          interface_description: r142b-core01-Eth1/10
+          policy_group: vpc26
+          policy_group_type: bundle
         - interface: 1/26
+          interface_description: r142b-core02-Eth1/10
+          policy_group: vpc26
+          policy_group_type: bundle
         - interface: 1/27
         - interface: 1/28
         - interface: 1/29

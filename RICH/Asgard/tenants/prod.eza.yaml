@@ -1,0 +1,48 @@
+---
+tenants:
+  - name: prod
+    application_profiles:
+      - name: nets
+        description: "Default Network Centric Application Profile"
+        application_epgs:
+          - name: 10.92.123.0
+            bridge_domain: 10.92.123.0
+            vlans: [123]
+            template: preferred_group
+    networking:
+      bridge_domains:
+        - application_epg:
+            application_profile: nets
+            template: preferred_group
+            vlans: [121]
+          name: 10.92.121.0
+          subnets:
+            - gateway_ip: 10.92.121.1/24
+              template: advertise_external
+          template: prod_optimize
+        - application_epg:
+            application_profile: nets
+            template: preferred_group
+            vlans: [122]
+          name: 10.92.122.0
+          subnets:
+            - gateway_ip: 10.92.122.1/24
+              template: advertise_external
+          template: prod_optimize
+        - name: 10.92.123.0
+          subnets:
+            - gateway_ip: 10.92.123.1/24
+              template: advertise_external
+          template: prod_optimize
+    policies:
+      protocol:
+        dhcp:
+          relay_policies:
+            - description: default
+              dhcp_servers:
+                - 10.101.128.15
+                - 10.101.128.16
+              epg: prod
+              epg_type: external_epg
+              l3out: asgard-prod
+              mode: visible

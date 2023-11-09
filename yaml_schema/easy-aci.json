@@ -6273,7 +6273,7 @@
                     "minLength": 1,
                     "maxLength": 64,
                     "pattern": "^(\\d|1[0-6])/(\\d|\\d\\d|10[0-8])(/[1-4])?$",
-                    "title": "interface - [fromCard|fromPort|toCard|toPort]"
+                    "title": "interface"
                 },
                 "interface_description": {
                     "description": "This will be the description that will show in a `show interface description`/`show interface status`.",
@@ -12461,12 +12461,11 @@
                 "epg_type": {
                     "type": "string",
                     "apicApi": "not_applicable",
-                    "default": "standard",
-                    "description": "The Type of EPG to Create.  Options are:\n  * inb - Use this option to create an Inband EPG.\n  * oob - Use this option to create an Out-of-Band EPG.\n  * standard: (default)",
+                    "default": "application_epg",
+                    "description": "The Type of EPG to assign to the DHCP relay Provider.  Options are:\n  * application_epg: (default)\n  * external_epg",
                     "enum": [
-                        "inb",
-                        "oob",
-                        "standard"
+                        "application_epg",
+                        "external_epg"
                     ],
                     "title": "epg_type"
                 },

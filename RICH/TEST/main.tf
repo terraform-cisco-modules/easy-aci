@@ -49,15 +49,17 @@ module "admin" {
 
 module "built_in_tenants" {
   depends_on = [module.access]
-  source     = "../../../terraform-aci-tenants"
-  #source  = "terraform-cisco-modules/tenants/aci"
-  #version = "2.5.1"
+  # source     = "../../../terraform-aci-tenants"
+  source  = "terraform-cisco-modules/tenants/aci"
+  version = "3.0.4"
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) > 0
   }
-  model = merge(each.value, local.global_settings, lookup(local.model, "templates", {}), {
-    aaep_to_epgs = {}
-    switch       = {}
+  model = merge(each.value, lookup(local.model, "templates", {}), {
+    aaep_to_epgs    = {}
+    global_settings = local.global_settings
+    switch          = {}
+    templates       = lookup(local.model, "templates", {})
   })
   tenant           = each.key
   tenant_sensitive = local.tenant_sensitive
@@ -117,15 +119,17 @@ module "system_settings" {
 
 module "tenants" {
   depends_on = [module.built_in_tenants]
-  source     = "../../../terraform-aci-tenants"
-  #source  = "terraform-cisco-modules/tenants/aci"
-  #version = "2.5.1"
+  #source     = "../../../terraform-aci-tenants"
+  source  = "terraform-cisco-modules/tenants/aci"
+  version = "3.0.4"
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) == 0
   }
-  model = merge(each.value, local.global_settings, lookup(local.model, "templates", {}), {
-    aaep_to_epgs = {}
-    switch       = {}
+  model = merge(each.value, lookup(local.model, "templates", {}), {
+    aaep_to_epgs    = {}
+    global_settings = local.global_settings
+    switch          = {}
+    templates       = lookup(local.model, "templates", {})
   })
   tenant           = each.key
   tenant_sensitive = local.tenant_sensitive
