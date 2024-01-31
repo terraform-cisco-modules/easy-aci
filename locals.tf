@@ -5,7 +5,7 @@ locals {
     annotations = flatten([lookup(local.model.global_settings, "annotations", []), [
       {
         key   = "orchestrator"
-        value = "terraform:easy-aci:v3.0.4"
+        value = "terraform:easy-aci:v3.1.1"
       }
     ]])
     controller = merge({

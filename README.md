@@ -370,8 +370,8 @@ terraform.exe apply "main.plan"
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_aci"></a> [aci](#requirement\_aci) | 2.9.0 |
-| <a name="requirement_mso"></a> [mso](#requirement\_mso) | 0.11.1 |
+| <a name="requirement_aci"></a> [aci](#requirement\_aci) | 2.13.0 |
+| <a name="requirement_mso"></a> [mso](#requirement\_mso) | 1.0.0 |
 | <a name="requirement_utils"></a> [utils](#requirement\_utils) | 0.2.5 |
 ## Providers
 

@@ -13,8 +13,9 @@ data "utils_yaml_merge" "model" {
 #__________________________________________________________________
 
 module "built_in_tenants" {
-  source  = "terraform-cisco-modules/tenants/aci"
-  version = "3.0.1"
+  source     = "../../../terraform-aci-tenants"
+  #source  = "terraform-cisco-modules/tenants/aci"
+  #version = "3.0.4"
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) > 0
   }
@@ -33,8 +34,9 @@ module "built_in_tenants" {
 
 module "tenants" {
   depends_on = [module.built_in_tenants]
-  source     = "terraform-cisco-modules/tenants/aci"
-  version    = "3.0.1"
+  source     = "../../../terraform-aci-tenants"
+  #source  = "terraform-cisco-modules/tenants/aci"
+  #version = "3.0.4"
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) == 0
   }
