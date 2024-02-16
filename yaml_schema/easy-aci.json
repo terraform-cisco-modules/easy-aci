@@ -7601,10 +7601,13 @@
                     "title": "bridge_domain - fvRsBd"
                 },
                 "combine_description": {
-                    "type": "boolean",
-                    "apicApi": "not_applicable",
-                    "default": false,
-                    "description": "Default is `false`.  Flag to Combine the EPG Name and the Description into the Display Name in Nexus Dashboard Orchestrator.",
+                    "type": "string",
+                    "apicApi": "",
+                    "default": "",
+                    "description": "Option to Combine the Name and Description since BD and EPG's can't be renamed. i.e. <bd-name><combine_description_character><description>",
+                    "minLength": 1,
+                    "maxLength": 1,
+                    "pattern": "^[\\:\\-\\./]$",
                     "title": "combine_description"
                 },
                 "contract_exception_tag": {
@@ -8734,10 +8737,13 @@
                     "$ref": "#/definitions/Tenants:Networking:BridgeDomains:ApplicationEpg"
                 },
                 "combine_description": {
-                    "type": "boolean",
-                    "apicApi": "not_applicable",
-                    "default": false,
-                    "description": "Default value is `false`.  Flag for Nexus Dashboard Orchestrator to configure the name+description as the display name.",
+                    "type": "string",
+                    "apicApi": "",
+                    "default": "",
+                    "description": "Option to Combine the Name and Description since BD and EPG's can't be renamed. i.e. <bd-name><combine_description_character><description>",
+                    "minLength": 1,
+                    "maxLength": 1,
+                    "pattern": "^[\\:\\-\\./]$",
                     "title": "combine_description"
                 },
                 "description": {
