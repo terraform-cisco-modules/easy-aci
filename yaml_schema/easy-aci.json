@@ -7185,6 +7185,12 @@
                 "name": {
                     "$ref": "#/definitions/AbstractSettings/properties/name"
                 },
+                "name_prefix": {
+                    "$ref": "#/definitions/Tenants:NamePrefixSuffix"
+                },
+                "name_suffix": {
+                    "$ref": "#/definitions/Tenants:NamePrefixSuffix"
+                },
                 "networking": {
                     "$ref": "#/definitions/Tenants:Networking"
                 },
@@ -8571,6 +8577,113 @@
                 }
             },
             "title": "tcp_session_rules"
+        },
+        "Tenants:NamePrefixSuffix": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "A List of (Pre|Suf)fixes to add to Tenant Policies.\n Options are:\n  * application_profiles\n  * application_epgs\n  * bridge_domains\n  * contracts\n  * external_epgs\n  * filters\n  * l3outs\n  * logical_interface_profiles\n  * logical_node_profiles\n  * vrfs",
+            "properties": {
+                "application_profiles": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "",
+                    "description": "A Value to add to Application Profiles.",
+                    "intersightApi": "",
+                    "minLength": 0,
+                    "maxLength": 12,
+                    "pattern": "^$|^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "application_profiles"
+                },
+                "application_epgs": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "",
+                    "description": "A Value to add to Application EPGs.",
+                    "intersightApi": "",
+                    "minLength": 0,
+                    "maxLength": 12,
+                    "pattern": "^$|^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "application_epgs"
+                },
+                "bridge_domains": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "",
+                    "description": "A Value to add to Bridge Domains.",
+                    "intersightApi": "",
+                    "minLength": 0,
+                    "maxLength": 12,
+                    "pattern": "^$|^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "bridge_domains"
+                },
+                "contracts": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "",
+                    "description": "A Value to add to Contracts.",
+                    "intersightApi": "",
+                    "minLength": 0,
+                    "maxLength": 12,
+                    "pattern": "^$|^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "contracts"
+                },
+                "filters": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "",
+                    "description": "A Value to add to Filters.",
+                    "intersightApi": "",
+                    "minLength": 0,
+                    "maxLength": 12,
+                    "pattern": "^$|^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "filters"
+                },
+                "l3outs": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "",
+                    "description": "A Value to add to L3Outs.",
+                    "intersightApi": "",
+                    "minLength": 0,
+                    "maxLength": 12,
+                    "pattern": "^$|^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "l3outs"
+                },
+                "logical_interface_profiles": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "",
+                    "description": "A Value to add to Logical Interface Profiles.",
+                    "intersightApi": "",
+                    "minLength": 0,
+                    "maxLength": 12,
+                    "pattern": "^$|^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "logical_interface_profiles"
+                },
+                "logical_node_profiles": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "",
+                    "description": "A Value to add to Logical Node Profiles.",
+                    "intersightApi": "",
+                    "minLength": 0,
+                    "maxLength": 12,
+                    "pattern": "^$|^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "logical_node_profiles"
+                },
+                "vrfs": {
+                    "type": "string",
+                    "apicApi": "not_applicable",
+                    "default": "",
+                    "description": "A Value to add to VRFs.",
+                    "intersightApi": "",
+                    "minLength": 0,
+                    "maxLength": 12,
+                    "pattern": "^$|^[a-zA-Z0-9_\\.:-]+$",
+                    "title": "vrfs"
+                }
+            },
+            "title": "Name Prefix/Suffix"
         },
         "Tenants:Networking": {
             "type": "object",
