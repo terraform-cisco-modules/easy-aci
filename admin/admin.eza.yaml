@@ -75,8 +75,8 @@ admin:
       - admin_state: enabled
         forwarding_facility: local7
         hosts:
-        - 10.101.128.24
-        - 10.101.128.25
+          #- 10.101.128.24
+          - 10.101.128.25
         management_epg: ooband
         port: 514
         severity: information
@@ -101,16 +101,18 @@ admin:
           silent_role_package_version: default
           smu_operation_flags: smuReloadImmediate
           smu_operation_type: smuInstall
-          target_version: "6.0(2h)"
+          target_version: "6.0(4c)"
           version_check_override: untriggered
+        - name: MG_A
+          nodes:
+            - 101
+            - 201
+          target_version: "6.0(4c)"
         - name: MG_B
           nodes:
-            - 202
-          target_version: "6.0(2h)"
-        - name: MG_C
-          nodes:
             - 102
-          target_version: "6.0(2h)"
+            - 202
+          target_version: "6.0(4c)"
   import_export:
     configuration_backups:
     - authentication_type: usePassword
@@ -126,10 +128,9 @@ admin:
       port: 22
       protocol: sftp
       remote_locations:
-        - host: lnx1.rich.ciscolabs.com
         - host: lnx2.rich.ciscolabs.com
       scheduler_name: Every24Hours
-      username: tyscott
+      username: tyscott@rich.ciscolabs.com
     schedulers:
       - description: Backup Configuration every 24 Hours
         name: Every24Hours

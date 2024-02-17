@@ -25,7 +25,7 @@ access:
           spanning_tree_interface_policy: bpduFG
         - attachable_entity_profile: l3Out
           cdp_interface_policy: cdpEnabled
-          description: L3out Ports
+          description: l3Out Ports
           link_level_policy: inheritAuto
           lldp_interface_policy: lldpEnabled
           mcp_interface_policy: mcpEnabled

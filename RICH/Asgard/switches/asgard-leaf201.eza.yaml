@@ -18,13 +18,6 @@ switch:
           policy_group: vpc04
           policy_group_type: bundle
         - interface: 1/5
-          access_or_native_vlan: 1
-          allowed_vlans: 121-123
-          encapsulation_type: vlan
-          instrumentation_immediacy: immediate
-          interface_description: testing123
-          policy_group: staticTrunkPort
-          policy_group_type: access
         - interface: 1/6
         - interface: 1/7
         - interface: 1/8

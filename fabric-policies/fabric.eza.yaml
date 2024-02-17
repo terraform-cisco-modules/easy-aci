@@ -59,9 +59,9 @@ fabric:
           snmp_client_groups:
             - name: ooband
               clients:
-                - address: 10.101.128.24
-                  name: LNX1
+                #- address: 10.101.128.24
                 - address: 10.101.128.25
+                  name: LNX2
               description: 'Out-of-Band Client Group'
               management_epg: ooband
           snmp_communities:
@@ -70,15 +70,15 @@ fabric:
             - community: 2
               description: 'Community String 2'
           snmp_destinations:
-            - host: 10.101.128.24
+            #- host: 10.101.128.24
+            #  community: 1
+            #  management_epg: ooband
+            #  version: v2c
+            - host: 10.101.128.25
               management_epg: ooband
               username: cisco_user1
               v3_security_level: priv
               version: v3
-            - host: 10.101.128.25
-              community: 1
-              management_epg: ooband
-              version: v2c
           users:
             - username: cisco_user1
               authorization_key: 1

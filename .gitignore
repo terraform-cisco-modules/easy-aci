@@ -411,6 +411,7 @@ site/
 .terraform/
 .terraform.lock.hcl
 *.tfstate
+*.tfstate.*
 *.tfstate.backup
 *.tfplan
 *.plan

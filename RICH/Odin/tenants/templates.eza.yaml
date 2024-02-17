@@ -20,7 +20,8 @@ templates:
               allow_promiscuous: reject
               forged_transmits: reject
               mac_changes: reject
-          sites: [Asgard]
+          sites:
+            - Asgard
           switch_provider: VMware
           vlan_mode: dynamic
         - name: Wakanda
@@ -36,7 +37,8 @@ templates:
               allow_promiscuous: reject
               forged_transmits: reject
               mac_changes: reject
-          sites: [Wakanda]
+          sites:
+            - Wakanda
           switch_provider: VMware
           vlan_mode: dynamic
       epg_type: standard
@@ -70,7 +72,8 @@ templates:
               allow_promiscuous: reject
               forged_transmits: reject
               mac_changes: reject
-          sites: [Asgard]
+          sites: 
+            - Asgard
           switch_provider: VMware
           vlan_mode: dynamic
         - name: Wakanda
@@ -86,7 +89,8 @@ templates:
               allow_promiscuous: reject
               forged_transmits: reject
               mac_changes: reject
-          sites: [Wakanda]
+          sites: 
+            - Wakanda
           switch_provider: VMware
           vlan_mode: dynamic
       epg_type: standard

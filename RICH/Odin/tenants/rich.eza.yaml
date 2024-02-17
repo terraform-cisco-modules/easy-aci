@@ -5,7 +5,6 @@
 tenants:
   - application_profiles:
     - create: true
-      monitoring_policy: default
       name: nets
       ndo:
         schema: RICH
@@ -16,59 +15,59 @@ tenants:
     name: RICH
     ndo:
       schemas:
-      - create: true
-        description: RICH Schema
-        name: RICH
-        templates:
-          - name: RICH
-            sites:
-              - Asgard
-              - Wakanda
-      - create: false
-        name: common
-        templates:
-          - name: common
-            sites:
-              - Asgard
-              - Wakanda
+        - create: false
+          name: common
+          templates:
+            - name: common
+              sites:
+                - Asgard
+                - Wakanda
+        - create: true
+          description: RICH Schema
+          name: RICH
+          templates:
+            - name: RICH
+              sites:
+                - Asgard
+                - Wakanda
       sites:
-      - name: Asgard
-      - name: Wakanda
+        - name: Asgard
+        - name: Wakanda
       users:
-      - admin
-      - tyscott
+        - admin
+        - tyscott
     networking:
       bridge_domains:
       - application_epg:
           application_profile: nets
           template: RICH
           vlans:
-          - 101
+            - 101
         description: Vlan 101
         name: 198.18.101.0
         subnets:
-        - gateway_ip: 198.18.101.254/24
-          template: advertise_external
+          - gateway_ip: 198.18.101.254/24
+            template: advertise_external
         template: RICH_stretched
       - application_epg:
           application_profile: nets
           template: RICH
           vlans:
-          - 102
+            - 102
         description: Vlan 102
         name: 198.18.102.0
         subnets:
-        - gateway_ip: 198.18.102.254/24
-          template: advertise_external
+          - gateway_ip: 198.18.102.254/24
+            template: advertise_external
         template: RICH_stretched
       - application_epg:
           application_profile: nets
           template: RICH
           vlans:
-          - 103
+            - 103
         description: Vlan 103
         name: 198.18.103.0
         subnets:
-        - gateway_ip: 198.18.103.254/24
-          template: advertise_external
+          - gateway_ip: 198.18.103.254/24
+            template: advertise_external
         template: RICH_stretched
