@@ -1,6 +1,6 @@
 output "aaep_to_epgs" {
   description = "AAEP to EPG Mappings for NDO When it is supported"
-  value = local.aaep_to_epgs
+  value       = local.aaep_to_epgs
 }
 
 output "built_in_tenants" {

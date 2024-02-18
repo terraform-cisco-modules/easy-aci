@@ -19,8 +19,8 @@ data "utils_yaml_merge" "model" {
 module "access" {
   depends_on = [module.system_settings]
   #source     = "/home/tyscott/terraform-cisco-modules/terraform-aci-access"
-  source     = "terraform-cisco-modules/access/aci"
-  version    = "3.1.5"
+  source  = "terraform-cisco-modules/access/aci"
+  version = "3.1.5"
   for_each = { for v in ["default"] : v => v if length(
     lookup(local.model, "access", {})) > 0 || length(lookup(local.model, "virtual_networking", {})) > 0
   }
@@ -55,8 +55,8 @@ module "admin" {
 module "built_in_tenants" {
   depends_on = [module.access]
   #source     = "/home/tyscott/terraform-cisco-modules/terraform-aci-tenants"
-  source     = "terraform-cisco-modules/tenants/aci"
-  version    = "3.1.6"
+  source  = "terraform-cisco-modules/tenants/aci"
+  version = "3.1.6"
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) > 0
   }
@@ -93,8 +93,8 @@ module "fabric" {
 module "switch" {
   depends_on = [module.built_in_tenants]
   #source     = "/home/tyscott/terraform-cisco-modules/terraform-aci-switch"
-  source     = "terraform-cisco-modules/switch/aci"
-  version    = "3.1.5"
+  source  = "terraform-cisco-modules/switch/aci"
+  version = "3.1.5"
   for_each = { for v in ["default"] : v => v if length(
     lookup(local.model, "switch", {})) > 0 && local.global_settings.controller.type == "apic"
   }
@@ -125,8 +125,8 @@ module "system_settings" {
 module "tenants" {
   depends_on = [module.built_in_tenants]
   #source     = "/home/tyscott/terraform-cisco-modules/terraform-aci-tenants"
-  source     = "terraform-cisco-modules/tenants/aci"
-  version    = "3.1.6"
+  source  = "terraform-cisco-modules/tenants/aci"
+  version = "3.1.6"
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) == 0
   }

@@ -57,7 +57,7 @@ module "built_in_tenants" {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) > 0
   }
   model = merge(each.value, {
-    aaep_to_epgs    = {}
+    aaep_to_epgs    = local.aaep_to_epgs
     global_settings = local.global_settings
     switch          = lookup(local.model, "switch", {})
     templates       = lookup(local.model, "templates", {})
@@ -123,7 +123,7 @@ module "tenants" {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) == 0
   }
   model = merge(each.value, {
-    aaep_to_epgs    = {}
+    aaep_to_epgs    = local.aaep_to_epgs
     global_settings = local.global_settings
     switch          = lookup(local.model, "switch", {})
     templates       = lookup(local.model, "templates", {})
