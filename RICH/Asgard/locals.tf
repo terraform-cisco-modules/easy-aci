@@ -20,6 +20,13 @@ locals {
     management_epgs = local.model.global_settings.management_epgs
   }
   host = local.global_settings.controller
+
+  #__________________________________________________________________
+  #
+  # AAEP to EPG Mappings
+  #__________________________________________________________________
+  aaep_to_epgs = length(module.access) > 0 ? module.access["default"].aaep_to_epgs : {}
+
   #__________________________________________________________________
   #
   # Access Sensitive Variables
