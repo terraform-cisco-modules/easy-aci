@@ -938,7 +938,7 @@
                     "apicApi": "not_applicable",
                     "description": "A string containing the List of VLANs Allowed on the ports attached to the AAEP.  This will act much like `switch trunk allowed vlan list`, but will be used to assign/filter the EPG's to be assigned to the AAEP.\nIn example: `1-5`, `1,3,5`, `1-5,10-16`, or just `1`.",
                     "minLength": 1,
-                    "maxLength": 256,
+                    "maxLength": 512,
                     "pattern": "^(((\\d+)|(\\d+-\\d+))(,((\\d+)|(\\d+-\\d+)))*)$",
                     "title": "allowed_vlans"
                 },
