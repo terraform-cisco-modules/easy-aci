@@ -1,3 +1,8 @@
+output "aaep_to_epgs" {
+  description = "AAEP to EPG module outputs."
+  value       = module.aaep_to_epgs
+}
+
 output "access" {
   description = "Access module outputs."
   value       = module.access
@@ -26,9 +31,4 @@ output "switch" {
 output "system_settings" {
   description = "System Settings module outputs."
   value       = module.system_settings
-}
-
-output "tenants" {
-  description = "Tenants module outputs."
-  value       = module.tenants
 }
