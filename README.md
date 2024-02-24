@@ -41,7 +41,7 @@ The other examples are shown in the `./RICH/` Folder Structure.  This is what is
 
 The Structure of the YAML Files is very flexible.  You can have all the YAML Data in a single file or you can have it in multiple individual folders like is shown in this module.  The important part is that the `data.utils_yaml_merge.model` is configured to read the folders that you put the Data into.  In the single Data Center example the data is read from all the folders in the root path described above (`access-policies`, `admin`, `fabric-policies`, `switch`, `system-settings`, `tenants`, `virtual-networking`).  In comparison, the Asgard and Wakanda Fabrics, read files in their respective home directory plus they shared data found in the `./RICH/shared_settings` folder.
 
-Additionally because the `./RICH/Odin/` Nexus Dashboard Fabric Only supports pushing configuration with the tenants module, currently, only the `built_in_tenants` and `tenants` modules are defined.  The additional function for `Odin` is that it is pulling in the switch_profiles, from both `Asgard` and `Wakanda`, to build `EPG -> Static Path Bindings` in NDO.
+Additionally because the `./RICH/Odin/` Nexus Dashboard Fabric Only supports pushing configuration with the tenants module, currently, only the `built_in_tenants` and `tenants` modules are defined.  The additional function for `Odin` is that it is pulling in the switch_profiles, from both `Asgard` and `Wakanda`, to build `EPG -> Static Path Bindings` in NDO.  And since NDO is being used to build the Tenant policies, there is an additional modules used in `Asgard` and `Wakanda`, which is the AAEP to EPG module for mapping EPG's to the Attachable Access Entity Profiles, as this is not yet supported by Nexus Dashboard Orchestrator.
 
 ### Modify `global_settings.eza.yaml` to match environment
 
@@ -471,6 +471,8 @@ terraform.exe apply "main.plan"
 If you want to see documentation on Variables for Submodules use the links below:
 
 ## Terraform Registry
+
+### [*aaep-to-epgs*](https://registry.terraform.io/modules/terraform-cisco-modules/aaep-to-epgs/aci/latest)
 
 ### [*access-policies*](https://registry.terraform.io/modules/terraform-cisco-modules/access/aci/latest)
 
