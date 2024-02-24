@@ -94,6 +94,7 @@ content: |-
   alias tfd='terraform destroy'
   alias tff='terraform fmt'
   alias tfi='terraform init'
+  alias tfim='terraform import'
   alias tfp='tfenv terraform plan -out=main.plan'
   alias tfu='terraform init -upgrade'
   alias tfv='terraform validate'
