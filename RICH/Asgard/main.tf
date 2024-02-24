@@ -10,6 +10,7 @@ data "utils_yaml_merge" "model" {
     [for file in fileset(path.module, "*eza.yaml") : file(file)],
     [for file in fileset(path.module, "*/*eza.yaml") : file(file)]
   )
+  merge_list_items = false
 }
 
 #__________________________________________________________________
@@ -21,7 +22,7 @@ module "access" {
   depends_on = [module.system_settings]
   #source     = "/home/tyscott/terraform-cisco-modules/terraform-aci-access"
   source  = "terraform-cisco-modules/access/aci"
-  version = "3.1.7"
+  version = "3.1.10"
   for_each = { for v in ["default"] : v => v if length(
     lookup(local.model, "access", {})) > 0 || length(lookup(local.model, "virtual_networking", {})) > 0
   }
@@ -42,7 +43,7 @@ module "admin" {
   depends_on = [module.built_in_tenants]
   #source     = "/home/tyscott/terraform-cisco-modules/terraform-aci-admin"
   source          = "terraform-cisco-modules/admin/aci"
-  version         = "3.1.7"
+  version         = "3.1.10"
   for_each        = { for v in ["default"] : v => v if length(lookup(local.model, "admin", {})) > 0 }
   admin           = merge(lookup(local.model, "admin", {}), { global_settings = local.global_settings })
   admin_sensitive = local.admin_sensitive
@@ -57,7 +58,7 @@ module "built_in_tenants" {
   depends_on = [module.access]
   #source     = "/home/tyscott/terraform-cisco-modules/terraform-aci-tenants"
   source  = "terraform-cisco-modules/tenants/aci"
-  version = "3.1.9"
+  version = "3.1.10"
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)) > 0
   }
@@ -80,7 +81,7 @@ module "fabric" {
   depends_on = [module.built_in_tenants]
   #source     = "/home/tyscott/terraform-cisco-modules/terraform-aci-fabric/"
   source           = "terraform-cisco-modules/fabric/aci"
-  version          = "3.1.7"
+  version          = "3.1.10"
   for_each         = { for v in ["default"] : v => v if length(lookup(local.model, "fabric", {})) > 0 }
   fabric           = merge(local.model.fabric, { global_settings = local.global_settings })
   fabric_sensitive = local.fabric_sensitive
@@ -95,7 +96,7 @@ module "switch" {
   depends_on = [module.built_in_tenants]
   #source     = "/home/tyscott/terraform-cisco-modules/terraform-aci-switch"
   source  = "terraform-cisco-modules/switch/aci"
-  version = "3.1.7"
+  version = "3.1.10"
   for_each = { for v in ["default"] : v => v if length(
     lookup(local.model, "switch", {})) > 0 && local.global_settings.controller.type == "apic"
   }
@@ -110,7 +111,7 @@ module "switch" {
 module "system_settings" {
   #source = "/home/tyscott/terraform-cisco-modules/terraform-aci-system-settings"
   source  = "terraform-cisco-modules/system-settings/aci"
-  version = "3.1.7"
+  version = "3.1.10"
   for_each = {
     for v in ["default"] : v => v if length(lookup(local.model, "system_settings", {})
   ) > 0 && local.global_settings.controller.type == "apic" }
@@ -125,9 +126,9 @@ module "system_settings" {
 
 module "aaep_to_epgs" {
   depends_on = [module.built_in_tenants]
-  source     = "/home/tyscott/terraform-cisco-modules/terraform-aci-aaep-to-epgs"
-  #source  = "terraform-cisco-modules/aaep-to-epgs/aci"
-  #version = "3.1.7"
+  #source     = "/home/tyscott/terraform-cisco-modules/terraform-aci-aaep-to-epgs"
+  source  = "terraform-cisco-modules/aaep-to-epgs/aci"
+  version = "3.1.10"
   for_each = {
     for v in lookup(local.model, "tenants", []) : v.name => v if length(regexall("^(common|infra|mgmt)$", v.name)
     ) == 0 && local.global_settings.controller.type == "apic"
