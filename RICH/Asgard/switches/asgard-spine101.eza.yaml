@@ -1,4 +1,10 @@
 ---
+#====================================================================================
+#   Fabric -> Inventory -> Fabric Membership
+#   Fabric -> Switches -> Leaf/Spine Switches -> Profiles
+#   Fabric -> Access Policies -> Interfaces -> Leaf/Spine Interfaces -> Profiles
+#   Tenants -> mgmt -> Node Management Addresses -> Static Node Management Addresses
+#====================================================================================
 switch:
   switch_profiles:
     - node_id: 101

@@ -1,4 +1,8 @@
 ---
+#====================================================================================
+#   Templates are used by the script as a shared attribute holder to merge with
+#   the object types listed below to reduce code duplication for each object type.
+#====================================================================================
 templates:
   application_epgs:
     - contracts: []

@@ -4380,7 +4380,7 @@
                 "tenants": {
                     "type": "array",
                     "additionalProperties": false,
-                    "description": "Required:\n  * name\nIf this is for Nexus Dashboard Orchestrator it requires:\n  * ndo\nOptional:\n  * alias\n  * annotations\n  * apics_inband_mgmt_addresses\n  * application_profiles\n  * contracts\n  * create\n  * description\n  * global_alias\n  * monitoring_policy\n  * networking\n  * policies\n  * policy_tenant\n\n=================================================\nAPI Information:\n  * Class: fvTenant\n  * DN: Distinguished Name: `uni/tn-{tenant}`\nGUI Location:\n  * Tenants",
+                    "description": "Required:\n  * name\nIf this is for Nexus Dashboard Orchestrator it requires:\n  * ndo\nOptional:\n  * alias\n  * annotations\n  * application_profiles\n  * contracts\n  * create\n  * description\n  * global_alias\n  * monitoring_policy\n  * networking\n  * name_prefix\n  * name_suffix\n  * networking\n  * ndo\n  * node_management_addresses\n  * policies\n  * policy_tenant\n\n=================================================\nAPI Information:\n  * Class: fvTenant\n  * DN: Distinguished Name: `uni/tn-{tenant}`\nGUI Location:\n  * Tenants",
                     "items": {
                         "$ref": "#/definitions/Tenants"
                     },
@@ -6012,6 +6012,13 @@
                     "maximum": 64,
                     "title": "external_pool_id - "
                 },
+                "fabric_membership": {
+                    "type": "boolean",
+                    "apicApi": "not_applicable",
+                    "default": true,
+                    "description": "Default is `true`.  Flag to determine if the switch should be added to the fabric membership inventory.  Should only be used when the switch was already previously registered to the fabric and you don't want to manage it with Terrafrom.",
+                    "title": "fabric_membership"
+                },
                 "inband_addressing": {
                     "$ref": "#/definitions/Switch:SwitchProfiles:BandAddressing"
                 },
@@ -6129,6 +6136,13 @@
                     "maxLength": 64,
                     "pattern": "^[a-zA-Z0-9_\\.:-]+$",
                     "title": "site"
+                },
+                "switch_profile": {
+                    "type": "boolean",
+                    "apicApi": "not_applicable",
+                    "default": true,
+                    "description": "Default is `true`.  Flag to determine if the switch profile should be created.  Should only be used when the switch profile was already previously created and you don't want to manage it with Terrafrom.",
+                    "title": "switch_profile"
                 },
                 "two_slot_leaf": {
                     "type": "boolean",
@@ -14259,7 +14273,7 @@
             "type": "object",
             "additionalProperties": false,
             "class": "not_applicable",
-            "description": "Attributes are:\n  * application_epgs\n  * bridge_domains\n  * subnets",
+            "description": "Templates are used by the script as a shared attribute holder to merge with the object types listed below to reduce code duplication for each object type.  Attributes are:\n  * application_epgs\n  * bridge_domains\n  * subnets",
             "rn": "not_applicable",
             "properties": {
                 "alias": {
